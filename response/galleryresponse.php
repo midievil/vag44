@@ -7,12 +7,12 @@
 		return;
 	}
 	
-	include("../constants.php");
-	include("../db.php");
+	require_once("../constants.php");
+	require_once("../db.php");
 	connectToDB();	
-	include("../miscfunctions.php");
-	include("../userlogic.php");
-	include("../db/UserDB.php");
+	require_once("../miscfunctions.php");
+	require_once("../userlogic.php");
+	require_once("../db/UserDB.php");
 	
 	$currentUser = User::CurrentUser();
 	

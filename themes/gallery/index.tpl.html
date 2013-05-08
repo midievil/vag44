@@ -15,7 +15,6 @@
 		<td class='innercontent'>
 			
 		{if $mode=='galleries'}
-			{$galleries|@count}
 			<table>
 				<tr>
 				{foreach from=$galleries item=gallery name=galcycle}
@@ -31,9 +30,9 @@
 							</tr>
 							<tr>
 								<td class='gallerycomment'>
-									<a class='hand gallerycomment' id='aComment$galleryID' href='/gallery/id/{$gallery.ID}'>{$gallery.Name}</a>
+									<a class='hand gallerycomment' id='aComment{$gallery.ID}' href='/gallery/id/{$gallery.ID}'>{$gallery.Name}</a>
 									<input class='hidden gallerycomment' id='tbComment{$gallery.ID}' onkeypress='commentKeyPress(event.keyCode, {$gallery.ID}, "gallery");' value='{$gallery.Name}' />
-									{if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}<a class='comment hand hidden' id="btnEditName$galleryID" onclick='editComment({$gallery.ID})'>Переименовать</a>{/if}
+									{if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}<a class='comment hand hidden' id="btnEditName{$gallery.ID}" onclick='editComment({$gallery.ID})'>Переименовать</a>{/if}
 								</td>
 							</tr>
 						</table>
