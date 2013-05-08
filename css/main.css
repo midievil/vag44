@@ -1024,3 +1024,10 @@ textarea.commentanswer
 	height:100px; 
 	width:100%
 }
+
+
+td.news_column
+{
+	width:200px;
+	padding-right:10px;
+}

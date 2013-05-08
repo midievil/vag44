@@ -4,22 +4,18 @@
 
 {include file="controls/breadcrumbs.html"}
 
-{include file="controls/pagetitle.html" pageTitle=$title pageComment=''}
+{include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment}
 
 <br />
 
-{$usersCount} пользователей<br /><br />
 
-{include file="controls/paging.html" paging=$usersPaging}
-			<br /><br />
-			<table id='tblUserList' class='users list' cellspacing='0' cellpadding='0' width='100%'>
-				<tr class='header'>
-					<td>Ник</td>
-					<td>Авто</td>
-					<td>Статус</td>
-					<td>Последний визит</td>
-				</tr>
-			</table>	
+<table>
+{foreach from=$blogs item=blog}
+	{include file="controls/blog.html" blog=$blog}
+{/foreach}
+</table>
+
+			
 
 <br />
 

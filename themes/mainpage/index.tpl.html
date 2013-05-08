@@ -4,17 +4,27 @@
 
 {include file="mainpage/index.js"}
 
-	<div class="header">Разделы форума</div>
-	<div class="tagcategorylist">
-		<table cellspacing="0;" cellpadding="0" class="tagcategoryface">				
-			<tbody>
-			{foreach from=$categories item=category}
-				{include file="controls/tagcategory.html" category=$category}				
-			{/foreach}
-			</tbody>
-		</table>
-	</div>
+	<table width='100%'>
+		<tr>
+			<td class='news_column' valign='top'>
+				<div class="header">Новости</div>
+				<div class="tagcategorylist">
+				</div>
+			</td>
+			<td>
+				<div class="header">Разделы форума</div>
+				<div class="tagcategorylist">
+					<table cellspacing="0;" cellpadding="0" class="tagcategoryface">				
+						<tbody>
+						{foreach from=$categories item=category}
+							{include file="controls/tagcategory.html" category=$category}
+						{/foreach}
+						</tbody>
+					</table>
+				</div>
+			</td>
 
+	</table>
 <br />
 
 

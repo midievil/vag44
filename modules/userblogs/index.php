@@ -3,55 +3,30 @@
 	templater::assign('includeMainMenu', true);
 	
 	global $breadCrumbs;
-	$user = new User(mLogic::$urlVariables['userid']);	
-	templater::assign('user', $user);
 	
-	templater::assign('registerDate', getDateAtText($user->RegisterDate));
-	templater::assign('phone', formatPhone($user->Phone));
-	
-	$social = explode ("\n", trim($user->Social));
-	$socialNetworks = array();
-	if($social && $social[0])
+	$user = null;
+	if(isset(mLogic::$urlVariables["userid"]))
 	{
-		$i = 0;
-		$socialFormatted = "";
-		while($url = $social[$i++])
-		{
-			if($socialName = getSocialNetworkInnerName($url))
-			{
-				$network['url'] = $url;
-				$network['name'] = getSocialNetworkName($url);
-				$network['innername'] = $socialName;
-				$socialNetworks[] = $network;
-			}
-		}
+		$blogsUserID = mLogic::$urlVariables["userid"];	
+		$user = new User($blogsUserID);
+		
 	}
-	templater::assign('social', $socialNetworks);
+	else if ($currentUser->IsLogged())
+	{		
+		$blogsUserID = $currentUser->ID;
+		$user = $currentUser;
+		templater::assign('title', "Ваши блоги");
+		templater::assign('comment', "Это список ваших блогов. Вы можете написать пост в любой из них");
+	}
 	
-	
-	templater::assign('carslist', getCarsListByUserID($user->ID));
-	
-	$rating = UserDB::getUserRatingByID($user->ID);
-	$ratingText = "";
-	
-	$columnsCount = ceil(count($rating) / 10);
-	$colIndex = 0;
-	foreach ($rating as $ratingRow)
+	if($user != null)
 	{
-		if($colIndex == 0)
-		{
-			$ratingText .= "<tr>";
-		}
-		$ratingText .= "<td><a href=/user/" . $ratingRow["FromUserID"] . ">".$ratingRow["FromUserName"]."</a> (+".$ratingRow["Value"].")&nbsp;</td>";
-	
-		$colIndex++;
-		if($colIndex == $columnsCount)
-		{
-			$colIndex = 0;
-			$ratingText .= "</tr>";
-		}
+		templater::assign('blogs', $user->Blogs());
 	}
-	templater::assign('ratingList', renderPopup($ratingText));
+	
+	templater::assign('blogsUser', $user);
+	
+	
 	
 	
 	templater::display();

@@ -17,6 +17,7 @@ class mLogic {
 		'knowlege' => 'knowlege',
 		'users' => 'users',
 		'user' => 'user',
+		'userblogs' => 'userblogs',
 		'category' => 'category',
 		'post' => 'post',
 		'profile' => 'profile',
@@ -220,6 +221,10 @@ class mLogic {
 			
 			elseif ( $act == 'tips' ){ /* category id */
 				$ret['tip'] = $ar[$pos+1];
+			}
+			
+			elseif ( $act == 'userblogs' ){ /* category id */
+				$ret['userid'] = $ar[$pos+1];
 			}
 		}
 

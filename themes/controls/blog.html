@@ -1,0 +1,12 @@
+<tr>
+	<td width='100%'>
+		<div class='header'>
+			{$blog->Name}			
+		</div>
+		<div>			
+			{foreach from=$blog->Posts() item=post}
+				{include file="controls/postFace.html" post=$post}
+			{/foreach}			
+		</div>
+	</td>
+</tr>
