@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>VAG Club Кострома</title>
+		
+		<meta http-equiv="keywords" content="Volkswagen Кострома, Клуб VAG в Костроме, VAG Кострома, Skoda кострома, Audi Кострома, Seat кострома">
+		<meta name="keywords" content="Volkswagen Кострома, Клуб VAG в Костроме, VAG Кострома, Skoda кострома, Audi Кострома, Seat кострома">
+		<meta http-equiv="description" content="Клуб владельцев и поклонников автомобилей Volkswagen, Skoda, Audi, Seat в Костроме и Костромской области. ">
+	
+	
+		
+		<link rel="stylesheet" type="text/css" href="/css/main.css?version=38" />
+		<link rel="stylesheet" type="text/css" href="/css/popupbox.css?version=16.10.2012" />
+		<link rel="stylesheet" type="text/css" href="/css/gallery.css?version=2" />	
+		<link rel="shortcut icon" href="/img/favicon.ico">
+			
+		<script type="text/javascript" src="/js/jquery.js"></script>
+		<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="/ckeditor/adapters/jquery.js"></script>
+		<script type="text/javascript" src="/js/functions.js?version=2"></script>	
+		<script type="text/javascript" src="/js/screen.js?version=17"></script>
+		<script type="text/javascript" src="/js/user.js?version=9"></script>
+		<script type="text/javascript" src="/js/blogging.js?version=23"></script>
+		<script type="text/javascript" src="/js/gallery.js?version=8"></script>
+		<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+		<script>
+		{if $currentUser->IsLogged()}
+			markOnline({$currentUser->ID});
+		{/if}			
+			
+		var categoryImages = new Array();
+			
+		</script>
+	</head>
+	
+	<body>
+		<div id="divGallery" style="position:absolute; display:none; z-index:2;">
+	 
+		</div>
+		<div id="divGalleryBack" style="position:absolute; display:none; z-index:1;">
+	
+		</div>		
+		<div id="divUserPic" class='userpic'>
+	 
+		</div>
+		
+		<div id="divPopup" class='popupbox hidden'>
+			<table cellspacing='0' cellpadding='0' border='0'>
+				<tr>					
+					<td colspan='3' class='popupbox_top'></td>
+				</tr>
+				<tr>
+					<td class='popupbox_border'></td>
+					<td id='tdPopupInfo' class='popupbox_content'></td>
+					<td class='popupbox_border'></td>
+				</tr>
+				<tr>					
+					<td colspan='3' class='popupbox_top'></td>
+				</tr>
+			</table>
+		</div>
+		<div id="divPopupPointer" class='popupbox hidden'>
+			<img src='/img/popupbox/pointer.gif?version=22.09.2011_1' style='bgcolor:transparent' />
+		</div>
+		
+		<div class='top user' align='center'>
+			<div class='sitewidth' >
+				<div style='float:left;'>			
+				{if $currentUser->IsLogged()}
+					<a>Добро пожаловать,</a> <b><a href='/profile'>{$currentUser->Name}</a></b>
+				{else}
+					<a id='aRegister' class='hand' href='/registration'><b>Регистрация</b></a>&nbsp;&nbsp;&nbsp;
+					<b>Вход</b>&nbsp;&nbsp;
+					<input id='tbLoginName' name='tbLoginName' type='text' class='login' placeholder='логин' />
+					<input id='tbLoginPass' name='tbLoginPass' type='password' class='login' placeholder='пароль' />
+					<a class='hand' onclick='checkLogin()'>ок</a>&nbsp;&nbsp;
+					<a class='comment' href='/restorepassword'>Забыли пароль?</a>
+				{/if}
+				</div>
+				
+				<div id='divOptions' class='options' style='float:right'>
+					<a id='aTopMenuFAQ' onmouseover='showPopup(this, "Как пользоваться сайтом")' onmouseout='hidePopup()' href='/post/184'><b>F.A.Q.</b></a>&nbsp;&nbsp;
+					<a href='/knowlege/'>база знаний</a>&nbsp;&nbsp;
+				{if $currentUser->IsLogged()}
+					<a id='aTopMenuService' href='/service' onmouseover='showPopup(this, "Отметки об обслуживании вашего авто")' onmouseout='hidePopup()'>сервисная книжка</a>&nbsp;&nbsp;
+					<a id='aTopMenuProfile' href='/profile' onmouseover='showPopup(this, "Настройки вашего профиля<br> и списка автомобилей")' onmouseout='hidePopup()'>профиль</a>&nbsp;&nbsp;
+					<a id='aMyBlogs' href='/userblogs' >блоги</a>&nbsp;&nbsp;
+					<a id='aMyGallery' href='/gallery' >галерея</a>&nbsp;&nbsp;
+					<a id='aPrivateMessages' {if $privateMessagesCount>0}class='important'{/if} href='/privatemessages' >личные сообщения{if $privateMessagesCount>0} ({$privateMessagesCount}){/if}</a>&nbsp;&nbsp;
+					<a id='aLogout' href='/?action=logoff'>выход</a>&nbsp;&nbsp;
+				{/if}
+				
+				</div>												
+			</div>
+		</div>
+		<div class='top logo' align='center'>
+			<div class='sitewidth' style='height:100px'>
+				<div style='float:left'>
+					<a href='/'><img style='border:0px' src='/img/bluelogo.png?version=winter' /></a>
+				</div>
+				<div style='float:right; padding-top:5px;'>
+					<span class='rounded bgwhite' >
+						<table cellspacing='0' cellpadding='0'>
+							<tr>
+								<td>
+									<input class='rounded' id='tbSearch' placeholder='поиск по сайту' onkeypress='searchKeyPressed(event)' style='background-color: #ffffff' />					
+								</td>
+								<td>
+									<img src='/img/search.jpg' class='hand search' onclick='redirectToSearch()' title='Искать' />
+								</td>
+							</tr>
+						</table>
+					</span>
+				</div>
+			</div>
+			{if $includeMainMenu}
+				{include file="controls/tabmenu.html" menu=$carsMenu id='mnuMain'}			
+			{/if}
+			
+		</div>
+		
+		{literal}
+		<script>	
+			$(".login").keypress(function(e) {
+				if(e.keyCode == 13)
+				{
+					checkLogin();		
+				}	
+			});
+		</script>
+		{/literal}
+		
+		<div align="center" class="main">
+			<div id="divMainContainer" class="sitewidth bgwhite">
+				<div class="main" id="divMain" align="left">

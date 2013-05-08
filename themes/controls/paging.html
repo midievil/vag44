@@ -1,0 +1,9 @@
+{if $paging->Pages|@count > 1}
+	<span class="paging nowrap"><a class="comment">Страницы:</a>		
+	{foreach from=$paging->Pages item=page}		
+		<div class='paging {$paging->ControlID} {if $page->Selected == 1}selected{/if} rounded' page='{$page->PageNumber}'>
+			<a class='paging hand' onclick='{$page->Function}; switchPage("{$paging->ControlID}", {$page->PageNumber})'>{$page->PageNumber}</a>
+		</div>
+	{/foreach}
+	</span>
+{/if}

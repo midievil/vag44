@@ -1,0 +1,143 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle=$post->Title pageComment=$post->Comment()}
+
+<script>var galleryItem=0; var galleryItemsCount={$galleryItems|@count}; var galleryItems = new Array(''
+		{foreach from=$galleryItems item=pic}		
+			,'{$pic}'
+		{/foreach}
+			);
+			
+		var page = {if $smarty.get.page=='last'}'last'{else}{$commentsPaging->CurrentPage}{/if};
+</script>
+
+		<div class='header'>
+			<div class='left'>
+				{$post->User->Name} написал: 
+			</div>
+			<div style='float:right'>
+				{$rating}
+			</div>
+		</div>
+		
+		<div class='tagcategorylist'>
+			<div class='padded bgwhite'>
+				<table cellspacing='0' cellpadding='0'>
+					<tr>
+						<td colspan='3' class='content'>						
+							<a class='messageheader' href='/post/{$post->ID}'>{$post->Title}</a>
+							<div id='divPost{$post->ID}'>
+								<table cellspacing='0' cellpadding='0'>
+									<tr>
+										<td valign='top'>
+											{$post->Text}
+											
+								{if $galleryItems|@count}
+											<table><tr>
+												<td>
+													<img src="/img/prev.gif" onclick="scrollDiv('divPostImages', 100);">
+												</td>
+												<td>
+													<div class="previewscroll nowrap">
+														<div id="divPostImages" style="left:10" title="">
+									{foreach from=$galleryItems item=pic name=cycle}
+										<a class='hand'>
+											<img class='preview' title='Щелкните для увеличения' onclick='galleryItem={$smarty.foreach.cycle.iteration}; ShowImageGallery("{$smarty.foreach.cycle.iteration}", true)' src='{$pic}' />
+										</a>
+											
+									{/foreach}
+														</div>
+													</div>
+												</td>
+												<td title="">
+													<img src="/img/next.gif" onclick="scrollDiv('divPostImages', -100);" title="" alt="">
+												</td>
+											</tr></table>
+								{/if}
+										</td>									
+									</tr>
+								</table>								
+							</div>
+							<br />
+							<br />							
+						</td>
+					</tr>					
+				</table>
+			</div>
+		</div>		
+		<div>
+			<div class='paddedtop'>			
+				{if $currentUser->IsLogged()}	
+					{if $post->Closed == false}
+						<div class='left'>
+							<b><a class='buttonsunderpost hand' onclick='$("#trCommentForPost{$post->ID}").show();'>Ответить</a></b>&nbsp;<a 
+								class='buttonsunderpost hand' onmouseover='copyToQuote("{$post->User->Name}", "Post", {$post->ID})' onclick='quotePostSelection("{$post->User->Name}", "Post", {$post->ID}); return false;'>Цитата</a>
+						</div>
+					{/if}
+					
+					{if $post->User->ID == $currentUser->ID || $currentUser->IsAdmin()}
+						<div class='right'>
+							<b><a class='buttonsunderpost hand' href='/editpost/{$post->ID}'>Редактировать</a></b>
+						</div>
+					{/if}
+					
+				{/if}
+			</div>
+			<br />
+			  
+			<div class='hidden padded' id='trCommentForPost{$post->ID}'>
+				Ваш ответ на пост:<br />
+				<textarea id='tbCommentForPost{$post->ID}' class='ck postanswer'></textarea> <br/>
+				<a class='buttonsunderpost writecommentbutton hand' onclick='writeComment({$post->ID});'><b>Написать</b></a>
+				<a class='buttonsunderpost hand' onclick='$("#trCommentForPost{$post->ID}").hide();'>Отмена</a>
+			</div>
+		</div>
+		<div class='paddedtop' style='height:20px'>
+			<div class='left'>
+				<b>Комментарии:</b>
+				<a id='aHideComments' class='hand textunderpost' onclick='hidePostComments({$post->ID});'><img class='posticons' title='Скрыть' src='/img/post_hidecomments.jpg'/> скрыть</a>
+				<a id='aShowComments' class='hand textunderpost hidden' onclick='showPostComments({$post->ID});'><img class='posticons' title='показать' src='/img/post_showcomments.jpg'/> показать</a>
+				<a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'><img class='posticons' title='список (по дате)' src='/img/post_list.jpg'/> списком</a>
+				<a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'><img class='posticons' title='дерево' src='/img/post_tree.jpg'/> деревом</a>
+				<a id='aSkipComments' class='hand textunderpost' onclick='goBottom();'><img class='posticons' title='В конец' src='/img/post_last.jpg'/> в конец</a>
+			</div>
+			<div class='right'>
+				{include file="controls/paging.html" paging=$commentsPaging}
+			</div>
+		</div>		
+		<div class='commentlist' id='trComments{$post->ID}'>
+			
+		</div>
+		
+		{if ((!$post->Closed && $currentUser->IsLogged()) || $currentUser->IsAdmin())}
+		<div id='divAnswerPostBottom' class='maincontent hidden'>
+			<div>
+				<a class='buttonsunderpost hand' onclick='$("#trCommentForPostBottom").show();'><b>Ответить на пост</b></a>
+				<div style='float:right'>
+					{include file="controls/paging.html" paging=$commentsPaging}
+				</div>
+			</div>		
+			<br />
+			<div class='hidden buttonsunderpost' id='trCommentForPostBottom'>
+				Ваш ответ на пост:<br>
+				<textarea class='ck postanswer' id='tbCommentForPostBottom'></textarea> <br>
+				<a class='writecommentbutton hand' onclick='writeComment({$post->ID});' disabled='disabled'>Написать</a>
+				<a class='hand' onclick='$(&quot;#trCommentForPostBottom&quot;).hide();'>Отмена</a>
+			</div>
+		</div>
+		{/if}
+		
+		<script>
+			var lastCommentID = {if $post->LastCommentID}{$post->LastCommentID}{else}-1{/if};
+		
+			showComments({$post->ID}, '{$currentUser->ListType}', {$commentsPaging->CurrentPage});
+			{if $currentUser->ListType=='tree'}
+			$("span.paging").hide();
+			{/if}
+			
+			window.setTimeout(function() {literal}{{/literal} showNewComments({$post->ID}, lastCommentID); {literal}}{/literal}, 10000);
+		</script>		
+
+{include file="footer.tpl.html"}

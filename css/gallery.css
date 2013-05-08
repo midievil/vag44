@@ -1,0 +1,40 @@
+table.gallery
+{
+    vertical-align:middle;
+    border-spacing:0px;
+    padding:0px;
+    border:0px;
+}
+
+table.gallery img
+{
+    border:8px solid #ffffff;
+}
+
+table.gallery img.arrowl
+{    
+	border-right:0px solid #ffffff;
+}
+
+table.gallery img.arrowr
+{    
+	border-right:0px solid #ffffff;
+}
+
+table.gallery td.buttons, table.gallery td.icons
+{
+    background-color:#ffffff;
+    padding-left:20px;
+    padding-right:16px;
+    vertical-align:middle;
+}
+
+table.gallery td.icons
+{
+	padding-left:0px;
+}
+
+table.galleryback
+{
+    background-color:Black;
+}

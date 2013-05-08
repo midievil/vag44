@@ -1,0 +1,31 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="blog/index.js"}
+
+{$message}
+
+{if $posts|@count > 0}
+	{foreach from=$posts item=post}
+		<div class='header'>
+			<div class='left'>
+				{$post->Title} ({$post->CreateDate()})
+			</div>
+			<div style='float:right'>
+				{$rating}
+			</div>
+		</div>
+		<div class='tagcategorylist'>
+			<div class='padded bgwhite'>
+				{$post->Text}
+			</div>
+		</div>
+		<br />
+	{/foreach}
+	</table>
+{else}
+	Здесь пусто. Автор еще ничего не написал.
+{/if}
+
+{include file="footer.tpl.html"}

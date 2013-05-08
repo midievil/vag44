@@ -1,0 +1,78 @@
+{include file="header.tpl.html"}
+
+{include file="service/index.js"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle='Сервисная книжка' pageComment='Здесь можно делать отметки об операциях, которые вы проделываете с вашим автомобилем, чтобы проще было вспомнить, когда их нужно делать в следующий раз.'}
+
+{if $currentUser->IsLogged() && $galleryUser->ID == $currentUser->ID}
+	<a class='button hand' onclick='addGallery(); return false;'>Добавить фотоальбом</a>
+{/if}
+
+<table>
+	<tr>
+		<td class='innercontent'>
+		{if $cars|@count > 0}	
+			{foreach from=$cars item=car}
+				<a class='messageheader'>{$car->getShortDescription()}</a><br />
+				<a class='hand' onclick='showAddOperation({$car->ID})'>Добавить запись</a><br />
+				<table class='list'>
+					<tr id='trAddRecord{$car->ID}' class='hidden comment' valign='top'>
+						<td>дата<br /><input id='tbDate{$car->ID}' type='text' size='7' value='{$currentDate}'/>
+							<br /><a class='hand buttons' onclick='addOperation({$car->ID})'>ок</a>&nbsp;<a class='hand buttons' onclick='cancelAddOperation({$car->ID})'>отмена</a>
+							<br /><br />
+						</td>
+						<td>операция<br /><select id='ddlAddOperation{$car->ID}'>{$serviceOperationsSelect}</select>
+							
+						</td>
+						<td>пробег (км)<br /><input id='tbMileage{$car->ID}' type='text' size='7' value='{$car->Mileage}'/></td>					
+						<td>комментарий<br /><input id='tbComment{$car->ID}' type='text' size='50' /></td>					
+					</tr>				
+				</table>
+				
+				{if $car->ServiceHistory(false)|@count > 0}
+				<table class='list'>
+					<tr valign='top' class='header'>
+						<td style='width:120px'>Дата</td>
+						<td>Операция</td>
+						<td>Пробег (км)</td>					
+						<td>Комментарий</td>
+						<td>Следующая замена</td>
+					</tr>
+					
+					{foreach from=$car->ServiceHistory(false) item=service}
+						<tr valign='top'>
+							<td align='center' onmouseover='showServiceDateEdit({$service.ID})' onmouseout='hideServiceDateEdit({$service.ID})'>
+								<input style='height:17px;' class='hidden' id='tbServiceDate{$service.ID}' size='12' value='{$service.DateText}' onfocus='editedComment = {$service.ID}; return false;' onkeypress='saveDate(event.keyCode, {$service.ID})' />
+								<a id='aServiceDate{$service.ID}'>{$service.DateText}</a>
+							</td>
+							<td>{$service.Operation}</td>
+							<td>{$service.Mileage}</td>
+							<td style='width:340px; height:20px' onmouseover='showServiceCommentEdit({$service.ID})' onmouseout='hideServiceCommentEdit({$service.ID})'>
+								<input style='height:17px;' class='hidden' id='tbServiceComent{$service.ID}' size='50' value='{$service.Comment}' onfocus='editedComment = {$service.ID}; return false;' onkeypress='saveComment(event.keyCode, {$service.ID})' />
+								<a id='aServiceComent{$service.ID}'>{$service.Comment}</a></td>
+							<td>
+								{$service.NextDateText}
+							</td>
+						</tr>
+					{/foreach}
+				
+				</table>
+				{else}
+				<a class='comment'>Нет записей о сервисе</a>
+				{/if}
+				
+			{/foreach}
+		{else}
+			Вы не добавили ни одного автомобиля. Вы можете сделать это на странице редактирования <a href='/profile/cars'>вашего профиля</a>
+		{/if}
+			
+		</td>
+	</tr>
+</table>
+
+
+
+{include file="footer.tpl.html"}
+

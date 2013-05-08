@@ -1,0 +1,90 @@
+{include file="header.tpl.html"}
+
+{include file="gallery/index.js"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment}
+
+{if $currentUser->IsLogged() && $galleryUser->ID == $currentUser->ID}
+	<a class='button hand' onclick='addGallery(); return false;'>Добавить фотоальбом</a>
+{/if}
+
+<table>
+	<tr>
+		<td class='innercontent'>
+			
+		{if $mode=='galleries'}
+			{$galleries|@count}
+			<table>
+				<tr>
+				{foreach from=$galleries item=gallery name=galcycle}
+					{if $smarty.foreach.galcycle.iteration % 5 == 1}
+				</tr><tr>
+					{/if}
+					<td>
+						<table cellspacing='0' cellpadding='0' class='gallery' {if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}onmouseover='showEditButton({$gallery.ID})' onmouseout='hideEditButton({$gallery.ID})'{/if}>
+							<tr>
+								<td class='image'>
+									<a class='hand' href='/gallery/id/{$gallery.ID}'><img class='gallerypreview' src='{$gallery.ThumbFile}' /></a>
+								</td>
+							</tr>
+							<tr>
+								<td class='gallerycomment'>
+									<a class='hand gallerycomment' id='aComment$galleryID' href='/gallery/id/{$gallery.ID}'>{$gallery.Name}</a>
+									<input class='hidden gallerycomment' id='tbComment{$gallery.ID}' onkeypress='commentKeyPress(event.keyCode, {$gallery.ID}, "gallery");' value='{$gallery.Name}' />
+									{if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}<a class='comment hand hidden' id="btnEditName$galleryID" onclick='editComment({$gallery.ID})'>Переименовать</a>{/if}
+								</td>
+							</tr>
+						</table>
+					</td>
+				{/foreach}
+				</tr>
+			</table>	
+		{elseif $mode=='pictures'}	
+			{if $galleryItems|@count > 0}
+				<table>
+					<tr>
+				{foreach from=$galleryItems item=galleryItem name=piccycle}
+					{if $smarty.foreach.piccycle.iteration % 5 == 1}
+					</tr>
+					<tr>
+					{/if}
+						<td>
+							<table cellspacing='0' cellpadding='0' class='gallery'>
+								<tr>
+									<td class='image'>
+										<a class='hand' href='{$galleryItem.BigFile}' target='blank'><img class='gallerypreview' src='{$galleryItem.ThumbFile}' /><br /></a>
+									</td>
+								</tr>
+								<tr>
+									<td class='comment'>
+										<a class='comment gallerycomment' id='aComment{$galleryItem.ID}' {if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}onclick='editComment({$galleryItem.ID})'{/if}>{if $galleryItem.Comment != ''}{$galleryItem.Comment}{else}<добавить комментарий>{/if}</a>
+									</td>
+								</tr>
+							</table>
+							<input class='hidden gallerycomment' id='tbComment{$galleryItem.ID}' onkeypress='commentKeyPress(event.keyCode, {$galleryItem.ID}, "item");' value='{$galleryItem.Comment}' />
+						</td>
+				{/foreach}
+					</tr>
+				</table>
+			{else}
+				Нет изображений
+			{/if}
+			
+			{if $currentUser->IsLogged() && $galleryUser->ID == $currentUser->ID}
+				<br />
+				<br />
+				Добавить изображение: <br /><input id='imageToUpload' type='file' name='imageToUpload' class='input'>
+				<button class='button' id='buttonUpload' onclick='return ajaxFileUpload();'>Загрузить</button>
+			{/if}
+		{/if}
+			
+		</td>
+	</tr>
+</table>
+
+
+
+{include file="footer.tpl.html"}
+

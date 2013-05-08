@@ -1,0 +1,44 @@
+{include file="header.tpl.html"}
+
+{include file="category/index.js"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle=$category->Name pageComment=$category->Comment}
+
+<br />
+
+	{if $category->ID == $ourCarsCategoryID}
+		Написать в этот раздел напрямую невозможно. Чтобы создать описание автомобиля, нажмите <a class='button' href='/editprofile/cars'>сюда</a>
+	{else}
+		<a class='button' href='/writeforum/{$category->ID}'>Написать в этот раздел</a>
+	{/if}
+
+<br /><br />
+
+<div class="header">{$category->Name}</div>
+<div class="tagcategorylist">
+	<table cellspacing="0" cellpadding="0" width="100%" class="tagcategoryface">
+
+
+{if $childCategories|@count>0}
+	{foreach from=$childCategories item=cat}
+		{include file="controls/tagcategory.html" category=$cat}
+	{/foreach}
+{/if}
+
+{foreach from=$childPosts item=post}
+	{include file="controls/post.html" post=$post}
+{/foreach}
+
+	</table>
+</div>
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="footer.tpl.html"}
+
+
+<script>
+	toggleCategoryVisibility({$category->ID});
+</script>

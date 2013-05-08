@@ -1,0 +1,45 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle='Обратная связь' pageComment='На что жалуетесь?'}
+
+{literal}
+<script>
+	function sendFeedback()
+	{
+		$.ajax({	url:"/response/feedback.php?header="+$("#tbHeader").val()+"&text="+$("#tbMessage").val(),
+					success:	function(result){						
+									if(trim(result)=='ok')
+									{
+										$("#divFeedBack").html("Спасибо! Ваше послание обязательно будет учтено!");
+									}
+									else
+									{
+										var html = $("#divFeedBack").html();
+										$("#divFeedBack").html("Ой! Что-то пошло не так и ваше заявление не доставлено. Пожалуйста, <a href='/feedback'>попробуйте снова.</a.");
+									}
+								}
+				}
+			);
+	}
+</script>
+{/literal}
+
+<table>
+	<tr>
+		<td class='innercontent'>
+			<br />
+			<br />
+			<div id="divFeedBack">
+				<table>
+					<tr><td>Заголовок:</td><td><input type='text' id='tbHeader' /></td></tr>
+					<tr><td valign='top'>Суть:</td><td><textarea id="tbMessage" rows="10" cols="100"></textarea></td></tr>
+					<tr><td></td><td><input type='button' value='Отправить' onclick='sendFeedback();' /><input type='button' value='Отмена' onclick='showContent();' /></td></tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+</table>
+
+{include file="footer.tpl.html"}

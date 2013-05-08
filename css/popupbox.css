@@ -1,0 +1,38 @@
+td.popupbox_pointer
+{
+	height:9px;
+	background-image:url(/img/popupbox/pointer.gif);
+	background-position: center;
+}
+
+td.popupbox_top
+{
+	background-image:url('/img/popupbox/border.png');
+	height:1px;
+}
+
+td.popupbox_border
+{
+	background-image:url('/img/popupbox/border.png');
+	width:1px;
+}
+
+td.popupbox_border_bottom
+{
+	background-image:url('/img/popupbox/border.png');
+	background-repeat: no-repeat;
+	width:1px;
+}
+
+td.popupbox_content
+{
+	background-color:#ffffff;
+	padding:5px;
+	font-size:8pt;
+	white-space:nowrap;
+}
+
+div.popupbox
+{
+	position:absolute;
+}

@@ -1,0 +1,22 @@
+				<tr class="trCategory{$category->ID}Child hidden postface" title="">					
+					<td rowspan="2" class="userpic content_left" style="" title="">	
+						{$post->User->RenderUserPic('post', $post->User->ID, 42)}
+					</td>
+					<td>
+						<a class='tagcategory2 {if $post->Closed}closedpost{/if}' href="/post/{$post->ID}">{$post->Title}</a>
+					</td>					
+					<td rowspan="2" class="content_bottom">
+						<a class="comment font10">{$post->VisitsCountHint()}</a><br>
+						<a class="comment font10">{$post->CommentsCountHint()}</a>
+					</td>
+					<td rowspan="2" class="lastcomment nowrap content_right" align="right">
+						{$post->LastCommentHint()}
+					</td>
+				</tr>
+				<tr class="trCategory{$category->ID}Child hidden">					
+					<td class="comment content_bottom">					
+						Написал <a href="/user/{$post->User->ID}">{$post->User->Name}</a> <a class="textunderpost">{$post->CreateDate()}</a>
+					</td>
+				</tr>
+				
+				

@@ -1,0 +1,45 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle='Личные сообщения' pageComment=''}
+
+{include file="privatemessages/index.js"}
+
+
+<div class='TabListContainer sitewidth'>
+	<span class='tab'>&nbsp;&nbsp;</span>
+	<span class='tab In selected' ><a class='hand' onclick='switchPrivateMessages("In");'>Входящие</a></span>
+	<span class='tab Out' ><a class='hand' onclick='switchPrivateMessages("Out");'>Исходящие</a></span>
+	<span class='tab' width='100%'>&nbsp;</span>	
+</div>
+
+<div class='TabContentContainer sitewidth'>
+	<table>
+		<tr>
+		
+			<td class='innercontent hidden privatemessages' id='tdMessagesIn'>
+				<div id='divMessagesIn'>
+					<a class='start'></a>						
+				{foreach from=$messagesIn item=message}
+					{include file="controls/privateMessage.html" message=$message}							
+				{/foreach}
+				</div>
+			</td>
+			
+			<td class='innercontent hidden privatemessages' id='tdMessagesOut'>
+				<div id='divMessagesOut'>
+					<a class='start'></a>						
+				{foreach from=$messagesOut item=message}
+					{include file="controls/privateMessage.html" message=$message}							
+				{/foreach}
+				</div>
+			</td>			
+				
+		</tr>
+	</table>
+</div>
+
+		
+
+{include file="footer.tpl.html"}

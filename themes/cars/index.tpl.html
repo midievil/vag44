@@ -1,0 +1,41 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment}
+
+<table>
+	<tr>
+		<div class='categorytitle'>
+		{if $models|@count > 0}
+			Здесь представлены модели: 
+			{foreach from=$models item=model}
+				{if $model.CountOnSite > 0}
+			<a class='button' href='/{$vendor.Name}/{$model.Name}'>{$model.Name}</a>						
+					{/if}
+			{/foreach}
+		{/if}
+			<br /><br />
+		{if $currentUser->IsLogged()}
+			<a class='button' href='/tips/whynocar'>Почему здесь нет моей машины?</a>
+		{/if}
+		</div>
+		<td class='innercontent'>
+			<table>
+				<tr>
+				{foreach from=$carDescriptions item=carDescription name=carcycle}
+					{if $smarty.foreach.carcycle.iteration % 2 == 1}
+					</tr>
+					<tr>
+					{/if}
+						<td>
+							{$carDescription}
+						</td>					
+				{/foreach}
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+{include file="footer.tpl.html"}

@@ -1,0 +1,95 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="user/index.js"}
+
+{if $user->Name != '' }
+		<a class='messageheader'>{$user->Name}</a> <a class='comment hand' id='aRatingValue' {$ratingList}><b>рейтинг: {$user->Rating}</b></a>
+
+		<table cellspacing='0' cellpadding='0' id='tblDescription' class='font9'>
+			<tr>
+				<td colspan='3' class='comment' style='padding-bottom:20px'>
+					Группа: {$user->GroupName}
+					{if $registerDate}<br />С нами с {$registerDate}{/if}
+				</td>
+			</tr>
+			<tr>
+				<td rowspan='8' valign='top' style='padding-right:10px'>
+				{$user->RenderUserPic('EditProfile', '', 100)}
+				</td>
+			</tr>		
+	
+	{if $user->GetFullName() != ""}
+			<tr class='font11'><td colspan='2'>{$user->GetFullName()}</td></tr>
+	{/if}
+	
+	{if $user->From}
+			<tr class='comment'><td colspan='2'>Город: {$user->From}</td></tr>
+	{/if}
+	
+	
+	{if $currentUser->IsLogged()}
+			
+			<tr><td>&nbsp;</td><td></td></tr>
+			
+		{if $user->ShowEmail}
+			<tr><td>e-mail:</td><td>{$user->Email}</td></tr>
+		{/if}
+		
+		{if $icq}
+			<tr><td>ICQ:</td><td>{$user->ICQ}</td></tr>
+		{/if}
+		
+		{if $user->Phone}
+			<tr><td>Телефон:&nbsp;</td><td>+7 {$phone}</td></tr>
+		{/if}
+		
+		{if $social|@count>0}
+			<tr><td>Соцсети:&nbsp;</td><td>
+			{foreach from=$social item=sn}
+				<a href='{$sn.url}' target='blank'>
+				<img style='width:15px; height:15px; margin:-2px;' src='/img/social/{$sn.innername}.jpg' />&nbsp;{$sn.name}
+				</a> 
+			{/foreach}
+			</td></tr>
+		{/if}
+	{/if}
+	
+	{if $carslist}
+			<tr><td style='padding-top:10px' colspan='1' valign='top'>Ездит на&nbsp;</td><td style='padding-top:10px'><b>{$carslist}</b></td></tr>
+	{/if}
+	
+	
+	{if $blogs|@count > 0}
+	 <tr><td style='padding-top:10px' colspan='1' valign='top'>Блоги:&nbsp;</td><td style='padding-top:10px'>
+	 <b>
+	 	{foreach from=$blogs item=blog}
+	 		<a href='/blog/{$blog->ID}'>{$blog->Name}</a><br />
+	 	{/foreach}
+	 </b>
+	 </td></tr>
+	{/if}
+
+		</table>
+		
+		{if $currentUser->IsLogged() && $currentUser->ID != $user->ID}
+			<br/><br/>
+			<a onclick='$("#divPrivateMessage").show();' href='#'>Написать личное сообщение</a><br/>
+			<div id='divPrivateMessage' class='hidden'>
+			Заголовок<br />
+			<input type='text' id='tbPrivateMessageHeader' size='50'/><br />
+			Текст<br />
+			<textarea id='tbPrivateMessageText' cols='70' rows='3'></textarea><br />
+			<a href='#' onclick='sendMessage({$user->ID});'>Отправить</a> <a href='#' onclick='cancelMessage();'>Отмена</a>
+			</div>
+		{/if}
+
+
+			<a id='aComment'></a>		
+{else}
+Такого пользователя у нас нет. Похоже, вы что-то перепутали =(
+{/if}
+
+
+{include file="footer.tpl.html"}

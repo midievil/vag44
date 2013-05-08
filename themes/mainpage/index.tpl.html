@@ -1,0 +1,21 @@
+{include file="header.tpl.html"}
+
+{include file="notifications/index.tpl.html" jsfile='notifications'}
+
+{include file="mainpage/index.js"}
+
+	<div class="header">Разделы форума</div>
+	<div class="tagcategorylist">
+		<table cellspacing="0;" cellpadding="0" class="tagcategoryface">				
+			<tbody>
+			{foreach from=$categories item=category}
+				{include file="controls/tagcategory.html" category=$category}				
+			{/foreach}
+			</tbody>
+		</table>
+	</div>
+
+<br />
+
+
+{include file="footer.tpl.html"}

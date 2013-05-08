@@ -1,0 +1,19 @@
+<div id='trMessage{$message->ID}' class='paddedbottom'>	
+		<b>{$message->Header}</b> <a class='comment'>{if $message->Direction() == "In"}от{else}для{/if}</a> <a href='/user/{$message->UserID}'>{$message->UserName}</a> <a class='comment'>{$message->PostDateText()}</a>
+		{if $message->Direction() == "Out"}
+			<a class='comment'>({if $message->Read==1}прочитано{else}еще не прочитано{/if} пользователем)</a>{/if}
+		<br />
+		{$message->Text}<br /> 
+		{if $message->Direction() == "In"}<a class='hand buttonsunderpost' onclick='answerMessage({$message->ID})'>ответить</a> · {/if}
+		<a class='hand buttonsunderpost' onclick='deletePrivateMessage({$message->ID})'>удалить</a> 
+		{if $message->Read == '0' && $message->Direction() == "In"} · <a class='hand buttonsunderpost read' onclick='setMessageRead({$message->ID})'>отметить как прочитанное</a>{/if}
+	
+		<div id='trAnswerMessage{$message->ID}' class='hidden'>
+			<a class='comment'>Тема: </a><input type='text' id='tbAnswerText{$message->ID}' size='50' value='Re: {$message->Header}' /><br />
+			<textarea id='tbAnswerMessage{$message->ID}' cols='70' rows='3'></textarea>
+			<br />
+			<a class='hand buttonsunderpost' onclick='sendMessage({$message->UserID}, {$message->ID});'>отправить</a> · 
+			<a class='hand buttonsunderpost' onclick='cancelMessage({$message->ID});'>отмена</a>
+			
+		</div>		
+</div>

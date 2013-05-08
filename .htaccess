@@ -1,0 +1,24 @@
+AddDefaultCharset utf-8
+RewriteEngine on
+Options +FollowSymlinks
+
+
+
+
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{HTTP_HOST} !www.vag44.ru [NC]
+RewriteCond %{HTTP_HOST} !vag44.ru [NC,OR]
+RewriteCond %{HTTP_HOST} ^(www.)?([a-z0-9-\.\-]+).vag44.ru [NC]
+
+
+RewriteRule ^(.*)$ /front/index.php?URL_REQUESTED=/$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+
+RewriteRule ^(.*)$ index.php?URL_REQUESTED=$1 [QSA,L]

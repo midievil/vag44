@@ -1,0 +1,46 @@
+					
+				{if $currentUser->IsLogged()}
+					<div style='padding-top:42px;' align='left'>
+							<b>Сейчас на сайте:</b>
+							{if $onlineUsers|@count > 0}
+								{foreach from=$onlineUsers item=user name=userscycle}
+									<a id='aOnlineUser{$user->ID}' href='/user/{$user->ID}' onmouseover='showPopup(this, "{$user->GetDescriptionForPopup()}");' onmouseout='hidePopup(this);'>{$user->Name}</a>{if $smarty.foreach.userscycle.iteration<$onlineUsers|@count},{/if} 
+								{/foreach}
+							{else}
+							никого
+							{/if} 
+							<br /><br />					
+	 				</div>
+	 			{/if} 
+ 				</div> 
+		
+				<div class="bottom" style="padding-top:42px; padding-bottom:42px; padding-left:25px; padding-right:25px; height:50px;">
+					<table width='100%'>
+						<tr>
+							<td align='left'>
+								<a class='comment'>©2011 midievil</a> <br /> <br />
+								<a id='aRules' href='/rules/'>Правила</a>
+								&nbsp;·&nbsp;<a id='aUsers' href='/users/'>Пользователи</a>
+								&nbsp;·&nbsp;<a href='/feedback/' >Обратная связь</a>	
+								{if $currentUser->IsLogged()}
+								&nbsp;·&nbsp;<a href='/post/55' >Книга жалоб</a>
+								&nbsp;·&nbsp;<a href='/post/11' >Улучшение сайта</a>
+								&nbsp;·&nbsp;<a href='/post/143' >Помощь сайту</a>
+								{/if}
+							</td>
+							<td>
+							</td>
+							<td align='right'>
+								<br /> <br />
+								<a onclick='goTop();' class='hand'>Наверх</a>
+								{if $currentAction != 'mainpage'}
+									&nbsp;·&nbsp<a href='/'>На главную</a>
+								{/if}			
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>	

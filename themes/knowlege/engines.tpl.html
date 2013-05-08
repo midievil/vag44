@@ -1,0 +1,86 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle='База двигателей концерна VAG' pageComment="Список двигателей пополняется по мере появления различных автомобилей на сайте. Если вашего двигателя нет в базе, пожалуйста, сообщите об этом <a class='button' href='/showpost/7'>здесь</a><br />"}
+
+{include file="knowlege/js/engines.js"}
+
+<table>
+	<tr>
+		<td class='innercontent'>
+
+
+	{if $currentUser->IsAdmin()}
+			<table class='list'>			
+				<tr class='header'><td></td><td>Объем</td><td>Топл.</td><td>Код</td><td>Мощность</td><td>Расп/цил</td><td>Клапана</td><td>Объем, см<sup>3</sup></td><td></td><td></td><td></td></tr>
+				<tr>
+					<td>Добавить:</td>
+					<td><input id='tbSize' size='3' /></td>
+					<td><input id='tbFuel' size='3' /></td>
+					<td><input id='tbName' size='30' /></td>
+					<td><input id='tbHP' size='3' /></td>
+					<td style='white-space: nowrap'><input id='tbLayout' size='2' /><input id='tbCilinders' size='2' /></td>
+					<td><input id='tbValves' size='2' /></td>
+					<td><input id='tbСС' size='4' /></td>
+					<td><input type='button' onclick='addEngine($(\"#tbSize\").val(), $(\"#tbFuel\").val(), $(\"#tbName\").val(), $(\"#tbHP\").val(), $(\"#tbCilinders\").val(), $(\"#tbLayout\").val(), $(\"#tbValves\").val(), $(\"#tbСС\").val());' value='YARRRR!!!' /></td>
+					
+				</tr>
+				
+			</table>
+			<br /><br />
+	{/if}
+
+	<table><tr><td>
+	Марка: 
+		<select id='ddlVendor' onchange="reloadWithVendor();">
+			<option value=''></option>
+		{foreach from=$vendors item=vendor}
+			<option value='{$vendor.ID}' {if $vendor.ID == $vendorID}selected{/if}>{$vendor.Name}</option>
+		{/foreach}	
+		</select>
+	</td>
+	<td {if $vendorID == ''}class='hidden'{/if} id='tdModel'>
+	Модель:
+		<select id='ddlModel' onchange="reloadWithModel();">
+			<option value=''></option>
+		
+		{foreach from=$model item=model}
+				<option value='{$model.id}' {if $model.id == $modelID}selected{/if}>$model.Name</option>
+		{/foreach}	
+		</select>
+	</td><td {if $modelID == ''}class='hidden'{/if}  id='tdGeneration'>
+	Поколение:
+		<select id='ddlGeneration' onchange="reloadWithGeneration();">
+			echo "<option value=''></option>";
+		{foreach from=$generations item=generations name=genscycle}
+				<option value='{$generation}'>{$smarty.foreach.genscycle.iteration-1}</option>
+		{/foreach}		
+		</select>
+	</td>
+	
+	{if $currentUser->IsAdmin()}
+	<td>
+		<select id='ddlEngineToAssign'><option value=''></option>
+		{foreach from=$engines item=engine}
+			<option value='$engine.id'>{$engine.name}</option>
+		{/foreach}
+		</select>
+		<a class='hand' onclick='assignEngineToModel();'>Добавить мотор</a></td>
+	{/if}
+	
+		</tr>
+	</table>
+	<br />
+	<br />
+	<a id='aEnginesTable'>
+
+		{$list}
+
+	</a>
+
+		</td>
+	</tr>
+</table>
+
+{include file="footer.tpl.html"}

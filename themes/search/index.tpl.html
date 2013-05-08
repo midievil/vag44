@@ -1,0 +1,79 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle='Результаты поиска' pageComment=$comment}
+
+{include file="search/index.js"}
+
+<table>
+	<tr>
+		{if $resultsFromCategoryNames|@count == 0 
+			&& $resultsFromPostTitles|@count == 0
+			&& $resultsFromPostTexts|@count == 0
+			&& $resultsFromComments|@count == 0
+			&& $resultsFromUserNames|@count == 0 }
+			Мы ничего не нашли. То есть вообще ничего. Ни-че-го-шень-ки! Попробуйте перефразировать или поменять способ поиска.
+		{/if}
+		{if $message != ''}{$message}{/if}<br /><br />
+		{if $mode == 'solid'}
+			Мы поискали введенную вами строку целиком и подряд. <a href='/search?req={$req}&mode=multi'>Поискать отдельные слова?</a>
+		{else}
+			Мы искали все введенные вами слова, как будто они разбросаны по тексту. <a href='/search?req={$req}&mode=solid'>Поискать целую строку?</a>
+		{/if}
+		<br />
+		<br />
+	</tr>
+	<tr>
+		<td class='innercontent comment'>
+		{if $resultsFromCategoryNames|@count > 0}
+			<a class='messageheader'>В названиях разделов</a><br />
+			{foreach from=$resultsFromCategoryNames item=result}		
+				<a class='tagcategory2' href='/tagcategory/{$result.ID}' style=padding-left:20px>{$result.Name}</a>
+				<br />				
+			{/foreach}
+			<br /><br />
+		{/if}
+	
+		{if $resultsFromPostTitles|@count > 0}
+			<a class='messageheader'>В заголовках постов</a><br />
+			{foreach from=$resultsFromPostTitles item=result}
+				<a class='tagcategory2' href='/post/{$result.PostID}' style='padding-left:20px'>{if $result.Title != ''}{$result.Title}{else}<нет заголовка>{/if}</a> (автор: <a href='/user/{$result.UserID}'>{$result.UserName}</a>)
+				<br />		
+			{/foreach}
+			<br /><br />
+		{/if}
+	
+		{if $resultsFromPostTexts|@count > 0}
+			<a class='messageheader'>В текстах постов</a><br />
+			{foreach from=$resultsFromPostTexts item=result}				
+				<a class='tagcategory2' href='/post/{$result.PostID}' style='padding-left:20px'>{if $result.Title != ''}{$result.Title}{else}<нет заголовка>{/if}</a> (автор: <a href='/user/{$result.UserID}'>{$result.UserName}</a>)
+				<br />				
+			{/foreach}
+			<br /><br />
+		{/if}
+	
+		{if $resultsFromComments|@count > 0}
+			<a class='messageheader'>В комментариях к постам</a><br />
+			{foreach from=$resultsFromComments item=result}		
+				<a class='tagcategory2' href='/post/{$result.PostID}' style='padding-left:20px'>{$result.Title}</a> (автор: <a href='/user/{$result.UserID}'>{$result.UserName}</a>)
+				<br />			
+			{/foreach}
+			<br /><br />
+		{/if}
+	
+		{if $resultsFromUserNames|@count > 0}
+			<a class='messageheader'>В именах пользователей</a><br />
+			{foreach from=$resultsFromUserNames item=result}
+				<a class='tagcategory2' href='/user/{$result.ID}' style=padding-left:20px>{$result.Name}</a>
+				<br />		
+			{/foreach}
+			<br /><br />
+		{/if}
+
+		</td>
+	</tr>
+</table>
+
+
+{include file="footer.tpl.html"}

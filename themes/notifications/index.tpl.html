@@ -1,0 +1,43 @@
+	<div class="message" align="left">
+		{*if $birthdayUsers|@count}
+			<a class='veryimportant'>Сегодня день рождения у </a>
+			{foreach from=$birthdayUsers item=user}
+				<a class='veryimportant underline'{if $user.PostID != 0} href='/post/{$user.PostID}'{/if}> {$user.Name}</a>
+			{/foreach}
+			<a class='veryimportant'>. Поздравляем!</a><br /><br />
+		{/if*}
+
+{*			<a class='veryimportant' href='http://vag44.net/post/790'>Встреча 3 мая в 13:00. 2 года клубу. Шашлык пати.</a><br /><br /> *}
+
+		<b>Недавно здесь? Почитайте <a href='/post/184'>FAQ</a>, задайте вопрос.</b><br /><br />
+		{*<b><a href='/post/709' class='veryimportant' style='font-size:16pt'>Мы собираемся проводить год СЕГОДНЯ (в субботу, 29-го). Приходите!</a></b><br /><br />*}
+		
+		{if $currentUser->IsAdmin()}
+			{foreach from=$feedbacks item=feedback}
+				Новый фидбэк: <a class='button' href='/admin/feedback/{$feedback.ID}'>{$feedback.Header}</a>{if $feedback.UserName != ''} от  {$feedback.UserName}{/if}<br />
+			{/foreach}
+			
+			{foreach from=$unauthorizedUsers item=user}
+				Новый пользователь: <a class='button' href='/user/'>{$user.ID}</a>{$user.Name}</a><br />
+			{/foreach}
+			
+			{if $unauthorizedUsers|@count == 0 && $feedbacks|@count == 0}
+				Для админа новостей сегодня нет. Как-то даже странно.
+			{/if}
+		{/if}
+	
+	</div>
+	
+	{if $currentUser->IsLogged()}
+		{if $userMessages|@count > 0}
+	<br />	
+	<div class="message" align="left">
+		
+				<ul>	
+				{foreach from=$userMessages item=message}
+					<li>{$message}</li>
+				{/foreach}
+				</ul>
+	</div>
+		{/if}
+	{/if}

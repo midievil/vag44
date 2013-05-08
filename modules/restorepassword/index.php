@@ -1,0 +1,5 @@
+<?PHP
+	
+		templater::display();
+
+?>

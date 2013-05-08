@@ -1,0 +1,8 @@
+<div class='breadcrumbs'>
+	
+	{foreach from=$breadCrumbs item=breadCrumb name=cycle}		
+		<a {if $breadCrumb->Link != ''}href="{$breadCrumb->Link}"{/if}>{$breadCrumb->Text}</a>
+		{if $smarty.foreach.cycle.iteration < $breadCrumbs|@count}&nbsp;<a>›</a>&nbsp;{/if} 
+	{/foreach}
+	
+</div>

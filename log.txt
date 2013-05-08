@@ -1,0 +1,17 @@
+
+		
+		--------------------------------------exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'undefined' in 'where clause'' in /home/virtwww/w_vag44-net_e6e00719/http/inc/class.fdb.php:53
+Stack trace:
+#0 /home/virtwww/w_vag44-net_e6e00719/http/inc/class.fdb.php(53): PDOStatement->execute()
+#1 /home/virtwww/w_vag44-net_e6e00719/http/inc/class.fdb.php(115): fDB::_prep_query('?????select?C.*...', NULL)
+#2 /home/virtwww/w_vag44-net_e6e00719/http/db/BlogDB.php(23): fDB::fqueryAll('?????select?C.*...')
+#3 /home/virtwww/w_vag44-net_e6e00719/http/response/blogresponse.php(317): BlogDB::getCommentsByPostID('undefined')
+#4 {main}
+		
+		--------------------------------------exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'undefined' in 'where clause'' in /home/virtwww/w_vag44-net_e6e00719/http/inc/class.fdb.php:53
+Stack trace:
+#0 /home/virtwww/w_vag44-net_e6e00719/http/inc/class.fdb.php(53): PDOStatement->execute()
+#1 /home/virtwww/w_vag44-net_e6e00719/http/inc/class.fdb.php(115): fDB::_prep_query('?????select?C.*...', NULL)
+#2 /home/virtwww/w_vag44-net_e6e00719/http/db/BlogDB.php(48): fDB::fqueryAll('?????select?C.*...')
+#3 /home/virtwww/w_vag44-net_e6e00719/http/response/blogresponse.php(321): BlogDB::getFlatCommentsByPostID('undefined', '1')
+#4 {main}
