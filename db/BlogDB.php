@@ -87,8 +87,17 @@
 			return $result;
 		}
 		
-		public static function getPostsByBlogID($blogID)
+		public static function getPostsByBlogID($blogID, $sortField, $sortDir)
 		{
+			if(empty($sortField))
+			{
+				$sortField = "case
+						when P.Date > IFNULL(C.Date, '1900-01-01') then P.Date
+						else IFNULL(C.Date, '1900-01-01')
+					end";
+				$sortDir = 'desc';
+			}
+			
 			$query = "
 			select	P.ID,
 					P.Title,
@@ -102,7 +111,7 @@
 					U.Title UserTitle,
 					TCTP.TagCategoryID ParentID,
 					P.Closed,
-					(	select count(*) from Visits v where v.PostID = P.ID	)	VisitsCount
+					P.VisitsCount
 			from	TagCategoriesToPosts TCTP
 			join	Posts P on P.ID = TCTP.PostID
 			join	Blogs B on B.ID = P.BlogID
@@ -111,13 +120,17 @@
 			Comments C on C.ID = P.LastCommentID
 			where	B.ID = $blogID
 					and	P.Text != ''
-					order by
-					case
-						when P.Date > IFNULL(C.Date, '1900-01-01') then P.Date
-						else IFNULL(C.Date, '1900-01-01')
-					end desc";
+			order by $sortField
+					 $sortDir";
 			$result = fDB::fqueryAll($query);
 			return $result;
+		}
+		
+		public static function renameBlog($blogID, $newName)
+		{
+			$query = "UPDATE blogs SET Name='$newName' WHERE ID=$blogID";
+			$result = fDB::fexec($query);
+			return true;
 		}
 	}
 
@@ -196,7 +209,7 @@
 					U.Title UserTitle,
 					TCTP.TagCategoryID ParentID,					
 					P.Closed,
-					(	select count(*) from Visits v where v.PostID = P.ID	)	VisitsCount
+					P.VisitsCount
 			from	TagCategoriesToPosts TCTP
 			join	Posts P on P.ID = TCTP.PostID
 			join	Blogs B on B.ID = P.BlogID
@@ -289,8 +302,6 @@
 		}
 		return "";
 	}
-	
-	
 	
 	/*
 		C O M M E N T S

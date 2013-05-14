@@ -38,7 +38,7 @@ table
 
 .padded
 {
-	padding: 20px;
+	padding: 15px;
 }
 
 .padded.right
@@ -202,6 +202,12 @@ tr.comment td, td.comment, a.comment, div.comment
 {
 	color: #777777 !important;
 	font-size:8pt;
+}
+
+.commentunderpost
+{
+	color: #777777 !important;
+	font-size: 10pt;
 }
 
 tr.label td, td.label, a.label, div.label

@@ -6,24 +6,51 @@
 
 {$message}
 
+{include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment}
+
+{assign var='gender' value=$blogs_user->Gender|default:'m'}
+
 {if $posts|@count > 0}
+	{if $currentUser->ID == $blogs_user->ID}
+	<div class='buttonsunderpost paddedbottom'>
+		<a href='/writetoblog/{$blog->ID}'>{$i18n.blog_write}</a> · <a class='hand' onclick='ShowRenameBlog();'>{$i18n.blog_rename}</a> <input type='text' value='{$blog->Name}' size='50' class='hidden renameblog' /> <a class='hidden renameblog hand' onclick='RenameBlog({$blog->ID})'>Ok</a>
+	</div>
+	{/if}
 	{foreach from=$posts item=post}
-		<div class='header'>
-			<div class='left'>
-				{$post->Title} ({$post->CreateDate()})
-			</div>
+		<div>
+			<a class='tagcategory0'>{$post->Title}</a>
 			<div style='float:right'>
 				{$rating}
 			</div>
 		</div>
-		<div class='tagcategorylist'>
-			<div class='padded bgwhite'>
-				{$post->Text}
-			</div>
+		<div class='padded bgwhite'>
+			{$post->Text}
 		</div>
-		<br />
+		<div class='commentunderpost paddedleft paddedbottom'>
+			{$i18n.wrote.$gender} <a>{$blogs_user->Name}</a>, {$post->CreateDate()} · <a href='/post/{$post->ID}'>{$i18n.blog_comments}</a>
+			{if $currentUser->ID == $blogs_user->ID} · <a href='/editpost/{$post->ID}'>{$i18n.blog_edit}</a>{/if}
+		</div>
+		<br /><br />
 	{/foreach}
 	</table>
+{elseif $blogs|@count > 0}
+	{if $blogs|@count == 1}
+		{if $currentUser->ID == $blogs_user->ID}
+			{$i18n.blogs_count_1_your}
+		{else}
+			{$i18n.blogs_count_1}
+		{/if}
+	{else}
+		{assign var="cnt" value=$blogs|@count}
+		{if $currentUser->ID == $blogs_user->ID}
+			{$i18n.blogs_count_your|sprintf:$cnt}
+		{else}
+			{$i18n.blogs_count|sprintf:$cnt}
+		{/if}
+		{foreach from=$blogs item=blog name=blogs}
+			<a href='/blog/{$blog->ID}'>{$blog->Name|default:$i18n.blogs_noname}</a>{if !$smarty.foreach.blogs.last},{/if} 
+		{/foreach}
+	{/if}
 {else}
 	Здесь пусто. Автор еще ничего не написал.
 {/if}

@@ -28,8 +28,7 @@ function dbgTime($point)
 		echo "<script>window.setTimeout(function() {	window.location = '/'; }, 500);</script>";
 		die;
 	}	
-	
-	
+		
 	require_once "constants.php";
 	
 	require_once "db.php";	

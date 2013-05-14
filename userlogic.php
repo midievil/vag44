@@ -245,12 +245,13 @@
 	
 	function saveVisit()
 	{
-		if($_GET["showpost"])
+		$PostID = mLogic::$urlVariables['post'];
+		if(!empty($PostID))
 		{
 			global $currentUser;
 			$Date = getCurrentDateText();
 			$UserID = $currentUser->ID;
-			$PostID = $_GET["showpost"];
+			//$PostID = $_GET["showpost"];
 			$QUERY_STRING = $_SERVER["QUERY_STRING"];
 			$HTTP_REFERER = $_SERVER["HTTP_REFERER"];
 			

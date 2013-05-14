@@ -84,7 +84,7 @@
 				{if $currentUser->IsLogged()}
 					<a id='aTopMenuService' href='/service' onmouseover='showPopup(this, "Отметки об обслуживании вашего авто")' onmouseout='hidePopup()'>сервисная книжка</a>&nbsp;&nbsp;
 					<a id='aTopMenuProfile' href='/profile' onmouseover='showPopup(this, "Настройки вашего профиля<br> и списка автомобилей")' onmouseout='hidePopup()'>профиль</a>&nbsp;&nbsp;
-					<a id='aMyBlogs' href='/userblogs' >блоги</a>&nbsp;&nbsp;
+					<a id='aMyBlogs' href='/blog' ><b>блоги</b></a>&nbsp;&nbsp;
 					<a id='aMyGallery' href='/gallery' >галерея</a>&nbsp;&nbsp;
 					<a id='aPrivateMessages' {if $privateMessagesCount>0}class='important'{/if} href='/privatemessages' >личные сообщения{if $privateMessagesCount>0} ({$privateMessagesCount}){/if}</a>&nbsp;&nbsp;
 					<a id='aLogout' href='/?action=logoff'>выход</a>&nbsp;&nbsp;

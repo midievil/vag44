@@ -216,7 +216,10 @@ class mLogic {
 			}
 			
 			elseif ( $act == 'blog' ){ /* blog id */
-				$ret['blogid'] = $ar[$pos+1];
+				if(is_numeric($ar[$pos+1]))
+				{
+					$ret['blogid'] = $ar[$pos+1];
+				}
 			}
 			
 			elseif ( $act == 'tips' ){ /* category id */

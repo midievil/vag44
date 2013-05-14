@@ -51,6 +51,13 @@
 			}
 			return;
 			
+		case "renameblog":
+			$blogID = $_REQUEST["id"];
+			$newName = $_REQUEST["newname"];
+			BlogDB::renameBlog($blogID, $newName);
+			echo "ok";
+			return;
+			
 		case "writepost":	
 			$currentUser = User::CurrentUser();
 			

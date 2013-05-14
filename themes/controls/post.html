@@ -1,6 +1,6 @@
 				<tr class="trCategory{$category->ID}Child hidden postface" title="">					
 					<td rowspan="2" class="userpic content_left" style="" title="">	
-						{$post->User->RenderUserPic('post', $post->User->ID, 42)}
+						{$post->User->RenderUserPic('post', $post->ID, 42)}
 					</td>
 					<td>
 						<a class='tagcategory2 {if $post->Closed}closedpost{/if}' href="/post/{$post->ID}">{$post->Title}</a>

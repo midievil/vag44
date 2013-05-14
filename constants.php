@@ -8,6 +8,7 @@
 	$domain = 'vag44.ru';
 
 	$ourCarsCategoryID = 24;
+	$newsBlogID = 1;
 	
 	define('GENERAL_DOMAIN', 'vag44.ru');
 //	define('SITE_DIR', '/home/virtwww/w_vag44-net_e6e00719/http');

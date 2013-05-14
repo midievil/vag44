@@ -249,6 +249,11 @@
 			return getDateTimeAtText($this->Date);
 		}
 		
+		public function CreateShortDate()
+		{
+			return getDateAtText($this->Date);
+		}
+		
 		public function Comment()
 		{			
 			global $i18n;
@@ -492,7 +497,7 @@
 								
 				$date = $lastComment->Date;
 				$user = new User($lastComment->UserID);
-				$hint = "комментарий";
+				$comment_last = "Последний комментарий";
 			}
 			else 
 			{	
@@ -502,7 +507,7 @@
 				}
 				$date = $lastPost->Date;
 				$user = new User($lastPost->UserID);
-				$hint = "пост $lastPost->ID";	
+				$comment_last = "Написан пост";	
 			}	
 			
 			if($lastPost && $lastPost->ID)
@@ -523,7 +528,7 @@
 					<div>
 					$link
 					" .getDateTimeAtText($date) . ", <a id='aTagCategory".rand(1, 1000)."User' $popupEvents>" . $user->Name . '</a><br />
-					<a class="comment" href="/post/' . $lastPost->ID . '?page=last">последний '.$hint.'</a>'.$lastPost->RenderQuickPaging()."</div>
+					<a class="comment" href="/post/' . $lastPost->ID . '?page=last"> '.$comment_last.'</a>'.$lastPost->RenderQuickPaging()."</div>
 				</td>					
 				<td style='padding-left:5px'>" . $user->RenderUserPic($id, 'TagCategory'.rand(1, 1000), 30) . "</td></tr></table>";
 		}

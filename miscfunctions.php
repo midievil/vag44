@@ -28,7 +28,8 @@
 	{
 		if($dateFromDB)
 		{
-			$date = explode("-", $dateFromDB);
+			$date = explode(" ", $dateFromDB);
+			$date = explode("-", $date[0]);
 			return $date[2].".".$date[1].".".$date[0];
 		}
 		else

@@ -1,57 +1,68 @@
 <?PHP
 
 	$blogid = mLogic::$urlVariables['blogid'];
+	$blogUserID = mLogic::$urlVariables['userid'];
 	$userid = $_SESSION["loggeduserid"];
 	
 	global $breadCrumbs;
 	
-	$blog = new Blog($blogid);
-	
-	if(empty($blog->ID))
+	if(!empty($blogid))
 	{
-		templater::assign('message', 'Такого блога нет. Кажется, вам кто-то дал неверный адрес.');
-	}
-	else
-	{	
-		if($blog->UserID == $userid)
+		$blog = new Blog($blogid);
+		
+		$user = new User($blog->UserID);
+		templater::assign('blogs_user', $user);
+		
+		templater::assign('title', $blog->Name);
+		
+		if($blog->UserID == $currentUser->ID)
 		{
-			$breadCrumbs[] = new BreadCrumb('Ваши блоги', '/blogs/user/' . $blog->UserID); 		
+			$breadCrumbs[] = new BreadCrumb('Ваши блоги', '/blog/user/' . $blog->UserID);
+			templater::assign('comment', $i18n['blog_your']);			
 		}
 		else
 		{
-			$breadCrumbs[] = new BreadCrumb('Блоги пользователя <b>' . $blog->User()->Name . '</b>', '/blogs/user/' . $blog->UserID);		
+			$breadCrumbs[] = new BreadCrumb('Блоги пользователя <b>' . $blog->User()->Name . '</b>', '/blog/user/' . $blog->UserID);			
+			templater::assign('comment', sprintf($i18n['blog_users'], $user->Name));
 		}
 		
 		$breadCrumbs[] = new BreadCrumb($blog->Name, '');
-		templater::assign('breadCrumbs', $breadCrumbs);
-
-		templater::assign('posts', $blog->Posts());		
+				
+		templater::assign('blog', $blog);
+		templater::assign('posts', $blog->Posts());
+	}
+	elseif (!empty($blogUserID) || $currentUser->IsLogged())
+	{
+		if(!empty($blogUserID))
+		{
+			$user = new User($blogUserID);
+		}
+		else
+		{
+			$user = $currentUser;
+		}
+		
+		templater::assign('blogs_user', $user);
+		templater::assign('blogs', $user->Blogs());
+		
+		if($user->ID == $currentUser->ID)
+		{
+			$breadCrumbs[] = new BreadCrumb('Ваши блоги', '');
+			templater::assign('title', 'Ваши блоги');
+			templater::assign('comment', 'Здесь список ваших блогов. Их может быть несколько. Хоть весь блогами обложитесь.');
+		}
+		else 
+		{
+			$breadCrumbs[] = new BreadCrumb('Блоги пользователя <b>' . $user->Name . '</b>', '');
+			templater::assign('title', sprintf($i18n['users_blogs'], $user->Name));
+		}
+	}
+	else
+	{	
+		templater::assign('message', 'Такого блога нет. Кажется, вам кто-то дал неверный адрес.');				
 	}
 		
+	templater::assign('breadCrumbs', $breadCrumbs);
+	
 	templater::display();
 ?>
-
-<!-- <table> -->
-<!-- 	<tr> -->
-<!-- 		<td class='innercontent'> -->
-
-// <?PHP
-	
-// 	$result = getPosts($blogid);
-// 	if(mysql_num_rows($result) == 0)
-// 	{
-// 		echo "Здесь пока пусто.";
-// 	}
-// 	else
-// 	{
-// 		while($row = mysql_fetch_assoc($result))
-// 		{
-// 			showPostFace($row, "list", true);
-// 		}
-// 	}
-	
-// ?>
-
-<!-- 		</td> -->
-<!-- 	</tr> -->
-<!-- </table> -->
