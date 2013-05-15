@@ -8,7 +8,7 @@
 		<tr>
 			<td class='news_column' valign='top'>
 				<div class="header">Новости</div>
-				<div class="tagcategorylist">
+				<div class="tagcategorylist news">
 					{foreach from=$news item=newsItem name=news}
 						{if $smarty.foreach.news.iteration <= 10}
 							<a href='/post/{$newsItem->ID}'>{$newsItem->Title}</a><br />

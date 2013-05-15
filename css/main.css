@@ -1037,3 +1037,9 @@ td.news_column
 	width:200px;
 	padding-right:10px;
 }
+
+.news a
+{
+	font-size:9pt;
+	font-weight: bold;
+}
