@@ -15,7 +15,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td rowspan='8' valign='top' style='padding-right:10px'>
+				<td rowspan='9' valign='top' style='padding-right:10px'>
 				{$user->RenderUserPic('EditProfile', '', 100)}
 				</td>
 			</tr>		
@@ -66,6 +66,16 @@
 	 <b>
 	 	{foreach from=$blogs item=blog}
 	 		<a href='/blog/{$blog->ID}'>{$blog->Name}</a><br />
+	 	{/foreach}
+	 </b>
+	 </td></tr>
+	{/if}
+	
+	{if $galleries|@count > 0}
+	 <tr><td style='padding-top:10px' colspan='1' valign='top'>Фотоальбомы:&nbsp;</td><td style='padding-top:10px'>
+	 <b>
+	 	{foreach from=$galleries item=gallery}
+	 		<a href='/gallery/id/{$gallery.ID}'>{$gallery.Name}</a><br />
 	 	{/foreach}
 	 </b>
 	 </td></tr>

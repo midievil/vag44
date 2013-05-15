@@ -66,7 +66,7 @@
 	templater::assign('pics', $pics);
 	
 	
-	$galleries = getUserGalleries($currentUser->IsLogged());
+	$galleries = $currentUser->Galleries();
 	templater::assign('galleries', $galleries);
 
 	

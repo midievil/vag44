@@ -1,0 +1,11 @@
+
+	<div class="header">Новости</div>
+	<div class="tagcategorylist news">
+		{foreach from=$news item=newsItem name=news}
+			{if $smarty.foreach.news.iteration <= 10}
+				<a href='/post/{$newsItem->ID}'>{$newsItem->Title}</a><br />
+				<a class='comment'>{$newsItem->CreateShortDate()}</a>
+				<br /><br />
+			{/if}
+		{/foreach}
+	</div>

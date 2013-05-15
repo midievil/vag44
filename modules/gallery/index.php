@@ -85,7 +85,7 @@
 				createUserGallery($galleryUser->ID, "Фотоальбом");
 			}
 			
-			$rawGalleries = getUserGalleries($galleryUser->ID);
+			$rawGalleries = $galleryUser->Galleries();
 			$galleries = array();
 			foreach ($rawGalleries as $gallery)
 			{

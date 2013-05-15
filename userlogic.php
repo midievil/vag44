@@ -142,6 +142,16 @@
 			return $this->blogs;
 		}
 		
+		private $galleries = null;
+		public function Galleries()
+		{
+			if($this->galleries == null)
+			{
+				$this->galleries = GalleryDB::getUserGalleries($this->ID);
+			}
+			return $this->galleries;
+		}
+		
 		private $ratingEntries = null;
 		public function RatingEntries()
 		{

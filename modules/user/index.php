@@ -65,8 +65,7 @@
 			}
 		}
 	}
-	templater::assign('social', $socialNetworks);
-	
+	templater::assign('social', $socialNetworks);	
 	
 	templater::assign('carslist', getCarsListByUserID($user->ID));
 	
@@ -93,6 +92,8 @@
 	templater::assign('ratingList', renderPopup($ratingText));
 	
 	templater::assign('blogs', $user->Blogs());
+	
+	templater::assign('galleries', $user->Galleries());
 	
 	templater::display();
 	
