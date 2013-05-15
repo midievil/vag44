@@ -6,15 +6,7 @@
 	{
 		public static function loadUserByID($id)
 		{
-			$userRows = $_SESSION["userrows"];
-		
-			if($userRows[$id])
-			{
-				return $userRows[$id];
-			}
-			elseif($id)
-			{
-				$query = "
+			$query = "
 				select	U.ID,
 						U.Name,
 						U.Title,
@@ -38,44 +30,17 @@
 						U.Gender,
 						G.DisplayName GroupName,
 						G.Name GroupInnerName,
-						count(R.ID) Rating
+						U.Rating
 				from	Users U
-				join	UserGroups G on G.ID = U.GroupID
-				left join
-						Rating R on R.ToUserID = U.ID
-				where	U.ID=$id
-				group by
-						U.ID,
-						U.Name,
-						U.Title,
-						U.FirstName,
-						U.LastName,
-						U.From,
-						U.GroupID,
-						U.Password,
-						U.Email,
-						U.ShowEmail,
-						U.Phone,
-						U.ICQ,
-						U.Social,
-						U.Visible,
-						U.ListType,
-						U.PageSize,
-						U.CategoriesOrder,
-						U.LastVisit,
-						U.BirthDate,
-						U.RegisterDate,
-						G.DisplayName,
-						G.Name";
-				$result = fDB::fquery($query);		
-	
-				if($result)
-				{
-					$userRows[$id] = $result;
-					$_SESSION["userrows"] = $userRows;
-					return $userRows[$id];
-				}
-			}			
+				join	UserGroups G on G.ID = U.GroupID				
+				where	U.ID=$id";
+			$result = fDB::fquery($query);		
+
+			if($result)
+			{
+				return $result;
+			}
+					
 			return false;
 		}
 		
@@ -109,35 +74,10 @@
 					U.Gender,
 					G.DisplayName GroupName,
 					G.Name GroupInnerName,
-					count(R.ID) Rating
+					U.Rating
 			from	Users U
 			join	UserGroups G on G.ID = U.GroupID
-			left join
-					Rating R on R.ToUserID = U.ID
-			where	Visible = 1
-			group by
-					U.ID,
-					U.Name,
-					U.Title,
-					U.FirstName,
-					U.LastName,
-					U.From,
-					U.GroupID,
-					U.Password,
-					U.Email,
-					U.ShowEmail,
-					U.Phone,
-					U.ICQ,
-					U.Social,
-					U.Visible,
-					U.ListType,
-					U.PageSize,
-					U.CategoriesOrder,
-					U.LastVisit,
-					U.BirthDate,
-					U.RegisterDate,
-					G.DisplayName,
-					G.Name
+			where	Visible = 1			
 			order	by CAST(U.Name AS CHAR CHARACTER SET utf8)
 			$paging	";
 			return fDB::fqueryAll($query);
@@ -162,13 +102,6 @@
 		}
 	}
 
-	function removeUserFromCache($id)
-	{
-		$userRows = $_SESSION["userrows"];
-		$userRows[$id] = "";
-		$_SESSION["userrows"] = $userRows;
-	}
-	
 	function getUsersCount()
 	{	
 		$query = "

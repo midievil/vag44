@@ -312,7 +312,6 @@
 					$query = "update Users set ListType='$listtype' where ID = ".($currentUser->ID)." and ListType != '$listtype'";					
 					if(fDB::fexec($query))
 					{
-						removeUserFromCache($currentUser->ID);
 						$currentUser = User::CurrentUser();
 					}
 				}

@@ -12,10 +12,11 @@
 			$query  = "
 			select	C.*,
 					U.Name UserName,
-					U.Title UserTitle,
-					(	select COUNT(ID) from Rating where CommentID = C.ID )	Rating
+					U.Title UserTitle,					
+					P.Closed
 			from	Comments C
 			join	Users U	on U.ID = C.UserID
+			join	Posts P on P.ID = C.PostID
 			where	C.PostID = $postid
 					and C.CommentID is NULL
 			order	by C.Date" ;
@@ -39,9 +40,10 @@
 					U.Name UserName,
 					U.Title UserTitle,
 					0 Level,
-					(	select COUNT(ID) from Rating where CommentID = C.ID )	Rating
+					P.Closed
 			from	Comments C
 			join	Users U	on U.ID = C.UserID
+			join	Posts P on P.ID = C.PostID
 			where	C.PostID = $postid
 			order	by C.Date
 			$paging" ;
@@ -53,8 +55,7 @@
 			$query  = "
 			select	C.*,
 					U.Name UserName,
-					U.Title UserTitle,
-					(	select COUNT(ID) from Rating where CommentID = C.ID )	Rating
+					U.Title UserTitle					
 			from	Comments C
 			join	Users U	on U.ID = C.UserID
 			where	C.CommentID = $commentid
@@ -67,8 +68,7 @@
 			$query  = "
 			select	C.*,
 					U.Name UserName,
-					U.Title UserTitle,
-					(	select COUNT(ID) from Rating where CommentID = C.ID )	Rating
+					U.Title UserTitle
 			from	Comments C
 			join	Users U	on U.ID = C.UserID
 			where	C.PostID = $postid
@@ -105,7 +105,7 @@
 					P.Date,
 					IFNULL(C.Date, '1900-01-01')	LastCommentDate,
 					P.LastCommentID,
-					(select COUNT(ID) from Comments where PostID = P.ID) CommentsCount,
+					P.CommentsCount,
 					U.ID UserID,
 					U.Name UserName,
 					U.Title UserTitle,
@@ -203,7 +203,7 @@
 					P.Date,
 					IFNULL(C.Date, '1900-01-01')	LastCommentDate,
 					P.LastCommentID,
-					(select COUNT(ID) from Comments where PostID = P.ID) CommentsCount,
+					P.CommentsCount,
 					U.ID UserID, 
 					U.Name UserName, 
 					U.Title UserTitle,
@@ -262,15 +262,14 @@
 	function getPostByID($postid)
 	{
 		$query  = "
-			select	P.*, 
+			select	P.*,
 					B.Name,
 					B.UserID,
 					B.CarID BlogCarID,
 					U.Name UserName,
 					U.Title UserTitle,
-					TCTP.TagCategoryID ParentID,
-					(	select COUNT(ID) from Rating where PostID = $postid	and IFNULL(CommentID, -1)=-1 )	Rating,
-					(	select COUNT(ID) from Comments where PostID = $postid) CommentsCount
+					TCTP.TagCategoryID ParentID,					
+					P.CommentsCount
 			from	Posts P			
 			join	Blogs B on B.ID = P.BlogID 
 			join	Users U on U.ID = B.UserID
@@ -312,8 +311,7 @@
 		$query  = "
 			select	C.*, 
 					U.Name UserName,
-					U.Title UserTitle,
-					(	select COUNT(ID) from Rating where CommentID = C.ID )	Rating,
+					U.Title UserTitle,					
 					P.Closed
 			from	Comments C
 			join	Users U	on U.ID = C.UserID

@@ -129,7 +129,7 @@ function thankUser(postID, commentID, userID)
 									}
 									else
 									{
-										alert('Вы уже повышали рейтинг пользователя за этот комментарий');
+										alert('Вы уже повышали рейтинг пользователя за комментарии к этому посту');
 									}
 								}
 								else if(trim(result) == "postthanked")
@@ -154,6 +154,7 @@ function thankUser(postID, commentID, userID)
 								else
 								{
 									alert('Что-то пошло не так. Пожалуйста, попробуйте чуть позже или напишите в обратную связь');
+									alert(result);
 								}
 							}
 			}

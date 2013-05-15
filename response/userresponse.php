@@ -195,9 +195,8 @@
 				
 				if(fDB::fexec($query))
 				{
-					removeUserFromCache($id);
-				}
-				echo "ok";				
+					echo "ok";
+				}				
 			}
 			catch (Exception $e)
 			{
@@ -278,26 +277,37 @@
 				return;
 			}
 			
-			$query = "
-				select	*
+			if($commentid == -1)
+			{
+				$query = "
+				select	COUNT(ID) Cnt
 				from	Rating
 				where	FromUserID = $fromuserid
-						and	ToUserID = $touserid " . ($postid != -1 ? "
-						and PostID=$postid " : "") . ($commentid != -1 ? "
-						and CommentID=$commentid " : " and IFNULL(CommentID, -1) = -1") ;
-			$result = mysql_query($query);
-			if(mysql_num_rows($result) != 0)
-			{
-				$row = mysql_fetch_assoc($result);
-				if($row["CommentID"])
-				{
-					echo "commentthanked";
-				}
-				else
+						and ToUserID = $touserid
+						and PostID=$postid 
+						and IFNULL(CommentID, -1) = -1" ;
+				$result = fdb::fscalar($query);
+				if($result != 0)
 				{
 					echo "postthanked";
+					return;
 				}
-				return;
+			}
+			else
+			{
+				$query = "
+				select	COUNT(ID) Cnt
+				from	Rating
+				where	FromUserID = $fromuserid
+						and ToUserID = $touserid
+						and PostID=$postid 
+						and IFNULL(CommentID, -1) != -1" ;
+				$result = fdb::fscalar($query);
+				if($result != 0)
+				{
+					echo "commentthanked";
+					return;
+				}
 			}
 			
 			$query = "
@@ -310,12 +320,23 @@
 				values(	$fromuserid,
 						$touserid,
 						$postid,
-						".($commentid != -1 ? $commentid : "-1").",
+						$commentid,
 						'".getCurrentDateText()."' )";
+			
 			mysql_query($query);
+			
 			if(mysql_affected_rows() == 1)
 			{
-				removeUserFromCache($touserid);
+				mysql_query("UPDATE Users SET Rating = Rating+1 WHERE ID=$touserid");
+				if($commentid == -1)
+				{
+					mysql_query("UPDATE Posts SET Rating = Rating+1 WHERE ID=$postid");
+				}
+				else
+				{
+					mysql_query("UPDATE Comments SET Rating = Rating+1 WHERE ID=$commentid");
+				}
+				
 				echo "ok";
 				return;
 			}
