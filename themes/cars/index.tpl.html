@@ -2,11 +2,14 @@
 
 {include file="controls/breadcrumbs.html"}
 
-{include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment}
+{*include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment*}
 
-<table>
-	<tr>
-		<div class='categorytitle'>
+	<div class="hero-unit">		
+		<h1>{$title}</h1>
+		<p>
+		{$comment}
+		</p>
+		<p>
 		{if $models|@count > 0}
 			Здесь представлены модели: 
 			{foreach from=$models item=model}
@@ -15,11 +18,14 @@
 					{/if}
 			{/foreach}
 		{/if}
-			<br /><br />
-		{if $currentUser->IsLogged()}
-			<a class='button' href='/tips/whynocar'>Почему здесь нет моей машины?</a>
-		{/if}
-		</div>
+		</p>		
+		<p><a href="/tips/whynocar" class="btn btn-primary btn-large">Почему здесь нет моей машины?</a></p>
+	</div>
+
+	{include file='controls/maintabmenu.html' active='cars'}
+	
+<table>
+	<tr>
 		<td class='innercontent'>
 			<table>
 				<tr>

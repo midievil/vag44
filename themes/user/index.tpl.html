@@ -75,7 +75,9 @@
 	 <tr><td style='padding-top:10px' colspan='1' valign='top'>Фотоальбомы:&nbsp;</td><td style='padding-top:10px'>
 	 <b>
 	 	{foreach from=$galleries item=gallery}
+			{if $gallery.Public}
 	 		<a href='/gallery/id/{$gallery.ID}'>{$gallery.Name}</a><br />
+			{/if}
 	 	{/foreach}
 	 </b>
 	 </td></tr>

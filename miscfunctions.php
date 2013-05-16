@@ -606,18 +606,18 @@
 	{
 		global $currentUser;
 		
-		$level = $value > 2 ? "good" : "neutral";
+		$level = $value > 2 ? "btn-success" : "";
 				
 		$result = "";
 		$alreadyIncreased = false;
 		
 		if($value > 0)
 		{			
-			$popupText = "<b>Этот пост нравится:</b>";
+			$popupText = "Этот пост нравится:";
 			$ratingRecords = getRatingForPost($postid);
 			while($row = mysql_fetch_assoc($ratingRecords))
 			{
-				$popupText .=  "<br />" . $row["Name"];
+				$popupText .=  "\n" . $row["Name"];
 				if($row["ID"] == $currentUser->ID)
 				{
 					$alreadyIncreased = true;
@@ -626,15 +626,15 @@
 		}
 		else
 		{
-			$popupText = "<b>Рейтинг этого поста</b>";
+			$popupText = "Рейтинг этого поста";
 		}
 		
-		$result .=  "<span id='divPostRating' class='rating $level' " . renderPopup($popupText) .">$value</span>";
+		$result .=  "<a class='btn $level' href='#' rel='tooltip' data-original-title='$popupText'>$value</a>";
 		if(!$alreadyIncreased && $currentUser->IsLogged() && $currentUser->ID != $postUserID)
-		{
-			$result .=  "&nbsp;<span id='divPostIncreaseRating' class='rating increase' " . renderPopup("Повысить рейтинг") . ">
-				<a class='hand' onclick='thankUser($postid, -1, $postUserID)'>+1</a>
-			</span>";
+		{		
+			$result .=  "&nbsp;<a rel='tooltip' data-original-title='Повысить рейтинг' class='btn' onclick='thankUser($postid, -1, $postUserID)'>+1</a>";
+			
+			
 		}
 		return $result;
 	}

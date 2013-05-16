@@ -23,7 +23,7 @@ try
 		setcookie("vag44login", "", time()-1000);
 		$_SESSION["vag44pass"] = "";
 		setcookie("vag44pass", "", time()-1000);
-		echo "logging off...";
+		echo "Как, уже уходите?";
 		echo "<script>window.setTimeout(function() {	window.location = '/'; }, 500);</script>";
 		die;
 	}	
@@ -102,6 +102,16 @@ try
 	include 'modules/personalscreen.php';
 	
 	dbgTime(7);
+	
+	$newsRows = BlogDB::getPostsByBlogID(1, 'P.Date', 'desc');
+	$news = array();
+	foreach($newsRows as $newsRow)
+	{
+		$newNews = new Post();
+		$newNews->MakeFromRow($newsRow);
+		$news[] = $newNews;
+	}
+	templater::assign('news', $news);
 	
 	$breadCrumbs = Array();
 	$breadCrumbs[] = new BreadCrumb('Главная страница', '/');

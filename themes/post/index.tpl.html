@@ -2,7 +2,7 @@
 
 {include file="controls/breadcrumbs.html"}
 
-{include file="controls/pagetitle.html" pageTitle=$post->Title pageComment=$post->Comment()}
+{include file="controls/pagetitle.html" pageTitle=$post->Title pageComment=$post->Comment() sideContent=$rating}
 
 <script>var galleryItem=0; var galleryItemsCount={$galleryItems|@count}; var galleryItems = new Array(''
 		{foreach from=$galleryItems item=pic}		
@@ -13,25 +13,10 @@
 		var page = {if $smarty.get.page=='last'}'last'{else}{$commentsPaging->CurrentPage}{/if};
 </script>
 
-		<div class='header'>
-			<div class='left'>
-				{$post->User->Name} написал: 
-			</div>
-			<div style='float:right'>
-				{$rating}
-			</div>
-		</div>
-		
 		<div class='tagcategorylist'>
 			<div class='padded bgwhite'>
-				<table cellspacing='0' cellpadding='0'>
-					<tr>
-						<td colspan='3' class='content'>						
-							<a class='messageheader' href='/post/{$post->ID}'>{$post->Title}</a>
-							<div id='divPost{$post->ID}'>
-								<table cellspacing='0' cellpadding='0'>
-									<tr>
-										<td valign='top'>
+				<div id='divPost{$post->ID}'>
+								
 											{$post->Text}
 											
 								{if $galleryItems|@count}
@@ -56,32 +41,43 @@
 												</td>
 											</tr></table>
 								{/if}
-										</td>									
-									</tr>
-								</table>								
+																		
 							</div>
 							<br />
 							<br />							
-						</td>
-					</tr>					
-				</table>
+					
 			</div>
 		</div>		
 		<div>
 			<div class='paddedtop'>			
-				{if $currentUser->IsLogged()}	
-					{if $post->Closed == false}
-						<div class='left'>
-							<b><a class='buttonsunderpost hand' onclick='$("#trCommentForPost{$post->ID}").show();'>Ответить</a></b>&nbsp;<a 
-								class='buttonsunderpost hand' onmouseover='copyToQuote("{$post->User->Name}", "Post", {$post->ID})' onclick='quotePostSelection("{$post->User->Name}", "Post", {$post->ID}); return false;'>Цитата</a>
-						</div>
-					{/if}
-					
-					{if $post->User->ID == $currentUser->ID || $currentUser->IsAdmin()}
-						<div class='right'>
-							<b><a class='buttonsunderpost hand' href='/editpost/{$post->ID}'>Редактировать</a></b>
-						</div>
-					{/if}
+				{if $currentUser->IsLogged()}
+				<div class="navbar">
+					<div class="navbar-inner">
+						<div class="container">
+			              <ul class="nav">
+							{if $post->Closed}
+							<li><a><Пост закрыт></a></li>
+							{else}
+								<li><a class='hand' onclick='$("#trCommentForPost{$post->ID}").show();'>Ответить</a></li>
+				                <li><a class='hand' onmouseover='copyToQuote("{$post->User->Name}", "Post", {$post->ID})' onclick='quotePostSelection("{$post->User->Name}", "Post", {$post->ID}); return false;'>Цитата</a></li>
+								{if $post->User->ID == $currentUser->ID || $currentUser->IsAdmin()}
+									<li>
+										<a href='/editpost/{$post->ID}'>Редактировать</a>
+									</li>
+								{/if}
+							{/if}
+			              </ul>						  
+						  <ul class="nav pull-right">
+							<li><a>Комментарии:</a></li>
+							<li><a id='aHideComments' class='hand textunderpost' onclick='hidePostComments({$post->ID});'>скрыть</a></li>
+							<li><a id='aShowComments' class='hand textunderpost hidden' onclick='showPostComments({$post->ID});'>показать</a></li>
+							<li><a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'>списком</a></li>
+							<li><a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'>деревом</a></li>
+							<li><a id='aSkipComments' class='hand textunderpost' onclick='goBottom();'>в конец</a></li>
+						  </ul>
+			            </div>
+					</div>
+				</div>
 					
 				{/if}
 			</div>
@@ -95,14 +91,6 @@
 			</div>
 		</div>
 		<div class='paddedtop' style='height:20px'>
-			<div class='left'>
-				<b>Комментарии:</b>
-				<a id='aHideComments' class='hand textunderpost' onclick='hidePostComments({$post->ID});'><img class='posticons' title='Скрыть' src='/img/post_hidecomments.jpg'/> скрыть</a>
-				<a id='aShowComments' class='hand textunderpost hidden' onclick='showPostComments({$post->ID});'><img class='posticons' title='показать' src='/img/post_showcomments.jpg'/> показать</a>
-				<a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'><img class='posticons' title='список (по дате)' src='/img/post_list.jpg'/> списком</a>
-				<a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'><img class='posticons' title='дерево' src='/img/post_tree.jpg'/> деревом</a>
-				<a id='aSkipComments' class='hand textunderpost' onclick='goBottom();'><img class='posticons' title='В конец' src='/img/post_last.jpg'/> в конец</a>
-			</div>
 			<div class='right'>
 				{include file="controls/paging.html" paging=$commentsPaging}
 			</div>

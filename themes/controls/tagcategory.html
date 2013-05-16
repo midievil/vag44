@@ -3,15 +3,34 @@
 					<script>categoryImages['trTagCategory{$category->ID}']='{$image_file}';</script>
 				{/if}
 
-				<tr class="tagcategoryface" id="trTagCategory{$category->ID}" onclick="redirectToCategory('{$category->ID}', event); " onmouseover="highlightTableRow('trTagCategory{$category->ID}');" onmouseout="unhighlightTableRow('trTagCategory{$category->ID}');">
-					
-					<td class="content_left" colspan="3">
-						<a name="tagcategory{$category->ID}" class="tagcategory0" href="/category/{$category->ID}">{$category->Name}</a> <a class="comment">  </a><br>
-						<a class="comment">{$category->Comment}</a>
-					</td>
-					<td class="lastcomment nowrap content_right" align="right">
-						{$category->LastCommentHint}
-					</td>
-				</tr>
+				{assign var='childCategories' value=$category->getChildCategories()}
 				
-				
+				<div class="accordion-group">
+		              <div class="accordion-heading" style='height:90px;'>
+						<div class="pull-left">
+		                <a class="accordion-toggle pull-left" {if $childCategories|@count>0}data-toggle="collapse" href="#collapseTC{$category->ID}"{else}href="/category/{$category->ID}"{/if} data-parent="#accordionMain">
+							<h4>{$category->Name}</h4>
+		                </a>
+						<a class="btn" style='margin-top:10px;' href="/category/{$category->ID}">»</a>
+						<a style='margin-top:10px;' class="accordion-toggle" data-toggle="collapse" data-parent="#accordionMain" href="#collapseTC{$category->ID}">{$category->Comment}</a>
+						</div>
+						<span class='pull-right' style='padding-right:20px; padding-top:5px;'>						
+							{$category->LastCommentHint}
+						</span>
+		              </div>	
+					{if $childCategories|@count >0}
+		              <div id="collapseTC{$category->ID}" class="accordion-body collapse" style="height: 0px;">
+		                <div class="accordion-inner">
+							<div class="list" style='height:{math equation="30 + x*20" x=$category->getChildCategories()|@count}px'>
+								<ul>
+							{foreach from=$category->getChildCategories() item=child}
+								{if $category->Name != null}
+									<li class='hand' onclick='redirectToCategory({$category->ID}, event);'>{$child->Name}</li>
+								{/if}
+							{/foreach}
+								</ul>
+							</div>
+		                </div>
+		              </div>
+					{/if}
+		            </div>    

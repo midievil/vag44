@@ -489,18 +489,18 @@
 					$authLink="<a onclick='authorizeUser($user->ID);'>Авторизовать</a>";
 				}						
 								
-				echo "<tr class='user".($alternating ? " alternating" : "")."'>
+				echo "<tr class='user'>
 					<td>
-						<table cellspacing='0' cellpadding='0'><tr><td>						
+						<div class='pull-left'>
 							" . $user->RenderUserPic('UserList', $user->ID, 42) . "
-						</td><td valign='top' class='comment'>
+						</div>
+						<div style='width:250px; margin-left:60px'>
 							<a href='/user/$user->ID' class='username nowrap' id='aUser$user->ID' " . renderPopup($user->GetDescriptionForPopup()) . ">$user->Name</a>
 							<a class='hand' title='скоро'><img src='/img/message.gif' width='16px' /></a>
 							<br />
 							Рейтинг: $user->Rating
 							" . ($user->RegisterDate ? "<br />С нами с " . getDateAtText($user->RegisterDate) : "") . "
-						</td></tr>					
-						</table>
+						</div>
 					</td>
 					<td class='nowrap' width='100%'>$carRows</td>
 					<td class='nowrap'>$status</td>

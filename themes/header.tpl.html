@@ -7,15 +7,22 @@
 		<meta name="keywords" content="Volkswagen Кострома, Клуб VAG в Костроме, VAG Кострома, Skoda кострома, Audi Кострома, Seat кострома">
 		<meta http-equiv="description" content="Клуб владельцев и поклонников автомобилей Volkswagen, Skoda, Audi, Seat в Костроме и Костромской области. ">
 	
-	
+		{*<link rel="stylesheet" type="text/css" href="/css/main.css?version=39" />*}
 		
-		<link rel="stylesheet" type="text/css" href="/css/main.css?version=39" />
+		<link rel="stylesheet" type="text/css" href="/css/main.min.css?version=1" />
+		<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-list.css" />
 		<link rel="stylesheet" type="text/css" href="/css/popupbox.css?version=16.10.2012" />
 		<link rel="stylesheet" type="text/css" href="/css/gallery.css?version=2" />	
 		<link rel="shortcut icon" href="/img/favicon.ico">
 			
+		
 		<script type="text/javascript" src="/js/jquery/js/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="/js/jquery/js/jquery-ui-1.10.3.custom.min.js"></script>
+		
+		<script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/bootstrap/js/bootstrap-list.js"></script>
+		
 		<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="/ckeditor/adapters/jquery.js"></script>
 		<script type="text/javascript" src="/js/functions.js?version=2"></script>	
@@ -54,92 +61,105 @@
 		<div id="divGalleryBack" style="position:absolute; display:none; z-index:1;">
 	
 		</div>		
-		<div id="divUserPic" class='userpic'>
+		{*<div id="divUserPic" class='userpic'>
 	 
-		</div>
-		
-		<div id="divPopup" class='popupbox hidden'>
-			<table cellspacing='0' cellpadding='0' border='0'>
-				<tr>					
-					<td colspan='3' class='popupbox_top'></td>
-				</tr>
-				<tr>
-					<td class='popupbox_border'></td>
-					<td id='tdPopupInfo' class='popupbox_content'></td>
-					<td class='popupbox_border'></td>
-				</tr>
-				<tr>					
-					<td colspan='3' class='popupbox_top'></td>
-				</tr>
-			</table>
-		</div>
-		<div id="divPopupPointer" class='popupbox hidden'>
-			<img src='/img/popupbox/pointer.gif?version=22.09.2011_1' style='bgcolor:transparent' />
-		</div>
-		
-		<div class='top user' align='center'>
-			<div class='sitewidth' >
-				<div style='float:left;'>			
-				{if $currentUser->IsLogged()}
-					<a>Добро пожаловать,</a> <b><a href='/profile'>{$currentUser->Name}</a></b>
-				{else}
-					<a id='aRegister' class='hand' href='/registration'><b>Регистрация</b></a>&nbsp;&nbsp;&nbsp;
-					<b>Вход</b>&nbsp;&nbsp;
-					<input id='tbLoginName' name='tbLoginName' type='text' class='login' placeholder='логин' />
-					<input id='tbLoginPass' name='tbLoginPass' type='password' class='login' placeholder='пароль' />
-					<a class='hand' onclick='checkLogin()'>ок</a>&nbsp;&nbsp;
-					<a class='comment' href='/restorepassword'>Забыли пароль?</a>
-				{/if}
-				</div>
+		</div>*}
 				
-				<div id='divOptions' class='options' style='float:right'>
-					<a id='aTopMenuFAQ' onmouseover='showPopup(this, "Как пользоваться сайтом")' onmouseout='hidePopup()' href='/post/184'><b>F.A.Q.</b></a>&nbsp;&nbsp;
-					<a href='/knowlege/'>база знаний</a>&nbsp;&nbsp;
-				{if $currentUser->IsLogged()}
-					<a id='aTopMenuService' href='/service' onmouseover='showPopup(this, "Отметки об обслуживании вашего авто")' onmouseout='hidePopup()'>сервисная книжка</a>&nbsp;&nbsp;
-					<a id='aTopMenuProfile' href='/profile' onmouseover='showPopup(this, "Настройки вашего профиля<br> и списка автомобилей")' onmouseout='hidePopup()'>профиль</a>&nbsp;&nbsp;
-					<a id='aMyBlogs' href='/blog' ><b>блоги</b></a>&nbsp;&nbsp;
-					<a id='aMyGallery' href='/gallery' >галерея</a>&nbsp;&nbsp;
-					{if $privateMessagesCount>0}
-						<a id='aPrivateMessages' href='/privatemessages' class='important' >личные сообщения ({$privateMessagesCount})</a>
-						<script>
-							highlightPrivateMessages();
-						</script>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class='navbar-inner'>
+				<div class="container-fluid">
+					{if $currentUser->IsLogged()}
+						<a class='brand'>Привет, {$currentUser->Name}</a>						
+						<div class="nav-collapse collapse">
+							<ul class="nav pull-right">
+								<li>
+									<li><a href="/"><i class="icon-home icon-white"></i> Домой</a></li>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">профиль <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+									  <li><a href="/profile/about">Описание</a></li>
+									  <li><a href="/profile/cars">Мои авто</a></li>
+									  <li><a href="/profile/settings">Настройки</a></li>
+									  <li><a href="/profile/changepass">Сменить пароль</a></li>
+									  <li class="divider"></li>
+									  <li><a id='aLogout' href='/?action=logoff'>выход</a></li>
+									</ul>
+								</li>								
+								
+								<li>
+									<a href='/service' >сервисная книжка</a>
+								</li>
+				
+								<li>
+									<a href='/blog' ><b>блоги</b></a>
+								</li>
+								<li>
+									<a href='/gallery' >галерея</a>
+								</li>
+								<li>
+								{if $privateMessagesCount>0}
+									<a id='aPrivateMessages' href='/privatemessages' class='active'>личные сообщения ({$privateMessagesCount})</a>
+									<script>
+										highlightPrivateMessages();
+									</script>
+								{else}
+									<a id='aPrivateMessages' href='/privatemessages'>личные сообщения</a>
+								{/if}
+								</li>
+								<li>
+									<form class="navbar-form pull-right">  
+									  <input type="text" class="span2" id='tbSearch'>  
+									  <img src='/img/search_inv.jpg' class='hand search' onclick='redirectToSearch()' title='Искать' />
+									</form>
+								</li>
+								<li>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+								</li>
+							</ul>
+						</div>
 					{else}
-						<a id='aPrivateMessages' href='/privatemessages' >личные сообщения</a>
-					{/if}
-					&nbsp;&nbsp;
-					<a id='aLogout' href='/?action=logoff'>выход</a>&nbsp;&nbsp;
-				{/if}
+						<div class="nav-collapse collapse">
+						<nobr>
+							<ul class="nav">								
+								<li>
+									<form class="navbar-form pull-left">	
+										<input id='tbLoginName' name='tbLoginName' type='text' class='span2' placeholder='логин' />
+										<input id='tbLoginPass' name='tbLoginPass' type='password' class='span2' placeholder='пароль' />
+										<button onclick='checkLogin(); return false;' class="btn">Войти</button>								
+									</form>
+								</li>
+								<li><a href='/restorepassword'>Забыли пароль?</a></li>								
+								<li><a id='aRegister' href='/registration'><b>Регистрация</b></a></li>
+							</ul>							
+							
+							<nobr>
+						</div>
+						
+						
+					{/if}	
 				
-				</div>												
+				</div>	
+				
 			</div>
 		</div>
-		<div class='top logo' align='center'>
-			<div class='sitewidth' style='height:100px'>
-				<div style='float:left'>
-					<a href='/'><img style='border:0px' src='/img/bluelogo.png?version=winter' /></a>
-				</div>
-				<div style='float:right; padding-top:5px;'>
-					<span class='rounded bgwhite' >
-						<table cellspacing='0' cellpadding='0'>
-							<tr>
-								<td>
-									<input class='rounded' id='tbSearch' placeholder='поиск по сайту' onkeypress='searchKeyPressed(event)' style='background-color: #ffffff' />					
-								</td>
-								<td>
-									<img src='/img/search.jpg' class='hand search' onclick='redirectToSearch()' title='Искать' />
-								</td>
-							</tr>
-						</table>
-					</span>
-				</div>
-			</div>
-			{if $includeMainMenu}
-				{include file="controls/tabmenu.html" menu=$carsMenu id='mnuMain'}			
-			{/if}
+		
+		<div class="pagetop logo" align="center">			
+				<div style="float:left">
+					<a href="/"><img style="border:0px" src="/img/bluelogo.png?version=winter"></a>
+				</div>			
+		</div>
+		
+		<div class="container-fluid">
+	      <div class="row-fluid">
+	        <div class="span3">
+	          <div class="well sidebar-nav">
+				{include file="controls/newsblock.html" news=$news}	            
+	          </div><!--/.well -->
+	        </div><!--/span-->
+	        <div class="span9">
+	          
 			
-		</div>
 		
 		{literal}
 		<script>	
@@ -152,6 +172,4 @@
 		</script>
 		{/literal}
 		
-		<div align="center" class="main">
-			<div id="divMainContainer" class="sitewidth bgwhite">
-				<div class="main" id="divMain" align="left">
+		

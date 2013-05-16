@@ -360,7 +360,7 @@
 			{
 				if($result != "")
 				{
-					$result = $result."<br /> ";
+					$result = $result."\n";
 				}
 				$genlist = explode(";", $carrow[GenerationsList]);
 				$generation = $genlist[$carrow["Generation"]] ? $genlist[$carrow["Generation"]]." " : "" ;

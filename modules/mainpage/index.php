@@ -14,15 +14,5 @@
 	}
 	templater::assign('categories', $categories);	
 	
-	$newsRows = BlogDB::getPostsByBlogID(1, 'P.Date', 'desc');
-	$news = array();
-	foreach($newsRows as $newsRow)
-	{
-		$newNews = new Post();
-		$newNews->MakeFromRow($newsRow);
-		$news[] = $newNews;
-	}
-	templater::assign('news', $news);
-	
 	templater::display();
 ?>

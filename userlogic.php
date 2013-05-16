@@ -172,17 +172,17 @@
 			$cars = getShortCarsListByUserID($this->ID);
 		
 			$result = "Группа:&nbsp;".$this->GroupName;
-			$result .= "<br />Рейтинг:&nbsp;".$this->Rating;
-			$result .= "<br />Город:&nbsp;".$this->From;
-			$result .= "<br /><b>$cars</b>";
+			$result .= "\nРейтинг:&nbsp;".$this->Rating;
+			$result .= "\nГород:&nbsp;".$this->From;
+			$result .= "\n$cars";
 			
 			if($this->IsOnline())
 			{
-				$result .= "<br />Сейчас <b>онлайн</b>";
+				$result .= "\nСейчас онлайн";
 			}
 			else
 			{				
-				$result .= "<br />Был&nbsp;".getDateTimeAtText($this->LastVisit);
+				$result .= "\nБыл&nbsp;".getDateTimeAtText($this->LastVisit);
 			}
 			return $result;
 		}

@@ -118,13 +118,11 @@ function addGallery()
 function changePublic(id)
 {	
 	var val = $("#cbPublic"+id).is(':checked') ? '1' : '0';
-	alert(val);
 	$.ajax({	type:	"POST",	
 				url:	"/response/galleryresponse.php",
 				data:	"action=changepublic&id="+id+"&val="+val,
 				success: function(result){
-					result = trim(result);
-					alert(result);
+					result = trim(result);					
 				}
 			});
 }

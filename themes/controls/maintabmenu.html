@@ -1,0 +1,15 @@
+			<ul id="mainTabMenu" class="nav nav-tabs">
+					<li {if $active=='home' || $active==null}class="active"{/if}><a href="#home" data-toggle="tab" onclick="Redirect('');">Форум</a></li>
+					<li {if $active=='feed'}class="active"{/if}><a href="#feed" data-toggle="tab">Лента</a></li>
+					<li {if $active=='users'}class="active"{/if}><a href="#users" data-toggle="tab" onclick="Redirect('users');">Люди</a></li>
+					<li class="dropdown {if $active=='cars'} active{/if}">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Автомобили <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a data-toggle="tab" onclick='GoToCars("cars");'>Все</a></li>
+							<li><a data-toggle="tab" onclick='GoToCars("VolksWagen");'>Volkswagen</a></li>
+							<li><a data-toggle="tab" onclick='GoToCars("Audi");'>Audi</a></li>
+							<li><a data-toggle="tab" onclick='GoToCars("Skoda");'>Skoda</a></li>
+							<li><a data-toggle="tab" onclick='GoToCars("Seat");'>Seat</a></li>
+						</ul>
+					</li>					
+				</ul>

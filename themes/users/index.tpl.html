@@ -4,26 +4,33 @@
 
 {include file="controls/breadcrumbs.html"}
 
-{include file="controls/pagetitle.html" pageTitle='Наши ряды' pageComment='Список зарегистрированных пользователей'}
+{*include file="controls/pagetitle.html" pageTitle='Наши ряды' pageComment='Список зарегистрированных пользователей'*}
 
-<br />
+{include file="controls/mainbanner.html"}
+
+
+{include file='controls/maintabmenu.html' active='users'}
 
 {$usersCount} пользователей<br /><br />
 
-{include file="controls/paging.html" paging=$usersPaging}
-			<br /><br />
-			<table id='tblUserList' class='users list' cellspacing='0' cellpadding='0' width='100%'>
-				<tr class='header'>
-					<td>Ник</td>
-					<td>Авто</td>
-					<td>Статус</td>
-					<td>Последний визит</td>
-				</tr>
-			</table>	
-
+{include file="controls/paging.html" paging=$usersPaging div="divUserList" onclick="showUsers"}
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade in active" id="divUserList">
+					<table id='tblUserList' class="table table-striped users" cellspacing='0' cellpadding='0' width='100%'>
+						<tbody>
+						<tr>
+							<th>Ник</th>
+							<th>Авто</th>
+							<th>Статус</th>
+							<th>Последний визит</th>
+						</tr>
+						</tbody>
+					</table>	
+				</div>		
+			</div>
 <br />
 
-{include file="controls/paging.html" paging=$usersPaging}
+{include file="controls/paging.html" paging=$usersPaging div="divUserList" onclick="showUsers"}
 
 {include file="controls/breadcrumbs.html"}
 

@@ -194,6 +194,31 @@
 			}
 			return $this->childObjects;
 		}		
+		
+		private $childCategories = 'notloaded';
+		public function getChildCategories()
+		{
+			if($this->childCategories == 'notloaded')
+			{
+				$this->childCategories = array();
+				$this->ChildCategories = array();
+				$this->ChildPosts = array();
+				
+				$childCategoryRows = getChildCategoriesByCategoryID($this->ID, "date");
+				while($childCategoryRow = mysql_fetch_assoc($childCategoryRows))
+				{
+					$childCategory = new TagCategory();
+					$childCategory->MakeFromRow($childCategoryRow);
+					$childCategory->Init();
+					$childCategory->setParent($this);
+					$this->childCategories[count($this->childCategories)] = $childCategory;
+					
+					$this->ChildCategories[] = $childCategory;
+				}
+								
+			}
+			return $this->childCategories;
+		}
 	}	//	class TagCategory
 	
 	class Post extends TagCategoryChild

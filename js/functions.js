@@ -61,3 +61,13 @@ function checkDate(input)
 	
 	return true;
 }
+
+function Redirect(url)
+{
+	window.location="/"+url;
+}
+
+function GoToCars(marque)
+{
+	window.location="/"+marque;
+}
