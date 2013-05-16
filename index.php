@@ -1,6 +1,4 @@
 <?PHP
-
-
 function dbgTime($point)
 {
 // 	if(stripos($_SERVER['SERVER_NAME'], 'local') !== false)
@@ -9,7 +7,8 @@ function dbgTime($point)
 // 		echo "POINT $point: " . $date["seconds"] . "." . $date[0] . "<br />";
 // 	}
 }
-
+try
+{
 	//error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	error_reporting(0);
 		
@@ -120,4 +119,9 @@ function dbgTime($point)
 	
 	die;
 	
+}
+catch(Exception $e)
+{
+	var_dump($e);
+}
 ?>					

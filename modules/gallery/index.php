@@ -89,14 +89,17 @@
 			$galleries = array();
 			foreach ($rawGalleries as $gallery)
 			{
-				$thumbFile = '/img/gallery/' . $galleryUser->ID . '_' . $gallery['ID'] . '_' . $gallery["Thumbnail"] . '.jpg';
-				if(!file_exists(".$thumbFile"))
+				if($gallery["Public"] || ($currentUser->IsLogged() && $galleryUser->ID == $currentUser->ID))
 				{
-					$thumbFile = "/img/noimage.jpg";
-				}
+					$thumbFile = '/img/gallery/' . $galleryUser->ID . '_' . $gallery['ID'] . '_' . $gallery["Thumbnail"] . '.jpg';
+					if(!file_exists(".$thumbFile"))
+					{
+						$thumbFile = "/img/noimage.jpg";
+					}
 				
-				$gallery['ThumbFile'] = $thumbFile;				
-				$galleries[] = $gallery;
+					$gallery['ThumbFile'] = $thumbFile;				
+					$galleries[] = $gallery;
+				}
 			}
 			
 			templater::assign('galleries', $galleries);			

@@ -1,7 +1,5 @@
 <?PHP
-
 	
-
 	class UserDB
 	{
 		public static function loadUserByID($id)

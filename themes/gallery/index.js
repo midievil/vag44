@@ -44,10 +44,16 @@ function ajaxFileUpload()
 
 function editComment(id)
 {
-	$("a.gallerycomment").show();
-	$("input.gallerycomment").hide();
+	cancelEditComment();
 	$("#aComment"+id).hide();
 	$("#tbComment"+id).show();
+	$(".edit"+id).show();
+}
+
+function cancelEditComment()
+{
+	$("a.gallerycomment").show();
+	$("input.gallerycomment").hide();	
 }
 
 function updateComment(id, text, type)
@@ -73,6 +79,10 @@ function commentKeyPress(key, id, type)
 	{
 		updateComment(id, $("#tbComment"+id).val(), type);
 	}
+	else if(key == 27)
+	{
+		cancelEditComment();
+	}
 }	
 
 function showEditButton(galleryID)
@@ -80,12 +90,14 @@ function showEditButton(galleryID)
 	if($("#aComment" + galleryID).is(":visible"))
 	{
 		$("#btnEditName"+galleryID).show();
+		$(".public"+galleryID).show();
 	}
 }
 
 function hideEditButton(galleryID)
 {
 	$("#btnEditName"+galleryID).hide();
+	$(".public"+galleryID).hide();
 }
 
 function addGallery()
@@ -103,6 +115,23 @@ function addGallery()
 			});
 }
 
+function changePublic(id)
+{	
+	var val = $("#cbPublic"+id).is(':checked') ? '1' : '0';
+	alert(val);
+	$.ajax({	type:	"POST",	
+				url:	"/response/galleryresponse.php",
+				data:	"action=changepublic&id="+id+"&val="+val,
+				success: function(result){
+					result = trim(result);
+					alert(result);
+				}
+			});
+}
+
+$(".innercontent").click( function() {
+	cancelEditComment();	
+});
 
 </script>
 {/literal}

@@ -198,7 +198,7 @@ table.top td.logo
 	width:100px;
 }
 
-tr.comment td, td.comment, a.comment, div.comment
+tr.comment td, td.comment, a.comment, div.comment, label.comment
 {
 	color: #777777 !important;
 	font-size:8pt;
@@ -1042,4 +1042,11 @@ td.news_column
 {
 	font-size:9pt;
 	font-weight: bold;
+}
+
+td.gallerycomment
+{
+	height:33px;
+	width:200px;
+	vertical-align:top;
 }

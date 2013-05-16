@@ -9,10 +9,13 @@
 	
 	require_once("../constants.php");
 	require_once("../db.php");
+	require_once '../inc/class.db.php';
+	require_once '../inc/class.fdb.php';	
 	connectToDB();	
 	require_once("../miscfunctions.php");
 	require_once("../userlogic.php");
 	require_once("../db/UserDB.php");
+	require_once("../db/GalleryDB.php");
 	
 	$currentUser = User::CurrentUser();
 	
@@ -48,6 +51,15 @@
 			{
 				echo "ok";
 				return;
+			}
+			return;
+			
+		case "changepublic":
+			$id = $_POST["id"];
+			$val = $_POST["val"];
+			if(GalleryDB::changeGalleryPublic($id, $val))
+			{
+				echo "ok";
 			}
 			return;
 	}

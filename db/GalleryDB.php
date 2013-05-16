@@ -1,10 +1,7 @@
 <?PHP		
 	//error_reporting(0);	
 	
-	require_once 'inc/class.db.php';
-	require_once 'inc/class.fdb.php';
-
-
+	
 	class GalleryDB
 	{
 		
@@ -14,11 +11,21 @@
 				select	G.ID,
 						G.Name,
 						G.UserID,
-						(select min(ID) from GalleryItems where GalleryID = G.ID) Thumbnail
+						G.Public,
+						(select min(ID) from GalleryItems where GalleryID = G.ID) Thumbnail						
 				from	Galleries G
 				where UserID = $userid");
 		}
 		
+		public static function changeGalleryPublic($id, $value)
+		{
+			if(empty($value))
+			{
+				$value='0';
+			}
+			fDB::fexec("UPDATE Galleries SET Public = $value WHERE ID=$id");
+			return true;
+		}
 	}
 	
 	function userGalleryExists($userid)

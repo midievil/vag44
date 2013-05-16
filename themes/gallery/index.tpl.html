@@ -1,7 +1,5 @@
 {include file="header.tpl.html"}
 
-{include file="gallery/index.js"}
-
 {include file="controls/breadcrumbs.html"}
 
 {include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment}
@@ -31,8 +29,12 @@
 							<tr>
 								<td class='gallerycomment'>
 									<a class='hand gallerycomment' id='aComment{$gallery.ID}' href='/gallery/id/{$gallery.ID}'>{$gallery.Name}</a>
-									<input class='hidden gallerycomment' id='tbComment{$gallery.ID}' onkeypress='commentKeyPress(event.keyCode, {$gallery.ID}, "gallery");' value='{$gallery.Name}' />
-									{if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}<a class='comment hand hidden' id="btnEditName{$gallery.ID}" onclick='editComment({$gallery.ID})'>Переименовать</a>{/if}
+									<input class='hidden gallerycomment' id='tbComment{$gallery.ID}' onkeyup='commentKeyPress(event.keyCode, {$gallery.ID}, "gallery");' onclick='event.stopPropagation(); return false;' value='{$gallery.Name}' />
+									{if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}
+										<a class='comment hand hidden' id="btnEditName{$gallery.ID}" onclick='editComment({$gallery.ID}); event.stopPropagation(); return false;'>Переименовать</a>
+										<br />
+										<input type='checkbox' id="cbPublic{$gallery.ID}" class='public{$gallery.ID} hidden' onclick='changePublic({$gallery.ID})' {if $gallery.Public==1}checked{/if} /> <label for="cbPublic{$gallery.ID}" class='hidden public{$gallery.ID} comment'>виден всем</label>
+									{/if}
 								</td>
 							</tr>
 						</table>
@@ -62,7 +64,7 @@
 									</td>
 								</tr>
 							</table>
-							<input class='hidden gallerycomment' id='tbComment{$galleryItem.ID}' onkeypress='commentKeyPress(event.keyCode, {$galleryItem.ID}, "item");' value='{$galleryItem.Comment}' />
+							<input class='hidden gallerycomment' id='tbComment{$galleryItem.ID}' onkeyup='commentKeyPress(event.keyCode, {$galleryItem.ID}, "item");' value='{$galleryItem.Comment}' />
 						</td>
 				{/foreach}
 					</tr>
@@ -87,3 +89,4 @@
 
 {include file="footer.tpl.html"}
 
+{include file="gallery/index.js"}
