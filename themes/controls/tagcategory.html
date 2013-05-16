@@ -2,30 +2,36 @@
 				{if $image_file != ''}
 					<script>categoryImages['trTagCategory{$category->ID}']='{$image_file}';</script>
 				{/if}
-
-				{assign var='childCategories' value=$category->getChildCategories()}
 				
+				{assign var='childObjects' value=$category->getChildObjects()}
+
 				<div class="accordion-group">
 		              <div class="accordion-heading" style='height:90px;'>
 						<div class="pull-left">
-		                <a class="accordion-toggle pull-left" {if $childCategories|@count>0}data-toggle="collapse" href="#collapseTC{$category->ID}"{else}href="/category/{$category->ID}"{/if} data-parent="#accordionMain">
+		                <a class="accordion-toggle pull-left" data-toggle="collapse" href="#collapseTC{$category->ID}" data-parent="#accordionMain">
 							<h4>{$category->Name}</h4>
 		                </a>
 						<a class="btn" style='margin-top:10px;' href="/category/{$category->ID}">»</a>
 						<a style='margin-top:10px;' class="accordion-toggle" data-toggle="collapse" data-parent="#accordionMain" href="#collapseTC{$category->ID}">{$category->Comment}</a>
 						</div>
-						<span class='pull-right' style='padding-right:20px; padding-top:5px;'>						
+						<span class='pull-right' style='padding-right:20px; padding-top:5px; position: absolute;  right:15px;'>						
 							{$category->LastCommentHint}
 						</span>
 		              </div>	
-					{if $childCategories|@count >0}
+					{if $childObjects|@count >0}
 		              <div id="collapseTC{$category->ID}" class="accordion-body collapse" style="height: 0px;">
 		                <div class="accordion-inner">
-							<div class="list" style='height:{math equation="30 + x*20" x=$category->getChildCategories()|@count}px'>
+							<div class="list" style='height:250px'>
 								<ul>
-							{foreach from=$category->getChildCategories() item=child}
-								{if $category->Name != null}
-									<li class='hand' onclick='redirectToCategory({$category->ID}, event);'>{$child->Name}</li>
+							{foreach from=$category->ChildCategories item=child}
+								{if $child->Name != null}
+									<li class='hand listSelected' onclick='redirectToCategory({$child->ID}, event);'>[Категория] {$child->Name} </li>
+								{/if}
+							{/foreach}
+							
+							{foreach from=$category->ChildPosts item=child}
+								{if $child->Title != null}
+									<li class='hand' onclick="Redirect('post/{$child->ID}', event);">{$child->Title}</li>
 								{/if}
 							{/foreach}
 								</ul>

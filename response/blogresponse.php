@@ -21,6 +21,16 @@
 	require_once "tools/simpleimage.php";
 	
 	$currentUser = User::CurrentUser();
+	
+	function dbgTime($point)
+	{
+		return;
+		if(stripos($_SERVER['SERVER_NAME'], 'local') !== false)
+		{
+			$date = getdate();
+			echo "POINT $point: " . $date["seconds"] . "." . $date[0] . "<br />";
+		}
+	}
 		
 	switch($_REQUEST["action"])
 	{
@@ -294,15 +304,16 @@
 			
 		case "showcomments":
 			try
-			{				
+			{			
+				dbgTime("c1");
 				$_SESSION["lastShownCommentID"] = -1;								
 				
-				$postid = $_POST["postid"];			
-				$listtype = $_POST["listtype"];
-				$page = $_POST["page"];
+				$postid = $_REQUEST["postid"];			
+				$listtype = $_REQUEST["listtype"];
+				$page = $_REQUEST["page"];
 				
 				$currentUser = User::CurrentUser();
-																	
+				dbgTime("c2");
 				if(!$listtype)
 				{	
 					$listtype = $currentUser->ListType;					
@@ -315,6 +326,7 @@
 						$currentUser = User::CurrentUser();
 					}
 				}
+				dbgTime("c3");
 				
 				$comments = "";
 								
@@ -326,6 +338,7 @@
 				{					
 					$comments = BlogDB::getFlatCommentsByPostID($postid, $page);					
 				}
+				dbgTime("c4");
 				
 				echo "
 				<table id='tblPostComments' cellspacing='0' cellpadding='0'>
@@ -338,7 +351,9 @@
 					{
 						$comment = new Comment();
 						$comment->MakeFromRow($row);
-						echo $comment->Render();						
+						dbgTime("c5");
+						echo $comment->Render();
+						dbgTime("c6");
 					}					
 				}
 				else
@@ -346,7 +361,8 @@
 					echo "<tr class='actualcomment'><td colspan='2'>комментариев нет</td></tr>";
 				}
 				
-				echo "</table>";				
+				echo "</table>";
+				dbgTime("c5");
 			}
 			catch (Exception $e)
 			{
@@ -354,7 +370,7 @@
 			}
 			return;
 			
-		case "shownewcomments":
+		case "shownewcomments": 
 			$postid = $_REQUEST["postid"];
 			$lastCommentID = intval($_REQUEST["lastcommentid"]);
 			

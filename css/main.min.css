@@ -63,15 +63,13 @@ div.breadcrumbs
 	font-size:10pt;
 }
 
-.good
+td.userpic
 {
-	background-color:#95B725;
-	color:#ffffff;
+	vertical-align: top;
+	width:50px;
 }
 
-.neutral
+tr.bottom td.postcomment
 {
-	background-color:#dddddd;
-	color:#333333;
+	padding-bottom: 20px;
 }
-

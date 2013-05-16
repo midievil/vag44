@@ -13,6 +13,6 @@
 		$categories[] = $category;
 	}
 	templater::assign('categories', $categories);	
-	
 	templater::display();
+	
 ?>

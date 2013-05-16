@@ -175,7 +175,7 @@
 					$childCategory->MakeFromRow($childCategoryRow);
 					$childCategory->Init();
 					$childCategory->setParent($this);
-					$this->childObjects[count($this->childObjects)] = $childCategory;
+					$this->childObjects[] = $childCategory;
 					
 					$this->ChildCategories[] = $childCategory;
 				}
@@ -187,37 +187,12 @@
 					$childPost->MakeFromRow($childPostRow);
 					$childPost->Init();
 					$childPost->setParent($this);
-					$this->childObjects[count($this->childObjects)] = $childPost;
+					$this->childObjects[] = $childPost;
 					
 					$this->ChildPosts[] = $childPost;
 				}
 			}
 			return $this->childObjects;
-		}		
-		
-		private $childCategories = 'notloaded';
-		public function getChildCategories()
-		{
-			if($this->childCategories == 'notloaded')
-			{
-				$this->childCategories = array();
-				$this->ChildCategories = array();
-				$this->ChildPosts = array();
-				
-				$childCategoryRows = getChildCategoriesByCategoryID($this->ID, "date");
-				while($childCategoryRow = mysql_fetch_assoc($childCategoryRows))
-				{
-					$childCategory = new TagCategory();
-					$childCategory->MakeFromRow($childCategoryRow);
-					$childCategory->Init();
-					$childCategory->setParent($this);
-					$this->childCategories[count($this->childCategories)] = $childCategory;
-					
-					$this->ChildCategories[] = $childCategory;
-				}
-								
-			}
-			return $this->childCategories;
 		}
 	}	//	class TagCategory
 	
@@ -387,16 +362,16 @@
 		
 		public function Render()
 		{
-			global $currentUser;
-			$commentUser = new User($this->UserID);
+ 			global $currentUser;
+ 			$commentUser = new User($this->UserID);
 		
-			if(!$listtype)
-			{			
-				$listtype = $currentUser->ListType;
-			}
+ 			if(!$listtype)
+ 			{			
+ 				$listtype = $currentUser->ListType;
+ 			}
 								
-			$commentLink = '';
-			$quoteLink = '';
+ 			$commentLink = '';
+ 			$quoteLink = '';
 			if(!$this->Closed && $currentUser->IsLogged())
 			{
 				if($commentUser->ID != $currentUser->ID)
@@ -407,12 +382,11 @@
 				
 				if($commentUser->ID == $currentUser->ID || $currentUser->IsAdmin())
 				{			
-							
 					$editLink = ($quoteLink != '' ? '&nbsp;·&nbsp;' : '') . "<a class='buttonsundercomment hand' onclick='editComment($this->ID);'>Редактировать</a>";					
 				}
 			}
 			
-			$tabulation = $listtype == 'tree' ? "padding-left:".(($this->Level-1)*20 + 10)."px;" : '';
+ 			$tabulation = $listtype == 'tree' ? "padding-left:".(($this->Level-1)*20 + 10)."px;" : '';
 			
 			if($this->CommentID)
 			{
@@ -436,18 +410,19 @@
 							
 			$result = "
 				<tr id='trComment$this->ID' class='$class"."Child actualcomment' level='$this->Level'>
-					<td style='$tabulation' class='content_left'>
+					<td style='$tabulation' class='content_left' style='padding-bottom:20px;'>
 						<table cellspacing='0' cellpadding='0' width='100%'>
 							<tr>
 								<td class='userpic' rowspan='2'>
 									" . $commentUser->RenderUserPic('comment', $this->ID, 30) . "
 								</td>
-								<td class='postcomment'>
-									$quotedcomment<a href='/user/$commentUser->ID' class='username' id='aUserComment$this->ID' ".renderPopup($commentUser->GetDescriptionForPopup()).">$commentUser->Name</a><br /><a name='comment$this->ID' />
+								<td class='postcomment'>								
+									$quotedcomment									
+									<i class='icon-user icon-black'></i><a href='/user/$commentUser->ID' class='username' id='aUserComment$this->ID' rel='tooltip' data-original-title='".$commentUser->GetDescriptionForPopup()."'>$commentUser->Name</a><br /><a name='comment$this->ID' />
 									" . formatText($this->Text) . "
 								</td>	
 							</tr>					
-							<tr>
+							<tr class='bottom'>
 								<td  class='postcomment'><a class='comment'>" . getDateTimeAtText($this->Date) . "</a>".	( $currentUser->IsLogged() ? " $commentLink$quoteLink" : "" )."	$editLink</td>
 								<td align='right' class='buttonsunderpost'>
 									

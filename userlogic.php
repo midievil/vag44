@@ -260,10 +260,7 @@
 		{
 			global $currentUser;
 			$Date = getCurrentDateText();
-			$UserID = $currentUser->ID;
-			//$PostID = $_GET["showpost"];
-			$QUERY_STRING = $_SERVER["QUERY_STRING"];
-			$HTTP_REFERER = $_SERVER["HTTP_REFERER"];
+			$UserID = $currentUser->ID;			
 			
 			$query = "insert into Visits (Date, UserID, PostID) values ('$Date', $UserID, $PostID)";
 			fDB::fquery($query);

@@ -4,6 +4,8 @@
 
 {include file="controls/pagetitle.html" pageTitle=$post->Title pageComment=$post->Comment() sideContent=$rating}
 
+{include file="post/index.js"}
+
 <script>var galleryItem=0; var galleryItemsCount={$galleryItems|@count}; var galleryItems = new Array(''
 		{foreach from=$galleryItems item=pic}		
 			,'{$pic}'
@@ -17,7 +19,7 @@
 			<div class='padded bgwhite'>
 				<div id='divPost{$post->ID}'>
 								
-											{$post->Text}
+					{$post->Text}
 											
 								{if $galleryItems|@count}
 											<table><tr>
@@ -49,8 +51,7 @@
 			</div>
 		</div>		
 		<div>
-			<div class='paddedtop'>			
-				{if $currentUser->IsLogged()}
+			{if $currentUser->IsLogged()}
 				<div class="navbar">
 					<div class="navbar-inner">
 						<div class="container">
@@ -58,7 +59,7 @@
 							{if $post->Closed}
 							<li><a><Пост закрыт></a></li>
 							{else}
-								<li><a class='hand' onclick='$("#trCommentForPost{$post->ID}").show();'>Ответить</a></li>
+								<li><a class='hand' onclick='AnswerPost();'>Ответить</a></li>
 				                <li><a class='hand' onmouseover='copyToQuote("{$post->User->Name}", "Post", {$post->ID})' onclick='quotePostSelection("{$post->User->Name}", "Post", {$post->ID}); return false;'>Цитата</a></li>
 								{if $post->User->ID == $currentUser->ID || $currentUser->IsAdmin()}
 									<li>
@@ -80,41 +81,59 @@
 				</div>
 					
 				{/if}
-			</div>
-			<br />
 			  
-			<div class='hidden padded' id='trCommentForPost{$post->ID}'>
-				Ваш ответ на пост:<br />
-				<textarea id='tbCommentForPost{$post->ID}' class='ck postanswer'></textarea> <br/>
-				<a class='buttonsunderpost writecommentbutton hand' onclick='writeComment({$post->ID});'><b>Написать</b></a>
-				<a class='buttonsunderpost hand' onclick='$("#trCommentForPost{$post->ID}").hide();'>Отмена</a>
+			<div class='answer' id='trCommentForPost'>
+				<h4>Ваш ответ на пост:</h4>
+				<textarea id='tbCommentForPost' style='width:90%;'></textarea> <br/>
+				<button type="button" class="btn btn-primary" onclick='writeComment({$post->ID});'>Написать</button>
+				<button type="button" class="btn" onclick='CancelAnswerPost();'>Отмена</button>
 			</div>
 		</div>
-		<div class='paddedtop' style='height:20px'>
-			<div class='right'>
-				{include file="controls/paging.html" paging=$commentsPaging}
+					
+		{include file="controls/paging.html" paging=$commentsPaging onclick='ChangePage'}			
+		
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade active in" id="home">
+				<div class='commentlist' id='trComments{$post->ID}'>
+				
 			</div>
-		</div>		
-		<div class='commentlist' id='trComments{$post->ID}'>
-			
 		</div>
 		
-		{if ((!$post->Closed && $currentUser->IsLogged()) || $currentUser->IsAdmin())}
-		<div id='divAnswerPostBottom' class='maincontent hidden'>
-			<div>
-				<a class='buttonsunderpost hand' onclick='$("#trCommentForPostBottom").show();'><b>Ответить на пост</b></a>
-				<div style='float:right'>
-					{include file="controls/paging.html" paging=$commentsPaging}
-				</div>
-			</div>		
-			<br />
-			<div class='hidden buttonsunderpost' id='trCommentForPostBottom'>
-				Ваш ответ на пост:<br>
-				<textarea class='ck postanswer' id='tbCommentForPostBottom'></textarea> <br>
-				<a class='writecommentbutton hand' onclick='writeComment({$post->ID});' disabled='disabled'>Написать</a>
-				<a class='hand' onclick='$(&quot;#trCommentForPostBottom&quot;).hide();'>Отмена</a>
+		{include file="controls/paging.html" paging=$commentsPaging onclick='ChangePage'}
+		
+		{if ((!$post->Closed && $currentUser->IsLogged()) || $currentUser->IsAdmin())}		
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="container">	
+		            <ul class="nav">
+					{if $post->Closed}
+						<li><a><Пост закрыт></a></li>
+					{else}
+						<li><a class='hand' onclick='AnswerPostBottom();'>Ответить</a></li>
+						{if $post->User->ID == $currentUser->ID || $currentUser->IsAdmin()}
+						<li><a href='/editpost/{$post->ID}'>Редактировать</a></li>
+						{/if}
+					{/if}
+		             </ul>						  
+					<ul class="nav pull-right">
+						<li><a>Комментарии:</a></li>
+						<li><a id='aHideComments' class='hand textunderpost' onclick='hidePostComments({$post->ID});'>скрыть</a></li>
+						<li><a id='aShowComments' class='hand textunderpost hidden' onclick='showPostComments({$post->ID});'>показать</a></li>
+						<li><a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'>списком</a></li>
+						<li><a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'>деревом</a></li>
+						<li><a id='aSkipComments' class='hand textunderpost' onclick='goTop();'>в начало</a></li>
+					</ul>
+	           </div>
 			</div>
 		</div>
+							
+			<div class='answer'  id='trCommentForPostBottom'>
+				<h4>Ваш ответ на пост:</h4>
+				<textarea id='tbCommentForPostBottom' style='width:90%;'></textarea> <br/>
+				<button type="button" class="btn btn-primary" onclick='writeComment({$post->ID});'>Написать</button>
+				<button type="button" class="btn" onclick='CancelAnswerPostBottom();'>Отмена</button>
+			</div>
+		
 		{/if}
 		
 		<script>
@@ -124,6 +143,8 @@
 			{if $currentUser->ListType=='tree'}
 			$("span.paging").hide();
 			{/if}
+			
+			$(".answer").hide();
 			
 			window.setTimeout(function() {literal}{{/literal} showNewComments({$post->ID}, lastCommentID); {literal}}{/literal}, 10000);
 		</script>		

@@ -117,7 +117,7 @@ function writeComment(postID)
 	{
 		commentLock = "lock";
 		
-		var text = replaceSymbols($("#tbCommentForPost"+postID).val());
+		var text = replaceSymbols($("#tbCommentForPost").val());
 		if(text == "")
 		{
 			text = replaceSymbols($("#tbCommentForPostBottom").val());
@@ -125,9 +125,9 @@ function writeComment(postID)
 		
 		$(".writecommentbutton").attr('disabled', 'disabled');
 		
-		$("#trCommentForPost"+postID).hide();
+		$("#trCommentForPost").hide();
 		$("#trCommentForPostBottom").hide();
-		$("#tbCommentForPost"+postID).val('');
+		$("#tbCommentForPost").val('');
 		$("#tbCommentForPostBottom").val('');
 		
 		addedComments++;

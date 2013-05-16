@@ -1,11 +1,12 @@
 <?PHP
 function dbgTime($point)
 {
-// 	if(stripos($_SERVER['SERVER_NAME'], 'local') !== false)
-// 	{	
-// 		$date = getdate();
-// 		echo "POINT $point: " . $date["seconds"] . "." . $date[0] . "<br />";
-// 	}
+	return;
+ 	if(stripos($_SERVER['SERVER_NAME'], 'local') !== false)
+ 	{	
+ 		$date = getdate();
+ 		echo "POINT $point: " . $date["seconds"] . "." . $date[0] . "<br />";
+ 	}
 }
 try
 {
@@ -132,6 +133,6 @@ try
 }
 catch(Exception $e)
 {
-	var_dump($e);
+//	var_dump($e);
 }
 ?>					
