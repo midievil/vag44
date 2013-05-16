@@ -509,21 +509,23 @@
 		
 		$monthNames = array(1 => 'январь', 2 => 'февраль', 3 => 'март', 4 => 'апрель', 5 => 'май', 6 => 'июнь', 7 => 'июль', 8 => 'август', 9 => 'сентябрь', 10 => 'октябрь', 11 => 'ноябрь', 12 => 'декабрь');
 		
-		$result .= "<select id='ddlDateDay$controlName'><option value='0'></option>";
+		$result = "";
+		
+		$result .= "<select id='ddlDateDay$controlName' class='input-mini'><option value='0'></option>";
 		for($i=1; $i<=31; $i++)
 		{	
 			$result .= "<option value='$i' " . ($i == $day ? "selected" : "") . ">$i</option>";
 		}
 		$result .= '</select>';
 		
-		$result .= "<select id='ddlDateMonth$controlName'><option value='0'></option>";
+		$result .= "<select id='ddlDateMonth$controlName' class='input-medium'><option value='0'></option>";
 		for($i=1; $i<=12; $i++)
 		{	
 			$result .= "<option value='$i' " . ($i == $month ? "selected" : "") . ">" . $monthNames[$i] . "</option>";
 		}
 		$result .= '</select>';
 		
-		$result .= "<select id='ddlDateYear$controlName'><option value='1900'></option>";
+		$result .= "<select id='ddlDateYear$controlName' class='input-small add-on'><option value='1900'></option>";
 		for($i=1950; $i<2000; $i++)
 		{	
 			$result .= "<option value='$i' " . ($i == $year ? "selected" : "") . ">$i</option>";

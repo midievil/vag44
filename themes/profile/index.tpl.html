@@ -8,294 +8,283 @@
 
 Это страница настройки вашего профиля. Здесь вы решаете, как вас видят другие участники и что они знают о вас. 
 <br><br>Также на этой странице есть <a class="button hand" onclick="switchEditProfile('cars');">список ваших автомобилей</a>.
+<br><br>
 
+<ul class="nav nav-tabs">
+	<li {if $setupModule == "userpic"}class="active"{/if}'>
+		<a class='hand' href='#userpic' data-toggle="tab">Аватар</a>
+	</li>
+	<li {if $setupModule == "about"}class="active"{/if}' >
+		<a class='hand' href='#about' data-toggle="tab">Общая информация</a>
+	</li>
+	<li {if $setupModule == "cars"}class="active"{/if}' >
+		<a class='hand' href='#cars' data-toggle="tab">Автомобили</a>
+	</li>
+	<li {if $setupModule == "contacts"}class="active"{/if}' >
+		<a class='hand' href='#contacts' data-toggle="tab">Контактная информация</a>
+	</li>
+	<li {if $setupModule == "settings"}class="active"{/if}' >
+		<a class='hand' href='#settings' data-toggle="tab">Настройки</a>
+	</li>
+	<li {if $setupModule == "changepass"}class="active"{/if}' >
+		<a class='hand' href='#changepass' data-toggle="tab">Сменить пароль</a>
+	</li>  
+</ul>
 
-<div class='TabListContainer sitewidth'>
-	<span class='tab'>&nbsp;&nbsp;</span>
-	<span class='tab userpic {if $setupModule == "userpic"}selected{/if}' ><a class='hand' onclick='switchEditProfile("userpic");'>Аватар</a></span>
-	<span class='tab about {if $setupModule == "about"}selected{/if}' ><a class='hand' onclick='switchEditProfile("about");'>Общая информация</a></span>
-	<span class='tab cars {if $setupModule == "cars"}selected{/if}' ><a class='hand' onclick='switchEditProfile("cars");'>Автомобили</a></span>
-	<span class='tab contacts {if $setupModule == "contacts"}selected{/if}' ><a class='hand' onclick='switchEditProfile("contacts");'>Контактная информация</a></span>
-	<span class='tab settings {if $setupModule == "settings"}selected{/if}' ><a class='hand' onclick='switchEditProfile("settings");'>Настройки</a></span>
-	<span class='tab changepass {if $setupModule == "changepass"}selected{/if}' ><a class='hand' onclick='switchEditProfile("changepass");'>Сменить пароль</a></span>
-	<span class='tab' width='100%'>&nbsp;</span>	
+<div id="myTabContent" class="tab-content">
+	<div class="tab-pane fade {if $setupModule == "userpic"}active in{/if}" id="userpic">
+		<table id='divUserpic'>
+			<tr>
+				<td>
+					<img id='imgUserPic' class='userpic_big userphoto' {if $userPic}src='/{$userPic}'{/if} />
+				</td>
+				<td width='100%'>
+					{if $userPic}
+					Сменить?
+					{else}
+					Пока нет. Загрузить?
+					{/if}
+					<br />
+					<input id='imageToUpload' name='imageToUpload' type='file' />
+					<button class='button' id='buttonUpload' onclick='return ajaxFileUpload();'>Загрузить</button>
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2'>
+					<a class='comment' >Аватар должен быть квадратным и размером не более 100х100 пикселей.<br />
+						Если он всё же будет большим и прямоугольным, он будет автоматически уменьшен.
+					</a>
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>
+			
+		</table>
+	</div>
+	<div class="tab-pane fade {if $setupModule == "about"}active in{/if}" id="about">
+	
+		<form class="form-horizontal">
+			<div class="control-group">
+			    <label class="control-label" for="tbEditProfileLastName">Фамилия</label>
+			    <div class="controls">
+			      <input type="text" id="tbEditProfileLastName" placeholder="Фамилия" value='{$currentUser->LastName}'>
+			    </div>
+			</div>
+			<div class="control-group">
+			    <label class="control-label" for="tbEditProfileFirstName">Имя</label>
+			    <div class="controls">
+			      <input type="text" id="tbEditProfileFirstName" placeholder="Имя" value='{$currentUser->FirstName}'>
+			    </div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="optionsRadios">{$i18n.gender}</label>
+				<div class="controls">
+					<label class="radio">				
+					  <input type='radio' id='rblGender' name='rblGender' value='m' {if $currentUser->Gender=='m'}checked{/if} />{$i18n.mygender.m}
+					</label>
+					<label class="radio">
+					  <input type='radio' id='rblGender' name='rblGender' value='f' {if $currentUser->Gender=='f'}checked{/if} />{$i18n.mygender.f}
+					</label>
+					<small>{$i18n.genderdisclaimer}</small>
+				</div>				
+			</div>
+			
+			<div class="control-group">
+			    <label class="control-label" for="tbEditProfileFrom">Город</label>
+			    <div class="controls">
+			      <input type="text" id="tbEditProfileFrom" placeholder="Имя" value='{$currentUser->From}'>
+			    </div>
+			</div>
+			
+			<div class="control-group">
+			    <label class="control-label" for="tbEditProfileFrom">День рождения</label>
+			    <div class="controls">
+			      {$birthDateSelector}
+			      {if $currentUser->BirthDate == "1900-01-01"}
+						&nbsp;<a class='hand' onclick='stopAskingBirthday();'>(не спрашивать)</a>
+					{/if}
+			    </div>
+			</div>
+		</form>
+	</div>
+	<div class="tab-pane fade {if $setupModule == "cars"}active in{/if}" id="cars">
+		<table id='tblCar' class='paddedleft'>
+		{foreach from=$currentUser->Cars() item=car name=carscycle}
+			<tr>
+				<td style='padding-top:6px' valign='top'>{$car->VendorName}</td>
+				<td style='padding-top:6px' valign='top'>{$car->ModelName}</td>
+				<td class='comment nowrap' colspan='2'>
+					<table cellspacing='0' cellpadding='0'>
+						<tr>
+							<td>
+								<select id='ddlEditCarGeneration{$car->ID}' onchange='generationChanged({$car->ID})'>
+									<option value='-1'></option>
+								{foreach from=$car->Generations() item=gen name=genscycle}
+									<option value='{$smarty.foreach.genscycle.iteration-1}' {if $smarty.foreach.genscycle.iteration-1 == $car->Generation}selected{/if}>{$gen}</option>
+								{/foreach}
+								</select>
+							</td>
+							<td id='tdEditCarEngine{$car->ID}'>
+								<select id='ddlEditCarEngine{$car->ID}' class='editcarstuff{$car->ID}'>
+								{foreach from=$car->Engines() item=eng name=engscycle}
+									<option value='{$eng->ID}' {if $eng->ID == $car->EngineID}selected{/if}>{$eng->Name}</option>
+								{/foreach}
+								</select>
+							</td>
+							<td id='tdEditCarDoors{$car->ID}'>
+								<select id='ddlEditCarDoors{$car->ID}' class='editcarstuff$carid'>
+									<option value='-1'></option>
+								{foreach from=$car->DoorsList() item=doors name=doorscycle}
+									<option value='{$doors}' {if $doors == $car->Doors}selected{/if}>{$doors}</option>			
+								{/foreach}
+								</select>
+							</td>
+							<td><input id='tbColor{$car->ID}' value='{$car->Color}' maxlength='20' size='20' /></td>
+							<td><input id='tbYear{$car->ID}' value='{$car->Year}' maxlength='4' size='4' /></td>
+							<td><input id='tbMileage{$car->ID}' value='{$car->Mileage}' maxlength='7' size='7' /></td>
+							<td><input type='checkbox' id='cbInPast{$car->ID}' {if $car->InPast}checked{/if} maxlength='7' size='7' />был раньше</td>
+							<td><a href='/editcar/{$car->ID}'>Описание</a></td>
+						</tr>
+						<tr class='comment'>
+							<td>кузов</td>
+							<td>двигатель</td>
+							<td>двери</td>
+							<td>цвет</td>
+							<td>год</td>
+							<td>пробег</td>
+							<td>это ваш бывший авто</td>
+						</tr>
+					</table>
+				</td>
+				
+			</tr>
+		{/foreach}
+			
+			<tr id='trSelectCar' class='hidden'>
+				<td>
+					<select id='ddlSelectCarVendor' onchange='selectModel(this.value);' />
+				</td>
+				<td>
+					<select id='ddlSelectCarModel' onchange='showCarSaveButton(this.value);' class='hidden' />
+				</td>
+				<td>
+					<a class='hand hidden' onclick='addCar($("#ddlSelectCarModel").val());' id='btnSaveCar'>сохранить</a>
+				</td>
+			</tr>
+			<tr>					
+				<td>
+					<a class='hand' onclick='selectCar()'>добавить</a>
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>
+		</table>
+	</div>
+	<div class="tab-pane fade {if $setupModule == "contacts"}active in{/if}" id="contacts">
+		<table id='tblContacts' class='paddedleft' cellspacing='0' cellpadding='0' width='100%' align='left'>
+			<tr>
+				<td valign='top' style='padding-top:4px;'>e-mail: </td>
+				<td >
+					<input type='text' id='tbEditProfileEmail' value='{$currentUser->Email}' /><br />
+					<input id='cbEditProfileShowEmail' type='checkbox' {if $currentUser->ShowEmail}checked{/if} value='1' /> показать всем
+				</td>
+				<td class='comment' valign='top' style='padding-top:4px;'>Электронный адрес может понадобиться для восстановления пароля.<br />Вы можете скрыть его от остальных.</td>
+			</tr>
+			<tr>
+				<td>ICQ: </td><td><input type='text' id='tbEditProfileICQ'  value='{$currentUser->ICQ}' maxlength='9' /></td><td class='comment'></td>
+			</tr>
+			<tr>					
+				<td>Телефон: </td>
+				<td class='comment'>+7<input type='text' id='tbEditProfilePhone' value='{$currentUser->Phone}' maxlength='10' /></td>
+				<td class='comment'>Только цифры, пожалуйста.<br />Номер будет отформатирован автоматически.</td>
+			</tr>
+			<tr>					
+				<td style='vertical-align:top'>Соцcети:</td>
+				<td colspan='2'>
+					<textarea rows='3' cols='70' id='tbEditProfileSocial'>{$currentUser->Social}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan='3' class='comment'>
+					Ссылка на вашу страницу в социальной сети. Если их несколько, пишите их в разных строках
+				</td>
+			</tr>					
+			<tr><td>&nbsp;</td></tr>
+		</table>
+	</div>
+	<div class="tab-pane fade {if $setupModule == "settings"}active in{/if}" id="settings">
+		<table id='tblSettings' class='paddedleft' cellspacing='0' cellpadding='0' width='100%' align='left'>					
+			<tr>
+				<td valign='top'>Просмотр&nbsp;форумов:</td>
+				<td width='100%'>
+					<input type='radio' value='tree' name='ddlListType' {if $currentUser->ListType == 'tree'}checked{/if}>дерево</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>каждый комментарий образует ветку, содержащую ответы на него</a><br />
+					<input type='radio' value='list' name='ddlListType' {if $currentUser->ListType == 'list'}checked{/if}>список</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>все комментарии расположены в порядке их написания</a><br />
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>
+			<tr>
+				<td valign='top'>Упорядочивание разделов:</td>
+				<td width='100%'>
+					<input type='radio' value='default' name='ddlCategoriesOrder' {if $currentUser->CategoriesOrder == 'default'}checked{/if}>по умолчанию</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>разделы следуют в том порядке, в котором мы их разместили</a><br />
+					<input type='radio' value='date' name='ddlCategoriesOrder'    {if $currentUser->CategoriesOrder == 'date'   }checked{/if}>по дате</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>вверху находятся разделы, в которых недавно кто-то отписывался</a><br />
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>
+			<tr>
+				<td valign='top'>Страницы:</td>
+				<td width='100%'>
+					<input onclick='setPagingVisibility();' type='radio' value='off' id='cbCategoriesPagingCategoriesPaging' name='cbCategoriesPaging' {if $currentUser->PageSize == 0}checked{/if}>показывать все комментарии</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>все комментарии показываются сразу</a><br />
+					<input onclick='setPagingVisibility();' type='radio' value='on'  id='cbCategoriesPaging' name='cbCategoriesPaging' {if $currentUser->PageSize > 0}checked{/if}>разбивать на страницы</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>комментарии разбиваются на страницы, которые можно листать</a><br />
+					<span id='spanPageSize' {if $currentUser->PageSize == -1}class="hidden"{/if}>
+						Размер страницы: 
+						<select id='ddlPageSize'>
+							<option value='20' {if $currentUser->PageSize == 20 || $currentUser->PageSize == -1}selected{/if}>20</option>
+							<option value='50' {if $currentUser->PageSize == 50}selected{/if}>50</option>
+							<option value='100' {if $currentUser->PageSize == 100}selected{/if}>100</option>
+							<option value='200' {if $currentUser->PageSize == 200}selected{/if}>200</option>
+							<option value='500' {if $currentUser->PageSize == 500}selected{/if}>500</option>
+						</select>
+						комментариев
+					</span>
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>					
+		</table>
+	</div>
+	<div class="tab-pane fade {if $setupModule == "changepass"}active in{/if}" id="changepass">
+		<table id='tblChangePass' class='paddedleft' cellspacing='0' cellpadding='0' width='100%' align='left'>					
+			<tr>
+				<td valign='top'>Старый&nbsp;пароль:</td>
+				<td width='100%'>
+					<input id='tbOldPass' type='password' />
+				</td>
+			</tr>
+			<tr>
+				<td valign='top'>Новый&nbsp;пароль:</td>
+				<td width='100%'>
+					<input id='tbNewPass' type='password' />
+				</td>
+			</tr>
+			<tr>
+				<td valign='top'>Подтверждение:</td>
+				<td width='100%'>
+					<input id='tbConfirmPass' type='password' />
+				</td>
+			</tr>
+			<tr>
+				<td valign='top'></td>
+				<td width='100%'>
+					<a onclick='changePass($("#tbOldPass").val(), $("#tbNewPass").val(), $("#tbConfirmPass").val());' class='hand'>сменить</a>
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>
+		</table>
+	</div>
 </div>
 
+<button class="btn btn-primary" type="button" onclick='updateUser({$currentUser->ID});'>Сохранить</button>
+<button class="btn" type="button" onclick='window.location="/"'>Отмена</button>
 
-<div class='TabContentContainer sitewidth'>
-	<table>
-		<tr>
-			<td class='innercontent'>
-				<table width='100%'>
-					<tr>
-						<td class='editprofile userpic {if $setupModule != "userpic"}hidden{/if}'>
-						<table id='divUserpic'>
-							<tr>
-								<td>
-									<img id='imgUserPic' class='userpic_big userphoto' {if $userPic}src='/{$userPic}'{/if} />
-								</td>
-								<td width='100%'>
-									{if $userPic}
-									Сменить?
-									{else}
-									Пока нет. Загрузить?
-									{/if}
-									<br />
-									<input id='imageToUpload' name='imageToUpload' type='file' />
-									<button class='button' id='buttonUpload' onclick='return ajaxFileUpload();'>Загрузить</button>
-								</td>
-							</tr>
-							<tr>
-								<td colspan='2'>
-									<a class='comment' >Аватар должен быть квадратным и размером не более 100х100 пикселей.<br />
-										Если он всё же будет большим и прямоугольным, он будет автоматически уменьшен.
-									</a>
-								</td>
-							</tr>
-							<tr><td>&nbsp;</td></tr>
-							
-						</table>
-					</td>
-					
-					<td class='editprofile about {if $setupModule != "about"}hidden{/if}'>
-						<table id='tblGeneralInfo' class='paddedleft' cellspacing='0' cellpadding='0'>
-							<tr class='label'>
-								<td>Имя</td>
-								<td>Фамилия</td>
-								<td class='delimiter' rowspan='7'></td>
-								<td>{$i18n.gender}</td>
-							</tr>
-							<tr>
-								<td><input type='text' id='tbEditProfileFirstName' value='{$currentUser->FirstName}' /></td>	
-								<td><input type='text' id='tbEditProfileLastName' value='{$currentUser->LastName}' /></td>
-								
-								<td rowspan='2'>
-									<input type='radio' id='rblGender' name='rblGender' value='m' {if $currentUser->Gender=='m'}checked{/if} />{$i18n.mygender.m}<br />
-									<input type='radio' id='rblGender' name='rblGender' value='f' {if $currentUser->Gender=='f'}checked{/if} />{$i18n.mygender.f}<br />
-									<a class='comment'>{$i18n.genderdisclaimer}</a>
-								</td>
-							</tr>					
-							
-							<tr class='label'>
-								<td>Город</td>
-							</tr>
-							<tr>
-								<td><input type='text' id='tbEditProfileFrom' value='{$currentUser->From}' /></td><td class='comment'></td>
-							</tr>
-							
-							<tr class='label'>
-								<td>День рождения</td>						
-							</tr>
-							<tr>								
-								<td colspan='2'>
-									{$birthDateSelector}
-									{if $currentUser->BirthDate == "1900-01-01"}
-										&nbsp;<a class='hand' onclick='stopAskingBirthday();'>(не спрашивать)</a>
-									{/if}
-								</td>
-							</tr>
-							<tr><td>&nbsp;</td></tr>
-							
-						</table>
-					</td>
-					
-					<td class='editprofile cars {if $setupModule != "cars"}hidden{/if}'>
-						<table id='tblCar' class='paddedleft'>
-						{foreach from=$currentUser->Cars() item=car name=carscycle}
-							<tr>
-								<td style='padding-top:6px' valign='top'>{$car->VendorName}</td>
-								<td style='padding-top:6px' valign='top'>{$car->ModelName}</td>
-								<td class='comment nowrap' colspan='2'>
-									<table cellspacing='0' cellpadding='0'>
-										<tr>
-											<td>
-												<select id='ddlEditCarGeneration{$car->ID}' onchange='generationChanged({$car->ID})'>
-													<option value='-1'></option>
-												{foreach from=$car->Generations() item=gen name=genscycle}
-													<option value='{$smarty.foreach.genscycle.iteration-1}' {if $smarty.foreach.genscycle.iteration-1 == $car->Generation}selected{/if}>{$gen}</option>
-												{/foreach}
-												</select>
-											</td>
-											<td id='tdEditCarEngine{$car->ID}'>
-												<select id='ddlEditCarEngine{$car->ID}' class='editcarstuff{$car->ID}'>
-												{foreach from=$car->Engines() item=eng name=engscycle}
-													<option value='{$eng->ID}' {if $eng->ID == $car->EngineID}selected{/if}>{$eng->Name}</option>
-												{/foreach}
-												</select>
-											</td>
-											<td id='tdEditCarDoors{$car->ID}'>
-												<select id='ddlEditCarDoors{$car->ID}' class='editcarstuff$carid'>
-													<option value='-1'></option>
-												{foreach from=$car->DoorsList() item=doors name=doorscycle}
-													<option value='{$doors}' {if $doors == $car->Doors}selected{/if}>{$doors}</option>			
-												{/foreach}
-												</select>
-											</td>
-											<td><input id='tbColor{$car->ID}' value='{$car->Color}' maxlength='20' size='20' /></td>
-											<td><input id='tbYear{$car->ID}' value='{$car->Year}' maxlength='4' size='4' /></td>
-											<td><input id='tbMileage{$car->ID}' value='{$car->Mileage}' maxlength='7' size='7' /></td>
-											<td><input type='checkbox' id='cbInPast{$car->ID}' {if $car->InPast}checked{/if} maxlength='7' size='7' />был раньше</td>
-											<td><a href='/editcar/{$car->ID}'>Описание</a></td>
-										</tr>
-										<tr class='comment'>
-											<td>кузов</td>
-											<td>двигатель</td>
-											<td>двери</td>
-											<td>цвет</td>
-											<td>год</td>
-											<td>пробег</td>
-											<td>это ваш бывший авто</td>
-										</tr>
-									</table>
-								</td>
-								
-							</tr>
-						{/foreach}
-							
-							<tr id='trSelectCar' class='hidden'>
-								<td>
-									<select id='ddlSelectCarVendor' onchange='selectModel(this.value);' />
-								</td>
-								<td>
-									<select id='ddlSelectCarModel' onchange='showCarSaveButton(this.value);' class='hidden' />
-								</td>
-								<td>
-									<a class='hand hidden' onclick='addCar($("#ddlSelectCarModel").val());' id='btnSaveCar'>сохранить</a>
-								</td>
-							</tr>
-							<tr>					
-								<td>
-									<a class='hand' onclick='selectCar()'>добавить</a>
-								</td>
-							</tr>
-							<tr><td>&nbsp;</td></tr>
-						</table>
-					</td>
-					
-					
-					<td class='editprofile contacts {if $setupModule != "contacts"}hidden{/if}'>
-						<table id='tblContacts' class='paddedleft' cellspacing='0' cellpadding='0' width='100%' align='left'>
-							<tr>
-								<td valign='top' style='padding-top:4px;'>e-mail: </td>
-								<td >
-									<input type='text' id='tbEditProfileEmail' value='{$currentUser->Email}' /><br />
-									<input id='cbEditProfileShowEmail' type='checkbox' {if $currentUser->ShowEmail}checked{/if} value='1' /> показать всем
-								</td>
-								<td class='comment' valign='top' style='padding-top:4px;'>Электронный адрес может понадобиться для восстановления пароля.<br />Вы можете скрыть его от остальных.</td>
-							</tr>
-							<tr>
-								<td>ICQ: </td><td><input type='text' id='tbEditProfileICQ'  value='{$currentUser->ICQ}' maxlength='9' /></td><td class='comment'></td>
-							</tr>
-							<tr>					
-								<td>Телефон: </td>
-								<td class='comment'>+7<input type='text' id='tbEditProfilePhone' value='{$currentUser->Phone}' maxlength='10' /></td>
-								<td class='comment'>Только цифры, пожалуйста.<br />Номер будет отформатирован автоматически.</td>
-							</tr>
-							<tr>					
-								<td style='vertical-align:top'>Соцcети:</td>
-								<td colspan='2'>
-									<textarea rows='3' cols='70' id='tbEditProfileSocial'>{$currentUser->Social}</textarea>
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td colspan='3' class='comment'>
-									Ссылка на вашу страницу в социальной сети. Если их несколько, пишите их в разных строках
-								</td>
-							</tr>					
-							<tr><td>&nbsp;</td></tr>
-						</table>
-					</td>
-
-				
-					<td class='editprofile settings {if $setupModule != "settings"}hidden{/if}'>
-						<table id='tblSettings' class='paddedleft' cellspacing='0' cellpadding='0' width='100%' align='left'>					
-							<tr>
-								<td valign='top'>Просмотр&nbsp;форумов:</td>
-								<td width='100%'>
-									<input type='radio' value='tree' name='ddlListType' {if $currentUser->ListType == 'tree'}checked{/if}>дерево</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>каждый комментарий образует ветку, содержащую ответы на него</a><br />
-									<input type='radio' value='list' name='ddlListType' {if $currentUser->ListType == 'list'}checked{/if}>список</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>все комментарии расположены в порядке их написания</a><br />
-								</td>
-							</tr>
-							<tr><td>&nbsp;</td></tr>
-							<tr>
-								<td valign='top'>Упорядочивание разделов:</td>
-								<td width='100%'>
-									<input type='radio' value='default' name='ddlCategoriesOrder' {if $currentUser->CategoriesOrder == 'default'}checked{/if}>по умолчанию</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>разделы следуют в том порядке, в котором мы их разместили</a><br />
-									<input type='radio' value='date' name='ddlCategoriesOrder'    {if $currentUser->CategoriesOrder == 'date'   }checked{/if}>по дате</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>вверху находятся разделы, в которых недавно кто-то отписывался</a><br />
-								</td>
-							</tr>
-							<tr><td>&nbsp;</td></tr>
-							<tr>
-								<td valign='top'>Страницы:</td>
-								<td width='100%'>
-									<input onclick='setPagingVisibility();' type='radio' value='off' id='cbCategoriesPagingCategoriesPaging' name='cbCategoriesPaging' {if $currentUser->PageSize == 0}checked{/if}>показывать все комментарии</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>все комментарии показываются сразу</a><br />
-									<input onclick='setPagingVisibility();' type='radio' value='on'  id='cbCategoriesPaging' name='cbCategoriesPaging' {if $currentUser->PageSize > 0}checked{/if}>разбивать на страницы</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>комментарии разбиваются на страницы, которые можно листать</a><br />
-									<span id='spanPageSize' {if $currentUser->PageSize == -1}class="hidden"{/if}>
-										Размер страницы: 
-										<select id='ddlPageSize'>
-											<option value='20' {if $currentUser->PageSize == 20 || $currentUser->PageSize == -1}selected{/if}>20</option>
-											<option value='50' {if $currentUser->PageSize == 50}selected{/if}>50</option>
-											<option value='100' {if $currentUser->PageSize == 100}selected{/if}>100</option>
-											<option value='200' {if $currentUser->PageSize == 200}selected{/if}>200</option>
-											<option value='500' {if $currentUser->PageSize == 500}selected{/if}>500</option>
-										</select>
-										комментариев
-									</span>
-								</td>
-							</tr>
-							<tr><td>&nbsp;</td></tr>					
-						</table>
-					</td>
-					
-					<td class='editprofile changepass {if $setupModule != "changepass"}hidden{/if}'>
-						<table id='tblChangePass' class='paddedleft' cellspacing='0' cellpadding='0' width='100%' align='left'>					
-							<tr>
-								<td valign='top'>Старый&nbsp;пароль:</td>
-								<td width='100%'>
-									<input id='tbOldPass' type='password' />
-								</td>
-							</tr>
-							<tr>
-								<td valign='top'>Новый&nbsp;пароль:</td>
-								<td width='100%'>
-									<input id='tbNewPass' type='password' />
-								</td>
-							</tr>
-							<tr>
-								<td valign='top'>Подтверждение:</td>
-								<td width='100%'>
-									<input id='tbConfirmPass' type='password' />
-								</td>
-							</tr>
-							<tr>
-								<td valign='top'></td>
-								<td width='100%'>
-									<a onclick='changePass($("#tbOldPass").val(), $("#tbNewPass").val(), $("#tbConfirmPass").val());' class='hand'>сменить</a>
-								</td>
-							</tr>
-							<tr><td>&nbsp;</td></tr>
-						</table>
-					</td>					
-				</tr>
-				
-				<tr>
-					<td>
-						<input type='button' id='btnSave' value='Сохранить' onclick='updateUser({$currentUser->ID});'/>
-						<input type='button' id='btnCancel' value='Отмена' onclick='window.location="/"'/>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						<br><br><br><a id='aComment'></a>
-					</td>
-				</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-</div>
+												<br><br><br><a id='aComment'></a>
 
 
 {include file="footer.tpl.html"}
