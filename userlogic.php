@@ -4,6 +4,12 @@
 
 	class User
 	{
+	
+		public static function UserIcon() 
+		{
+			return "<i class='icon-user icon-black'></i>";
+		}
+		
 		public $ID = -1;
 		public $Name = '';
 		public $FirstName = '';
@@ -172,17 +178,17 @@
 			$cars = getShortCarsListByUserID($this->ID);
 		
 			$result = "Группа:&nbsp;".$this->GroupName;
-			$result .= "\nРейтинг:&nbsp;".$this->Rating;
-			$result .= "\nГород:&nbsp;".$this->From;
-			$result .= "\n$cars";
+			$result .= "<br />Рейтинг:&nbsp;".$this->Rating;
+			$result .= "<br />Город:&nbsp;".$this->From;
+			$result .= "<br />$cars";
 			
 			if($this->IsOnline())
 			{
-				$result .= "\nСейчас онлайн";
+				$result .= "<br />Сейчас онлайн";
 			}
 			else
 			{				
-				$result .= "\nБыл&nbsp;".getDateTimeAtText($this->LastVisit);
+				$result .= "<br />Был&nbsp;".getDateTimeAtText($this->LastVisit);
 			}
 			return $result;
 		}

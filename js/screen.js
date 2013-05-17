@@ -155,24 +155,24 @@ function hideEnlargedUserPic()
 	$("#divUserPic").hide();
 }
 
-function hidePostComments(postID)
+function hidePostComments()
 {
-	$("#trComments"+postID).hide(); 
-	$("#aHideComments").hide();
-	$("#aShowComments").show();
+	$("#trComments").hide(); 
+	$("a.HideComments").hide();
+	$("a.ShowComments").show();	
 }
 
-function showPostComments(postID)
+function showPostComments()
 {
-	$("#trComments"+postID).show(); 
-	$("#aHideComments").show();
-	$("#aShowComments").hide();
+	$("#trComments").show(); 
+	$("a.HideComments").show();
+	$("a.ShowComments").hide();
 }
 
 function showComentsList(postid)
 {
-	$("span.paging").show();
-	showPostComments(postid);
+	$("div.paging").show();
+	showPostComments();
 	showComments(postid, "list", 1);
 	$("#aCommentsTree").show();
 	$("#aCommentsList").hide();
@@ -180,8 +180,8 @@ function showComentsList(postid)
 
 function showComentsTree(postid)
 {
-	$("span.paging").hide();
-	showPostComments(postid);
+	$("div.paging").hide();
+	showPostComments();
 	showComments(postid, "tree");
 	$("#aCommentsTree").hide();
 	$("#aCommentsList").show();

@@ -11,7 +11,7 @@ body  {
 
 .hidden
 {
-	display:none !IMPORTANT;	
+	display:none;	
 }
 
 .sidebar-nav {
@@ -72,4 +72,10 @@ td.userpic
 tr.bottom td.postcomment
 {
 	padding-bottom: 20px;
+}
+
+.hero-unit
+{
+	padding-top:30px !IMPORTANT;
+	padding-bottom:30px !IMPORTANT;
 }

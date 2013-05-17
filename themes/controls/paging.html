@@ -1,8 +1,8 @@
 {if $paging->Pages|@count > 1}
-<div class="pagination">	
+<div class="pagination row">	
   <ul>    
   	{foreach from=$paging->Pages item=page}
-    <li page='{$page->PageNumber}' {if $page->Selected == 1} class="active"{/if}><a href="#" {if $onclick}onclick='{$onclick}({$page->PageNumber})'{/if}>{$page->PageNumber}</a></li>    
+    <li page='{$page->PageNumber}' {if $page->Selected == 1} class="active"{/if}><a class='hand' {if $onclick}onclick='{$onclick}({$page->PageNumber})'{/if}>{$page->PageNumber}</a></li>    
     {/foreach}
   </ul>
 </div>

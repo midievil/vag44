@@ -33,32 +33,22 @@
 
 <div id="myTabContent" class="tab-content">
 	<div class="tab-pane fade {if $setupModule == "userpic"}active in{/if}" id="userpic">
-		<table id='divUserpic'>
-			<tr>
-				<td>
-					<img id='imgUserPic' class='userpic_big userphoto' {if $userPic}src='/{$userPic}'{/if} />
-				</td>
-				<td width='100%'>
-					{if $userPic}
-					Сменить?
-					{else}
-					Пока нет. Загрузить?
-					{/if}
-					<br />
-					<input id='imageToUpload' name='imageToUpload' type='file' />
-					<button class='button' id='buttonUpload' onclick='return ajaxFileUpload();'>Загрузить</button>
-				</td>
-			</tr>
-			<tr>
-				<td colspan='2'>
-					<a class='comment' >Аватар должен быть квадратным и размером не более 100х100 пикселей.<br />
-						Если он всё же будет большим и прямоугольным, он будет автоматически уменьшен.
-					</a>
-				</td>
-			</tr>
-			<tr><td>&nbsp;</td></tr>
+		<form class="form-horizontal">
+			{if $userPic}
+			Сменить?
+			{else}
+			Пока нет. Загрузить?
+			{/if}
 			
-		</table>
+			<input id='imageToUpload' name='imageToUpload' type='file' class='btn' />
+			<button class='btn' id='buttonUpload' onclick='return ajaxFileUpload();'>Загрузить</button>
+			<br />
+					<small>Аватар должен быть квадратным и размером не более 100х100 пикселей.<br />
+						Если он всё же будет большим и прямоугольным, он будет автоматически уменьшен.
+					</small>
+			
+			
+		</form>
 	</div>
 	<div class="tab-pane fade {if $setupModule == "about"}active in{/if}" id="about">
 	
@@ -107,177 +97,240 @@
 		</form>
 	</div>
 	<div class="tab-pane fade {if $setupModule == "cars"}active in{/if}" id="cars">
-		<table id='tblCar' class='paddedleft'>
-		{foreach from=$currentUser->Cars() item=car name=carscycle}
-			<tr>
-				<td style='padding-top:6px' valign='top'>{$car->VendorName}</td>
-				<td style='padding-top:6px' valign='top'>{$car->ModelName}</td>
-				<td class='comment nowrap' colspan='2'>
-					<table cellspacing='0' cellpadding='0'>
-						<tr>
-							<td>
-								<select id='ddlEditCarGeneration{$car->ID}' onchange='generationChanged({$car->ID})'>
+		<form class="form-horizontal">
+			<div class="accordion" id="accordion2">
+			{foreach from=$currentUser->Cars() item=car name=carscycle}				
+	            <div class="accordion-group">
+	              <div class="accordion-heading">
+	                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseCar{$car->ID}">
+	                  {$car->getShortDescription()}
+	                </a>
+	              </div>
+	              <div id="collapseCar{$car->ID}" class="accordion-body collapse" style="height: 0px;">
+	                <div class="accordion-inner">
+						<div class="control-group">
+							<label class="control-label">{$i18n.cars_generation}</label>
+							<div class="controls">
+								<select id='ddlEditCarGeneration{$car->ID}' onchange='generationChanged({$car->ID})' class='input-small'>
 									<option value='-1'></option>
 								{foreach from=$car->Generations() item=gen name=genscycle}
 									<option value='{$smarty.foreach.genscycle.iteration-1}' {if $smarty.foreach.genscycle.iteration-1 == $car->Generation}selected{/if}>{$gen}</option>
 								{/foreach}
 								</select>
-							</td>
-							<td id='tdEditCarEngine{$car->ID}'>
-								<select id='ddlEditCarEngine{$car->ID}' class='editcarstuff{$car->ID}'>
-								{foreach from=$car->Engines() item=eng name=engscycle}
-									<option value='{$eng->ID}' {if $eng->ID == $car->EngineID}selected{/if}>{$eng->Name}</option>
-								{/foreach}
-								</select>
-							</td>
-							<td id='tdEditCarDoors{$car->ID}'>
-								<select id='ddlEditCarDoors{$car->ID}' class='editcarstuff$carid'>
-									<option value='-1'></option>
-								{foreach from=$car->DoorsList() item=doors name=doorscycle}
-									<option value='{$doors}' {if $doors == $car->Doors}selected{/if}>{$doors}</option>			
-								{/foreach}
-								</select>
-							</td>
-							<td><input id='tbColor{$car->ID}' value='{$car->Color}' maxlength='20' size='20' /></td>
-							<td><input id='tbYear{$car->ID}' value='{$car->Year}' maxlength='4' size='4' /></td>
-							<td><input id='tbMileage{$car->ID}' value='{$car->Mileage}' maxlength='7' size='7' /></td>
-							<td><input type='checkbox' id='cbInPast{$car->ID}' {if $car->InPast}checked{/if} maxlength='7' size='7' />был раньше</td>
-							<td><a href='/editcar/{$car->ID}'>Описание</a></td>
-						</tr>
-						<tr class='comment'>
-							<td>кузов</td>
-							<td>двигатель</td>
-							<td>двери</td>
-							<td>цвет</td>
-							<td>год</td>
-							<td>пробег</td>
-							<td>это ваш бывший авто</td>
-						</tr>
-					</table>
-				</td>
-				
-			</tr>
-		{/foreach}
-			
-			<tr id='trSelectCar' class='hidden'>
-				<td>
-					<select id='ddlSelectCarVendor' onchange='selectModel(this.value);' />
-				</td>
-				<td>
-					<select id='ddlSelectCarModel' onchange='showCarSaveButton(this.value);' class='hidden' />
-				</td>
-				<td>
-					<a class='hand hidden' onclick='addCar($("#ddlSelectCarModel").val());' id='btnSaveCar'>сохранить</a>
-				</td>
-			</tr>
-			<tr>					
-				<td>
-					<a class='hand' onclick='selectCar()'>добавить</a>
-				</td>
-			</tr>
-			<tr><td>&nbsp;</td></tr>
-		</table>
+							</div>				
+						</div>
+						<div class="control-group">
+							<label class="control-label">{$i18n.cars_engine}</label>
+							<div class="controls">
+								<span id='tdEditCarEngine{$car->ID}'>
+									<select id='ddlEditCarEngine{$car->ID}' class='editcarstuff{$car->ID}'>
+									{foreach from=$car->Engines() item=eng name=engscycle}
+										<option value='{$eng->ID}' {if $eng->ID == $car->EngineID}selected{/if}>{$eng->Name}</option>
+									{/foreach}
+									</select>
+								</span>
+							</div>	
+						</div>
+						<div class="control-group">
+							<label class="control-label">{$i18n.cars_doors}</label>
+							<div class="controls">
+								<span id='tdEditCarDoors{$car->ID}'>
+									<select id='ddlEditCarDoors{$car->ID}' class='editcarstuff$carid'>
+										<option value='-1'></option>
+									{foreach from=$car->DoorsList() item=doors name=doorscycle}
+										<option value='{$doors}' {if $doors == $car->Doors}selected{/if}>{$doors}</option>			
+									{/foreach}
+									</select>
+								</span>
+							</div>				
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="tbColor{$car->ID}">{$i18n.cars_color}</label>
+							<div class="controls">
+								<input id='tbColor{$car->ID}' value='{$car->Color}' maxlength='20' size='20' />
+							</div>				
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="tbYear{$car->ID}">{$i18n.cars_year}</label>
+							<div class="controls">
+								<input id='tbYear{$car->ID}' value='{$car->Year}' maxlength='4' size='4' />
+							</div>				
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="tbMileage{$car->ID}">{$i18n.cars_mileage}</label>
+							<div class="controls">
+								<input id='tbMileage{$car->ID}' value='{$car->Mileage}' maxlength='7' size='7' />
+							</div>				
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<label class="checkbox">
+									<input type='checkbox' id='cbInPast{$car->ID}' {if $car->InPast}checked{/if} maxlength='7' size='7' />{$i18n.cars_inpast}
+								</label>
+							</div>				
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<a class='btn btn-primary' href='/editcar/{$car->ID}'>{$i18n.cars_editdescription}</a>
+							</div>				
+						</div>
+	                </div>
+	              </div>
+	            </div>	            			
+			{/foreach}
+				<div class="accordion-group">
+	              <div class="accordion-heading">
+	                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseCar" onclick='selectCar()'; >
+	                  Добавить
+	                </a>
+	              </div>
+	              <div id="collapseCar" class="accordion-body collapse" style="height: 0px;">
+	                <div class="accordion-inner">
+						<div class="control-group">
+							<label class="control-label">{$i18n.cars_vendor}</label>
+							<div class="controls">
+								<select id='ddlSelectCarVendor' onchange='selectModel(this.value);'></select>
+							</div>				
+						</div>
+						<div class="control-group" id='divSelectModel'>
+							<label class="control-label">{$i18n.cars_model}</label>
+							<div class="controls">
+								<select id='ddlSelectCarModel' onchange='showCarSaveButton(this.value);' disabled></select>
+							</div>	
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<a class='btn btn-primary disabled' onclick='addCar($("#ddlSelectCarModel").val());' id='btnSaveCar'>сохранить</a>
+							</div>				
+						</div>
+	                </div>
+	              </div>
+	            </div>
+			</div>
+		</form>		
 	</div>
 	<div class="tab-pane fade {if $setupModule == "contacts"}active in{/if}" id="contacts">
-		<table id='tblContacts' class='paddedleft' cellspacing='0' cellpadding='0' width='100%' align='left'>
-			<tr>
-				<td valign='top' style='padding-top:4px;'>e-mail: </td>
-				<td >
-					<input type='text' id='tbEditProfileEmail' value='{$currentUser->Email}' /><br />
-					<input id='cbEditProfileShowEmail' type='checkbox' {if $currentUser->ShowEmail}checked{/if} value='1' /> показать всем
-				</td>
-				<td class='comment' valign='top' style='padding-top:4px;'>Электронный адрес может понадобиться для восстановления пароля.<br />Вы можете скрыть его от остальных.</td>
-			</tr>
-			<tr>
-				<td>ICQ: </td><td><input type='text' id='tbEditProfileICQ'  value='{$currentUser->ICQ}' maxlength='9' /></td><td class='comment'></td>
-			</tr>
-			<tr>					
-				<td>Телефон: </td>
-				<td class='comment'>+7<input type='text' id='tbEditProfilePhone' value='{$currentUser->Phone}' maxlength='10' /></td>
-				<td class='comment'>Только цифры, пожалуйста.<br />Номер будет отформатирован автоматически.</td>
-			</tr>
-			<tr>					
-				<td style='vertical-align:top'>Соцcети:</td>
-				<td colspan='2'>
-					<textarea rows='3' cols='70' id='tbEditProfileSocial'>{$currentUser->Social}</textarea>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td colspan='3' class='comment'>
-					Ссылка на вашу страницу в социальной сети. Если их несколько, пишите их в разных строках
-				</td>
-			</tr>					
-			<tr><td>&nbsp;</td></tr>
-		</table>
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for='tbEditProfileEmail'>{$i18n.profile_email}</label>
+				<div class="controls">
+					<input type="email"  id='tbEditProfileEmail' value='{$currentUser->Email}' required placeholder="user@example.com" /><br />
+					<label class='checkbox'>
+						<input id='cbEditProfileShowEmail' type='checkbox' {if $currentUser->ShowEmail}checked{/if} value='1' /> показать всем
+					</label>
+					<small>Электронный адрес может понадобиться для восстановления пароля.<br />Вы можете скрыть его от остальных.</small>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for='tbEditProfileICQ'>{$i18n.profile_icq}</label>
+				<div class="controls">
+					<input type='text' id='tbEditProfileICQ'  value='{$currentUser->ICQ}' maxlength='9' />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">{$i18n.profile_phone}</label>
+				<div class="controls" for='tbEditProfilePhone'>
+					<div class="input-prepend">
+						<span class="add-on">+7</span>
+						<input type='text' id='tbEditProfilePhone' value='{$currentUser->Phone}' maxlength='10' />
+					</div>
+					<small>Только цифры, пожалуйста.<br />Номер будет отформатирован автоматически.</small>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for='tbEditProfileSocial'>{$i18n.profile_social}</label>
+				<div class="controls">
+					<textarea class='span7' rows='5' id='tbEditProfileSocial'>{$currentUser->Social}</textarea><br />
+					<small>Ссылка на вашу страницу в социальной сети. Если их несколько, пишите их в разных строках</small>
+				</div>			
+			</div>
+		</form>
+		
 	</div>
 	<div class="tab-pane fade {if $setupModule == "settings"}active in{/if}" id="settings">
-		<table id='tblSettings' class='paddedleft' cellspacing='0' cellpadding='0' width='100%' align='left'>					
-			<tr>
-				<td valign='top'>Просмотр&nbsp;форумов:</td>
-				<td width='100%'>
-					<input type='radio' value='tree' name='ddlListType' {if $currentUser->ListType == 'tree'}checked{/if}>дерево</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>каждый комментарий образует ветку, содержащую ответы на него</a><br />
-					<input type='radio' value='list' name='ddlListType' {if $currentUser->ListType == 'list'}checked{/if}>список</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>все комментарии расположены в порядке их написания</a><br />
-				</td>
-			</tr>
-			<tr><td>&nbsp;</td></tr>
-			<tr>
-				<td valign='top'>Упорядочивание разделов:</td>
-				<td width='100%'>
-					<input type='radio' value='default' name='ddlCategoriesOrder' {if $currentUser->CategoriesOrder == 'default'}checked{/if}>по умолчанию</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>разделы следуют в том порядке, в котором мы их разместили</a><br />
-					<input type='radio' value='date' name='ddlCategoriesOrder'    {if $currentUser->CategoriesOrder == 'date'   }checked{/if}>по дате</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>вверху находятся разделы, в которых недавно кто-то отписывался</a><br />
-				</td>
-			</tr>
-			<tr><td>&nbsp;</td></tr>
-			<tr>
-				<td valign='top'>Страницы:</td>
-				<td width='100%'>
-					<input onclick='setPagingVisibility();' type='radio' value='off' id='cbCategoriesPagingCategoriesPaging' name='cbCategoriesPaging' {if $currentUser->PageSize == 0}checked{/if}>показывать все комментарии</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>все комментарии показываются сразу</a><br />
-					<input onclick='setPagingVisibility();' type='radio' value='on'  id='cbCategoriesPaging' name='cbCategoriesPaging' {if $currentUser->PageSize > 0}checked{/if}>разбивать на страницы</input><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='comment'>комментарии разбиваются на страницы, которые можно листать</a><br />
-					<span id='spanPageSize' {if $currentUser->PageSize == -1}class="hidden"{/if}>
-						Размер страницы: 
-						<select id='ddlPageSize'>
-							<option value='20' {if $currentUser->PageSize == 20 || $currentUser->PageSize == -1}selected{/if}>20</option>
-							<option value='50' {if $currentUser->PageSize == 50}selected{/if}>50</option>
-							<option value='100' {if $currentUser->PageSize == 100}selected{/if}>100</option>
-							<option value='200' {if $currentUser->PageSize == 200}selected{/if}>200</option>
-							<option value='500' {if $currentUser->PageSize == 500}selected{/if}>500</option>
-						</select>
-						комментариев
-					</span>
-				</td>
-			</tr>
-			<tr><td>&nbsp;</td></tr>					
-		</table>
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label">{$i18n.profile_listtype}</label>
+				<div class="controls">
+					<label class="radio">
+						<input type='radio' value='tree' name='ddlListType' {if $currentUser->ListType == 'tree'}checked{/if}>дерево</input><br />
+					</label>
+					<small>каждый комментарий образует ветку, содержащую ответы на него</small>
+					
+					<label class="radio">
+						<input type='radio' value='list' name='ddlListType' {if $currentUser->ListType == 'list'}checked{/if}>список</input><br />
+					</label>
+					<small>все комментарии расположены в порядке их написания</small><br />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">{$i18n.profile_sort}</label>
+				<div class="controls">
+					<label class="radio">
+						<input type='radio' value='default' name='ddlCategoriesOrder' {if $currentUser->CategoriesOrder == 'default'}checked{/if}>по умолчанию</input><br />
+						<small>разделы следуют в том порядке, в котором мы их разместили</small><br />
+					</label>
+					
+					<label class="radio">
+						<input type='radio' value='date' name='ddlCategoriesOrder'    {if $currentUser->CategoriesOrder == 'date'   }checked{/if}>по дате</input><br />
+						<small>вверху находятся разделы, в которых недавно кто-то отписывался</small><br />
+					</label>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">{$i18n.profile_paging}</label>
+				<div class="controls">
+					<label class="radio">
+						<input onclick='setPagingVisibility();' type='radio' value='off' id='cbCategoriesPagingCategoriesPaging' name='cbCategoriesPaging' {if $currentUser->PageSize == 0}checked{/if}>показывать все комментарии</input><br />
+						<small>все комментарии показываются сразу</small><br />
+					</label>
+					
+					<label class="radio">
+						<input onclick='setPagingVisibility();' type='radio' value='on'  id='cbCategoriesPaging' name='cbCategoriesPaging' {if $currentUser->PageSize > 0}checked{/if}>разбивать на страницы</input><br />
+						<small>комментарии разбиваются на страницы, которые можно листать</small><br />
+					</label>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">{$i18n.profile_pagesize}</label>
+				<div class="controls">					
+					<select id='ddlPageSize'>
+						<option value='20' {if $currentUser->PageSize == 20 || $currentUser->PageSize == -1}selected{/if}>20</option>
+						<option value='50' {if $currentUser->PageSize == 50}selected{/if}>50</option>
+						<option value='100' {if $currentUser->PageSize == 100}selected{/if}>100</option>
+						<option value='200' {if $currentUser->PageSize == 200}selected{/if}>200</option>
+						<option value='500' {if $currentUser->PageSize == 500}selected{/if}>500</option>
+					</select>
+				</div>
+			</div>			
+		</form>
 	</div>
 	<div class="tab-pane fade {if $setupModule == "changepass"}active in{/if}" id="changepass">
-		<table id='tblChangePass' class='paddedleft' cellspacing='0' cellpadding='0' width='100%' align='left'>					
-			<tr>
-				<td valign='top'>Старый&nbsp;пароль:</td>
-				<td width='100%'>
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for='tbOldPass'>{$i18n.profile_oldpass}</label>
+				<div class="controls">
 					<input id='tbOldPass' type='password' />
-				</td>
-			</tr>
-			<tr>
-				<td valign='top'>Новый&nbsp;пароль:</td>
-				<td width='100%'>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for='tbNewPass'>{$i18n.profile_newpass}</label>
+				<div class="controls">
 					<input id='tbNewPass' type='password' />
-				</td>
-			</tr>
-			<tr>
-				<td valign='top'>Подтверждение:</td>
-				<td width='100%'>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for='tbConfirmPass'>{$i18n.profile_confirm}</label>
+				<div class="controls">
 					<input id='tbConfirmPass' type='password' />
-				</td>
-			</tr>
-			<tr>
-				<td valign='top'></td>
-				<td width='100%'>
-					<a onclick='changePass($("#tbOldPass").val(), $("#tbNewPass").val(), $("#tbConfirmPass").val());' class='hand'>сменить</a>
-				</td>
-			</tr>
-			<tr><td>&nbsp;</td></tr>
-		</table>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<a onclick='changePass($("#tbOldPass").val(), $("#tbNewPass").val(), $("#tbConfirmPass").val());' class='btn btn-primary'>сменить</a>
+				</div>
+			</div>
+		</form>	
 	</div>
 </div>
 

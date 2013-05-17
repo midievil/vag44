@@ -1,8 +1,9 @@
-<div class='breadcrumbs'>
-	
+<ul class="breadcrumb">
 	{foreach from=$breadCrumbs item=breadCrumb name=cycle}		
-		<a {if $breadCrumb->Link != ''}href="{$breadCrumb->Link}"{/if}>{$breadCrumb->Text}</a>
-		{if $smarty.foreach.cycle.iteration < $breadCrumbs|@count}&nbsp;<a>›</a>&nbsp;{/if} 
+		<li {if $breadCrumb->Link == ''}class="active"{/if}>
+			{if $breadCrumb->Link != ''}<a href="{$breadCrumb->Link}">{$breadCrumb->Text}</a>{else}{$breadCrumb->Text}{/if}
+			{if $smarty.foreach.cycle.iteration < $breadCrumbs|@count}<span class="divider">/</span>{/if} 
+		</li>
 	{/foreach}
-	
-</div>
+  
+</ul>

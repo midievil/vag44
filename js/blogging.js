@@ -232,8 +232,8 @@ function showComments(postID, listType, currentPage)
 	
 	currentListType = listType;
 	
-	$("#trComments"+postID).html(loadingTdText);
-	$("#trComments"+postID).show();
+	$("#trComments").html(loadingTdText);
+	$("#trComments").show();
 	
 	$("span.paging span.selected").removeClass("selected");
 	$("span.paging span[page="+currentPage+"]").addClass("selected");
@@ -247,12 +247,12 @@ function showComments(postID, listType, currentPage)
 				success: function(result){
 					if(trim(result) != "error")
 					{	
-						$("#trComments"+postID).html(result).ready(function() { if(page == 'last') {goBottom();} });
-						$("#trComments"+postID).show();
+						$("#trComments").html(result).ready(function() { if(page == 'last') {goBottom();} });
+						$("#trComments").show();
 						$(".writecommentbutton").removeAttr('disabled');
 						commentLock = "";
 												
-						$("#tblPostComments").width($("#trComments"+postID).width());
+						$("#tblPostComments").width($("#trComments").width());
 						
 						if($("#tblPostComments").height() > ($(window).height() - 100))						
 						{
@@ -287,7 +287,7 @@ function showNewComments(postID, currentPage)
 							
 							$("#tblPostComments tr.actualcomment:last").after(parts[0]).ready(function() { });
 													
-							$("#tblPostComments").width($("#trComments"+postID).width());
+							$("#tblPostComments").width($("#trComments").width());
 							
 							if($("#tblPostComments").height() > ($(window).height() - 100))						
 							{

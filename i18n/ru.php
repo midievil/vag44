@@ -18,6 +18,29 @@
 		'blogs_count' => 'А блогов у него %s, а именно: ',
 		'blogs_count_your_1' => 'А блог у вас один, ',
 		'blogs_count_your' => 'А блогов у вас %s, а именно: ',
-		'blogs_noname' => 'Безымянный'
+		'blogs_noname' => 'Безымянный',
+		
+		'cars_generation' => 'Поколение',
+		'cars_engine' => 'Двигатель',
+		'cars_doors' => 'Двери',
+		'cars_color' => 'Цвет',
+		'cars_year' => 'Год выпуска',
+		'cars_mileage' => 'Пробег',
+		'cars_inpast' => 'этот автомобиль был у меня раньше',
+		'cars_editdescription' => 'Редактировать описание »',
+		'cars_vendor' => 'Марка',
+		'cars_model' => 'Модель',
+		
+		'profile_email' => 'e-mail',
+		'profile_icq' => 'ICQ',
+		'profile_phone' => 'Телефон',
+		'profile_social' => 'Соцсети',
+		'profile_listtype' => 'Режим просмотра форумов',
+		'profile_sort' => 'Упорядочивание разделов',
+		'profile_paging' => 'Разбивка на страницы',
+		'profile_pagesize' => 'Размер страницы',
+		'profile_oldpass' => 'Текущий пароль',
+		'profile_newpass' => 'Новый пароль',
+		'profile_confirm' => 'И еще раз',
 	)
 ?>

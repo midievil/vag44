@@ -15,9 +15,8 @@
 		var page = {if $smarty.get.page=='last'}'last'{else}{$commentsPaging->CurrentPage}{/if};
 </script>
 
-		<div class='tagcategorylist'>
-			<div class='padded bgwhite'>
-				<div id='divPost{$post->ID}'>
+		<div class='row span10'>
+			<div id='divPost{$post->ID}' style='padding-top:30px'>
 								
 					{$post->Text}
 											
@@ -44,13 +43,12 @@
 											</tr></table>
 								{/if}
 																		
-							</div>
+			</div>
 							<br />
 							<br />							
 					
-			</div>
 		</div>		
-		<div>
+		<div clas='row'>
 			{if $currentUser->IsLogged()}
 				<div class="navbar">
 					<div class="navbar-inner">
@@ -70,8 +68,8 @@
 			              </ul>						  
 						  <ul class="nav pull-right">
 							<li><a>Комментарии:</a></li>
-							<li><a id='aHideComments' class='hand textunderpost' onclick='hidePostComments({$post->ID});'>скрыть</a></li>
-							<li><a id='aShowComments' class='hand textunderpost hidden' onclick='showPostComments({$post->ID});'>показать</a></li>
+							<li><a class='hand textunderpost HideComments' onclick='hidePostComments();'>скрыть</a></li>
+							<li><a class='hand textunderpost ShowComments hidden' onclick='showPostComments();'>показать</a></li>
 							<li><a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'>списком</a></li>
 							<li><a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'>деревом</a></li>
 							<li><a id='aSkipComments' class='hand textunderpost' onclick='goBottom();'>в конец</a></li>
@@ -82,26 +80,32 @@
 					
 				{/if}
 			  
-			<div class='answer' id='trCommentForPost'>
+			<div class='answer row span15' id='trCommentForPost'>
 				<h4>Ваш ответ на пост:</h4>
 				<textarea id='tbCommentForPost' style='width:90%;'></textarea> <br/>
 				<button type="button" class="btn btn-primary" onclick='writeComment({$post->ID});'>Написать</button>
-				<button type="button" class="btn" onclick='CancelAnswerPost();'>Отмена</button>
-			</div>
-		</div>
-					
-		{include file="controls/paging.html" paging=$commentsPaging onclick='ChangePage'}			
-		
-		<div id="myTabContent" class="tab-content">
-			<div class="tab-pane fade active in" id="home">
-				<div class='commentlist' id='trComments{$post->ID}'>
-				
-			</div>
+				<button type="button" class="btn" onclick='CancelAnswerPost();'>Отмена</button>				
+				<br /><br />
+			</div>			
 		</div>
 		
-		{include file="controls/paging.html" paging=$commentsPaging onclick='ChangePage'}
+		<div class='span15 paging row {if $currentUser->ListType == "tree"} hidden{/if}'>
+			{include file="controls/paging.html" paging=$commentsPaging onclick='ChangePage'}			
+		</div>
+		<div color='white'>&nbsp;</div>
+		<div class='commentlist row span15' id='trComments'>
+		
+		</div>
+		<div color='white'>&nbsp;</div>
+		
+		<div class='span15 paging row {if $currentUser->ListType == "tree"} hidden{/if}'>
+			{include file="controls/paging.html" paging=$commentsPaging onclick='ChangePage'}
+		</div>
+		
+		<div color='white'>&nbsp;</div>
 		
 		{if ((!$post->Closed && $currentUser->IsLogged()) || $currentUser->IsAdmin())}		
+		<br />
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container">	
@@ -117,8 +121,8 @@
 		             </ul>						  
 					<ul class="nav pull-right">
 						<li><a>Комментарии:</a></li>
-						<li><a id='aHideComments' class='hand textunderpost' onclick='hidePostComments({$post->ID});'>скрыть</a></li>
-						<li><a id='aShowComments' class='hand textunderpost hidden' onclick='showPostComments({$post->ID});'>показать</a></li>
+						<li><a class='hand textunderpost HideComments' onclick='hidePostComments();'>скрыть</a></li>
+						<li><a class='hand textunderpost ShowComments hidden' onclick='showPostComments();'>показать</a></li>
 						<li><a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'>списком</a></li>
 						<li><a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'>деревом</a></li>
 						<li><a id='aSkipComments' class='hand textunderpost' onclick='goTop();'>в начало</a></li>
@@ -147,6 +151,7 @@
 			$(".answer").hide();
 			
 			window.setTimeout(function() {literal}{{/literal} showNewComments({$post->ID}, lastCommentID); {literal}}{/literal}, 10000);
+			
 		</script>		
 
 {include file="footer.tpl.html"}

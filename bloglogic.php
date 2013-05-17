@@ -386,17 +386,18 @@
 				}
 			}
 			
- 			$tabulation = $listtype == 'tree' ? "padding-left:".(($this->Level-1)*20 + 10)."px;" : '';
+ 			$tabulation = $listtype == 'tree' ? "margin-left:".(($this->Level-1)*20 + 10)."px;" : '';
 			
 			if($this->CommentID)
 			{
-				if($listtype=='list')
+				//if($listtype=='list')
 				{				
 					if($_SESSION["lastShownCommentID"] != $this->CommentID)
 					{
 						$parentComment = getCommentByID($this->CommentID);
-						$parentComment = preg_replace("/\[quote=(.+)](.*)\[\/quote]/", "", $parentComment);
-						$quotedcomment = "<span class='quote' onclick='highlightParentComment($this->CommentID);' href='#comment$this->CommentID'><b>".($parentComment["UserName"])."</b>: ".($parentComment["Text"])."</span><br />";
+						$parentComment = preg_replace("/\[quote=(.+)](.*)\[\/quote]/", "", $parentComment);						
+//						$quotedcomment = "<span class='quote' onclick='highlightParentComment($this->CommentID);' href='#comment$this->CommentID'>".User::UserIcon()."<b>".($parentComment["UserName"])."</b>: ".($parentComment["Text"])."</span><br />";
+						$quotedcomment = " » <i class='icon-user icon-black'></i> <a href='/user/1' rel='popover' data-content='<blockquote>".$parentComment["Text"]."</blockquote>' data-original-title='Ответ на комментарий ".$parentComment["UserName"]."' ><strong>".$parentComment["UserName"]."</strong></a>";
 					}
 					$_SESSION["lastShownCommentID"] = $this->ID;
 				}
@@ -407,6 +408,8 @@
 			{
 				$class = "Post";				
 			}
+			
+			$userPic = $commentUser->RenderUserPic('comment', $this->ID, 30);
 							
 			$result = "
 				<tr id='trComment$this->ID' class='$class"."Child actualcomment' level='$this->Level'>
@@ -417,8 +420,8 @@
 									" . $commentUser->RenderUserPic('comment', $this->ID, 30) . "
 								</td>
 								<td class='postcomment'>								
-									$quotedcomment									
-									<i class='icon-user icon-black'></i><a href='/user/$commentUser->ID' class='username' id='aUserComment$this->ID' rel='tooltip' data-original-title='".$commentUser->GetDescriptionForPopup()."'>$commentUser->Name</a><br /><a name='comment$this->ID' />
+									<blockquote>$quotedcomment</blockquote>
+									".User::UserIcon()."<a href='/user/$commentUser->ID' class='username' id='aUserComment$this->ID' rel='tooltip' data-original-title='".$commentUser->GetDescriptionForPopup()."'><strong>$commentUser->Name</strong></a><br /><a name='comment$this->ID' />
 									" . formatText($this->Text) . "
 								</td>	
 							</tr>					
@@ -430,18 +433,22 @@
 							</tr>
 							".( $commentUser->ID == $currentUser->ID || $currentUser->IsAdmin() ? "
 							<tr id='trEditComment$this->ID' class='buttonsunderpost hidden'>
-								<td colspan='3'>
-									<textarea id='tbEditComment$this->ID' class='commentanswer'>$this->Text</textarea>
+								<td />
+								<td colspan='2'>
+									<textarea id='tbEditComment$this->ID' class='span10'>$this->Text</textarea>
 									<br />
-									<a class='writecommentbutton hand' onclick='updateComment($this->ID, $this->PostID)'>Сохранить</a>&nbsp;<a class='hand' onclick='hideEditComment($this->ID);'>Отмена</a>
+									<button class='btn btn-primary' onclick='updateComment($this->ID, $this->PostID)'>Сохранить</button>
+									<button class='btn' onclick='hideEditComment($this->ID);'>Отмена</button>									
 								</td>
 							</tr>" : "" ).
 							(  $currentUser->IsLogged() ?  "
 							<tr id='trAnswerComment$this->ID' class='buttonsunderpost hidden'>
-								<td colspan='3'>
-									<textarea id='tbAnswerComment$this->ID' class='commentanswer'></textarea>
+								<td />
+								<td colspan='2'>
+									<textarea id='tbAnswerComment$this->ID' class='.span10'></textarea>
 									<br />
-									<a class='writecommentbutton hand' onclick='writeCommentForComment($this->ID, $this->PostID); return false;'>Написать</a>&nbsp;<a class='hand' onclick='hideAnswerComment($this->ID);'>Отмена</a>
+									<button class='btn btn-primary' onclick='writeCommentForComment($this->ID, $this->PostID); return false;'>Написать</button>
+									<button class='btn' onclick='hideAnswerComment($this->ID);'>Отмена</button>
 								</td>
 							</tr>" : "" )."
 						</table>
@@ -450,6 +457,57 @@
 						" . renderRatingForComment($this->Rating, $this->PostID, $this->ID, $commentUser->ID) . "
 					</td>
 				</tr>";
+				
+				if($commentUser->ID == $currentUser->ID || $currentUser->IsAdmin())
+				{
+					$editForm = "
+					<div class='row hidden' id='trEditComment$this->ID'>
+						<div class='row span10'>
+							<textarea id='tbEditComment$this->ID' class='span10' rows='5'>$this->Text</textarea>
+						</div>
+						<div class='row span10'>
+							<button class='btn btn-primary' onclick='updateComment($this->ID, $this->PostID)'>Сохранить</button>
+							<button class='btn' onclick='hideEditComment($this->ID);'>Отмена</button>									
+						</div>
+					</div>";
+				}
+				
+				if($currentUser->IsLogged())
+				{				
+					$answerForm = "<div class='hidden row' id='trAnswerComment$this->ID'>
+						<div class='row span10'>
+							<textarea id='tbAnswerComment$this->ID' class='span10' rows='5'></textarea>
+						</div>
+						<div class='row span10'>
+							<button class='btn btn-primary' onclick='writeCommentForComment($this->ID, $this->PostID); return false;'>Написать</button>
+							<button class='btn' onclick='hideAnswerComment($this->ID);'>Отмена</button>
+						</div>
+					</div>";
+				}
+				$descriptionRow = "<div class='row'>".getDateTimeAtText($this->Date) . ( $currentUser->IsLogged() ? " $commentLink$quoteLink" : "" ).	$editLink . "</div>";
+				
+				$result = "
+					<div class='span10 row' style='$tabulation'>
+						<div class='well row'>
+							<div class='span1'>
+								$userPic
+							</div>				
+							<div class='span8'>
+								<i class='icon-user icon-black'></i> 
+								<a href='/user/1' rel='popover' data-content='".$commentUser->GetDescriptionForPopup()."' data-original-title='A Title' >
+								<strong>$commentUser->Name</strong></a>
+								$quotedcomment<br />
+								" . formatText($this->Text) . "
+							</div>
+							
+						</div>
+						
+						$descriptionRow
+						$editForm
+						$answerForm
+						<br />						
+					</div><br />
+				";
 				
 			if($listtype == 'tree' && $this->Level<50)
 			{

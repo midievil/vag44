@@ -340,29 +340,22 @@
 				}
 				dbgTime("c4");
 				
-				echo "
-				<table id='tblPostComments' cellspacing='0' cellpadding='0'>
-					<tr>
-						<td colspan='2' class='content_top'></td>
-					</tr>";
+				echo "<div class='span10 row'></div>";
+				
 				if(count($comments) > 0)
 				{	
 					foreach($comments as $row)
 					{
 						$comment = new Comment();
 						$comment->MakeFromRow($row);
-						dbgTime("c5");
-						echo $comment->Render();
-						dbgTime("c6");
+						echo $comment->Render();						
 					}					
+						echo "<script>$('[rel=\"popover\"]').popover({'placement':'top'});</script>";
 				}
 				else
 				{
-					echo "<tr class='actualcomment'><td colspan='2'>комментариев нет</td></tr>";
-				}
-				
-				echo "</table>";
-				dbgTime("c5");
+					echo "<div class='well row'>комментариев нет</div>";
+				}								
 			}
 			catch (Exception $e)
 			{

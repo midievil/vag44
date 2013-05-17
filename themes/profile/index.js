@@ -142,11 +142,6 @@
 	
 	function selectCar()
 	{
-		if($("#trSelectCar").is(":visible")) 
-		{
-			return;
-		}
-		
 		if(isValid == true)
 		{
 			$("#trSelectCar").show();
@@ -171,8 +166,8 @@
 		if(isValid == true)
 		{
 			$("#ddlSelectCarModel").html('');
-			$("#ddlSelectCarModel").hide();
-			$("#btnSaveCar").hide();
+			$("#ddlSelectCarModel").prop('disabled', true);
+			$("#btnSaveCar").addClass('disabled');
 			if(vendorID != -1)
 			{
 				showCarSaveButton();
@@ -183,7 +178,7 @@
 							success:	function(result){
 											$("#ddlSelectCarModel").html(result);
 											$("#ddlSelectCarModel").val(-1);
-											$("#ddlSelectCarModel").show();
+											$("#ddlSelectCarModel").prop('disabled', false);
 										}
 					}
 					);
@@ -195,16 +190,19 @@
 	{
 		if(modelID == undefined || modelID == -1)
 		{
-			$("#btnSaveCar").hide();
+			$("#btnSaveCar").addClass('disabled');
 		}
 		else
 		{
-			$("#btnSaveCar").show();
+			$("#btnSaveCar").removeClass('disabled');
 		}
 	}
 	
 	function addCar(modelid)
 	{
+		if($("#btnSaveCar").hasClass("disabled")) {
+			return false;
+		}
 		$.ajax(	{	type: "POST",	
 							url:"/response/carresponse.php",
 							data:"action=addcar&modelid="+modelid,
@@ -265,11 +263,11 @@
 		
 		if($("input[name='cbCategoriesPaging']:checked").val() == "off")
 		{
-			$("#spanPageSize").hide();
+			$("#ddlPageSize").prop('disabled', true);
 		}
 		else
 		{
-			$("#spanPageSize").show();
+			$("#ddlPageSize").prop('disabled', false);
 		}
 	}
 </script>

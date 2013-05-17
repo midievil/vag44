@@ -193,10 +193,8 @@
 							Gender = '$gender'
 					where	ID=$id";								
 				
-				if(fDB::fexec($query))
-				{
-					echo "ok";
-				}				
+				if(fDB::fexec($query));
+				echo "ok";								
 			}
 			catch (Exception $e)
 			{
