@@ -10,7 +10,7 @@
 							<b>Сейчас на сайте:</b>
 							{if $onlineUsers|@count > 0}
 								{foreach from=$onlineUsers item=user name=userscycle}
-									<a href="#" rel="tooltip" data-original-title="{$user->GetDescriptionForPopup()}">{$user->Name}</a>
+									<a href="/user/{$user->ID}" rel="popover" data-content="{$user->GetDescriptionForPopup()}" data-original-title="Пользователь <strong>{$user->Name}</strong>">{$user->Name}</a>
 									{if $smarty.foreach.userscycle.iteration<$onlineUsers|@count},{/if} 									
 								{/foreach}
 								{literal}
@@ -55,5 +55,7 @@
 <script>
 $('.list').list();
 $(".hidden").hide();
+$('[rel="popover"]').popover({'placement':'top'});
+
 </script>
 {/literal}

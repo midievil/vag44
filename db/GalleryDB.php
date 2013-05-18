@@ -14,16 +14,16 @@
 						G.Public,
 						(select min(ID) from GalleryItems where GalleryID = G.ID) Thumbnail						
 				from	Galleries G
-				where UserID = $userid");
+				where UserID = $userid");			
 		}
 		
-		public static function changeGalleryPublic($id, $value)
+		public static function saveGallery($id, $name, $pub)
 		{
 			if(empty($value))
 			{
 				$value='0';
 			}
-			fDB::fexec("UPDATE Galleries SET Public = $value WHERE ID=$id");
+			fDB::fexec("UPDATE Galleries SET Public = $pub, Name='$name' WHERE ID=$id");
 			return true;
 		}
 	}

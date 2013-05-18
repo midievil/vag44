@@ -410,53 +410,7 @@
 			}
 			
 			$userPic = $commentUser->RenderUserPic('comment', $this->ID, 30);
-							
-			$result = "
-				<tr id='trComment$this->ID' class='$class"."Child actualcomment' level='$this->Level'>
-					<td style='$tabulation' class='content_left' style='padding-bottom:20px;'>
-						<table cellspacing='0' cellpadding='0' width='100%'>
-							<tr>
-								<td class='userpic' rowspan='2'>
-									" . $commentUser->RenderUserPic('comment', $this->ID, 30) . "
-								</td>
-								<td class='postcomment'>								
-									<blockquote>$quotedcomment</blockquote>
-									".User::UserIcon()."<a href='/user/$commentUser->ID' class='username' id='aUserComment$this->ID' rel='tooltip' data-original-title='".$commentUser->GetDescriptionForPopup()."'><strong>$commentUser->Name</strong></a><br /><a name='comment$this->ID' />
-									" . formatText($this->Text) . "
-								</td>	
-							</tr>					
-							<tr class='bottom'>
-								<td  class='postcomment'><a class='comment'>" . getDateTimeAtText($this->Date) . "</a>".	( $currentUser->IsLogged() ? " $commentLink$quoteLink" : "" )."	$editLink</td>
-								<td align='right' class='buttonsunderpost'>
-									
-								</td>
-							</tr>
-							".( $commentUser->ID == $currentUser->ID || $currentUser->IsAdmin() ? "
-							<tr id='trEditComment$this->ID' class='buttonsunderpost hidden'>
-								<td />
-								<td colspan='2'>
-									<textarea id='tbEditComment$this->ID' class='span10'>$this->Text</textarea>
-									<br />
-									<button class='btn btn-primary' onclick='updateComment($this->ID, $this->PostID)'>Сохранить</button>
-									<button class='btn' onclick='hideEditComment($this->ID);'>Отмена</button>									
-								</td>
-							</tr>" : "" ).
-							(  $currentUser->IsLogged() ?  "
-							<tr id='trAnswerComment$this->ID' class='buttonsunderpost hidden'>
-								<td />
-								<td colspan='2'>
-									<textarea id='tbAnswerComment$this->ID' class='.span10'></textarea>
-									<br />
-									<button class='btn btn-primary' onclick='writeCommentForComment($this->ID, $this->PostID); return false;'>Написать</button>
-									<button class='btn' onclick='hideAnswerComment($this->ID);'>Отмена</button>
-								</td>
-							</tr>" : "" )."
-						</table>
-					</td>
-					<td class='nowrap content_right' style='padding-top:30px' valign='top'>
-						" . renderRatingForComment($this->Rating, $this->PostID, $this->ID, $commentUser->ID) . "
-					</td>
-				</tr>";
+						
 				
 				if($commentUser->ID == $currentUser->ID || $currentUser->IsAdmin())
 				{
@@ -487,7 +441,7 @@
 				$descriptionRow = "<div class='row'>".getDateTimeAtText($this->Date) . ( $currentUser->IsLogged() ? " $commentLink$quoteLink" : "" ).	$editLink . "</div>";
 				
 				$result = "
-					<div class='span10 row' style='$tabulation'>
+					<div class='span10 comment row' style='$tabulation'>
 						<div class='well row'>
 							<div class='span1'>
 								$userPic
@@ -574,7 +528,7 @@
 				{
 					$link = '
 					<div width="200px">
-						<a title="'.$lastPost->Title.'" class="lastposttitle" href="/post/' . $lastPost->ID . '?page=last">' . $lastPost->Title . '</a>
+						<a title="'.$lastPost->Title.'" class="lastposttitle" href="/post/' . $lastPost->ID . '?page=last">' . substr($lastPost->Title, 0, 50) . '</a>
 					</div>&nbsp;';
 				}
 			}

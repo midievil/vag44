@@ -3,20 +3,19 @@
 					<script>categoryImages['trTagCategory{$category->ID}']='{$image_file}';</script>
 				{/if}
 				
-				{assign var='childObjects' value=$category->getChildObjects()}
-
+				{assign var='childObjects' value=$category->getChildObjects()}			
 				<div class="accordion-group">
 		              <div class="accordion-heading" style='height:90px;'>
-						<div class="pull-left">
+						<div class="span10">
 		                <a class="accordion-toggle pull-left" data-toggle="collapse" href="#collapseTC{$category->ID}" data-parent="#accordionMain">
 							<h4>{$category->Name}</h4>
 		                </a>
 						<a class="btn" style='margin-top:10px;' href="/category/{$category->ID}">»</a>
 						<a style='margin-top:10px;' class="accordion-toggle" data-toggle="collapse" data-parent="#accordionMain" href="#collapseTC{$category->ID}">{$category->Comment}</a>
 						</div>
-						<span class='pull-right' style='padding-right:20px; padding-top:5px; position: absolute;  right:15px;'>						
+						<div class='span2' style='padding-right:20px; padding-top:5px; position: absolute;  right:15px; text-align:right;'>						
 							{$category->LastCommentHint}
-						</span>
+						</div>
 		              </div>	
 					{if $childObjects|@count >0}
 		              <div id="collapseTC{$category->ID}" class="accordion-body collapse" style="height: 0px;">

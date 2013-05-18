@@ -1,0 +1,6 @@
+<i class='icon-user icon-black'></i>
+{if $user!=null}
+	<a href="#" rel="popover" data-content="{$user->GetDescriptionForPopup()}" data-original-title="Пользователь <strong>{$user->Name}</strong>">{$user->Name}</a>
+{else}
+	<a href="/user/{$id}">{$name}</a>
+{/if}

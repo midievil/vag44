@@ -17,20 +17,7 @@
 	</div>
 	{/if}
 	{foreach from=$posts item=post}
-		<div>
-			<a class='tagcategory0'>{$post->Title}</a>
-			<div style='float:right'>
-				{$rating}
-			</div>
-		</div>
-		<div class='padded bgwhite'>
-			{$post->Text}
-		</div>
-		<div class='commentunderpost paddedleft paddedbottom'>
-			{$i18n.wrote.$gender} <a>{$blogs_user->Name}</a>, {$post->CreateDate()} · <a href='/post/{$post->ID}'>{$i18n.blog_comments}</a>
-			{if $currentUser->ID == $blogs_user->ID} · <a href='/editpost/{$post->ID}'>{$i18n.blog_edit}</a>{/if}
-		</div>
-		<br /><br />
+		{include file="controls/postFace.html" post=$post}		
 	{/foreach}
 	</table>
 {elseif $blogs|@count > 0}

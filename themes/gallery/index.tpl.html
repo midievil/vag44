@@ -4,71 +4,86 @@
 
 {include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment}
 
+<div class='row span10'>
 {if $currentUser->IsLogged() && $galleryUser->ID == $currentUser->ID}
-	<a class='button hand' onclick='addGallery(); return false;'>Добавить фотоальбом</a>
+	<a class='btn btn-primary' onclick='addGallery(); return false;'>Добавить фотоальбом</a>
 {/if}
+</div>
 
-<table>
-	<tr>
-		<td class='innercontent'>
-			
+<div class='span10 row'>
+   
 		{if $mode=='galleries'}
-			<table>
-				<tr>
-				{foreach from=$galleries item=gallery name=galcycle}
-					{if $smarty.foreach.galcycle.iteration % 5 == 1}
-				</tr><tr>
-					{/if}
-					<td>
-						<table cellspacing='0' cellpadding='0' class='gallery' {if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}onmouseover='showEditButton({$gallery.ID})' onmouseout='hideEditButton({$gallery.ID})'{/if}>
-							<tr>
-								<td class='image'>
-									<a class='hand' href='/gallery/id/{$gallery.ID}'><img class='gallerypreview' src='{$gallery.ThumbFile}' /></a>
-								</td>
-							</tr>
-							<tr>
-								<td class='gallerycomment'>
-									<a class='hand gallerycomment' id='aComment{$gallery.ID}' href='/gallery/id/{$gallery.ID}'>{$gallery.Name}</a>
-									<input class='hidden gallerycomment' id='tbComment{$gallery.ID}' onkeyup='commentKeyPress(event.keyCode, {$gallery.ID}, "gallery");' onclick='event.stopPropagation(); return false;' value='{$gallery.Name}' />
-									{if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}
-										<a class='comment hand hidden' id="btnEditName{$gallery.ID}" onclick='editComment({$gallery.ID}); event.stopPropagation(); return false;'>Переименовать</a>
-										<br />
-										<input type='checkbox' id="cbPublic{$gallery.ID}" class='public{$gallery.ID} hidden' onclick='changePublic({$gallery.ID})' {if $gallery.Public==1}checked{/if} /> <label for="cbPublic{$gallery.ID}" class='hidden public{$gallery.ID} comment'>виден всем</label>
-									{/if}
-								</td>
-							</tr>
-						</table>
-					</td>
-				{/foreach}
-				</tr>
-			</table>	
+			<input type='hidden' id='editGalleryID' />
+			<div id='renameModal' class="modal hide fade">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3>Modal header</h3>
+			  </div>
+			  <div class="modal-body">
+			  	<form class="form-horizontal">
+					<div class="control-group">
+					    <label class="control-label" for="tbEditProfileLastName">Название</label>
+					    <div class="controls">
+					      <input type="text" id="tbEditGalleryName" placeholder="название" />
+					    </div>
+					</div>
+					
+					<div class="control-group">
+						<div class="controls">
+							<label class='checkbox'>
+								<input type='checkbox' id="cbEditGalleryPublic" /> виден всем
+							</label>
+						</div>
+					</div>
+				</form>			  	
+			  </div>
+			  <div class="modal-footer">
+			  	<a class="btn btn-primary" onclick='saveGallery();'>Сохранить</a>
+			    <a class="btn" onclick="$('#renameModal').modal('hide')">Отмена</a>
+			  </div>
+			</div>
+		
+			<ul class="thumbnails">		
+				<li class='span'></li>
+			  	{foreach from=$galleries item=gallery name=galcycle}			  	
+			  	<li class="span3">
+			  		<div style='width:200px;' class='gallery{$gallery.ID}'>
+			  			<div style='height:150px; overflow: hidden; '>
+			  				<a href='/gallery/id/{$gallery.ID}' class="thumbnail"><img class='gallerypreview' src='{$gallery.ThumbFile}' /></a>
+			  			</div>
+				    	
+				    	<a class='galleryname' href='/gallery/id/{$gallery.ID}'>{$gallery.Name}</a>
+				    	<input class='gallerypublic' type='hidden' value='{$gallery.Public}' />
+												
+						{if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}
+							<a	rel='tooltip'  data-toggle="tooltip" data-placement="top" title="" data-original-title="Редактировать"
+								onclick="editGallery({$gallery.ID});" 
+								>
+								<i class="icon-edit"></i>
+							</a>
+							<br />							
+						{/if}
+					</div>
+			    </li>  
+			    {/foreach}  
+			  
+			</ul>
 		{elseif $mode=='pictures'}	
 			{if $galleryItems|@count > 0}
-				<table>
-					<tr>
-				{foreach from=$galleryItems item=galleryItem name=piccycle}
-					{if $smarty.foreach.piccycle.iteration % 5 == 1}
-					</tr>
-					<tr>
-					{/if}
-						<td>
-							<table cellspacing='0' cellpadding='0' class='gallery'>
-								<tr>
-									<td class='image'>
-										<a class='hand' href='{$galleryItem.BigFile}' target='blank'><img class='gallerypreview' src='{$galleryItem.ThumbFile}' /><br /></a>
-									</td>
-								</tr>
-								<tr>
-									<td class='comment'>
-										<a class='comment gallerycomment' id='aComment{$galleryItem.ID}' {if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}onclick='editComment({$galleryItem.ID})'{/if}>{if $galleryItem.Comment != ''}{$galleryItem.Comment}{else}<добавить комментарий>{/if}</a>
-									</td>
-								</tr>
-							</table>
-							<input class='hidden gallerycomment' id='tbComment{$galleryItem.ID}' onkeyup='commentKeyPress(event.keyCode, {$galleryItem.ID}, "item");' value='{$galleryItem.Comment}' />
-						</td>
+				<ul class="thumbnails">
+					<li class='span'></li>
+				{foreach from=$galleryItems item=galleryItem name=piccycle}						
+				  	<li class="span3">
+				  		<div style='width:220px; padding-bottom:20px' class='picture{$galleryItem.ID}'>
+				  			<div style='height:150px; overflow: hidden; '>
+				  				<a class="thumbnail"><img class='gallerypreview' src='{$galleryItem.ThumbFile}' /></a>
+				  			</div>
+				  			<a class='gallerycomment' {if $currentUser->IsLogged() && $currentUser->ID == $galleryUser->ID}onclick='editComment({$galleryItem.ID})'{/if}>{if $galleryItem.Comment != ''}{$galleryItem.Comment}{else}<добавить комментарий>{/if}</a>
+				  			<input class='hidden gallerycomment' id='tbComment{$galleryItem.ID}' onkeyup='commentKeyPress(event.keyCode, {$galleryItem.ID}, "item");' value='{$galleryItem.Comment}' />
+						</div>
+				    </li>
 				{/foreach}
-					</tr>
-				</table>
+				</ul>
 			{else}
 				Нет изображений
 			{/if}
@@ -80,12 +95,8 @@
 				<button class='button' id='buttonUpload' onclick='return ajaxFileUpload();'>Загрузить</button>
 			{/if}
 		{/if}
-			
-		</td>
-	</tr>
-</table>
 
-
+</div>
 
 {include file="footer.tpl.html"}
 

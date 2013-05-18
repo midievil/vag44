@@ -349,8 +349,10 @@
 						$comment = new Comment();
 						$comment->MakeFromRow($row);
 						echo $comment->Render();						
-					}					
-						echo "<script>$('[rel=\"popover\"]').popover({'placement':'top'});</script>";
+					}
+
+					
+					echo "<script>$('[rel=\"popover\"]').popover({'placement':'top'});</script>";
 				}
 				else
 				{

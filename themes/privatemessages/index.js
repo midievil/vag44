@@ -39,16 +39,6 @@ function deletePrivateMessage(id)
 		});
 }
 
-var mode;
-function switchPrivateMessages(messagesMode)
-{
-	mode = messagesMode;
-	$("td.privatemessages").hide();
-	$("span.tab").removeClass("selected");
-	$("span." + messagesMode).addClass("selected");
-	$("#tdMessages" + messagesMode).show();
-}
-
 function answerMessage(id)
 {
 	$("#trAnswerMessage"+id).show();

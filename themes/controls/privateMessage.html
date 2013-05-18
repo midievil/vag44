@@ -1,19 +1,42 @@
-<div id='trMessage{$message->ID}' class='paddedbottom'>	
-		<b>{$message->Header}</b> <a class='comment'>{if $message->Direction() == "In"}от{else}для{/if}</a> <a href='/user/{$message->UserID}'>{$message->UserName}</a> <a class='comment'>{$message->PostDateText()}</a>
-		{if $message->Direction() == "Out"}
-			<a class='comment'>({if $message->Read==1}прочитано{else}еще не прочитано{/if} пользователем)</a>{/if}
-		<br />
-		{$message->Text}<br /> 
-		{if $message->Direction() == "In"}<a class='hand buttonsunderpost' onclick='answerMessage({$message->ID})'>ответить</a> · {/if}
-		<a class='hand buttonsunderpost' onclick='deletePrivateMessage({$message->ID})'>удалить</a> 
-		{if $message->Read == '0' && $message->Direction() == "In"} · <a class='hand buttonsunderpost read' onclick='setMessageRead({$message->ID})'>отметить как прочитанное</a>{/if}
+<div id='trMessage{$message->ID}' class='alert alert-info'>
+	<button type="button" class="close" data-dismiss="alert" onclick='deletePrivateMessage({$message->ID})'>&times;</button>
+		<div >	
+			<b>{$message->Header}</b> <a class='comment'>{if $message->Direction() == "In"}от{else}для{/if}</a> {include file='controls/userplate.html' id=$message->UserID name=$message->UserName} <small>{$message->PostDateText()}</small>
+			{if $message->Direction() == "Out"}
+				<a class='comment'>({if $message->Read==1}прочитано{else}еще не прочитано{/if} пользователем)</a>
+			{/if}
+		</div>
+		<div>
+		{$message->Text}
+		</div> 
+		<div>
+		{if $message->Direction() == "In"}<a class='btn btn-small btn-primary' onclick='answerMessage({$message->ID})'>ответить</a>{/if}
+		<a class='btn btn btn-small' onclick='deletePrivateMessage({$message->ID})'>удалить</a>
+		{if $message->Read == '0' && $message->Direction() == "In"} <a class='btn btn-success read' onclick='setMessageRead({$message->ID})'>отметить как прочитанное</a>{/if}
+		</div>
 	
 		<div id='trAnswerMessage{$message->ID}' class='hidden'>
-			<a class='comment'>Тема: </a><input type='text' id='tbAnswerText{$message->ID}' size='50' value='Re: {$message->Header}' /><br />
-			<textarea id='tbAnswerMessage{$message->ID}' cols='70' rows='3'></textarea>
 			<br />
-			<a class='hand buttonsunderpost' onclick='sendMessage({$message->UserID}, {$message->ID});'>отправить</a> · 
-			<a class='hand buttonsunderpost' onclick='cancelMessage({$message->ID});'>отмена</a>
+			<form class="">
+				<div class="control-group">
+				    <label class="control-label" for="tbAnswerText{$message->ID}">Тема</label>
+				    <div class="controls">
+				      <input type='text' id='tbAnswerText{$message->ID}' size='50' value='Re: {$message->Header}' />
+				    </div>
+				</div>			
+				<div class="control-group">
+				    <label class="control-label" for="tbAnswerMessage{$message->ID}">Сообщение</label>
+				    <div class="controls">
+				    	<textarea id='tbAnswerMessage{$message->ID}' class='span10' rows='5'></textarea>
+				    </div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<a class='btn btn-primary' onclick='sendMessage({$message->UserID}, {$message->ID});'>отправить</a> · 
+						<a class='btn' onclick='cancelMessage({$message->ID});'>отмена</a>
+					</div>
+				</div>
+			</form>			
 			
-		</div>		
+		</div>	
 </div>

@@ -54,10 +54,11 @@
 			}
 			return;
 			
-		case "changepublic":
+		case "savegallery":
 			$id = $_POST["id"];
-			$val = $_POST["val"];
-			if(GalleryDB::changeGalleryPublic($id, $val))
+			$pub = $_POST["pub"];
+			$name = $_POST["name"];
+			if(GalleryDB::saveGallery($id, $name, $pub))
 			{
 				echo "ok";
 			}

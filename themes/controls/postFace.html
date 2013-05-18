@@ -1,5 +1,36 @@
-<br />
-<a class='tagcategory0'>{$post->Title}</a><br />
-{$post->Text}<br />
-<a class='comment'>{$post->Date}</a><br />
-<br />
+<div class="span10">
+	<h2>{$post->Title}</h2>
+	<div style='float:right'>
+		{$rating}
+	</div>
+</div>
+<div class="row span10">
+	{$post->Text}
+</div>
+<div class='paddedleft paddedbottom'>
+	
+	<div clas="row">
+				<div class="navbar">
+					<div class="navbar-inner">
+						<div class="container">
+			              <ul class="nav">
+			              		<li>
+			              			{$i18n.wrote.$gender} <a>{$blogs_user->Name}</a>
+			              		</li>
+			              		<li>
+			              			<a>
+			              				, {$post->CreateDate()}
+			              			</a>
+			              		</li>
+			              		<li>
+			              			<a href='/post/{$post->ID}'>{$i18n.blog_comments}</a>			              			
+			              		</li>
+			              	{if $currentUser->ID == $blogs_user->ID}
+			              		<li><a href='/editpost/{$post->ID}'>{$i18n.blog_edit}</a></li>
+		              		{/if}
+			              </ul>						  
+			            </div>
+					</div>
+				</div>
+		</div>
+</div>

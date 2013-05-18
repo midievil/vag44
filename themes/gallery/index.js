@@ -115,17 +115,42 @@ function addGallery()
 			});
 }
 
-function changePublic(id)
-{	
-	var val = $("#cbPublic"+id).is(':checked') ? '1' : '0';
-	$.ajax({	type:	"POST",	
-				url:	"/response/galleryresponse.php",
-				data:	"action=changepublic&id="+id+"&val="+val,
-				success: function(result){
-					result = trim(result);					
-				}
-			});
+function editGallery(id)
+{
+	$('#editGalleryID').val(id);
+	
+	var text = $('div.gallery'+id+' a.galleryname').text();
+	$("#tbEditGalleryName").val(text);
+	
+	var pub = $('div.gallery'+id+' input.gallerypublic').val();
+	$("#cbEditGalleryPublic").prop('checked', pub==1);
+	
+	
+	$('#renameModal').modal();
 }
+
+function saveGallery()
+{
+	var id=$('#editGalleryID').val();
+	var name = $("#tbEditGalleryName").val();
+	var pub = $("#cbEditGalleryPublic").prop('checked');
+	
+	$.ajax({	type:	"POST",	
+		url:	"/response/galleryresponse.php",
+		data:	"action=savegallery&id="+id+"&name="+name+"&pub="+pub,
+		success: function(result){
+			result = trim(result);
+			if(result == "ok")
+			{	
+				$('div.gallery'+id+' a.galleryname').text(name);
+				$('div.gallery'+id+' input.gallerypublic').val(pub);
+				$('#renameModal').modal('hide');
+			}
+		}
+	});
+}
+
+
 
 $(".innercontent").click( function() {
 	cancelEditComment();	
