@@ -109,7 +109,7 @@ function updateComment(commentID, postID)
 }
 
 
-var loadingTdText = '<td colspan="3" class="comment" style="width:100%; padding:30px" align="center"><img src="/img/loading.gif" /></td>';
+var loadingTdText = '<div class="progress progress-striped active span10"><div class="bar" style="width: 100%;"></div></div>';
 var addedComments = 0;
 function writeComment(postID)
 {
@@ -131,10 +131,10 @@ function writeComment(postID)
 		$("#tbCommentForPostBottom").val('');
 		
 		addedComments++;
-		//$("tr.actualcomment:last").after("<tr id='trNewComment" + addedComments + "'>"+loadingTdText+"</tr>");		
-		//$(document).scrollTop($("#trNewComment"+addedComments).offset().top);
+		$("div.commentlist div.comment:last").after(loadingTdText);		
+		$(document).scrollTop($("div.commentlist div.comment:last").offset().top);
 		
-		window.clearTimeout();
+		//window.clearTimeout();
 		
 		$.ajax({	type:	"POST",	
 					url:	"/response/blogresponse.php",
@@ -147,9 +147,9 @@ function writeComment(postID)
 							{
 								lastCommentID = parts[1]; 
 							}
-							window.location =window.location; 
-							//$("#trNewComment"+addedComments).after(parts[0]);
-							//$("#trNewComment"+addedComments).hide();
+							 
+							$("div.commentlist div.comment:last").after(parts[0]);
+							$("div.commentlist div.progress").hide();
 							commentLock = "";
 							//showComments(postID);							
 							//showBlog(blogid);							
@@ -179,7 +179,7 @@ function writeCommentForComment(commentID, postID)
 		}
 		else
 		{
-			$("tr.actualcomment:last").after("<tr id='trNewComment" + addedComments + "'>"+loadingTdText+"</tr>");		
+			$("div.commentlist div.comment:last").after(loadingTdText);		
 		}
 								
 		//if($("#trNewComment" + addedComments).offset().top  - $(window).scrollTop() > $(window).height())
@@ -189,7 +189,7 @@ function writeCommentForComment(commentID, postID)
 		
 		var currentLevel = $("#trComment" + commentID).attr("level");
 		
-		window.clearTimeout();
+		//window.clearTimeout();
 		
 		$.ajax({	type:	"POST",	
 					url:	"/response/blogresponse.php",
@@ -204,11 +204,12 @@ function writeCommentForComment(commentID, postID)
 						
 						if(trim(result) != "error")
 						{		
-							window.location =window.location; 
-							//$("#trNewComment"+addedComments).after(parts[0]);
+							 
+							$("div.commentlist div.comment:last").after(parts[0]);
 							//$("#trNewComment"+addedComments).hide();
-							$("#trComment" + commentID).addClass("commentrelated");
+							//$("#trComment" + commentID).addClass("commentrelated");
 							commentLock = "";
+							
 							//showComments(postID);							
 							//showBlog(blogid);
 						}
@@ -270,34 +271,35 @@ function showComments(postID, listType, currentPage)
 			});
 }
 
-function showNewComments(postID, currentPage)
+function showNewComments(postID)
 {
 	if(currentListType == "list")
 	{
+		var oldLast = lastCommentID;
 		$.ajax({	type:	"POST",	
 					url:	"/response/blogresponse.php",
 					data:	"action=shownewcomments&postid="+postID+"&lastcommentid="+lastCommentID,
 					success: function(result){
 						if(trim(result) != "error")
 						{	
+							if(oldLast != lastCommentID)
+							{
+								showNewComments(postID);
+								return;
+							}
+							
 							var parts = result.split('|#lstcmnt#|');							
 							if(parts[1] != '-1')
-							{
-								lastCommentID = parts[1]; 
+							{								
+								lastCommentID = parts[1];
 							}
 							
 							$("div.commentlist div.comment:last").after(parts[0]).ready(function() { });
-													
-							if($("#tblPostComments").height() > ($(window).height() - 100))						
-							{
-								$("#divAnswerPostBottom").show();
-								$("#divPagingBottom").show();
-							}
+							window.setTimeout(function() { showNewComments(postID); }, 10000);
 						}
 					}
 				});		
-	}
-	window.setTimeout(function() { showNewComments(postID, lastCommentID); }, 10000);
+	}	
 }
 
 function getSelectedText() {

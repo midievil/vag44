@@ -32,7 +32,7 @@
 		<script type="text/javascript" src="/js/functions.js?version=3"></script>	
 		<script type="text/javascript" src="/js/screen.js?version=19"></script>
 		<script type="text/javascript" src="/js/user.js?version=11"></script>
-		<script type="text/javascript" src="/js/blogging.js?version=25"></script>
+		<script type="text/javascript" src="/js/blogging.js?version=30"></script>
 		<script type="text/javascript" src="/js/gallery.js?version=9"></script>
 		<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
 		<script>
@@ -72,8 +72,8 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class='navbar-inner'>
 				<div class="container-fluid">
+					<img src='/img/logo_small.png' class='pull-left' style='margin-right: 10px' /> <a href='/' class='brand' style='color:#ffffff'>{*Привет, {$currentUser->Name}*}Kostroma VAG Club</a>
 					{if $currentUser->IsLogged()}
-						<img src='/img/logo_small.png' class='pull-left' style='margin-right: 10px' /> <a href='/' class='brand' style='color:#ffffff'>{*Привет, {$currentUser->Name}*}Kostroma VAG Club</a>
 						<div class="nav-collapse collapse">
 							<ul class="nav pull-right">
 								{*<li>

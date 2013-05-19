@@ -134,16 +134,32 @@ function register()
 					success:	function(result){													
 						if(trim(result)=='ok')
 						{
-							$("#divMain").load("/registration/congratulations");																
+							$("#regInfo").hide();
+							$("#trRegisterSuccess").show();							
 						}
 						else if(trim(result)=='exists')
 						{							
-							$("#tdRegisterResult").html("Какая досада! Пользователь с таким именем уже успел появиться в системе с момента проверки. Это или очень странное совпадение, или наш скрипт глючит под действием торсионных полей. Попробуйте войти в систему с вашим паролем, и если это удастся - значит всё в порядке.");
+							$("#trRegisterExists").show();
 						}							
 					}
 				}
 				);
 	}
 }
+
+$(document).ready( function () {
+	$("#trRegisterPassword").hide();
+	$("#trRegisterPasswordConfirm").hide();
+	$("#trRegisterEmail").hide();
+	$("#trRegisterFirstName").hide();
+	$("#tbRegisterLastName").hide();
+	$("#trRegisterFrom").hide();
+	$("#trRegisterHaveCar").hide();
+	$("#trRegisterCar").hide();
+	$("#trRegisterOK").hide();
+	
+	
+});
+
 </script>
 {/literal}

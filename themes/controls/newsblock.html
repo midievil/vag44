@@ -2,7 +2,7 @@
 					<li class="nav-header">Новости</li>
 					{foreach from=$news item=newsItem name=news}
 						{if $smarty.foreach.news.iteration <= 10}
-							<li ><a href="/post/{$newsItem->ID}'">{$newsItem->Title} ({$newsItem->CreateShortDate()})</a></li>
+							<li ><a href="/post/{$newsItem->ID}'">{$newsItem->Title} <br /> <small>({$newsItem->CreateShortDate()})</small></a></li>
 						{/if}
 					{/foreach}					
 	            </ul>

@@ -27,48 +27,131 @@
 		
 		<br/>
 		<br/>
-		<table>
-			<tr id="trRegisterNick">
-				<td style='width:150px'><b class='nowrap'>Ваш будущий ник:</b></td><td><input id="tbRegisterNick" type="text" onkeyup="checkUserName(this.value);" onchange="checkUserName(this.value);" onblur="checkUserName(this.value); " /></td><td id="tdregisterNickCheck" style='width:32px'></td><td class="comment nowrap">Для начала, давайте определимся, как окружающие в дальнейшем будут вас называть<br /> (не короче 4 символов)</td>
-			</tr>
-			
-			<tr id="trRegisterPassword" class="hidden">
-				<td><b class='nowrap'>Ваш пароль:</b></td><td><input id="tbRegisterPassword" type="password" onkeyup="checkPassword(this.value);" onchange="checkPassword(this.value);" onblur="checkPassword(this.value); " /></td><td id="tdregisterPasswordCheck"></td><td class="comment nowrap">Пароль понадобится для входа под вашей учетной записью. Он должен быть не короче восьми символов.</td>
-			</tr>
-			<tr id="trRegisterPasswordConfirm" class="hidden">
-				<td><b class='nowrap'>Подтвердите пароль:</b></td><td><input id="tbRegisterPasswordConfirm" type="password" onkeyup="checkPassword(this.value);" onchange="checkPassword(this.value);" onblur="checkPassword(this.value); " /></td><td id="tdregisterPasswordConfirmCheck"></td><td class="comment nowrap">на тот случай, если вы вдруг опечатались, наберите пароль еще раз</td>
-			</tr>
-			<tr id="trRegisterEmail" class="hidden">
-				<td><b class='nowrap'>Адрес электронной почты:</b></td><td><input id="tbRegisterEmail" type="text" onkeyup="checkEmail(this.value);" onchange="checkEmail(this.value);" onblur="checkEmail(this.value); "  /></td><td></td><td class="comment nowrap">Этот адрес понадобится вам для восстановления пароля. Настоятельно рекомендуем вам указать<br />правильный адрес, поскольку наличие действующей почты может стать обязательным. </td>
-			</tr>
+		<div style='min-height: 500px;'>
+			<div id='regInfo'>
+				<form class="form-horizontal">
+				<DIV></DIV>
+				<div id="trRegisterNick" class="control-group" >
+					<label class="control-label" for='tbRegisterNick'>Ваш будущий ник</label>
+					<div class="controls">
+						<div class='span7'>
+							<input  id="tbRegisterNick" type="text" onkeyup="checkUserName(this.value);" onchange="checkUserName(this.value);" onblur="checkUserName(this.value); " />
+						</div>
+						<div class="span1" id="tdregisterNickCheck" style='width:32px'></div>
+						<div><small>Для начала, давайте определимся, как окружающие в дальнейшем будут вас называть<br /> (не короче 4 символов)</small></div>
+					</div>
+				</div>
 				
-			<tr id="trRegisterFirstName" class="hidden">
-				<td><b class='nowrap'>Ваше имя:</b></td><td><input id="tbRegisterFirstName" type="text" /></td>	<td></td><td class="comment nowrap" >Вы можете также указать ваше имя, фамилию и местонахождление, чтобы знакомые могли найти ваш блог.</td>
-			</tr>
-			<tr id="trRegisterLastName" class="hidden">
-				<td><b class='nowrap'>Ваша фамилия:</b></td><td><input id="tbRegisterLastName" type="text" />	</td>	<td></td><td class="comment nowrap">Это необязательно, так что если вы хотите сохранить анонимность, можете ничего не указывать.</td>
-			</tr>
-			<tr id="trRegisterFrom" class="hidden">
-				<td><b class='nowrap'>В каком городе вы живете?</b></td>	<td><input id="tbRegisterFrom" type="text" />		</td>	<td></td><td class="comment nowrap"></td>
-			</tr>
+				<div id="trRegisterPassword" class="hidden control-group" >
+					<label class="control-label" for='tbRegisterPassword'>Ваш пароль</label>
+					<div class="controls">
+						<div class='span7'>
+							<input id="tbRegisterPassword" type="password" onkeyup="checkPassword(this.value);" onchange="checkPassword(this.value);" onblur="checkPassword(this.value); " />
+						</div>
+						<div class='span1' id="tdregisterPasswordCheck"></div>
+						<div><small>Пароль понадобится для входа под вашей учетной записью. Он должен быть не короче восьми символов.</small></div>
+					</div>
+				</div>
+				<div id="trRegisterPasswordConfirm" class="hidden control-group">
+					<label class="control-label" for='tbRegisterPasswordConfirm'>Подтвердите пароль</label>
+					<div class="controls">
+						<div class='span7'>
+						<input id="tbRegisterPasswordConfirm" type="password" onkeyup="checkPassword(this.value);" onchange="checkPassword(this.value);" onblur="checkPassword(this.value); " />
+						</div>						
+						<div class='span1' id="tdregisterPasswordConfirmCheck"></div>
+						<div><small>на тот случай, если вы вдруг опечатались, наберите пароль еще раз</small></div>
+					</div>
+				</div>
+				<div id="trRegisterEmail" class="hidden control-group">
+					<label class="control-label" for='tbRegisterEmail'>Адрес электронной почты</label>
+					<div class="controls">
+						<div class='span8'>
+							<input required placeholder="user@example.com"  id="tbRegisterEmail" type="text" onkeyup="checkEmail(this.value);" onchange="checkEmail(this.value);" onblur="checkEmail(this.value); "  />
+						</div>
+						<div>
+							<small>Этот адрес понадобится вам для восстановления пароля. Настоятельно рекомендуем вам указать<br />правильный адрес, поскольку наличие действующей почты может стать обязательным.
+							</small>
+						</div>
+					</div> 
+				</div>
+					
+				<div id="trRegisterFirstName" class="hidden control-group">
+					<label class="control-label" for='tbRegisterFirstName'>Ваше имя</label>
+					<div class="controls">
+						<div class='span8'>
+							<input id="tbRegisterFirstName" type="text" />
+						</div>
+						<div>	
+							<small>Вы можете также указать ваше имя, фамилию и местонахождление, чтобы знакомые могли найти ваш блог.</small>
+						</div>
+					</div>
+				</div>
+				<div id="tbRegisterLastName" class="hidden control-group">
+					<label class="control-label" for='tbRegisterLastName'>Ваша фамилия</label>
+					<div class="controls">
+						<div class='span8'>
+							<input id="tbRegisterLastName" type="text" />
+						</div>
+						<div>		
+							<small>Это необязательно, так что если вы хотите сохранить анонимность, можете ничего не указывать.</small>
+						</div>
+					</div>
+				</div>
+				<div id="trRegisterFrom" class="hidden control-group">
+					<label class="control-label" for='tbRegisterFrom'>В каком городе вы живете?</label>
+					<div class="controls">
+						<div class='span8'>
+							<input id="tbRegisterFrom" type="text" />
+						</div>		
+					</div>
+				</div>
+				
+				<div id="trRegisterHaveCar" class="hidden control-group">	
+					<label class="control-label" for='tbEditProfileEmail'>У вас есть автомобиль?</label>
+					<div class="controls">	
+						<div class='span8'>					
+							<input value='Да' type='button' onclick="showCar();" class='btn' /><input class='btn' value='Нет' type='button' onclick='hideCar();'/>
+						</div>
+						<div>					
+							<small>Это не влияет на результат регистрации, ведь каждый, у кого нет машины, мечтает её купить</small>
+						</div>
+					</div>
+				</div>
+				<div id="trRegisterCar" class="hidden control-group">
+					<label class="control-label" for='tbEditProfileEmail'>Любопытно, какой?</label>
+					<div class="controls">
+						<div class='span8'>					
+							<select id='ddlRegisterVendor' onchange='showModel(this.value);'></select><br />
+							<select id='ddlRegisterModel' class='hidden'></select>
+							<input type='text' class='hidden' id="tbRegstrationOtherCar" />
+						</div>
+						<div>
+							<small>Выберите марку вашего автомобиля из списка. Если его там нет, значит у вас автомобиль какого-то другого автоконцерна (или вы счастливый обладатель Bentley или Lamborghini). Если у вас несколько автомобилей, вы сможете добавить остальные позже, при редактировании профиля.</small>
+						</div>
+					</div>
+				</div>
+				<div id="trRegisterOK" class="hidden control-group">				
+					<div class="controls">
+						<input type='button' class='btn btn-primary' id='btnRegister' value='Зарегистрируйте меня!' onclick='register();'>
+					</div>					
+				</div>
+				</form>
+			</div>
 			
-			<tr id="trRegisterHaveCar" class="hidden">	
-				<td><b class='nowrap'>У вас есть автомобиль?</td><td ><input value='Да' type='button' onclick="showCar();" /><input value='Нет' type='button' onclick='hideCar();'/></td><td></td><td class="comment nowrap">Это не влияет на результат регистрации, ведь каждый, у кого нет машины, мечтает её купить</td>
-			</tr>
-			<tr id="trRegisterCar" class="hidden">
-				<td valign="top" style="padding-top:4px;"><b class='nowrap'>Любопытно, какой?</td>
-				<td valign="top">
-					<select id='ddlRegisterVendor' onchange='showModel(this.value);'></select>
-					<select id='ddlRegisterModel' class='hidden'></select>
-					<input type='text' class='hidden' id="tbRegstrationOtherCar" />
-				</td>
-				<td></td>
-				<td class="comment" valign="top" style="padding-top:4px;">Выберите марку вашего автомобиля из списка. Если его там нет, значит у вас автомобиль какого-то другого автоконцерна (или вы счастливый обладатель Bentley или Lamborghini). Если у вас несколько автомобилей, вы сможете добавить остальные позже, при редактировании профиля.</td>
-			</tr>
-			<tr id="trRegisterOK" class="hidden">
-				<td></td><td><input type='button' id='btnRegister' value='Зарегистрируйте меня!' onclick='register();'></td><td></td><td id='#tdRegisterResult'></td>
-			</tr>	
-		</table>
+			<div id="trRegisterSuccess" class="hidden">				
+				<div class="alert alert-success">
+				  Поздравляем! Вы успешно зарегистрировались. Теперь вы можете войти на сайт с вашим новым именем и паролем.
+				</div>				
+				
+			</div>
+			
+			
+			<div id="trRegisterExists" class="hidden">				
+				<div class="alert alert-error">
+				  Какая досада! Пользователь с таким именем уже успел появиться в системе с момента проверки. Это или очень странное совпадение, или наш скрипт глючит под действием торсионных полей. Попробуйте войти в систему с вашим паролем, и если это удастся - значит всё в порядке.
+				</div>			
+			</div>
+			
 {/if}
 	</div>
 
