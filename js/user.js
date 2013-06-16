@@ -141,14 +141,14 @@ function thankUser(postID, commentID, userID)
 									if(commentID != -1)
 									{
 										$("#aCommentIncrease" + commentID).hide();
-										var currentRating = $("#divCommentRating" + commentID).text();
-										$("#divCommentRating" + commentID).text((currentRating*1)+1);
+										var currentRating = $("#aCommentRating" + commentID).text();
+										$("#aCommentRating" + commentID).text((currentRating*1)+1);
 									}
 									else
 									{
-										$("#divPostIncreaseRating").hide();
-										var currentRating = $("#divPostRating").text();
-										$("#divPostRating").text((currentRating*1)+1);
+										$("#aPostIncreaseRating").hide();
+										var currentRating = $("#aPostRating").text();
+										$("#aPostRating").text((currentRating*1)+1);
 									}
 								}
 								else

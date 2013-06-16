@@ -615,11 +615,12 @@
 		
 		if($value > 0)
 		{			
-			$popupText = "Этот пост нравится:";
+			$popupTitle = "Этот пост нравится:";
+			$popupText = "";
 			$ratingRecords = getRatingForPost($postid);
 			while($row = mysql_fetch_assoc($ratingRecords))
 			{
-				$popupText .=  "\n" . $row["Name"];
+				$popupText .=  ($popupText != '' ? ", ":"") . $row["Name"];
 				if($row["ID"] == $currentUser->ID)
 				{
 					$alreadyIncreased = true;
@@ -631,10 +632,10 @@
 			$popupText = "Рейтинг этого поста";
 		}
 		
-		$result .=  "<a class='btn $level' href='#' rel='tooltip' data-original-title='$popupText'>$value</a>";
+		$result .=  "<a id='aPostRating' class='btn $level' href='#' rel='popover' data-toggle='popover' title='$popupTitle' data-content='$popupText'>$value</a>";
 		if(!$alreadyIncreased && $currentUser->IsLogged() && $currentUser->ID != $postUserID)
 		{		
-			$result .=  "&nbsp;<a rel='tooltip' data-original-title='Повысить рейтинг' class='btn' onclick='thankUser($postid, -1, $postUserID)'>+1</a>";
+			$result .=  "&nbsp;<a id='aPostIncreaseRating' rel='tooltip' data-original-title='Повысить рейтинг' class='btn' onclick='thankUser($postid, -1, $postUserID)'>+1</a>";
 			
 			
 		}
@@ -644,14 +645,17 @@
 	function renderRatingForComment($value, $postid, $commentid, $commentUserID)
 	{
 		global $currentUser;
-		$level = $value > 2 ? "good" : "neutral";
+		$level = $value > 2 ? "btn-success" : "";
 		
 		$result = "";
 		$alreadyIncreased = false;
 		
+		$popupTitle = '';
+		
 		if($value > 0)
-		{			
-			$popupText = "<b>Этот комментарий нравится:</b>";
+		{	
+			$popupTitle = "Этот комментарий нравится:";
+			$popupText = "";
 			$ratingRecords = getRatingForComment($commentid);
 			while($row = mysql_fetch_assoc($ratingRecords))
 			{
@@ -666,8 +670,8 @@
 		{
 			$popupText = "<b>Рейтинг этого комментария</b>";
 		}
-		
-		$result .=  "<span id='divCommentRating$commentid' class='rating $level' " . renderPopup("$popupText") . ">$value</span>";
+				
+		$result .=  "<a id='aCommentRating$commentid' class='btn $level' rel='popover' data-toggle='popover' title='$popupTitle' data-content='$popupText'" . renderPopup("") . ">$value</a>";
 		if(!$alreadyIncreased && $currentUser->IsLogged() && $currentUser->ID != $commentUserID)
 		{
 			$result .=  "&nbsp;<a id='aCommentIncrease$commentid' class='hand increasecomment' onclick='thankUser($postid, $commentid, $commentUserID)'>+1</a>";

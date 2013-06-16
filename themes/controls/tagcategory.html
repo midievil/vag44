@@ -6,14 +6,14 @@
 				{assign var='childObjects' value=$category->getChildObjects()}			
 				<div class="accordion-group">
 		              <div class="accordion-heading" style='height:90px;'>
-						<div class="span10">
+						<div class="span8">
 		                <a class="accordion-toggle pull-left" data-toggle="collapse" href="#collapseTC{$category->ID}" data-parent="#accordionMain">
 							<h4>{$category->Name}</h4>
 		                </a>
 						<a class="btn" style='margin-top:10px;' href="/category/{$category->ID}">»</a>
-						<a style='margin-top:10px;' class="accordion-toggle" data-toggle="collapse" data-parent="#accordionMain" href="#collapseTC{$category->ID}">{$category->Comment}</a>
+						<a style='margin-top:10px;' class="accordion-toggle nowrap" data-toggle="collapse" data-parent="#accordionMain" href="#collapseTC{$category->ID}"><small>{$category->Comment}</small></a>
 						</div>
-						<div class='span2' style='padding-right:20px; padding-top:5px; position: absolute;  right:15px; text-align:right;'>						
+						<div class='pull-right span3' style='padding-right:20px; padding-top:5px;  text-align:right;'>						
 							{$category->LastCommentHint}
 						</div>
 		              </div>	

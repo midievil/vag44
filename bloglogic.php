@@ -440,6 +440,8 @@
 				}
 				$descriptionRow = "<div class='row'>".getDateTimeAtText($this->Date) . ( $currentUser->IsLogged() ? " $commentLink$quoteLink" : "" ).	$editLink . "</div>";
 				
+				$rating = renderRatingForComment($this->Rating, $this->PostID, $this->ID, $this->UserID);
+				
 				$result = "
 					<div class='span10 comment row' style='$tabulation'>
 						<div class='well row'>
@@ -451,9 +453,9 @@
 								<a href='/user/1' rel='popover' data-content='".$commentUser->GetDescriptionForPopup()."' data-original-title='A Title' >
 								<strong>$commentUser->Name</strong></a>
 								$quotedcomment<br />
-								" . formatText($this->Text) . "
+								" . formatText($this->Text) . "								
 							</div>
-							
+							<div class='span1 pull-right'>$rating</div>
 						</div>
 						
 						$descriptionRow
@@ -527,8 +529,8 @@
 				if($lastPostID != -1)
 				{
 					$link = '
-					<div width="200px">
-						<a title="'.$lastPost->Title.'" class="lastposttitle" href="/post/' . $lastPost->ID . '?page=last">' . substr($lastPost->Title, 0, 50) . '</a>
+					<div style="width: 200px; overflow: hidden;  white-space: nowrap;">
+						<a title="'.$lastPost->Title.'" class="lastposttitle" href="/post/' . $lastPost->ID . '?page=last">' . $lastPost->Title . '</a>
 					</div>&nbsp;';
 				}
 			}
@@ -540,7 +542,7 @@
 					<div>
 					$link
 					" .getDateTimeAtText($date) . ", <a id='aTagCategory".rand(1, 1000)."User' $popupEvents>" . $user->Name . '</a><br />
-					<a class="comment" href="/post/' . $lastPost->ID . '?page=last"> '.$comment_last.'</a>'.$lastPost->RenderQuickPaging()."</div>
+					<a class="comment" href="/post/' . $lastPost->ID . '?page=last"> '.$comment_last.'</a><br />'.$lastPost->RenderQuickPaging()."</div>
 				</td>					
 				<td style='padding-left:5px'>" . $user->RenderUserPic($id, 'TagCategory'.rand(1, 1000), 30) . "</td></tr></table>";
 		}

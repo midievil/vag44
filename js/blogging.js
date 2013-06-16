@@ -109,7 +109,7 @@ function updateComment(commentID, postID)
 }
 
 
-var loadingTdText = '<div class="progress progress-striped active span10"><div class="bar" style="width: 100%;"></div></div>';
+var loadingTdText = '<div class="progress progress-striped active span2"><div class="bar" style="width: 100%;"></div></div>';
 var addedComments = 0;
 function writeComment(postID)
 {
