@@ -41,11 +41,29 @@
 	
 	templater::assign('includeMainMenu', true);
 	
-	global $breadCrumbs;
+	
+	
 	$user = new User(mLogic::$urlVariables['userid']);	
 	templater::assign('user', $user);
 	
-	templater::assign('registerDate', getDateAtText($user->RegisterDate));
+	
+	global $breadCrumbs;
+	$breadCrumbs[] = new BreadCrumb("Люди", "/users");
+	$breadCrumbs[] = new BreadCrumb($user->Name);
+	templater::assign('breadCrumbs', $breadCrumbs);
+	
+
+	$reg = getDateAtText($user->RegisterDate); 
+	if($reg)
+	{
+		$comment .= "С нами с $reg.<br />";		
+	}
+	
+	$comment .= "Группа: $user->GroupName";
+	
+	templater::assign('comment', $comment);
+		
+	
 	templater::assign('phone', formatPhone($user->Phone));
 	
 	$social = explode ("\n", trim($user->Social));
@@ -76,20 +94,20 @@
 	$colIndex = 0;
 	foreach ($rating as $ratingRow)
 	{
-		if($colIndex == 0)
-		{
-			$ratingText .= "<tr>";
-		}
-		$ratingText .= "<td><a href=/user/" . $ratingRow["FromUserID"] . ">".$ratingRow["FromUserName"]."</a> (+".$ratingRow["Value"].")&nbsp;</td>";
+		$ratingText .= "<div class=\"span2 pull-left nowrap\"><a href=/user/" . $ratingRow["FromUserID"] . ">".$ratingRow["FromUserName"]."</a> (+".$ratingRow["Value"].")&nbsp;</div>";
 	
 		$colIndex++;
 		if($colIndex == $columnsCount)
 		{
 			$colIndex = 0;
-			$ratingText .= "</tr>";
+			$ratingText .= "<br />";
 		}
 	}
 	templater::assign('ratingList', renderPopup($ratingText));
+
+	$rating = "<a class='btn popover-bottom' rel='popover' data-toggle='popover' title='' data-content='$ratingText' data-original-title='Рейтинг'>$user->Rating</a>";
+	templater::assign('rating', $rating);
+	
 	
 	templater::assign('blogs', $user->Blogs());
 	

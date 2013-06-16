@@ -306,7 +306,6 @@
 			try
 			{			
 				dbgTime("c1");
-				$_SESSION["lastShownCommentID"] = -1;								
 				
 				$postid = $_REQUEST["postid"];			
 				$listtype = $_REQUEST["listtype"];
@@ -356,7 +355,7 @@
 				}
 				else
 				{
-					echo "<div class='well row'>комментариев нет</div>";
+					echo "<div class='well comment row nocomments'>комментариев нет</div>";
 				}								
 			}
 			catch (Exception $e)

@@ -15,7 +15,22 @@
 		var page = {if $smarty.get.page=='last'}'last'{else}{$commentsPaging->CurrentPage}{/if};
 </script>
 
-		<div class='row span10'>
+	<div id='enlargePicModal' class="modal hide fade">
+		<div class="modal-header">
+		    &nbsp;<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>			    
+  		</div>
+	  	<div class="modal-body">			  
+		  	<div id="myCarouselEnlarge" class="carousel slide">
+                <div class="carousel-inner">
+				  <div class="item active">
+                    <img src="http://vag44.net/img/postpics/711_1.jpg" alt="" class='picture' >						                    
+                  </div>			           	  	
+                </div>			                
+			</div>
+		</div>			  
+	</div>
+
+	<div class='row span10'>
 			<div id='divPost{$post->ID}' style='padding-top:30px'>
 								
 					{$post->Text}
@@ -58,13 +73,20 @@
 							<li><a><Пост закрыт></a></li>
 							{else}
 								<li><a class='hand' onclick='AnswerPost();'>Ответить</a></li>
-				                <li><a class='hand' onmouseover='copyToQuote("{$post->User->Name}", "Post", {$post->ID})' onclick='quotePostSelection("{$post->User->Name}", "Post", {$post->ID}); return false;'>Цитата</a></li>
-								{if $post->User->ID == $currentUser->ID || $currentUser->IsAdmin()}
-									<li>
-										<a href='/editpost/{$post->ID}'>Редактировать</a>
-									</li>
+								<li><a class='hand' onmouseover='copyToQuote("{$post->User->Name}", "Post", {$post->ID})' onclick='quotePostSelection("{$post->User->Name}", "Post", {$post->ID}); return false;'>Цитата</a></li>								
+								{if $currentUser->IsAdmin()}								
+								<li>
+									<a class='hand' onclick='closePost({$post->ID})'>Закрыть</a>
+								</li>
 								{/if}
 							{/if}
+							
+							{if (!$post->Closed && $post->User->ID == $currentUser->ID) || $currentUser->IsAdmin()}
+								<li>
+									<a href='/editpost/{$post->ID}'>Редактировать</a>
+								</li>									
+							{/if}
+							
 			              </ul>						  
 						  <ul class="nav pull-right">
 							<li><a>Комментарии:</a></li>
@@ -80,7 +102,7 @@
 					
 				{/if}
 			  
-			<div class='answer row span15' id='trCommentForPost'>
+			<div class='answer row span10' id='trCommentForPost'>
 				<h4>Ваш ответ на пост:</h4>
 				<textarea id='tbCommentForPost' style='width:90%;'></textarea> <br/>
 				<button type="button" class="btn btn-primary" onclick='writeComment({$post->ID});'>Написать</button>
@@ -89,20 +111,20 @@
 			</div>			
 		</div>
 		
-		<div class='span15 paging row {if $currentUser->ListType == "tree"} hidden{/if}'>
+		<div class='span10 paging row {if $currentUser->ListType == "tree"} hidden{/if}'>
 			{include file="controls/paging.html" paging=$commentsPaging onclick='ChangePage'}			
 		</div>
-		<div color='white'>&nbsp;</div>
-		<div class='commentlist row span15' id='trComments'>
+		<div color='white' class='row'>&nbsp;</div>
+		<div class='commentlist row span10' id='trComments'>
 		
 		</div>
-		<div color='white'>&nbsp;</div>
+		<div color='white' class='row'>&nbsp;</div>
 		
-		<div class='span15 paging row {if $currentUser->ListType == "tree"} hidden{/if}'>
+		<div class='span10 paging row {if $currentUser->ListType == "tree"} hidden{/if}'>
 			{include file="controls/paging.html" paging=$commentsPaging onclick='ChangePage'}
 		</div>
 		
-		<div color='white'>&nbsp;</div>
+		<div color='white' class='row'>&nbsp;</div>
 		
 		{if ((!$post->Closed && $currentUser->IsLogged()) || $currentUser->IsAdmin())}		
 		<br />

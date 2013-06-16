@@ -1,4 +1,3 @@
-
 <script>
 
 	var page = {$commentsPaging->CurrentPage};
@@ -32,6 +31,18 @@
 		$("div.pagination ul li").removeClass('active');
 		$("div.pagination ul li[page='"+page+"']").addClass('active');
 	}
-		
+	
+	function slideShow(picID)
+	{	
+		$('#slideShowModal div.item').removeClass('active');
+		$('#slideShowModal div.pic'+picID).addClass('active');
+		$('#slideShowModal').modal();
+	}	
+	
+	function EnlargePic(picUrl)
+	{	
+		$('#enlargePicModal img.picture').attr('src', picUrl);
+		$('#enlargePicModal').modal();
+	}
 </script>
 {/literal}

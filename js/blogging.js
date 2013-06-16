@@ -150,6 +150,7 @@ function writeComment(postID)
 							 
 							$("div.commentlist div.comment:last").after(parts[0]);
 							$("div.commentlist div.progress").hide();
+							$("div.commentlist div.nocomments").hide();
 							commentLock = "";
 							//showComments(postID);							
 							//showBlog(blogid);							
@@ -206,6 +207,8 @@ function writeCommentForComment(commentID, postID)
 						{		
 							 
 							$("div.commentlist div.comment:last").after(parts[0]);
+							$("div.commentlist div.progress").hide();
+							$("div.commentlist div.nocomments").hide();
 							//$("#trNewComment"+addedComments).hide();
 							//$("#trComment" + commentID).addClass("commentrelated");
 							commentLock = "";

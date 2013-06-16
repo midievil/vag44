@@ -6,117 +6,133 @@
 
 {include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment}
 
-<table width='100%'>
-	<tr>
-		<td>
-		
-			Категория: 
-			<select id='ddlTagCategory'>
+<form class='form-horizontal'>
+
+	<div class="control-group">
+	    <label class="control-label">Категория</label>
+	    <div class="controls">
+	      <select id='ddlTagCategory'>
 			{foreach from=$tagCategories item=tagCategory}
 				<option value='{$tagCategory.ID}' {if $tagCategory.ID == $post->ParentID}selected{/if}>
 					{if $tagCategory.ParentName != $tagCategory.Name} {$tagCategory.ParentName} - {/if}{$tagCategory.Name}
 				</option>
 			{/foreach}
 			</select>
-			<br />
-			
+	    </div>
+	</div>
+		
 			{if $blogs|@count}
 			
-			Блог: 
-			<select id='ddlBlog'>
-			{foreach from=$blogs item=blog}
-				<option value='{$blog.ID}' {if $blog.ID == $post->BlogID}selected{/if}>
-					{$blog.Name}				
-				</option>
-			{/foreach}
-			</select>
-			<br />
+			<div class="control-group">
+			    <label class="control-label">Блог</label>
+			    <div class="controls">
+			      <select id='ddlBlog'>
+					{foreach from=$blogs item=blog}
+						<option value='{$blog.ID}' {if $blog.ID == $post->BlogID}selected{/if}>
+							{$blog.Name}				
+						</option>
+					{/foreach}
+					</select>
+			    </div>
+			</div>
 			
-			Заголовок<br />
-			<input type='text' size='100' id='tbPostTitle' value='{$post->Title}' /><br />
-			<br />
-			<textarea id='tbPostText' class='editpost ck' style='width:100%; height: 300px'>{$post->Text}</textarea>			
+			<div class="control-group">
+			    <label class="control-label">Заголовок</label>
+			    <div class="controls">
+			      <input type='text' size='100' id='tbPostTitle' value='{$post->Title}' />
+			    </div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label">Текст пост</label>
+			    <div class="controls">
+			      <textarea id='tbPostText' class='editpost ck' style='width:100%; height: 300px'>{$post->Text}</textarea>
+			    </div>
+			</div>
+			
+						
 			{else}
 				У вас нет блогов. Вы можете создать их <a href='/blogs'>здесь</a>, это легко.
 			{/if}
 			
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+			<div class="control-group">
+				<label class="control-label">Файлы и картинки</label>
+			    <div class="controls">
 
-<div class="TabListContainer sitewidth">
-	<span class="tab">&nbsp;&nbsp;</span>
-	<span class="tab pics selected"><a class="hand" onclick="switchEditPost('pics');">Картинки</a></span>
-	<span class="tab gallery"><a class="hand" onclick="switchEditPost('gallery');">Галерея</a></span>
-	<span class="tab files"><a class="hand" onclick="switchEditPost('files');">Файлы</a></span>
-	<span class="tab" width="100%">&nbsp;</span>	
-</div>
-		
-		
-<div class="TabContentContainer sitewidth">
-<table style='padding:20px;' >	
-	<tr>
-		<td id='tdeditpostpics' class='editpost pics selected' style='height:200px;' valign='top'>
-		
-			<a class='comment'>
-				Чтобы загрузить картинку, выберите её и нажмите &laquo;загрузить&raquo;".<br/>
-				Чтобы вставить картинку в текст, установите курсор в нужное место текста и щелкните по картинке.
-			</a>
-			<table id='tblPostPictures'>
-				<tr>
-					<td></td>
-					{foreach from=$pics item=pic name=picscycle}
-						<td><img style='max-width:100px; max-height:100px;' src='{$pic}' onclick='insertPic("{$smarty.foreach.picscycle.iteration}")' /><br />{$smarty.foreach.picscycle.iteration}</td>
-					{/foreach}
-				</tr>
-			</table>
-			Добавить изображение: <br /><input id="imageToUpload" type="file" name="imageToUpload" class="input">
-			<button class="button" id="buttonUpload" onclick="return ajaxImageUpload();">Загрузить</button>
-		</td>
-		
-		<td id='tdeditpostgallery' class='editpost gallery hidden' style='height:200px;' valign='top'>
-			Прикрепить галерею: 
-			<select id='ddlGallery'>
-				<option value='-1'></option>
-				{foreach from=$galleries item=gal name=galcycle}
-					<option value='{$gal.ID}' {if $post->GalleryID == $gal.ID}selected{/if}>{$gal.Name}</option>";
-				{/foreach}
-			</select>
-			<br />
-			<a class='comment'>Вы можете прикрепить галерею к посту. Тогда изображения из галереи будут отображаться рядом с постом.</a>
-		</td>
-		
-		
-		<td  id='tdeditpostfiles' class='editpost files hidden' style='height:200px;' valign='top'>
-			<a class='comment'>
-				Чтобы загрузить файл, выберите его и нажмите &laquo;загрузить&raquo;".<br/>
-				Чтобы вставить файл в текст, установите курсор в нужное место текста и щелкните по файлу.
-			</a>
-			<table id='tblPostFiles'>
-				<tr>
-					<td></td>
-					{foreach from=$files item=file}
-					<td align='center'>
-						<a class='comment hand' onclick='insertFile("{$file}")'>
-						<img width='50px' src='/img/file.jpg'/><br />
-						{$file}
-						</a>
-					</td>
-					{/foreach}
-					</tr>
-			</table>
-			Добавить файл: <br /><input id="fileToUpload" type="file" name="fileToUpload" class="input">
-			<button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">Загрузить</button>
-		</td>
-	</tr>
-</table>
-</div>
+					<ul id="myTab" class="nav nav-tabs">
+					  <li class="active"><a href="#pics" data-toggle="tab">Картинки</a></li>
+					  <li><a href="#gallery" data-toggle="tab">Галерея</a></li>
+					  <li><a href="#files" data-toggle="tab">Файлы</a></li>
+					</ul>
+					
+					<div id="myTabContent" class="tab-content">
+					  <div class="tab-pane fade in active" id="pics">	
+						<table id='tblPostPictures'>
+							<tr>
+								<td></td>
+								{foreach from=$pics item=pic name=picscycle}
+									<td><img style='max-width:100px; max-height:100px;' src='{$pic}' onclick='insertPic("{$smarty.foreach.picscycle.iteration}")' /><br />{$smarty.foreach.picscycle.iteration}</td>
+								{/foreach}
+							</tr>
+						</table>
+						Добавить изображение: <br /><input id="imageToUpload" type="file" name="imageToUpload" class="input">
+						<button class="button" id="buttonUpload" onclick="return ajaxImageUpload();">Загрузить</button>
+						
+						<br />
+						<small>
+							Чтобы загрузить картинку, выберите её и нажмите &laquo;загрузить&raquo;.<br/>
+							Чтобы вставить картинку в текст, установите курсор в нужное место текста и щелкните по картинке.
+						</small>
+					  </div>
+					  
+					  <div class="tab-pane fade" id="gallery">
+					    Прикрепить галерею: 
+						<select id='ddlGallery'>
+							<option value='-1'></option>
+							{foreach from=$galleries item=gal name=galcycle}
+								<option value='{$gal.ID}' {if $post->GalleryID == $gal.ID}selected{/if}>{$gal.Name}</option>
+							{/foreach}
+						</select>
+						<br />
+						<small>Вы можете прикрепить галерею к посту. Тогда изображения из галереи будут отображаться рядом с постом.</small>
+					  </div>
+					  
+					  <div class="tab-pane fade" id="files">
+					    <small>
+							Чтобы загрузить файл, выберите его и нажмите &laquo;загрузить&raquo;".<br/>
+							Чтобы вставить файл в текст, установите курсор в нужное место текста и щелкните по файлу.
+						</small>
+						<table id='tblPostFiles'>
+							<tr>
+								<td></td>
+								{foreach from=$files item=file}
+								<td align='center'>
+									<a class='comment hand' onclick='insertFile("{$file}")'>
+									<img width='50px' src='/img/file.jpg'/><br />
+									{$file}
+									</a>
+								</td>
+								{/foreach}
+								</tr>
+						</table>
+						Добавить файл: <br /><input id="fileToUpload" type="file" name="fileToUpload" class="input">
+						<button class="button" id="buttonUpload" onclick="return ajaxFileUpload();">Загрузить</button>
+					  </div>
+					</div>			      
 
-<a class='writecommentbutton hand' onclick='savePost($("#ddlBlog").val(), $("#ddlTagCategory").val(), {if $post->ID!=''}{$post->ID}{else}null{/if});'>Сохранить</a>&nbsp;
-<a href='/category/{$post->ParentID}'>Отмена</a>
+					<hr>
+					
+						
+					<a class='btn btn-primary' onclick='savePost($("#ddlBlog").val(), $("#ddlTagCategory").val(), {if $post->ID!=''}{$post->ID}{else}null{/if});'>Сохранить</a>&nbsp;
+					<a class='btn' href='/category/{$post->ParentID}'>Отмена</a>
+
+			    </div>
+			</div>
+</form>
+
+
+
+
 
 {literal}
 <script>

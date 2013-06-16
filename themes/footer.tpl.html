@@ -2,9 +2,14 @@
 				</div> 
 		
 		<hr>
-
-      <footer class='pull-down'>
-		<div class='container'>
+		
+		</div>
+	</div>
+	
+	<div class='row-fluid'>
+		<div class='span3 pull-left'></div>
+		<div class='span9' style="padding-left: 30px; padding-right: 30px;">
+      <footer>
 			{if $currentUser->IsLogged()}
 					<div style='padding-top:42px;' align='left'>
 							<b>Сейчас на сайте:</b>
@@ -40,13 +45,11 @@
 				<a class='pull-right' onclick='goTop();' class='hand'>Наверх</a>
 								{if $currentAction != 'mainpage'}
 									&nbsp;·&nbsp<a href='/'>На главную</a>
-								{/if}
-		</div>
+								{/if}		
       </footer>
+      </div>
+      </div>
 		
-				
-			</div>
-		</div>
 		</div><!--/span-->
 	</body>
 </html>	
@@ -55,7 +58,10 @@
 <script>
 $('.list').list();
 $(".hidden").hide();
-$('[rel="popover"]').popover({'placement':'top'});
+
+$('.popover-bottom').popover({'placement':'bottom'});
+$('[rel="popover"]').filter('[class!="popover-bottom"]').popover({'placement':'top'});
+
 
 </script>
 {/literal}

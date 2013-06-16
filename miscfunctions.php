@@ -79,7 +79,7 @@
 	function pasteUploadedImage($text, $postid)
 	{
 		$text = preg_replace("/\[img](\d+)\[\/img]/",
-                     "<a class='hand' onclick='galleryItem=\${1}; ShowImageGallery(\"\${1}\", true);'>
+                     "<a class='hand' onclick='slideShow(\"\${1}\");'>
 						<img class='postpic' src=\"/img/postpics/$postid"."_\${1}.jpg\" /></a></br>",
 					 $text);		
 		return $text;
@@ -218,14 +218,14 @@
 				$newUrl = createThumbnailsForGalleryPics($url);
 				if($newUrl)
 				{
-					$text = preg_replace('/[^"]'.str_replace("/", "\/", $url).'/i', "<br /><img class='hand' onclick='ShowImageGallery(\"/img/gallery/$newUrl\", false);' src='/img/gallery/previews/$newUrl' /><br /><a class='comment'>Щелкните для увеличения</a>", $text);
+					$text = preg_replace('/[^"]'.str_replace("/", "\/", $url).'/i', "<br /><img class='hand' onclick='EnlargePic(\"/img/gallery/$newUrl\", false);' src='/img/gallery/previews/$newUrl' /><br /><a class='comment'>Щелкните для увеличения</a>", $text);
 				}
 				else
 				{
 					$newUrl = createThumbnailsForForeignPics($url);
 					if($newUrl && file_exists("img/foreign/$newUrl"))
 					{
-						$text = preg_replace('/[^"]'.str_replace("/", "\/", $url).'/i', "<br /><img class='hand' onclick='ShowImageGallery(\"/img/foreign/$newUrl\", false);' src='/img/foreign/previews/$newUrl' /><br /><a class='comment'>Щелкните для увеличения</a>", $text);
+						$text = preg_replace('/[^"]'.str_replace("/", "\/", $url).'/i', "<br /><img class='hand' onclick='EnlargePic(\"/img/foreign/$newUrl\", false);' src='/img/foreign/previews/$newUrl' /><br /><a class='comment'>Щелкните для увеличения</a>", $text);
 					}
 					else
 					{
@@ -238,7 +238,7 @@
 		else
 		{
 			$text = ereg_replace("(https?|ftp|file)://[^<>[:space:]]+[[:alnum:]/](.jpg|.jpeg|.gif)",
-	                     "<br /><a onclick='ShowImageGallery(\"\\0\", false);'><img style='max-width:700px; max-height:400px; cursor:pointer; cursor:hand' src=\"\\0\" /></a><br />", $text);
+	                     "<br /><a onclick='EnlargePic(\"\\0\", false);'><img style='max-width:700px; max-height:400px; cursor:pointer; cursor:hand' src=\"\\0\" /></a><br />", $text);
 		}
 		return $text;
 		
@@ -629,6 +629,7 @@
 		}
 		else
 		{
+			$value = "0";
 			$popupText = "Рейтинг этого поста";
 		}
 		

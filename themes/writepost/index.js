@@ -131,16 +131,6 @@
 	function insertFile(picName)
 	{
 		$('#tbPostText').ckeditorGet().insertText("[file]" + getFileName(picName) + "[/file]");
-	}
-	
-	var mode;
-	function switchEditPost(tab)
-	{
-		mode = tab;
-		$("td.editpost").hide();
-		$("span.tab").removeClass("selected");
-		$("span." + tab).addClass("selected");
-		$("#tdeditpost" + tab).show();
-	}
+	}	
 	</script>
 {/literal}

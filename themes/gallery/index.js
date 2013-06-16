@@ -47,6 +47,7 @@ function editComment(id)
 	cancelEditComment();
 	$("#aComment"+id).hide();
 	$("#tbComment"+id).show();
+	$("#tbComment"+id).focus();
 	$(".edit"+id).show();
 }
 
@@ -69,6 +70,10 @@ function updateComment(id, text, type)
 						$("input.gallerycomment").hide();
 						$("#aComment"+id).text(text);
 					}
+				},
+				error: function ()
+				{
+					
 				}
 			});
 }
@@ -113,6 +118,15 @@ function addGallery()
 					}
 				}
 			});
+}
+
+function slideShow(picID)
+{	
+	$('#slideShowModal div.item').removeClass('active');
+	$('ol.carousel-indicators li').removeClass('active');
+	$('#slideShowModal div.pic'+picID).addClass('active');
+	$('ol.carousel-indicators li[data-slide-to="'+picID+'"]').addClass('active');
+	$('#slideShowModal').modal();
 }
 
 function editGallery(id)

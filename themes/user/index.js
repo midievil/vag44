@@ -2,14 +2,15 @@
 <script>
 	function sendMessage(targetUserID)
 	{			
+		$(".modal-footer .btn-primary").addClass('disabled');
 		$.ajax({	type: "POST",	
 					url:"/response/messagingresponse.php",
 					data: "action=sendprivate&norender=1&&userid="+targetUserID+"&headertext="+$("#tbPrivateMessageHeader").val()+"&messagetext="+$("#tbPrivateMessageText").val(),
 					success: function(result) {						
 						if(trim(result)=='ok')
 						{						
-							cancelMessage();
-							alert('Ваше сообщение отправлено');
+							$('#privateMessage').modal('hide')
+							$(".modal-footer .btn-primary").removeClass('disabled');
 						}
 						else if(trim(result)=='noheader')
 						{
@@ -27,11 +28,5 @@
 				});
 	}
 
-	function cancelMessage()
-	{
-		$("#divPrivateMessage").hide();
-		$("#tbPrivateMessageHeader").val('');
-		$("#tbPrivateMessageText").val('');
-	}
 </script>
 {/literal}

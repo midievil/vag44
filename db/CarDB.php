@@ -74,7 +74,7 @@
 						E.Size			EngineSize,
 						E.HP			EngineHP,
 						E.Fuel			EngineFuel,
-						#P.ID			PostID,
+						P.ID			PostID,
 						P.Title			PostTitle,
 						U.Name			UserName,
 						''				UserTitle

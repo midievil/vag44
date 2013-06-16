@@ -392,14 +392,10 @@
 			{
 				//if($listtype=='list')
 				{				
-					if($_SESSION["lastShownCommentID"] != $this->CommentID)
-					{
-						$parentComment = getCommentByID($this->CommentID);
-						$parentComment = preg_replace("/\[quote=(.+)](.*)\[\/quote]/", "", $parentComment);						
+					$parentComment = getCommentByID($this->CommentID);
+					$parentComment = preg_replace("/\[quote=(.+)](.*)\[\/quote]/", "", $parentComment);						
 //						$quotedcomment = "<span class='quote' onclick='highlightParentComment($this->CommentID);' href='#comment$this->CommentID'>".User::UserIcon()."<b>".($parentComment["UserName"])."</b>: ".($parentComment["Text"])."</span><br />";
-						$quotedcomment = " » <i class='icon-user icon-black'></i> <a href='/user/1' rel='popover' data-content='<blockquote>".$parentComment["Text"]."</blockquote>' data-original-title='Ответ на комментарий ".$parentComment["UserName"]."' ><strong>".$parentComment["UserName"]."</strong></a>";
-					}
-					$_SESSION["lastShownCommentID"] = $this->ID;
+					$quotedcomment = " » <i class='icon-user icon-black'></i> <a href='/user/".$parentComment["UserID"]."' rel='popover' data-content='<blockquote>".$parentComment["Text"]."</blockquote>' data-original-title='Ответ на комментарий ".$parentComment["UserName"]."' ><strong>".$parentComment["UserName"]."</strong></a>";		
 				}
 				
 				$class = "Comment$this->CommentID";				
@@ -450,7 +446,7 @@
 							</div>				
 							<div class='span8'>
 								<i class='icon-user icon-black'></i> 
-								<a href='/user/1' rel='popover' data-content='".$commentUser->GetDescriptionForPopup()."' data-original-title='A Title' >
+								<a href='/user/".$commentUser->ID."' rel='popover' data-content='".$commentUser->GetDescriptionForPopup()."' data-original-title='".$commentUser->Name."' >
 								<strong>$commentUser->Name</strong></a>
 								$quotedcomment<br />
 								" . formatText($this->Text) . "								

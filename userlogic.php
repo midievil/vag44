@@ -218,7 +218,7 @@
 			{
 				$enlarge = "";
 			}
-			return "<img class='userphoto' id='imgUserPic$type$id' src='$imgname' style='max-width:$size"."px; width:$size"."px' class='avatar' onmouseover='$enlarge' />";
+			return "<img class='img-polaroid' id='imgUserPic$type$id' src='$imgname' style='max-width:$size"."px; width:$size"."px' class='avatar' onmouseover='$enlarge' />";
 		}
 	}
 
