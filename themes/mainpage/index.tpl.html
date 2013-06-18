@@ -24,13 +24,9 @@
 				        </div>
 		            </div>
 		            <div class="tab-pane fade {if $active == 'feed'}active in{/if}" id="feed">
-						<div class='span8'>
+						<div class='span8' id='divNotifications'>
 						{foreach from=$user_notifications item=notification}
-							<div class="alert alert-{$notification->Type()}">
-								<a class="close hand" data-dismiss="alert" onclick='DeleteNotification({$notification->ID}, {$currentUser->ID})'>&times;</a>
-								{$notification->DateText()}<br /><br />
-								{$notification->Text}
-							</div>
+							{include file="controls/notification.html" notification=$notification}
 						{foreachelse}
 							<p>Пока здесь ничего нет, но скоро обязательно что-то появится. Обещаем.</p>
 						{/foreach}

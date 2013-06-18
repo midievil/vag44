@@ -28,7 +28,9 @@
 						data:"action=delete"+
 							"&id="+id+"&userid="+userid,
 							success:	function(result){
-							
+								var oldCount = $("#aNotificationsCount").text() * 1;
+								oldCount -= 1;
+								$("#aNotificationsCount").text(oldCount);
 						}
 					});
 	}

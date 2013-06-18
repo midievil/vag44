@@ -1,0 +1,5 @@
+<div class="alert alert-{$notification->Type()}">
+	<a class="close hand" data-dismiss="alert" onclick='DeleteNotification({$notification->ID}, {$currentUser->ID})'>&times;</a>
+	{$notification->DateText()}<br /><br />
+	{$notification->Text}
+</div>
