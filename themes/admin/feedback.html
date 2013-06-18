@@ -1,0 +1,13 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="controls/pagetitle.html" pageTitle='Нам фидбек' pageComment='' }
+
+		<div class="alert alert-error">
+		  <button type="button" class="close" data-dismiss="alert" onclick='Redirect("admin/feedback/{$feedback.ID}?todo=read")'>&times;</button>
+		  	<strong>Заголовок:</strong> {$feedback.Header} <br /><br />
+			<strong>Суть:</strong> <br />{$feedback.Text}
+		</div>
+
+{include file="footer.tpl.html"}

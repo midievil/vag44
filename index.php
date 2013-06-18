@@ -41,7 +41,8 @@ try
 	require_once "messaginglogic.php";
 	require_once "userlogic.php";
 	require_once "carlogic.php";
-	require_once "db/GalleryDB.php";	
+	require_once "db/GalleryDB.php";
+	require_once "db/AdminDB.php";
 	require_once "miscfunctions.php";	
 	require_once "tools/simpleimage.php";
 	require_once "controls.php";
@@ -85,7 +86,7 @@ try
 	
 	if($currentUser->IsAdmin())
 	{
-		$feedbacks = getFeedBacks();
+		$feedbacks = AdminDB::getFeedBacks();
 		templater::assign('feedbacks', $feedbacks);
 		
 		$unauthorizedUsers = fDB::fqueryAll("select * from Users where GroupID = 3 AND Visible = 1");

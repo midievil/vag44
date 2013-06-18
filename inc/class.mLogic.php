@@ -54,8 +54,12 @@ class mLogic {
 		),
 		'tab' => array (
 			'change' => 'change', 
-			'changeheader' => 'changeheader', 
+			'changeheader' => 'changeheader',
+			'feedback' => 'feedback'
 		),
+		'admin' => array (
+			'feedback' => 'feedback'			
+		)
 	);
 
 	public static $notfoundAction = '404';
@@ -229,6 +233,10 @@ class mLogic {
 			
 			elseif ( $act == 'userblogs' ){ /* category id */
 				$ret['userid'] = $ar[$pos+1];
+			}
+			
+			elseif ( $act == 'feedback' ){ /* category id */
+				$ret['feedbackid'] = $ar[$pos+1];
 			}
 		}
 

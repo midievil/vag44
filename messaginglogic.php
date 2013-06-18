@@ -84,36 +84,6 @@
 		}
 	}
 
-	function getFeedBacks()
-	{
-		$query = "
-				select	F.*,
-						U.Name UserName
-				from	FeedBacks F
-				left join
-						Users U on U.ID = F.UserID
-				where	`Read` = 0";
-		return fDB::fqueryAll($query);			
-	}
-	
-	function getFeedBackByID($id)
-	{
-		$query = "
-				update	FeedBacks
-				set		`Read` = 1
-				where	ID = $id";
-		fDB::fexec($query);	
-		$query = "
-				select	F.*,
-						U.Name UserName
-				from	FeedBacks F
-				left join
-						Users U on U.ID = F.UserID
-				where	F.ID = $id";
-		
-		return fDB::fquery($query);
-	}
-	
 	function getTips()
 	{
 		$query = "select * from Tips";
