@@ -42,7 +42,7 @@
 			return false;
 		}
 		
-		public static function getUserList($page)
+		public static function getUserList($page = 0)
 		{
 			if($page)
 			{

@@ -1,5 +1,6 @@
 <?PHP
 
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	error_reporting(0);
 	
 	header('Content-type: text/html; charset=utf-8');	
@@ -10,14 +11,16 @@
 		return;
 	}
 	
-	require_once "../constants.php";
-	require_once "../db.php";
-	require_once '../inc/class.db.php';
-	require_once '../inc/class.fdb.php';	
+	chdir("..");
+	
+	require_once "constants.php";
+	require_once "db.php";
+	require_once 'inc/class.db.php';
+	require_once 'inc/class.fdb.php';	
 	connectToDB();	
-	require_once "../miscfunctions.php";
-	require_once "../userlogic.php";
-	require_once "../carlogic.php";
+	require_once "miscfunctions.php";
+	require_once "userlogic.php";
+	require_once "carlogic.php";
 	
 	
 	switch($_POST["action"]){
@@ -394,7 +397,7 @@
 			return;
 			
 		case "markonline":
-			$userid = $_POST["userid"];
+			$userid = $_REQUEST["userid"];
 			$date = getCurrentDateText();
 			
 			$query = "update Users set LastVisit = '".getCurrentDateText()."' where ID = $userid";			

@@ -1,9 +1,10 @@
 <?php
-	templater::assign('includeMainMenu', true);
-	
-	$tagCategoryRows = getTagCategoriesForMainPage($currentUser->CategoriesOrder);
-	
 	$categories = array();
+	templater::assign('includeMainMenu', true);
+	$categories = array();
+	
+	$tagCategoryRows = getTagCategoriesForMainPage($currentUser->CategoriesOrder);	
+	
 	foreach ($tagCategoryRows as $row)
 	{
 		$category = new TagCategory($row["ID"]);
@@ -12,7 +13,14 @@
 				
 		$categories[] = $category;
 	}
+	
 	templater::assign('categories', $categories);	
+	
+	if($currentUser->IsLogged())
+	{
+		templater::assign('user_notifications', $currentUser->Notifications());
+	}
+	
 	templater::display();
 	
 ?>

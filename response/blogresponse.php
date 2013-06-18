@@ -1,5 +1,7 @@
 <?PHP
-	error_reporting(0);
+
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+//	error_reporting(0);
 		
 	session_start();
 	header('Content-type: text/html; charset=utf-8');
@@ -9,12 +11,15 @@
 		return;
 	}
 	
-	chdir("..");		
+	chdir("..");
+	
+	require_once "i18n/ru.php";
 	
 	require_once "constants.php";	
 	require_once "miscfunctions.php";	
 	require_once "db.php";
 	connectToDB();		
+	require_once "db/NotificationsDB.php";
 	require_once "carlogic.php";
 	require_once "userlogic.php";
 	require_once "bloglogic.php";
@@ -178,8 +183,8 @@
 			
 			if($currentUser->IsLogged())
 			{
-				$postid = $_POST["postid"];
-				$text = replaceSymbols(unescape($_POST["text"]));			
+				$postid = $_REQUEST["postid"];
+				$text = replaceSymbols(unescape($_REQUEST["text"]));			
 				$date = getCurrentDateText();			
 				
 				$query = "
@@ -219,8 +224,16 @@
 						}
 						
 						$comment = new Comment($id);						
-						echo $comment->Render();												
+						echo $comment->Render();
 						echo '|#lstcmnt#|'.$comment->ID;
+						
+						
+						$post = new Post($postid);
+						if($currentUser->ID != $post->UserID)
+						{
+							$notification = sprintf($i18n['notification_newcommentforpost'], $currentUser->ID, $currentUser->Name, $post->Title, $post->ID);
+							NotificationsDB::addNotification($post->UserID, $notification, 3, $date);						
+						}
 						
 						return;
 					}
@@ -241,10 +254,10 @@
 		case "writecommentforcomment":
 			$currentUser = User::CurrentUser();
 		
-			$commentid = $_POST["commentid"];
-			$postid = $_POST["postid"];
-			$parentlevel = $_POST["parentlevel"];
-			$text = replaceSymbols(unescape($_POST["text"]));
+			$commentid = $_REQUEST["commentid"];
+			$postid = $_REQUEST["postid"];
+			$parentlevel = $_REQUEST["parentlevel"];
+			$text = replaceSymbols(unescape($_REQUEST["text"]));
 			$date = getCurrentDateText();
 						
 			$query = "
@@ -292,6 +305,23 @@
 					$comment->Level = $parentlevel+1;					
 					echo $comment->Render();
 					echo '|#lstcmnt#|'.$comment->ID;
+					
+					
+					$post = new Post($postid);
+					if($currentUser->ID != $post->UserID)
+					{
+						//	For beginning, we won't show this to post owner as this comment is written not directly to the post but to another comment
+						//$notification = sprintf($i18n['notification_newcommentforpost'], $currentUser->ID, $currentUser->Name, $post->Title, $post->ID);
+						//NotificationsDB::addNotification($post->UserID, $notification, 3, $date);																		
+					}
+					
+					$comment = new Comment($commentid);
+					if($currentUser->ID != $comment->UserID)
+					{
+						$notification = sprintf($i18n['notification_newcommentforcomment'], $currentUser->ID, $currentUser->Name, $comment->RenderSimple(), $post->Title, $post->ID);
+						NotificationsDB::addNotification($comment->UserID, $notification, 3, $date);	
+					}
+					
 					return;
 				}
 			}

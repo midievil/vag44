@@ -1,6 +1,7 @@
 <?PHP
 
 	require_once "db/UserDB.php";
+	require_once "inc/class.mNotification.php";
 
 	class User
 	{
@@ -33,7 +34,7 @@
 		public $Rating = 0;
 		public $Gender = '';
 		
-		public function __construct($id) {
+		public function __construct($id = null) {
 			if($id)
 			{
 				$this->ID = $id;
@@ -168,7 +169,21 @@
 			return $this->ratingEntries;
 		}
 		
-		
+		private $notifications = null;
+		public function Notifications()
+		{
+			if($this->notifications == null)
+			{
+				$notificationRows = NotificationsDB::getNotificationsByUserID($this->ID);				
+				foreach($notificationRows as $notificationRow)
+				{
+					$notification = new Notification();
+					$notification->MakeFromRow($notificationRow);
+					$this->notifications[] = $notification;
+				}
+			}
+			return $this->notifications;
+		}
 		
 		/*
 			Вспомогательные методы

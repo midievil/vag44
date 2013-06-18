@@ -8,7 +8,7 @@
 	{
 		public $ID;
 		
-		public function __construct($id) 
+		public function __construct($id = null) 
 		{
 			if($id)
 			{

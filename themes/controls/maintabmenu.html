@@ -1,6 +1,10 @@
 			<ul id="mainTabMenu" class="nav nav-pills">
 					<li {if $active=='home' || $active==null}class="active"{/if}><a href="#home" data-toggle="tab" {if $active!='home' && $active!=null}onclick="Redirect('');"{/if}>Форум</a></li>
-					<li {if $active=='feed'}class="active"{/if}><a href="#feed" data-toggle="tab">Лента</a></li>
+					<li {if $active=='feed'}class="active"{/if}><a href="#feed" data-toggle="tab">Что нового?
+					{if $user_notifications|@count > 0}
+						<span class="badge badge-important">{$user_notifications|@count}</span>
+					{/if}
+					</a></li>
 					<li {if $active=='users'}class="active"{/if}><a href="#users" data-toggle="tab" onclick="Redirect('users');">Люди</a></li>
 					<li class="dropdown {if $active=='cars'} active{/if}">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Автомобили <b class="caret"></b></a>

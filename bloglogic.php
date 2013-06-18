@@ -302,7 +302,7 @@
 			return $this->blog;
 		}
 		
-		function RenderQuickPaging($hint)
+		function RenderQuickPaging($hint = '')
 		{
 			global $currentUser;
 			
@@ -478,6 +478,47 @@
 					$result .= "<tr class='Comment$this->ID"."Child'></tr>";
 				}
 			}
+			
+			return $result;
+		}
+		
+		
+		public function RenderSimple()
+		{
+ 			global $currentUser;
+ 			$commentUser = new User($this->UserID);		
+ 								
+ 			$commentLink = '';
+ 			$quoteLink = '';
+			
+ 			if($this->CommentID)
+			{
+				$parentComment = getCommentByID($this->CommentID);
+				$parentComment = preg_replace("/\[quote=(.+)](.*)\[\/quote]/", "", $parentComment);						
+				$quotedcomment = " » <i class='icon-user icon-black'></i> <a href='/user/".$parentComment["UserID"]."'><strong>".$parentComment["UserName"]."</strong></a>";
+			}
+				
+			$descriptionRow = "<div class='row'>".getDateTimeAtText($this->Date)."</div>";
+						
+			$result = "
+				<div>
+					<div class='well'>									
+						<div class=''>
+							<i class='icon-user icon-black'></i> 
+							<a href='/user/".$commentUser->ID."' rel='popover' data-content='".$commentUser->GetDescriptionForPopup()."' data-original-title='".$commentUser->Name."' >
+							<strong>$commentUser->Name</strong></a>
+							$quotedcomment<br />
+							" . formatText($this->Text) . "<br /><br />
+						</div>
+					</div>
+					<div class='span5'>
+						$descriptionRow					
+					</div>
+					<br />						
+				</div><br />
+			";
+				
+			
 			
 			return $result;
 		}

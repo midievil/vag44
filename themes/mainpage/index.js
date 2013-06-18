@@ -21,6 +21,18 @@
 		}
 	}
 	
+	function DeleteNotification(id, userid)
+	{
+		$.ajax(	{	type: "POST",
+						url:"/response/notificationsresponse.php",
+						data:"action=delete"+
+							"&id="+id+"&userid="+userid,
+							success:	function(result){
+							
+						}
+					});
+	}
+	
 	$(document).ready(function() {
 		$('#myCarousel').carousel({
 		     interval: 10000

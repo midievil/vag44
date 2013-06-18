@@ -10,7 +10,7 @@ function dbgTime($point)
 }
 try
 {
-//	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	error_reporting(0);
 		
 	session_start();	
@@ -48,6 +48,7 @@ try
 	
 	require_once 'inc/class.mLogic.php';
 	require_once 'inc/class.templater.php';
+	require_once 'inc/class.mNotification.php';
 	require_once "ckeditor/ckeditor.php";	
 	require_once 'i18n/ru.php';	
 	
@@ -118,7 +119,7 @@ try
 	$breadCrumbs[] = new BreadCrumb('Главная страница', '/');
 	
 	if(isset(mLogic::$currentAction) && is_file('modules/' . mLogic::$currentAction . '/index.php'))
-	{			
+	{	
 		require_once SITE_DIR .  'modules/' . mLogic::$currentAction . '/index.php';
 	}
 	
