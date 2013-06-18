@@ -10,6 +10,7 @@ class mLogic {
 	public static $siteModules = array(
 		'admin' => 'admin',
 		'mainpage' => 'mainpage',
+		'feed' => 'mainpage',
 		'registration' => 'registration',			
 		'restorepassword' => 'restorepassword',
 		'rules' => 'rules',

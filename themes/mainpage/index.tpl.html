@@ -11,19 +11,19 @@
 	          </div><!--/row-->
 	          <div class="row-fluid">
 	            
-	          </div><!--/row-->
-				
-				{include file='controls/maintabmenu.html'}
+	          </div><!--/row-->				
+				{if $smarty.server.REQUEST_URI == '/feed'}{assign var="active" value="feed"}{/if}
+				{include file='controls/maintabmenu.html' active=$active}
 				
 				<div id="myTabContent" class="tab-content">
-		            <div class="tab-pane fade active in" id="home">
+		            <div class="tab-pane fade {if $active != 'feed'}active in{/if}" id="home">
 						<div class="accordion" id="accordionMain">
 							{foreach from=$categories item=category}
 								{include file="controls/tagcategory.html" category=$category}
 							{/foreach}					
 				        </div>
 		            </div>
-		            <div class="tab-pane fade" id="feed">
+		            <div class="tab-pane fade {if $active == 'feed'}active in{/if}" id="feed">
 						<div class='span8'>
 						{foreach from=$user_notifications item=notification}
 							<div class="alert alert-{$notification->Type()}">
