@@ -13,34 +13,38 @@ function cancelAddOperation(carid)
 var editedComment = true;
 function showServiceCommentEdit(commentid)
 {		
-	$("#tbServiceComent"+commentid).show();
-	$("#aServiceComent"+commentid).hide();
+	$(".showeditcomment"+commentid).show();
+	$(".hideeditcomment"+commentid).hide();
 }
 
 function hideServiceCommentEdit(commentid)
 {		
-	if(editedComment != commentid)
-	{
-		$("#tbServiceComent"+commentid).hide();
-		$("#aServiceComent"+commentid).show();
-		editedComment = -1;
-	}
+	$(".showeditcomment"+commentid).hide();
+	$(".hideeditcomment"+commentid).show();
 }
 
 function showServiceDateEdit(commentid)
 {		
-	$("#tbServiceDate"+commentid).show();
-	$("#aServiceDate"+commentid).hide();
+	$(".showeditdate"+commentid).show();
+	$(".hideeditdate"+commentid).hide();
 }
 
-function hideServiceDateEdit(commentid, anyway)
+function hideServiceDateEdit(commentid)
 {		
-	if(editedComment != commentid || anyway)
-	{
-		$("#tbServiceDate"+commentid).hide();
-		$("#aServiceDate"+commentid).show();
-		editedComment = -1;
-	}
+	$(".showeditdate"+commentid).hide();
+	$(".hideeditdate"+commentid).show();
+}
+
+function showServiceMileageEdit(commentid)
+{		
+	$(".showeditmileage"+commentid).show();
+	$(".hideeditmileage"+commentid).hide();
+}
+
+function hideServiceMileageEdit(commentid)
+{		
+	$(".showeditmileage"+commentid).hide();
+	$(".hideeditmileage"+commentid).show();
 }
 
 function saveComment(key, commentid)
@@ -64,6 +68,37 @@ function saveComment(key, commentid)
 	}
 }
 
+function saveMileage(key, commentid)
+{	
+	if(key == 13)
+	{
+		var isValid = true;
+		var userMileage = $("#tbServiceMileage"+commentid).val();
+		
+		if(checkNumber(userMileage) == false)
+		{
+			isValid = false;
+			alert('Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ');
+			return false;
+		}
+			
+		$.ajax(	{	type: "POST",
+					url:"/response/carresponse.php",
+					data:"action=editservicemileage"+
+						"&id="+commentid+
+						"&mileage="+userMileage,
+					success:	function(result){
+						if(trim(result)=='ok')
+						{
+							$("#tbServiceMileage"+commentid).blur();
+							hideServiceMileageEdit(commentid);
+							$("#aServiceMileage"+commentid).text($("#tbServiceMileage"+commentid).val());
+						}					
+					}
+				});
+	}
+}
+
 function saveDate(key, commentid)
 {	
 	if(key == 13)
@@ -78,7 +113,7 @@ function saveDate(key, commentid)
 					
 		if(!isValid)
 		{
-			alert('Неверная дата');
+			alert('Р¤РѕСЂРјР°С‚ РґР°С‚С‹ - РґРґ.РјРј.РіРіРіРі');
 			return false;
 		}
 		
@@ -93,7 +128,7 @@ function saveDate(key, commentid)
 						if(trim(result)=='ok')
 						{
 							$("#tbServiceDate"+commentid).blur();
-							hideServiceDateEdit(commentid, true);
+							hideServiceDateEdit(commentid);
 							$("#aServiceDate"+commentid).text($("#tbServiceDate"+commentid).val());
 						}					
 					}
@@ -109,18 +144,18 @@ function isValid(carid)
 {
 	if(!checkDate($("#tbDate"+carid).val()))
 	{
-		alert('Неверно введена дата');
+		alert('РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ РґР°С‚С‹');
 		return false;
 	}
 	
 	if($("#ddlAddOperation"+carid).val() == "")
 	{
-		alert('Выберите операцию');
+		alert('РќРµ РІС‹Р±СЂР°РЅР° РѕРїРµСЂР°С†РёСЏ');
 	}
 	
 	if(!checkNumber($("#tbMileage"+carid).val()))
 	{
-		alert('Неверно введен пробег');
+		alert('РќРµРІРµСЂРЅРѕ СѓРєР°Р·Р°РЅ РїСЂРѕР±РµРі');
 	}
 	return true;
 }

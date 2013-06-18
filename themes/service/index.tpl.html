@@ -10,63 +10,109 @@
 	<a class='button hand' onclick='addGallery(); return false;'>Добавить фотоальбом</a>
 {/if}
 
-<table>
-	<tr>
-		<td class='innercontent'>
+
+<div class="accordion" id="accordion2">
 		{if $cars|@count > 0}	
 			{foreach from=$cars item=car}
-				<a class='messageheader'>{$car->getShortDescription()}</a><br />
-				<a class='hand' onclick='showAddOperation({$car->ID})'>Добавить запись</a><br />
-				<table class='list'>
-					<tr id='trAddRecord{$car->ID}' class='hidden comment' valign='top'>
-						<td>дата<br /><input id='tbDate{$car->ID}' type='text' size='7' value='{$currentDate}'/>
-							<br /><a class='hand buttons' onclick='addOperation({$car->ID})'>ок</a>&nbsp;<a class='hand buttons' onclick='cancelAddOperation({$car->ID})'>отмена</a>
-							<br /><br />
-						</td>
-						<td>операция<br /><select id='ddlAddOperation{$car->ID}'>{$serviceOperationsSelect}</select>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{$car->ID}">
+							{$car->getShortDescription()}
+						</a>
+					</div>
+					<div id="collapse{$car->ID}" class="accordion-body collapse">
+						<div class="accordion-inner">
+							<a class='btn btn-primary' onclick='showAddOperation({$car->ID})'>Добавить запись</a><br /><br />
+							<table>
+								<tr id='trAddRecord{$car->ID}' class='hidden comment' valign='top'>
+									<td>дата<br /><input id='tbDate{$car->ID}' type='text' size='7' value='{$currentDate}'/>
+										<br />
+										<a class='btn btn-primary' onclick='addOperation({$car->ID})'>Добавить</a>&nbsp;<a class='btn' onclick='cancelAddOperation({$car->ID})'>Отмена</a>
+										<br /><br />
+									</td>
+									<td>операция<br /><select id='ddlAddOperation{$car->ID}'>{$serviceOperationsSelect}</select>
+										
+									</td>
+									<td>пробег (км)<br /><input id='tbMileage{$car->ID}' type='text' size='7' value='{$car->Mileage}'/></td>					
+									<td>комментарий<br /><input id='tbComment{$car->ID}' type='text' size='50' /></td>					
+								</tr>				
+							</table>
 							
-						</td>
-						<td>пробег (км)<br /><input id='tbMileage{$car->ID}' type='text' size='7' value='{$car->Mileage}'/></td>					
-						<td>комментарий<br /><input id='tbComment{$car->ID}' type='text' size='50' /></td>					
-					</tr>				
-				</table>
-				
-				{if $car->ServiceHistory(false)|@count > 0}
-				<table class='list'>
-					<tr valign='top' class='header'>
-						<td style='width:120px'>Дата</td>
-						<td>Операция</td>
-						<td>Пробег (км)</td>					
-						<td>Комментарий</td>
-						<td>Следующая замена</td>
-					</tr>
-					
-					{foreach from=$car->ServiceHistory(false) item=service}
-						<tr valign='top'>
-							<td align='center' onmouseover='showServiceDateEdit({$service.ID})' onmouseout='hideServiceDateEdit({$service.ID})'>
-								<input style='height:17px;' class='hidden' id='tbServiceDate{$service.ID}' size='12' value='{$service.DateText}' onfocus='editedComment = {$service.ID}; return false;' onkeypress='saveDate(event.keyCode, {$service.ID})' />
-								<a id='aServiceDate{$service.ID}'>{$service.DateText}</a>
-							</td>
-							<td>{$service.Operation}</td>
-							<td>{$service.Mileage}</td>
-							<td style='width:340px; height:20px' onmouseover='showServiceCommentEdit({$service.ID})' onmouseout='hideServiceCommentEdit({$service.ID})'>
-								<input style='height:17px;' class='hidden' id='tbServiceComent{$service.ID}' size='50' value='{$service.Comment}' onfocus='editedComment = {$service.ID}; return false;' onkeypress='saveComment(event.keyCode, {$service.ID})' />
-								<a id='aServiceComent{$service.ID}'>{$service.Comment}</a></td>
-							<td>
-								{$service.NextDateText}
-							</td>
-						</tr>
-					{/foreach}
-				
-				</table>
+							
+							
+							{if $car->ServiceHistory(false)|@count > 0}
+							<table class='table table-hover table-bordered'>
+								<tr valign='top' class='header'>
+									<th class='span3'>Дата</td>
+									<th>Операция</td>
+									<th>Пробег (км)</td>					
+									<th>Комментарий</td>
+									<th>Следующая замена</td>
+								</tr>
+								
+								{foreach from=$car->ServiceHistory(false) item=service}
+									<tr valign='top'>
+										<td align='center' >
+											<div class='hideeditdate{$service.ID}'>
+												<a id='aServiceDate{$service.ID}'>{$service.DateText}</a>
+												<i class="icon-edit hand" onclick='showServiceDateEdit({$service.ID});  return false;'>&nbsp;&nbsp;&nbsp;&nbsp;</i>
+											</div>
+											
+											<div class='hidden showeditdate{$service.ID}'>
+												<input style='height:17px;' id='tbServiceDate{$service.ID}' size='12' value='{$service.DateText}' onkeypress='saveDate(event.keyCode, {$service.ID})' /><br /><br />
+												<a class="btn btn-primary" onclick='saveDate(13, {$service.ID})'>Сохранить</a>
+												<a class="btn" onclick='hideServiceDateEdit({$service.ID})'>Отмена</a>
+											</div>
+										</td>
+										<td>{$service.Operation}</td>
+										<td>
+											<div class='hideeditmileage{$service.ID}'>
+												<a id='aServiceMileage{$service.ID}'>{$service.Mileage}</a>												
+												<i class="icon-edit hand" onclick='showServiceMileageEdit({$service.ID}); return false;'>&nbsp;&nbsp;&nbsp;&nbsp;</i>
+											</div>
+											<div class='hidden showeditmileage{$service.ID}'>
+												<input style='height:17px;' id='tbServiceMileage{$service.ID}' size='12' value='{$service.Mileage}' onkeypress='saveMileage(event.keyCode, {$service.ID})' /><br /><br />
+												<a class="btn btn-primary" onclick='saveMileage(13, {$service.ID})'>Сохранить</a>
+												<a class="btn" onclick='hideServiceMileageEdit({$service.ID})'>Отмена</a>
+											</div>
+										</td>
+										<td style='width:340px; height:20px'>
+											<div class='hideeditcomment{$service.ID}'>
+												<a id='aServiceComent{$service.ID}'>{$service.Comment}</a>
+												<i class="icon-edit hand" onclick='showServiceCommentEdit({$service.ID});  return false;'>&nbsp;&nbsp;&nbsp;&nbsp;</i>
+											</div>
+											<div class='hidden showeditcomment{$service.ID}'>
+												<input style='height:17px;' id='tbServiceComent{$service.ID}' size='50' value='{$service.Comment}' onkeypress='saveComment(event.keyCode, {$service.ID})' /><br /><br />
+												<a class="btn btn-primary" onclick='saveComment(13, {$service.ID})'>Сохранить</a>
+												<a class="btn" onclick='hideServiceCommentEdit({$service.ID})'>Отмена</a>
+											</div>
+										</td>
+											
+											
+										<td>
+											{$service.NextDateText}
+										</td>
+									</tr>
+								{/foreach}
+							
+							</table>
 				{else}
 				<a class='comment'>Нет записей о сервисе</a>
 				{/if}
+						</div>
+					</div>
+				</div>   
+				
+				
+				
+				
 				
 			{/foreach}
 		{else}
 			Вы не добавили ни одного автомобиля. Вы можете сделать это на странице редактирования <a href='/profile/cars'>вашего профиля</a>
 		{/if}
+		
+</div>
 			
 		</td>
 	</tr>

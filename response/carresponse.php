@@ -1,5 +1,6 @@
 <?PHP
 	
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	error_reporting(0);
 	
 	session_start();
@@ -11,15 +12,17 @@
 	{
 		return;
 	}
+	
+	chdir('..');
 		
 
-	require_once "../constants.php";
-	require_once "../db.php";		
-	require_once "../inc/class.db.php";
-	require_once "../inc/class.fdb.php";
+	require_once "constants.php";
+	require_once "db.php";		
+	require_once "inc/class.db.php";
+	require_once "inc/class.fdb.php";
 	connectToDB();	
-	require_once "../carlogic.php";
-	require_once "../userlogic.php";
+	require_once "carlogic.php";
+	require_once "userlogic.php";
 		
 	switch($_REQUEST["action"])
 	{
@@ -209,15 +212,13 @@
 				update	Service
 				set		Comment = '$comment'
 				where	ID = $id";
-			mysql_query($query);
-			
-			if(mysql_affected_rows() == 1)
+						
+			if(fDB::fexec($query) == 1)
 			{
 				echo "ok";
 			}
 			else
 			{
-				//writeQueryErrorToLog($query, mysql_error());
 				echo "error";
 			}
 			return;
@@ -229,16 +230,34 @@
 			$query = "
 				update	Service
 				set		Date = '$date'
-				where	ID = $id";
-			mysql_query($query);
+				where	ID = $id";			
 			
-			if(mysql_affected_rows() == 1)
+			if(fDB::fexec($query) == 1)
 			{
 				echo "ok";
 			}
 			else
 			{
 				//writeQueryErrorToLog($query, mysql_error());
+				echo "error";
+			}
+			return;
+			
+		case "editservicemileage":
+			$id = $_REQUEST["id"];
+			$mileage = $_REQUEST["mileage"];
+					
+			$query = "
+				update	Service
+				set		Mileage = $mileage
+				where	ID = $id";
+					
+			if(fDB::fexec($query) == 1)
+			{
+				echo "ok";
+			}
+			else
+			{		
 				echo "error";
 			}
 			return;
