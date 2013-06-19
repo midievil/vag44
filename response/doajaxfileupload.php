@@ -1,15 +1,21 @@
 <?PHP
-	//error_reporting(0);
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	error_reporting(0);
 	session_start();
 	
-	include("../constants.php");
+	chdir("..");
 	
-	include("../db.php");
-	connectToDB();
+	require_once "constants.php";
 	
-	include("../userlogic.php");
-	include("../db/GalleryDB.php");	
-	include("../miscfunctions.php");	
+	require_once "db.php";	
+	require_once 'inc/class.db.php';
+	require_once 'inc/class.fdb.php';
+		
+	connectToDB();	
+	
+	require_once "userlogic.php";	
+	require_once "db/GalleryDB.php";	
+	require_once "miscfunctions.php";	
 	
 	$error = "";	
 	$msg = "";
@@ -57,17 +63,18 @@
 		$error = 'No file was uploaded..';
 	}
 	else 
-	{
-			$filename = $_FILES[$fileElementName]['name'];
-			
-			if($userID = currentUserID())
+	{						
+			if($userID = User::CurrentUserID())
 			{
+				$filename = $_FILES[$fileElementName]['name'];
+				$path = $_GET["path"];
+				$msg .= " File Name: " . $_FILES[$fileElementName]['name'] . ", ";
+				$msg .= " File Size: " . @filesize($_FILES[$fileElementName]['tmp_name']) . ", ";
+				$msg .= " Path: " . $_GET["path"] . ", ";					
+				
 				if($fileElementName == "imageToUpload")
 				{
-					$msg .= " File Name: " . $_FILES[$fileElementName]['name'] . ", ";
-					$msg .= " File Size: " . @filesize($_FILES[$fileElementName]['tmp_name']) . ", ";
-					$msg .= " Path: " . $_GET["path"] . ", ";
-					$path = $_GET["path"];
+					
 					
 					if(endsWith(strtolower($filename), ".jpg") || endsWith(strtolower($filename), ".jpeg"))
 					{
@@ -85,7 +92,7 @@
 							case "postpics":
 								$i=1;
 								$postid = $_GET["postid"];
-								while(file_exists("../img/postpics/$postid"."_$i.jpg"))
+								while(file_exists("img/postpics/$postid"."_$i.jpg"))
 								{
 									$i++;
 								}
@@ -96,7 +103,7 @@
 							case "newpics":
 								$i=1;
 								$userid = $_GET["userid"];
-								while(file_exists("../img/newpics/$userid"."_$i.jpg"))
+								while(file_exists("img/newpics/$userid"."_$i.jpg"))
 								{
 									$i++;
 								}
@@ -111,11 +118,11 @@
 								$file = "/img/userpics/$name";
 								break;
 						}
-						$path = "../img/".$_GET["path"];
+						$path = "img/".$_GET["path"];
 														
 						move_uploaded_file($_FILES[$fileElementName]['tmp_name'], "$path/$name");
 						
-						include('simpleimage.php');
+						include('inc/simpleimage.php');
 						$image = new SimpleImage();
 						$image->load("$path/$name");
 						if($width < $image->getWidth())
@@ -132,11 +139,26 @@
 				}
 				else if($fileElementName == "fileToUpload")
 				{
+					$msg = "File Uploaded";
+					$ext = $_FILES[$fileElementName]['type'];
 					switch($path)
 					{
-						
-					}
-					$msg = "File Uploaded";
+						case "postfiles":
+							$postid = $_GET["postid"];							
+							$name = $postid."_".$filename;
+							$msg = "/uploads/postfiles/$name";
+							break;
+							
+						case "newfiles":
+							$userid = $_GET["userid"];
+							$name = $userid."_".$filename;
+							$msg = "/uploads/newfiles/$name";
+							break;
+					}	
+					
+					$path = "uploads/".$_GET["path"];
+
+					move_uploaded_file($_FILES[$fileElementName]['tmp_name'], "$path/$name");					
 				}
 			}
 			else

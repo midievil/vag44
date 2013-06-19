@@ -1,18 +1,21 @@
 <?PHP
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	error_reporting(0);
 	session_start();
 	
-	require_once "../constants.php";
+	chdir("..");
 	
-	require_once "../db.php";	
-	require_once '../inc/class.db.php';
-	require_once '../inc/class.fdb.php';
+	require_once "constants.php";
+	
+	require_once "db.php";	
+	require_once 'inc/class.db.php';
+	require_once 'inc/class.fdb.php';
 		
 	connectToDB();	
 	
-	require_once "../userlogic.php";	
-	require_once "../db/GalleryDB.php";	
-	require_once "../miscfunctions.php";	
+	require_once "userlogic.php";	
+	require_once "db/GalleryDB.php";	
+	require_once "miscfunctions.php";	
 	
 	$error = "";	
 	$msg = "";
@@ -89,7 +92,7 @@
 							case "postpics":
 								$i=1;
 								$postid = $_GET["postid"];
-								while(file_exists("../img/postpics/$postid"."_$i.jpg"))
+								while(file_exists("img/postpics/$postid"."_$i.jpg"))
 								{
 									$i++;
 								}
@@ -100,7 +103,7 @@
 							case "newpics":
 								$i=1;
 								$userid = $_GET["userid"];
-								while(file_exists("../img/newpics/$userid"."_$i.jpg"))
+								while(file_exists("img/newpics/$userid"."_$i.jpg"))
 								{
 									$i++;
 								}
@@ -115,7 +118,7 @@
 								$file = "/img/userpics/$name";
 								break;
 						}
-						$path = "../img/".$_GET["path"];
+						$path = "img/".$_GET["path"];
 														
 						move_uploaded_file($_FILES[$fileElementName]['tmp_name'], "$path/$name");
 						
@@ -153,7 +156,7 @@
 							break;
 					}	
 					
-					$path = "../uploads/".$_GET["path"];
+					$path = "uploads/".$_GET["path"];
 
 					move_uploaded_file($_FILES[$fileElementName]['tmp_name'], "$path/$name");					
 				}

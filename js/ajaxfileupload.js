@@ -80,7 +80,7 @@ jQuery.extend({
             }
             if ( xml || isTimeout == "timeout") 
             {               
-                requestDone = true;
+            	requestDone = true;
                 var status;
                 try {
                     status = isTimeout != "timeout" ? "success" : "error";
@@ -101,6 +101,7 @@ jQuery.extend({
                 } catch(e) 
                 {
                     status = "error";
+                    alert(e);
                     jQuery.handleError(s, xml, status, e);
                 }
 

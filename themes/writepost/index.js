@@ -44,7 +44,7 @@
         $.ajaxFileUpload
         (
             {
-                url:'/tools/doajaxfileupload.php?fileElementId=fileToUpload&path='+uploadPath, 
+                url:'/response/doajaxfileupload.php?fileElementId=fileToUpload&path='+uploadPath, 
                 secureuri:false,
                 fileElementId:'fileToUpload',				
                 dataType: 'json',
@@ -91,7 +91,7 @@
         $.ajaxFileUpload
         (
             {
-                url:'/tools/doajaxfileupload.php?fileElementId=imageToUpload&path='+imgUploadPath, 
+                url:'/response/doajaxfileupload.php?fileElementId=imageToUpload&path='+imgUploadPath, 
                 secureuri:false,
                 fileElementId:'imageToUpload',				
                 dataType: 'json',

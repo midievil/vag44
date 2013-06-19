@@ -14,7 +14,7 @@ function ajaxFileUpload()
     $.ajaxFileUpload
     (
         {
-            url:'/tools/doajaxfileupload.php?fileElementId=imageToUpload&path=gallery&galleryid={/literal}{$gallery.ID}{literal}', 
+            url:'/response/doajaxfileupload.php?fileElementId=imageToUpload&path=gallery&galleryid={/literal}{$gallery.ID}{literal}', 
             secureuri:false,
             fileElementId:'imageToUpload',				
             dataType: 'json',

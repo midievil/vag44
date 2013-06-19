@@ -21,7 +21,7 @@
         $.ajaxFileUpload
         (
             {
-                url:'/tools/doajaxfileupload.php?fileElementId=imageToUpload&path=userpics&userid='+userID, 
+                url:'/response/doajaxfileupload.php?fileElementId=imageToUpload&path=userpics&userid='+userID, 
                 secureuri:false,
                 fileElementId:'imageToUpload',
                 dataType: 'json',
