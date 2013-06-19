@@ -1,5 +1,8 @@
-<div class="alert alert-{$notification->Type()}">
-	<a class="close hand" data-dismiss="alert" onclick='DeleteNotification({$notification->ID}, {$currentUser->ID})'>&times;</a>
+<div class="alert alert-{$notification->Type()}" id='divNotification{$notification->ID}'>
+	<a class="close hand" data-dismiss="alert" onclick='DeleteNotification({$notification->ID}, {$currentUser->ID}, {$notification->Read})'>&times;</a>
 	{$notification->DateText()}<br /><br />
 	{$notification->Text}
+	{if $notification->Read == false}	
+		<a class='btn btn-small read' onclick='MarkReadNotification({$notification->ID}, {$currentUser->ID})'>{$i18n.read.$gender}</a>
+	{/if}
 </div>

@@ -10,6 +10,7 @@
 		public $TypeID;
 		public $Comment;
 		public $Date;
+		public $Read;
 				
 		public function Load()
 		{			
@@ -29,6 +30,11 @@
 		
 		public function Type()
 		{
+			if($this->Read)
+			{
+				return 'read';
+			}
+			
 			switch($this->TypeID)
 			{
 				case 1:

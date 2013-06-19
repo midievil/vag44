@@ -35,11 +35,21 @@
 			return fDB::fexec($query);
 		}
 		
+		public static function markReadNotificationByID($id, $userID)
+		{
+			$query  = "
+				update	Notifications
+				set		`Read` = 1
+				where	ID = $id 
+						AND UserID = $userID";
+			return fDB::fexec($query);
+		}
+		
 		public static function addNotification($userID, $text, $type, $date)
 		{
 			$text = str_replace("'", "''", $text);
 			$query = "
-				INSERT INTO	notifications (	UserID, Text, TypeID, Date ) VALUES ($userID, '$text', $type, '$date')";
+				INSERT INTO	Notifications (	UserID, Text, TypeID, Date, `Read` ) VALUES ($userID, '$text', $type, '$date', 0)";
 				echo $query;
 			return fDB::fexec($query);
 		}

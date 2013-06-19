@@ -29,5 +29,16 @@
 				return;
 			}
 			return;
+			
+		case "read":
+			$id = $_REQUEST["id"];
+			$userID = $_REQUEST["userid"];
+			if(User::CurrentUser()->IsLogged())
+			{
+				NotificationsDB::markReadNotificationByID($id, $userID);
+				echo "ok";
+				return;
+			}
+			return;
 	}
 ?>

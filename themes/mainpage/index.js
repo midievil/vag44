@@ -21,16 +21,42 @@
 		}
 	}
 	
-	function DeleteNotification(id, userid)
+	function DeleteNotification(id, userid, wasRead)
 	{
 		$.ajax(	{	type: "POST",
 						url:"/response/notificationsresponse.php",
 						data:"action=delete"+
 							"&id="+id+"&userid="+userid,
 							success:	function(result){
-								var oldCount = $("#aNotificationsCount").text() * 1;
-								oldCount -= 1;
-								$("#aNotificationsCount").text(oldCount);
+								if(wasRead != 1)
+								{
+									var oldCount = $("#aNotificationsCount").text() * 1;
+									oldCount -= 1;
+									$("#aNotificationsCount").text(oldCount);
+								}
+						}
+					});
+	}
+	
+	function MarkReadNotification(id, userid)
+	{
+		$.ajax(	{	type: "POST",
+						url:"/response/notificationsresponse.php",
+						data:"action=read"+
+							"&id="+id+"&userid="+userid,
+							success:	function(result){
+								if(result == 'ok')
+								{
+									var oldCount = $("#aNotificationsCount").text() * 1;
+									oldCount -= 1;
+									$("#aNotificationsCount").text(oldCount);
+									
+									$("#divNotification"+id).removeClass('alert-success');
+									$("#divNotification"+id).removeClass('alert-info');
+									$("#divNotification"+id).removeClass('alert-error');
+									
+									$("#divNotification"+id+" a.read").hide();
+								}
 						}
 					});
 	}
