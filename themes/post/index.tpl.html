@@ -104,7 +104,7 @@
 			  
 			<div class='answer row span10' id='trCommentForPost'>
 				<h4>Ваш ответ на пост:</h4>
-				<textarea id='tbCommentForPost' style='width:90%;'></textarea> <br/>
+				<textarea id='tbCommentForPost' style='width:90%;' rows='7'></textarea> <br/>
 				<button type="button" class="btn btn-primary" onclick='writeComment({$post->ID});'>Написать</button>
 				<button type="button" class="btn" onclick='CancelAnswerPost();'>Отмена</button>				
 				<br /><br />
@@ -155,7 +155,7 @@
 							
 			<div class='answer'  id='trCommentForPostBottom'>
 				<h4>Ваш ответ на пост:</h4>
-				<textarea id='tbCommentForPostBottom' style='width:90%;'></textarea> <br/>
+				<textarea id='tbCommentForPostBottom' style='width:90%;' rows='7'></textarea> <br/>
 				<button type="button" class="btn btn-primary" onclick='writeComment({$post->ID});'>Написать</button>
 				<button type="button" class="btn" onclick='CancelAnswerPostBottom();'>Отмена</button>
 			</div>
