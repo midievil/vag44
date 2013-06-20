@@ -22,19 +22,10 @@ function deletePrivateMessage(id)
 			data:	"action=deleteprivate&id=" + id,
 			success: function(result){
 				//alert(result);
-				if(trim(result) == "ok")
-				{						
-					$("#trMessage" + id).hide();
-				}
-				else if(trim(result) == "notlogged")
-				{
-					alert("Кажется, вы вышли из системы. Попробуйте обновить страницу.");
-				}
-				else if(trim(result) == "error")
-				{						
-					alert("Что-то не сработало. Пожалуйста, сообщите администратору (обратная связь)");
-				}
-				
+				//if(trim(result) == "ok")
+				//{						
+					//$("#trMessage" + id).hide();
+				//}
 			}
 		});
 }
