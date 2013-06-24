@@ -29,26 +29,34 @@
 							<br /><br />					
 	 				</div>
 	 			{/if} 
-				
-	        <p>© midievil 2013</p>
-			<br />
-			<a id='aRules' href='/rules/'>Правила</a>
-			&nbsp;·&nbsp;<a id='aUsers' href='/users/'>Пользователи</a>
-			&nbsp;·&nbsp;<a href='/feedback/' >Обратная связь</a>	
-			{if $currentUser->IsLogged()}
-			&nbsp;·&nbsp;<a href='/post/55' >Книга жалоб</a>
-			&nbsp;·&nbsp;<a href='/post/11' >Улучшение сайта</a>
-			&nbsp;·&nbsp;<a href='/post/143' >Помощь сайту</a>
-			{/if}
-			
-			
-				<a class='pull-right' onclick='goTop();' class='hand'>Наверх</a>
-								{if $currentAction != 'mainpage'}
-									&nbsp;·&nbsp<a href='/'>На главную</a>
-								{/if}		
       </footer>
       </div>
       </div>
+	  
+	  <div class="container">
+	  <div class="navbar navbar-inverse">
+          <div class="navbar-inner">            
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>            
+            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+				<li><a href='/user/1'>© midievil 2013</a></li>
+                <li class="active"><a href="/"><i class="icon-home icon-white"></i> Домой</a></li>
+			  </ul>
+			  <ul class="nav pull-right">
+                <li><a href='/feedback/'><i class="icon-bullhorn icon-white"></i> Обратная связь</a></li>
+                <li><a href='/post/55' ><i class="icon-book icon-white"></i> Книга жалоб</a></li>
+                <li><a href='/post/11' ><i class="icon-ok icon-white"></i> Улучшение сайта</a></li>
+				<li><a href='/post/143' ><i class="icon-heart icon-white"></i> Помощь сайту</a></li>                
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div>
+		</div>
 		
 		</div><!--/span-->
 	</body>
