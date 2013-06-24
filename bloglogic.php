@@ -356,7 +356,7 @@
 		
 		public function Load()
 		{
-			$row = getCommentByID($this->ID);
+			$row = BlogDB::getCommentByID($this->ID);
 			$this->MakeFromRow($row);
 		}
 		
@@ -392,10 +392,10 @@
 			{
 				//if($listtype=='list')
 				{				
-					$parentComment = getCommentByID($this->CommentID);
+					$parentComment = BlogDB::getCommentByID($this->CommentID);
 					$parentComment = preg_replace("/\[quote=(.+)](.*)\[\/quote]/", "", $parentComment);						
 //						$quotedcomment = "<span class='quote' onclick='highlightParentComment($this->CommentID);' href='#comment$this->CommentID'>".User::UserIcon()."<b>".($parentComment["UserName"])."</b>: ".($parentComment["Text"])."</span><br />";
-					$quotedcomment = " » <i class='icon-user icon-black'></i> <a href='/user/".$parentComment["UserID"]."' rel='popover' data-content='<blockquote>".$parentComment["Text"]."</blockquote>' data-original-title='Ответ на комментарий ".$parentComment["UserName"]."' ><strong>".$parentComment["UserName"]."</strong></a>";		
+					$quotedcomment = " » <i class='icon-user icon-black'></i> <a href='/user/".$parentComment["UserID"]."' rel='popover' data-content='<blockquote>".$parentComment["Text"]."</blockquote>' data-original-title='Ответ на комментарий <i class=\"icon-user\"></i><strong>".$parentComment["UserName"]."</strong>' ><strong>".$parentComment["UserName"]."</strong></a>";		
 				}
 				
 				$class = "Comment$this->CommentID";				
@@ -493,7 +493,7 @@
 			
  			if($this->CommentID)
 			{
-				$parentComment = getCommentByID($this->CommentID);
+				$parentComment = BlogDB::getCommentByID($this->CommentID);
 				$parentComment = preg_replace("/\[quote=(.+)](.*)\[\/quote]/", "", $parentComment);						
 				$quotedcomment = " » <i class='icon-user icon-black'></i> <a href='/user/".$parentComment["UserID"]."'><strong>".$parentComment["UserName"]."</strong></a>";
 			}

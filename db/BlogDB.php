@@ -7,6 +7,26 @@
 	class BlogDB
 	{
 		
+		public static function getCommentByID($id)
+		{
+			$query  = "
+				select	C.*, 
+						U.Name UserName,
+						U.Title UserTitle,					
+						P.Closed
+				from	Comments C
+				join	Users U	on U.ID = C.UserID
+				join	Posts P on P.ID = C.PostID
+				where	C.ID = $id" ;
+			//echo $query;
+			$result = mysql_query($query);
+			if(mysql_num_rows($result) == 0)
+			{
+				return;
+			}
+			return mysql_fetch_assoc($result);
+		}
+		
 		public static function getCommentsByPostID($postid)
 		{
 			$query  = "
@@ -305,26 +325,6 @@
 	/*
 		C O M M E N T S
 	*/
-	
-	function getCommentByID($id)
-	{
-		$query  = "
-			select	C.*, 
-					U.Name UserName,
-					U.Title UserTitle,					
-					P.Closed
-			from	Comments C
-			join	Users U	on U.ID = C.UserID
-			join	Posts P on P.ID = C.PostID
-			where	C.ID = $id" ;
-		//echo $query;
-		$result = mysql_query($query);
-		if(mysql_num_rows($result) == 0)
-		{
-			return;
-		}
-		return mysql_fetch_assoc($result);
-	}
 	
 	
 ?>

@@ -1,7 +1,7 @@
 <?PHP
 
 	error_reporting(E_ERROR | E_WARNING | E_PARSE);
-//	error_reporting(0);
+	error_reporting(0);
 		
 	session_start();
 	header('Content-type: text/html; charset=utf-8');
@@ -431,7 +431,7 @@
 			$commentid = $_POST["commentid"];
 			$text = replaceSymbols(unescape($_POST["text"]));
 			
-			$comment = getCommentByID($commentid);
+			$comment = BlogDB::getCommentByID($commentid);
 						
 			if ($comment && ($comment["UserID"] == $currentUser->ID || $currentUser->IsAdmin()))
 			{
