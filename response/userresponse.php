@@ -166,6 +166,10 @@
 				$social = $_POST["social"];
 				
 				$listtype = $_POST["listtype"];
+				if($listtype == 'undefined')
+				{
+					$listtype = '';
+				}
 				$categoriesorder = $_POST["categoriesorder"];
 				$pagesize = $_POST["pagesize"];
 				
