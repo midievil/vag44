@@ -173,6 +173,10 @@
 				$dateParts = explode("-", $selectedDate);
 				
 				$gender = $_POST["gender"];
+				if($gender == 'undefined')
+				{
+					$gender = '';
+				}
 				if($dateParts[0] != "1900" && $dateParts[1] != "0" && $dateParts[2] != "0")
 				{
 					$dateExpression = ",
