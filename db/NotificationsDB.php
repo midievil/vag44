@@ -21,7 +21,8 @@
 			$query  = "
 				select	*
 				from	Notifications
-				where	UserID = $userID";
+				where	UserID = $userID
+				ORDER BY id DESC";
 			return fDB::fqueryAll($query);
 		}
 		

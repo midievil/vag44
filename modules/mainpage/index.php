@@ -19,6 +19,7 @@
 	if($currentUser->IsLogged())
 	{
 		templater::assign('user_notifications', $currentUser->Notifications());
+		templater::assign('user_notifications_count', $currentUser->NotificationsCount());
 	}
 	
 	templater::display();

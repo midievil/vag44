@@ -170,6 +170,11 @@
 		}
 		
 		private $notifications = null;
+		private $notificationsCount = 0;
+		public function NotificationsCount()
+		{
+			return $this->notificationsCount;
+		}
 		public function Notifications()
 		{
 			if($this->notifications == null)
@@ -180,6 +185,11 @@
 					$notification = new Notification();
 					$notification->MakeFromRow($notificationRow);
 					$this->notifications[] = $notification;
+					
+					if(!$notification->Read)
+					{
+						$this->notificationsCount++;
+					}
 				}
 			}
 			return $this->notifications;
