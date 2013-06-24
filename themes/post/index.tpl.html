@@ -72,29 +72,29 @@
 							{if $post->Closed}
 							<li><a><Пост закрыт></a></li>
 							{else}
-								<li><a class='hand' onclick='AnswerPost();'>Ответить</a></li>
-								<li><a class='hand' onmouseover='copyToQuote("{$post->User->Name}", "Post", {$post->ID})' onclick='quotePostSelection("{$post->User->Name}", "Post", {$post->ID}); return false;'>Цитата</a></li>								
+								<li><a class='hand' onclick='AnswerPost();'><i class="icon-comment"></i> Ответить</a></li>
+								<li><a class='hand' onmouseover='copyToQuote("{$post->User->Name}", "Post", {$post->ID})' onclick='quotePostSelection("{$post->User->Name}", "Post", {$post->ID}); return false;'><i class="icon-italic"></i> Цитата</a></li>
 								{if $currentUser->IsAdmin()}								
 								<li>
-									<a class='hand' onclick='closePost({$post->ID})'>Закрыть</a>
+									<a class='hand' onclick='closePost({$post->ID})'><i class="icon-lock"></i> Закрыть</a>
 								</li>
 								{/if}
 							{/if}
 							
 							{if (!$post->Closed && $post->User->ID == $currentUser->ID) || $currentUser->IsAdmin()}
 								<li>
-									<a href='/editpost/{$post->ID}'>Редактировать</a>
+									<a href='/editpost/{$post->ID}'><i class="icon-pencil"></i> Редактировать</a>
 								</li>									
 							{/if}
 							
 			              </ul>						  
 						  <ul class="nav pull-right">
 							<li><a>Комментарии:</a></li>
-							<li><a class='hand textunderpost HideComments' onclick='hidePostComments();'>скрыть</a></li>
-							<li><a class='hand textunderpost ShowComments hidden' onclick='showPostComments();'>показать</a></li>
-							<li><a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'>списком</a></li>
-							<li><a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'>деревом</a></li>
-							<li><a id='aSkipComments' class='hand textunderpost' onclick='goBottom();'>в конец</a></li>
+							<li><a class='hand textunderpost HideComments' onclick='hidePostComments();'><i class="icon-eye-open"></i> скрыть</a></li>
+							<li><a class='hand textunderpost ShowComments hidden' onclick='showPostComments();'><i class="icon-eye-open"></i> показать</a></li>
+							<li><a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'><i class="icon-list"></i> списком</a></li>
+							<li><a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'><i class="icon-list"></i> деревом</a></li>
+							<li><a id='aSkipComments' class='hand textunderpost' onclick='goBottom();'><i class="icon-arrow-down"></i> в конец</a></li>
 						  </ul>
 			            </div>
 					</div>
@@ -135,19 +135,19 @@
 					{if $post->Closed}
 						<li><a><Пост закрыт></a></li>
 					{else}
-						<li><a class='hand' onclick='AnswerPostBottom();'>Ответить</a></li>
+						<li><a class='hand' onclick='AnswerPostBottom();'><i class="icon-comment"></i> Ответить</a></li>
 						{if $post->User->ID == $currentUser->ID || $currentUser->IsAdmin()}
-						<li><a href='/editpost/{$post->ID}'>Редактировать</a></li>
+						<li><a href='/editpost/{$post->ID}'><i class="icon-pencil"></i> Редактировать</a></li>
 						{/if}
 					{/if}
 		             </ul>						  
 					<ul class="nav pull-right">
 						<li><a>Комментарии:</a></li>
-						<li><a class='hand textunderpost HideComments' onclick='hidePostComments();'>скрыть</a></li>
-						<li><a class='hand textunderpost ShowComments hidden' onclick='showPostComments();'>показать</a></li>
-						<li><a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'>списком</a></li>
-						<li><a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'>деревом</a></li>
-						<li><a id='aSkipComments' class='hand textunderpost' onclick='goTop();'>в начало</a></li>
+						<li><a class='hand textunderpost HideComments' onclick='hidePostComments();'><i class="icon-eye-open"></i> скрыть</a></li>
+						<li><a class='hand textunderpost ShowComments hidden' onclick='showPostComments();'><i class="icon-eye-close"></i> показать</a></li>
+						<li><a id='aCommentsList' class='hand textunderpost {if $currentUser->ListType=="list"}hidden{/if}' onclick='showComentsList({$post->ID});'><i class="icon-list"></i> списком</a></li>
+						<li><a id='aCommentsTree' class='hand textunderpost {if $currentUser->ListType=="tree"}hidden{/if}' onclick='showComentsTree({$post->ID});'><i class="icon-list"></i> деревом</a></li>
+						<li><a id='aSkipComments' class='hand textunderpost' onclick='goTop();'><i class="icon-arrow-up"></i> в начало</a></li>
 					</ul>
 	           </div>
 			</div>
