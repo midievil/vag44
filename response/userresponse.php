@@ -24,6 +24,11 @@
 	
 	
 	switch($_POST["action"]){
+		case "setresolution":	
+			$_SESSION["screen_width"] = $_REQUEST["width"];
+			echo $_REQUEST["width"];
+			return;
+		
 		case "checkname":
 			$result = mysql_query("select count(*) Count from Users where Name='".($_POST["name"])."'");
 			$row = mysql_fetch_assoc($result);

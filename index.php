@@ -65,6 +65,8 @@ try
 	templater::assign('ourCarsCategoryID', $ourCarsCategoryID);
 	templater::assign('currentAction', mLogic::$currentAction);
 	
+	templater::assign('screen_width', $_SESSION['screen_width'] ? $_SESSION['screen_width'] : '0');
+	
 	
 	$currentUser = User::CurrentUser();
 	templater::assign('currentUser', $currentUser);

@@ -53,12 +53,27 @@
 				
 		}
 		
+		$(function() {
+			$.ajax({	type: "POST",	
+					url:"/response/userresponse.php",
+					data:	"action=setresolution&width="+document.width,
+					success: function(result){
+						//alert(result);
+						//var screen_width = {/literal}{$screen_width}{literal};
+						//if(result != screen_width)
+						//{
+							//alert(result + " " + screen_width);
+						//}
+					}
+					});
+		    
+		});
 		{/literal}
 			
 		</script>
 	</head>
 	
-	<body>	
+	<body>		
 		<div id="divGallery" style="position:absolute; display:none; z-index:2;">
 	 
 		</div>
@@ -72,14 +87,17 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class='navbar-inner'>
 				<div class="container-fluid">
-					<img src='/img/logo_small.png' class='pull-left' style='margin-right: 10px' /> <a href='/' class='brand' style='color:#ffffff'>{*Привет, {$currentUser->Name}*}Kostroma VAG Club</a>
+					<img src='/img/logo_small.png' class='pull-left' style='margin-right: 10px' /> {* <a href='/' class='brand'>{$screen_width}</a>*}
+					{if $screen_width >= 1000}
+						<a href='/' class='brand' style='color:#ffffff'>{*Привет, {$currentUser->Name}*}Kostroma VAG Club</a>
+					{/if}
 					{if $currentUser->IsLogged()}
 						<div class="nav-collapse collapse">
 							<ul class="nav pull-right">
 								{*<li>
 									<li><a href="/"><i class="icon-home icon-white"></i> Домой</a></li>
 								</li>*}
-								<li class="dropdown">									
+								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-user icon-white'></i> {$currentUser->Name} <b class="caret"></b></a>
 									<ul class="dropdown-menu">
 									  <li><a href="/profile/about">О себе</a></li>
@@ -91,6 +109,11 @@
 									</ul>
 								</li>								
 								
+								{if $screen_width < 1000}
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Ещё <b class="caret"></b></a>
+										<ul class="dropdown-menu">
+								{/if}
 								<li>
 									<a href='/service' >сервисная книжка</a>
 								</li>
@@ -101,6 +124,10 @@
 								<li>
 									<a href='/gallery' >галерея</a>
 								</li>
+								{if $screen_width < 1000}
+										</ul>
+									</li>
+								{/if}
 								<li>
 								{if $privateMessagesCount>0}
 									<a id='aPrivateMessages' href='/privatemessages' class='active'>личные сообщения ({$privateMessagesCount})</a>
