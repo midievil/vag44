@@ -26,6 +26,16 @@
 			return fDB::fqueryAll($query);
 		}
 		
+		public static function getNotificationsCountByUserID($userID)
+		{
+			$query  = "
+			select	COUNT(ID)
+			from	Notifications
+			where	UserID = $userID
+					AND `Read` = 0";			
+			return fDB::fscalar($query);
+		}
+		
 		public static function deleteNotificationByID($id, $userID)
 		{
 			$query  = "

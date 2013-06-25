@@ -1,6 +1,6 @@
 <?PHP
 	error_reporting(E_ERROR | E_WARNING | E_PARSE);
-	//error_reporting(0);
+	error_reporting(0);
 		
 	session_start();
 	header('Content-type: text/html; charset=utf-8');
@@ -25,7 +25,7 @@
 			if(User::CurrentUser()->IsLogged())
 			{
 				NotificationsDB::deleteNotificationByID($id, $userID);
-				echo "ok";
+				echo NotificationsDB::getNotificationsCountByUserID($userID);
 				return;
 			}
 			return;
@@ -36,7 +36,7 @@
 			if(User::CurrentUser()->IsLogged())
 			{
 				NotificationsDB::markReadNotificationByID($id, $userID);
-				echo "ok";
+				echo NotificationsDB::getNotificationsCountByUserID($userID);
 				return;
 			}
 			return;

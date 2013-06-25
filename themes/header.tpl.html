@@ -87,10 +87,9 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class='navbar-inner'>
 				<div class="container-fluid">
-					<img src='/img/logo_small.png' class='pull-left' style='margin-right: 10px' /> {* <a href='/' class='brand'>{$screen_width}</a>*}
-					{if $screen_width >= 1000}
-						<a href='/' class='brand' style='color:#ffffff'>{*Привет, {$currentUser->Name}*}Kostroma VAG Club</a>
-					{/if}
+					<img src='/img/logo_small.png' class='pull-left hand' style='margin-right: 10px' onclick='window.location="/";' /> {* <a href='/' class='brand'>{$screen_width}</a>*}
+					<a href='/' class='brand' style='color:#ffffff'>{*Привет, {$currentUser->Name}*}Kostroma VAG Club</a>
+					
 					{if $currentUser->IsLogged()}
 						<div class="nav-collapse collapse">
 							<ul class="nav pull-right">
@@ -109,7 +108,7 @@
 									</ul>
 								</li>								
 								
-								{if $screen_width < 1000}
+								{if $screen_width < 1200}
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Ещё <b class="caret"></b></a>
 										<ul class="dropdown-menu">
@@ -124,7 +123,7 @@
 								<li>
 									<a href='/gallery' >галерея</a>
 								</li>
-								{if $screen_width < 1000}
+								{if $screen_width < 1200}
 										</ul>
 									</li>
 								{/if}

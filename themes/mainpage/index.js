@@ -28,11 +28,9 @@
 						data:"action=delete"+
 							"&id="+id+"&userid="+userid,
 							success:	function(result){
-								if(wasRead != 1)
+								if(!isNaN(result*1))
 								{
-									var oldCount = $("#aNotificationsCount").text() * 1;
-									oldCount -= 1;
-									$("#aNotificationsCount").text(oldCount);
+									$("#aNotificationsCount").text(result);
 								}
 						}
 					});
@@ -45,11 +43,9 @@
 						data:"action=read"+
 							"&id="+id+"&userid="+userid,
 							success:	function(result){
-								if(result == 'ok')
+								if(!isNaN(result*1))
 								{
-									var oldCount = $("#aNotificationsCount").text() * 1;
-									oldCount -= 1;
-									$("#aNotificationsCount").text(oldCount);
+									$("#aNotificationsCount").text(result);								
 									
 									$("#divNotification"+id).removeClass('alert-success');
 									$("#divNotification"+id).removeClass('alert-info');
