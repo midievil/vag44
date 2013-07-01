@@ -97,10 +97,16 @@ function updateComment(commentID, postID)
 					success: function(result){
 						//alert(result);
 						if(trim(result) != "error")
-						{						
-							showComments(postID, currentListType, page);
-							//$("#trComment" + commentID).addClass("toremove");
-							//$(".writecommentbutton").removeAttr('disabled');
+						{			
+							if(trim(result) == 'deleted')
+							{
+								$('div.comment[commentid="'+commentID+'"]').replaceWith('<div class="span10 comment row"><div class="well row">Комментарий удален</div></div>');
+							}
+							else
+							{
+								$('div.comment[commentid="'+commentID+'"]').replaceWith(result);
+							}
+							
 							commentLock = "";
 						}
 					}

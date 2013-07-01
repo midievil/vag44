@@ -441,16 +441,19 @@
 						update	Comments 
 						set		Text = '$text'
 						where	ID = $commentid";
+					fDB::fexec($query);				
+					
+					$comment = new Comment($commentid);
+					echo $comment->Render();
 				}
 				else
 				{
 					$query = "
 						delete from	Comments 
 						where	ID = $commentid";
+					fDB::fexec($query);				
+					echo "deleted";
 				}
-					
-				fDB::fexec($query);				
-				echo "ok";
 			}
 			return;
 			
