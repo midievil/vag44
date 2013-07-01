@@ -15,19 +15,18 @@
 		var page = {if $smarty.get.page=='last'}'last'{else}{$commentsPaging->CurrentPage}{/if};
 </script>
 
-	<div id='enlargePicModal' class="modal hide fade">
-		<div class="modal-header">
-		    &nbsp;<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>			    
-  		</div>
-	  	<div class="modal-body">			  
-		  	<div id="myCarouselEnlarge" class="carousel slide">
-                <div class="carousel-inner">
-				  <div class="item active">
-                    <img src="http://vag44.net/img/postpics/711_1.jpg" alt="" class='picture' >						                    
-                  </div>			           	  	
-                </div>			                
-			</div>
-		</div>			  
+	<div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
+	    <div class="modal-header">
+	        <a class="close" data-dismiss="modal">&times;</a>
+	        <h3 class="modal-title"></h3>
+	    </div>
+	    <div class="modal-body"><div class="modal-image"></div></div>
+	    <div class="modal-footer">
+			<a class="btn modal-download" target="_blank"><i class="icon-download"></i> Сохранить</a>
+			<a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000"><i class="icon-play icon-white"></i> Слайдшоу</a>
+			<a class="btn btn-primary modal-prev"><i class="icon-arrow-left icon-white"></i></a>
+	        <a class="btn btn-primary modal-next"><i class="icon-arrow-right icon-white"></i></a>
+	    </div>
 	</div>
 
 	<div class='row span10'>
@@ -35,28 +34,11 @@
 								
 					{$post->Text}
 											
-								{if $galleryItems|@count}
-											<table><tr>
-												<td>
-													<img src="/img/prev.gif" onclick="scrollDiv('divPostImages', 100);">
-												</td>
-												<td>
-													<div class="previewscroll nowrap">
-														<div id="divPostImages" style="left:10" title="">
-									{foreach from=$galleryItems item=pic name=cycle}
-										<a class='hand'>
-											<img class='preview' title='Щелкните для увеличения' onclick='galleryItem={$smarty.foreach.cycle.iteration}; ShowImageGallery("{$smarty.foreach.cycle.iteration}", true)' src='{$pic}' />
-										</a>
-											
-									{/foreach}
-														</div>
-													</div>
-												</td>
-												<td title="">
-													<img src="/img/next.gif" onclick="scrollDiv('divPostImages', -100);" title="" alt="">
-												</td>
-											</tr></table>
-								{/if}
+					{if $galleryItems|@count}											
+				<div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
+					{foreach from=$galleryItems item=pic name=cycle}<a href="{$pic}" data-gallery="gallery" title='{$smarty.foreach.cycle.iteration}'><img class='preview' title='Щелкните для увеличения' src='{$pic}' /></a>{/foreach}					
+				</div>											
+				{/if}
 																		
 			</div>
 							<br />
