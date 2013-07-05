@@ -112,6 +112,10 @@
 				{if $currentUser->IsLogged() && $currentUser->ID != $user->ID}
 					<button type="button" data-toggle="modal" data-target="#privateMessage" class='btn btn-primary btn-small'>Написать личное сообщение</button>
 				{/if}
+				
+				{if !$user->IsAuthorized() && $currentUser->IsAdmin()}
+					<button type="button" data-toggle="modal" class='authorize btn btn-warning btn-small' onclick='authorizeUser({$user->ID});'>Авторизовать</button>
+				{/if}
 			</div>
 		</div>
 	

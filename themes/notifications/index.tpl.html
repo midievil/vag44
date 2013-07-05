@@ -7,7 +7,7 @@
 			{/foreach}
 			
 			{foreach from=$unauthorizedUsers item=user}
-				Новый пользователь: <a class='button' href='/user/'>{$user.ID}</a>{$user.Name}</a><br />
+				Новый пользователь: <a class='button' href='/user/{$user.ID}'>{$user.Name}</a><br />
 			{/foreach}
 			
 			{if $unauthorizedUsers|@count == 0 && $feedbacks|@count == 0}

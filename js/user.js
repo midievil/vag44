@@ -243,3 +243,15 @@ function markOnline(userid)
 			});
 	setTimeout(function() { markOnline(userid); }, 1000*60);
 }
+
+function authorizeUser(userid)
+{
+	$.ajax({	type: "POST",	
+				url:"/response/userresponse.php",
+				data: "action=authorize&userid="+userid,
+				success: function(result) {						
+					//window.location = window.location;
+					$("button.authorize").replaceWith('Пользователь авторизован');
+				}
+			});
+}
