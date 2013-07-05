@@ -185,7 +185,7 @@
 			{
 				$postid = $_REQUEST["postid"];
 				$text = replaceSymbols(unescape($_REQUEST["text"]));			
-				$date = getCurrentDateText();			
+				$date = getCurrentDateText();
 				
 				$query = "
 					insert	into Comments (
@@ -231,8 +231,8 @@
 						$post = new Post($postid);
 						if($currentUser->ID != $post->UserID)
 						{
-							$notification = sprintf($i18n['notification_newcommentforpost'], $currentUser->ID, $currentUser->Name, $post->Title, $post->ID);
-							NotificationsDB::addNotification($post->UserID, $notification, 3, $date);						
+							$notification = $i18n['notification_newcommentforpost'];
+							NotificationsDB::addNotification($post->UserID, $notification, 3, $date);
 						}
 						
 						return;
