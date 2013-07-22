@@ -45,7 +45,6 @@
 		'profile_confirm' => 'И еще раз',
 		
 		'notification_newcommentforpost' => 'Пользователь <a href="/user/%d">%s</a> написал комментарий к вашему посту &laquo;%s&raquo;. <br /><br /><a class="btn btn-success btn-small" href="/post/%d?page=last">Посмотреть »</a>',
-		'notification_newcommentforcomment' => 'Пользователь <a href="/user/%d">%s</a> ответил на ваш <a rel="popover" data-content="%s">комментарий</a> к посту &laquo;%s&raquo;. <br /><br /><a class="btn btn-success btn-small" href="/post/%d?page=last">Посмотреть »</a>',
-		'notification_userauthorized' => 'Ура, Вы авторизованы на сайте! Теперь вы можете создавать блоги, писать посты &mdash; в общем всё, что могут делать остальные в нашей песочнице.<br />'
+		'notification_newcommentforcomment' => 'Пользователь <a href="/user/%d">%s</a> ответил на ваш <a rel="popover" data-content="%s">комментарий</a> к посту &laquo;%s&raquo;. <br /><br /><a class="btn btn-success btn-small" href="/post/%d?page=last">Посмотреть »</a>'
 	)
 ?>

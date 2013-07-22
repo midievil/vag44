@@ -7,15 +7,17 @@
 		return;
 	}
 	
-	require_once("../constants.php");
-	require_once("../db.php");
-	require_once '../inc/class.db.php';
-	require_once '../inc/class.fdb.php';	
+	chdir("..");
+	
+	require_once("constants.php");
+	require_once("db.php");
+	require_once 'inc/class.db.php';
+	require_once 'inc/class.fdb.php';	
 	connectToDB();	
-	require_once("../miscfunctions.php");
-	require_once("../userlogic.php");
-	require_once("../db/UserDB.php");
-	require_once("../db/GalleryDB.php");
+	require_once("miscfunctions.php");
+	require_once("userlogic.php");
+	require_once("db/UserDB.php");
+	require_once("db/GalleryDB.php");
 	
 	$currentUser = User::CurrentUser();
 	

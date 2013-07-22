@@ -185,7 +185,7 @@
 			{
 				$postid = $_REQUEST["postid"];
 				$text = replaceSymbols(unescape($_REQUEST["text"]));			
-				$date = getCurrentDateText();
+				$date = getCurrentDateText();			
 				
 				$query = "
 					insert	into Comments (
@@ -231,8 +231,8 @@
 						$post = new Post($postid);
 						if($currentUser->ID != $post->UserID)
 						{
-							$notification = $i18n['notification_newcommentforpost'];
-							NotificationsDB::addNotification($post->UserID, $notification, 3, $date);
+							$notification = sprintf($i18n['notification_newcommentforpost'], $currentUser->ID, $currentUser->Name, $post->Title, $post->ID);
+							NotificationsDB::addNotification($post->UserID, $notification, 3, $date);						
 						}
 						
 						return;
@@ -441,19 +441,16 @@
 						update	Comments 
 						set		Text = '$text'
 						where	ID = $commentid";
-					fDB::fexec($query);				
-					
-					$comment = new Comment($commentid);
-					echo $comment->Render();
 				}
 				else
 				{
 					$query = "
 						delete from	Comments 
 						where	ID = $commentid";
-					fDB::fexec($query);				
-					echo "deleted";
 				}
+					
+				fDB::fexec($query);				
+				echo "ok";
 			}
 			return;
 			

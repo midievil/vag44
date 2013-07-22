@@ -439,7 +439,7 @@
 				$rating = renderRatingForComment($this->Rating, $this->PostID, $this->ID, $this->UserID);
 				
 				$result = "
-					<div class='span10 comment row' commentid=".$this->ID." style='$tabulation'>
+					<div class='span10 comment row' style='$tabulation'>
 						<div class='well row'>
 							<div class='span1'>
 								$userPic

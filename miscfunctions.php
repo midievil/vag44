@@ -95,24 +95,13 @@
 	function pasteLinks($text)
 	{
 		//	Вставка линков вида [url=То_Что_Видит_Юзер]url[/url]
-		
-		//	[url='ololo'][img]<link>[/img][/url]
-		//	[img]<link>[/img]
-		$text = preg_replace('/((\[URL=(.*)\])?\[IMG\])(.*)(\[\/IMG\](\[\/URL\])?)/i', 
-	                    "<img src='$4' class='commentpic'></img><br />", 
-						$text);
-						
-		$text = preg_replace('/(\[URL=(.*)\])(.*)(\[\/URL\])/i', 
+		$text = preg_replace(	'/(\[url=(.*)\])(.*)(\[\/url\])/i', 
 	                    "<a href='$3'>$2</a><br />", 
-						$text);
-						
-		$text = preg_replace('/[^>"\']((https?|ftp|file):\/\/[^<>[:space:]]+[[:alnum:]\/](.jpg|.jpeg|.gif|.png))/i',
-						"<img src='$1' class='commentpic'></img><br />", 
 						$text);
 
 		
-		$text = preg_replace('/[^>"\']((https?|ftp|file):\/\/[^<>[:space:]]+[[:alnum:]\/])/i',
-                     " <a href=\"$1\">$1</a>", $text);		  
+		$text = ereg_replace("[^\"'](https?|ftp|file)://[^<>[:space:]]+[[:alnum:]/]",
+                     "<a href=\"\\0\">\\0</a>", $text);		
 		return $text;
 	}
 	
@@ -217,7 +206,7 @@
 			//$text = preg_replace('/<img.*"(http:\/\/[^<>[:space:]]+[[:alnum:]\/](.jpg|.jpeg|.gif|.png))"[^<>]+.*\/>/iu', "\\1", $text);
 			$matches = "";
 			preg_match_all(
-						'/[^>"\'](https?|ftp|file):\/\/[^<>[:space:]]+[[:alnum:]\/](.jpg|.jpeg|.gif|.png)/i', 
+						'/[^"](https?|ftp|file):\/\/[^<>[:space:]]+[[:alnum:]\/](.jpg|.jpeg|.gif|.png)/i', 
 	                    $text,
 						$matches,
 						PREG_PATTERN_ORDER);
@@ -257,7 +246,7 @@
 	
 	function formatText($text)
 	{
-		$text = ' '.$text.' ';
+		$text = " ".$text." ";
 		$text = preg_replace("/\[quote=(.+)](.*)\[\/quote]/", "<a class='quote'>\n<b>$1:</b> $2</a>", $text);
 		
 		$text = preg_replace("/\[file](.+)\[\/file]/", "\n<a class='comment' href='/uploads/postfiles/$1' target='_blank'><img width='50px' src='/img/file.jpg' title='скачать'><br />$1</a>", $text);
@@ -278,9 +267,8 @@
 										<div class='undercut'>", $text);
 		$text = str_replace("[/cut]", "</div></div>", $text);
 		
-		
+		$text = pastePics($text);
 		$text = pasteLinks($text);
-		//$text = pastePics($text);
 		
 		$text = str_replace("[IMG]", "", $text);
 		$text = str_replace("[/IMG]", "", $text);
@@ -438,6 +426,70 @@
 	    if ($num < 2097152) return chr(($num >> 18) + 240) . chr((($num >> 12) & 63) + 128) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
 	    return '';
 	} 
+	
+	function drawPageTitle($pageCode, $title, $content, $comment, $path)
+	{
+		global $currentUser;
+		
+		if(startsWith($pageCode, "userpic"))
+		{	
+			$splits = explode("=", $pageCode);
+			if(file_exists("./img/userpics/" . $splits[1]))
+			{
+				$img = "/img/userpics/" . $splits[1];
+			}
+		}
+		
+		if(!$img)
+		{
+			if(file_exists("./img/categoryimages/$pageCode.jpg"))
+			{
+				$img = "/img/categoryimages/$pageCode";
+			}
+			else 
+			{
+				$vendor = getCarVendorByUserID($currentUser->ID);			
+				if($vendor && file_exists("/img/categoryimages/$vendor.jpg"))
+				{
+					$img = "/img/categoryimages/$vendor";
+				}
+				else
+				{
+					$img = "/img/categoryimages/default";
+				}
+			}
+		}
+		
+		echo "
+<div class='categorytitle'>
+	<table cellspacing='0' >
+		<tr>
+			<td colspan='2' class='path'>
+				$path
+			</td>
+		</tr>
+		<tr>"
+			. ( $pageCode != 'none' ?
+			"<td class='icon' rowspan='2'>
+				<img class='pagetitle' src='$img.jpg' />			
+			</td>" : "" ). "
+			<td class='title'>
+				$title
+			</td>
+		</tr>
+		<tr>
+			<td class='comment'>
+				$comment
+			</td>
+		</tr>" . ( $content ? "
+		<tr>
+			<td colspan='2' class='content'>
+				$content
+			</td>
+		</tr>" : "" ) . "
+	</table>
+</div>";
+	}
 	
 	function getDateSelector($controlName, $selectedDate)
 	{

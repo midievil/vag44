@@ -13,8 +13,6 @@
 	
 	chdir("..");
 	
-	require_once "i18n/ru.php";
-	
 	require_once "constants.php";
 	require_once "db.php";
 	require_once 'inc/class.db.php';
@@ -261,6 +259,7 @@
 					}					
 				}												
 				echo "ok";
+
 			}
 			catch (Exception $e)
 			{
@@ -270,16 +269,13 @@
 			
 		case "authorize":
 			if(User::CurrentUser()->IsAdmin())
-			{
-				$userid = $_POST["userid"];
+			{				
+				$userid =  $_POST["userid"];
 				$query = "
-					UPDATE	Users
-					SET		GroupID = 2
-					WHERE	ID = $userid;";
-				fDB::fexec($query);
-				
-				$notification = sprintf($i18n['notification_userauthorized'], $currentUser->ID, $currentUser->Name, $post->Title, $post->ID);
-				NotificationsDB::addNotification($_POST["userid"], $notification, 1, getCurrentDateText());
+					update	Users
+					set		GroupID = 2
+					where	ID = $userid;";
+				mysql_query($query);
 			}
 			return;
 		
