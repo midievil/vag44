@@ -26,9 +26,11 @@
 		
 	switch($_REQUEST["action"])
 	{
-		case "getvendors":			
-			$result = CarDB::getVendors();
+		case "getvendors":
+			$onlyvag = isset($_REQUEST["onlyvag"]) ? $_REQUEST["onlyvag"] : true;
 			$withoutall = isset($_REQUEST["withoutall"]) ? $_REQUEST["withoutall"] : false;
+			
+			$result = CarDB::getVendors($onlyvag);		
 			
 			echo "<option value='-1'></option>";
 			
@@ -44,11 +46,14 @@
 			return;
 			
 		case "getmodels":
-			$result = fDB::fqueryAll("select ID, Name from Models where VendorID=".($_REQUEST["vendorid"]));
-			echo "<option value='-1'></option>";
-			foreach ($result as $row)
+			$result = fDB::fqueryAll("select ID, Name from Models where Visible=1 AND VendorID=".($_REQUEST["vendorid"]));
+			if(count($result) > 0)
 			{
-				echo "<option value=".($row["ID"]).">".($row["Name"])."</option>";
+				echo "<option value='-1'></option>";
+				foreach ($result as $row)
+				{
+					echo "<option value=".($row["ID"]).">".($row["Name"])."</option>";
+				}
 			}
 			return;
 		case "getgenerations":
@@ -82,8 +87,7 @@
 										
 				$query = "insert into Engines (Size, Fuel, Name, Valves, Cilinders, Layout, HP, CC) values ('$size', '$fuel', '$name', $valves, $cilinders, '$layout', $hp, $cc)" ;
 			
-				mysql_query($query);			
-				if(mysql_affected_rows() != 1)
+				if(fDB::fexec($query))
 				{
 					$isOK = false;
 					//writeQueryErrorToLog($query, mysql_error());
@@ -114,9 +118,8 @@
 				echo "assigned";
 			}
 			else
-			{
-				mysql_query("insert into EnginesToModels (EngineID, ModelID, Generation) values ($engine, $model, $generation)");
-				if(mysql_affected_rows() == 1)
+			{				
+				if(fDB::fexec("insert into EnginesToModels (EngineID, ModelID, Generation) values ($engine, $model, $generation)"))
 				{
 					echo "ok";
 				}
@@ -128,14 +131,14 @@
 			return;
 			
 		case "addcar":						
-			 $modelid = $_REQUEST["modelid"];
+			 $modelid = !empty($_REQUEST["modelid"]) && $_REQUEST["modelid"] != "null" ? $_REQUEST["modelid"] : -1;
+			 $name = !empty($_REQUEST["name"]) ? $_REQUEST["name"] : "";
 			 $currentUser = User::CurrentUser();
 			 if($currentUser->IsLogged())
 			 {
-				$query = "insert into Cars(UserID, ModelID) values ($currentUser->ID, $modelid)";				
-				mysql_query($query);
+				$query = "insert into Cars(UserID, ModelID, Name) values ($currentUser->ID, $modelid, '$name')";
 				
-				if(mysql_affected_rows() == 1)
+				if(fDB::fexec($query))
 				{
 					echo "ok";
 				}

@@ -5,6 +5,7 @@
 		{
 			$query = "
 			select	C.*,
+					M.Visible		ModelVisible,
 					M.Name			ModelName,
 					M.VendorID		VendorID,
 					M.Generations	GenerationsList,
@@ -35,6 +36,7 @@
 		{
 			$query = "
 			select	C.*,
+					M.Visible		ModelVisible,
 					M.Name			ModelName,
 					M.VendorID		VendorID,
 					M.Generations	GenerationsList,
@@ -65,6 +67,7 @@
 			try {
 				$query = "
 				select	C.*,
+						M.Visible		ModelVisible,
 						M.Name			ModelName,
 						M.VendorID		VendorID,
 						M.Generations	GenerationsList,
@@ -98,6 +101,7 @@
 		{
 			$query = "
 			select	C.*,
+					M.Visible		ModelVisible,
 					M.Name			ModelName,
 					M.VendorID		VendorID,
 					M.Generations	GenerationsList,
@@ -150,9 +154,9 @@
 			return fDB::fqueryAll($query);
 		}
 		
-		public static function getVendors()
+		public static function getVendors($onlyVag = true)
 		{
-			return fDB::fqueryAll("select ID, Name from Vendors where IsVag=1");			
+			return fDB::fqueryAll("select ID, Name from Vendors " . ($onlyVag ? "where IsVag=1" : ""));			
 		}
 		
 		public static function getCarVendorsForMenu()
@@ -174,8 +178,8 @@
 		{
 			$query = "
 			SELECT	M.ID,
-				M.Name,
-				count(C.ID) CountOnSite
+					M.Name,
+					count(C.ID) CountOnSite
 			FROM	Models M
 			JOIN  	Cars C on C.ModelID = M.ID
 			JOIN	Users U on U.ID = C.UserID

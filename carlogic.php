@@ -20,6 +20,7 @@
 		public $Mileage = 0;
 		public $InPast = 0;		
 		public $ModelName;
+		public $ModelVisible;
 		public $VendorID;
 		public $GenerationsList;
 		public $DoorsList;
@@ -87,6 +88,10 @@
 		
 		public function getShortDescription()
 		{
+			if(!$this->ModelVisible)
+			{
+				return $this->Name;
+			}
 			return $this->VendorName . ' ' . $this->ModelName . ' ' . $this->GenerationName();
 		}
 		

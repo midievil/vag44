@@ -149,7 +149,7 @@
 			
 			$.ajax(	{	type: "POST",	
 						url:"/response/carresponse.php",
-						data:"action=getvendors&withoutall=yes",
+						data:"action=getvendors&withoutall=yes&onlyvag=0",
 						success:	function(result){
 										$("#ddlSelectCarVendor").html(result);
 										$("#ddlSelectCarVendor").val(-1);
@@ -165,20 +165,32 @@
 	{
 		if(isValid == true)
 		{
-			$("#ddlSelectCarModel").html('');
-			$("#ddlSelectCarModel").prop('disabled', true);
+			$("#ddlSelectCarModel").html('');			
 			$("#btnSaveCar").addClass('disabled');
+			
+			$("#tbCarName").val('');
+			$("#ddlSelectCarModel").val(-1);
+			
 			if(vendorID != -1)
 			{
 				showCarSaveButton();
-				$("#ddlSelectCarModel").show();
+				$("#ddlSelectCarModel").hide();
+				$("#tbCarName").hide();
 				$.ajax(	{	type: "POST",	
 							url:"/response/carresponse.php",
 							data:"action=getmodels&vendorid="+vendorID,
 							success:	function(result){
-											$("#ddlSelectCarModel").html(result);
-											$("#ddlSelectCarModel").val(-1);
-											$("#ddlSelectCarModel").prop('disabled', false);
+											if(result == '')
+											{													
+												$("#tbCarName").show();
+												showCarSaveButton(undefined);
+											}
+											else
+											{
+												$("#ddlSelectCarModel").html(result);																									
+												$("#ddlSelectCarModel").show();
+												showCarSaveButton(undefined);
+											}											
 										}
 					}
 					);
@@ -188,7 +200,7 @@
 	
 	function showCarSaveButton(modelID)
 	{
-		if(modelID == undefined || modelID == -1)
+		if((modelID == undefined || modelID == -1) && $("#tbCarName").val() == '')
 		{
 			$("#btnSaveCar").addClass('disabled');
 		}
@@ -198,14 +210,14 @@
 		}
 	}
 	
-	function addCar(modelid)
+	function addCar()
 	{
 		if($("#btnSaveCar").hasClass("disabled")) {
 			return false;
 		}
 		$.ajax(	{	type: "POST",	
 							url:"/response/carresponse.php",
-							data:"action=addcar&modelid="+modelid,
+							data:"action=addcar&modelid="+$("#ddlSelectCarModel").val()+"&name="+$("#tbCarName").val(),
 							success:	function(result){
 											window.location = "/profile/cars";
 										}

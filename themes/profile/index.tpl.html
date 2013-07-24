@@ -195,12 +195,13 @@
 						<div class="control-group" id='divSelectModel'>
 							<label class="control-label">{$i18n.cars_model}</label>
 							<div class="controls">
-								<select id='ddlSelectCarModel' onchange='showCarSaveButton(this.value);' disabled></select>
+								<select id='ddlSelectCarModel' onchange='showCarSaveButton(this.value);'  class='hidden'></select>
+								<input type="text" id="tbCarName" class='hidden' onkeyup='showCarSaveButton(undefined);'>
 							</div>	
 						</div>
 						<div class="control-group">
 							<div class="controls">
-								<a class='btn btn-primary disabled' onclick='addCar($("#ddlSelectCarModel").val());' id='btnSaveCar'>сохранить</a>
+								<a class='btn btn-primary disabled' onclick='addCar();' id='btnSaveCar'>сохранить</a>
 							</div>				
 						</div>
 	                </div>
