@@ -113,8 +113,12 @@ try
 	foreach($newsRows as $newsRow)
 	{
 		$newNews = new Post();
-		$newNews->MakeFromRow($newsRow);
-		$news[] = $newNews;
+		$newNews->MakeFromRow($newsRow);		
+		if(!$newNews->Closed)
+		{
+			
+			$news[] = $newNews;
+		}
 	}
 	templater::assign('news', $news);
 	
