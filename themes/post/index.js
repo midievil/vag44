@@ -34,15 +34,17 @@
 	
 	function slideShow(picID)
 	{	
-		$('#slideShowModal div.item').removeClass('active');
-		$('#slideShowModal div.pic'+picID).addClass('active');
-		$('#slideShowModal').modal();
+		//$('#modal-gallery modal-image').innerHtml('<img src="/" />');
+		//$('#modal-gallery div.item').removeClass('active');
+		//$('#modal-gallery div.pic'+picID).addClass('active');
+		//$('#modal-gallery').modal();
 	}	
 	
 	function EnlargePic(picUrl)
 	{	
-		$('#enlargePicModal img.picture').attr('src', picUrl);
-		$('#enlargePicModal').modal();
+		$('#modal-enlarge .modal-image').html('<img src='+picUrl+' />');
+		$('#modal-enlarge').modal();	
+		
 	}
 </script>
 {/literal}
