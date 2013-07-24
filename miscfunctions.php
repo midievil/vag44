@@ -101,7 +101,7 @@
 
 		
 		$text = ereg_replace("[^\"'](https?|ftp|file)://[^<>[:space:]]+[[:alnum:]/]",
-                     "<a href=\"\\0\">\\0</a>", $text);		
+                     "<a href='\\0'>\\0</a>", $text);		
 		return $text;
 	}
 	
