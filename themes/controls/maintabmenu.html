@@ -1,5 +1,4 @@
 			<ul id="mainTabMenu" class="nav nav-pills">
-			{$active}
 					<li {if $active=='home' || $active==null}class="active"{/if}><a href="#home" data-toggle="tab" {if $active!='home' && $active!=null}onclick="Redirect('');"{/if}>Форум</a></li>
 					<li {if $active=='feed'}class="active"{/if}><a href="#feed" data-toggle="tab" {if $active!='feed' && $active!=null}onclick="Redirect('feed');"{/if}>Что нового?
 					{if $user_notifications_count > 0}
