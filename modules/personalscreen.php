@@ -37,13 +37,16 @@
 			$car->MakeFromRow($carRow);
 			if(!$car->InPast)
 			{
-				if(!$car->EngineName)
+				if($car->IsVag)
 				{
-					$messages[] = "У вашего автомобиля " . $car->getShortDescription() . " не указан двигатель. Вы можете указать его <a href='/profile/cars'>здесь</a><br/>";
-				}
-				if($car->PostID && !file_exists("img/postpics/" . $car->PostID . "_1.jpg"))
-				{
-					$messages[] = "В описании вашего автомобиля " . $car->getShortDescription() . " нет ни одного фото, поэтому он не отображается в списке клубных автомобилей. Вы можете добавить фото <a href='/editpost/" . $car->PostID . "'>здесь</a>";
+					if(!$car->EngineName)
+					{
+						$messages[] = "У вашего автомобиля " . $car->getShortDescription() . " не указан двигатель. Вы можете указать его <a href='/profile/cars'>здесь</a><br/>";
+					}
+					if($car->PostID && !file_exists("img/postpics/" . $car->PostID . "_1.jpg"))
+					{
+						$messages[] = "В описании вашего автомобиля " . $car->getShortDescription() . " нет ни одного фото, поэтому он не отображается в списке клубных автомобилей. Вы можете добавить фото <a href='/editpost/" . $car->PostID . "'>здесь</a>";
+					}
 				}
 				
 				$serviceRows = CarDB::getCarServiceHistory($car->ID, true);

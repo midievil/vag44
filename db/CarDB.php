@@ -11,6 +11,7 @@
 					M.Generations	GenerationsList,
 					M.Doors			DoorsList,
 					V.Name			VendorName,
+					V.IsVag			IsVag,
 					P.Title			DescriptionTitle,
 					P.Text			Description,
 					P.ID			PostID,
@@ -42,6 +43,7 @@
 					M.Generations	GenerationsList,
 					M.Doors			DoorsList,
 					V.Name			VendorName,
+					V.IsVag			IsVag,
 					E.Name			EngineName,
 					E.Size			EngineSize,
 					E.HP			EngineHP,
@@ -73,6 +75,7 @@
 						M.Generations	GenerationsList,
 						M.Doors			DoorsList,
 						V.Name			VendorName,
+						V.IsVag			IsVag,
 						E.Name			EngineName,
 						E.Size			EngineSize,
 						E.HP			EngineHP,
@@ -107,6 +110,7 @@
 					M.Generations	GenerationsList,
 					M.Doors			DoorsList,
 					V.Name			VendorName,
+					V.IsVag			IsVag,
 					E.Name			EngineName,
 					E.Size			EngineSize,
 					E.HP			EngineHP,
@@ -215,28 +219,28 @@
 			S.Mileage,
 			S.DontRemind,
 			CASE
-			WHEN	SI.Time IS NULL THEN ''
-			WHEN	SI.Time like '%m' THEN DATE_ADD(S.Date, INTERVAL  REPLACE(SI.Time, 'm', '') MONTH)
-			ELSE	''
+				WHEN	SI.Time IS NULL THEN ''
+				WHEN	SI.Time like '%m' THEN DATE_ADD(S.Date, INTERVAL  REPLACE(SI.Time, 'm', '') MONTH)
+				ELSE	''
 			END	NextTime,
 			CASE
-			WHEN	SI.Time IS NULL THEN -10000
-			WHEN	SI.Time like '%m'
-			THEN DATEDIFF(
-			DATE_ADD(
-			S.Date,
-			INTERVAL  REPLACE(SI.Time, 'm', '') MONTH),
-			'".getCurrentDay()."')
-			ELSE	-10000
+				WHEN	SI.Time IS NULL THEN -10000
+				WHEN	SI.Time like '%m'
+					THEN DATEDIFF(
+						DATE_ADD(
+						S.Date,
+						INTERVAL  REPLACE(SI.Time, 'm', '') MONTH),
+						'".getCurrentDay()."')
+				ELSE	-10000
 			END	DaysLeft,
 			SI.Mileage	NextMileage
 			from	Service S
 			join	ServiceOperatons SO on SO.ID = S.OperationID
-			" . ( $onlyWithIntervals ? "" : "left" ) . " join
-			ServiceIntervals SI on SI.OperationID = SO.ID
+			" . ( $onlyWithIntervals ? "" : "left" ) . " 
+			join	ServiceIntervals SI on SI.OperationID = SO.ID
 			where	S.CarID = $carID
 			ORDER	BY S.Date,
-			S.Mileage";
+					S.Mileage";
 		
 			return fDB::fqueryAll($query);
 		}

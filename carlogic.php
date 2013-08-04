@@ -30,6 +30,7 @@
 		public $EngineHP;
 		public $EngineFuel;
 		public $PostID;
+		public $IsVag;
 		
 		public function __construct($id = null) {
 			if($id)
