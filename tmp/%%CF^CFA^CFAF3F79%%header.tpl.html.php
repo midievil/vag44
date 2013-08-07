@@ -1,3 +1,5 @@
+<?php /* Smarty version 2.6.22, created on 2013-08-01 17:30:39
+         compiled from header.tpl.html */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -7,12 +9,10 @@
 		<meta name="keywords" content="Volkswagen Кострома, Клуб VAG в Костроме, VAG Кострома, Skoda кострома, Audi Кострома, Seat кострома">
 		<meta http-equiv="description" content="Клуб владельцев и поклонников автомобилей Volkswagen, Skoda, Audi, Seat в Костроме и Костромской области. ">
 	
-		{*<link rel="stylesheet" type="text/css" href="/css/main.css?version=41" />*}
-		
+				
 		<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />		
 		<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-list.css" />
-		{*<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-responsive.min.css">*}
-		<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-image-gallery.min.css">
+				<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-image-gallery.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/popupbox.css?version=16.10.2012" />
 		<link rel="stylesheet" type="text/css" href="/css/gallery.css?version=3" />	
 		<link rel="shortcut icon" href="/img/favicon.ico">
@@ -44,17 +44,18 @@
 		<script type="text/javascript" src="/js/gallery.js?version=9"></script>
 		<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
 		<script>
-		{if $currentUser->IsLogged()}
-			markOnline({$currentUser->ID});
-		{/if}			
+		<?php if ($this->_tpl_vars['currentUser']->IsLogged()): ?>
+			markOnline(<?php echo $this->_tpl_vars['currentUser']->ID; ?>
+);
+		<?php endif; ?>			
 			
 		var categoryImages = new Array();
 		
-		{literal}
+		<?php echo '
 		function highlightPrivateMessages()
 		{
-				$("#aPrivateMessages").animate( {color: '#dd3333' }, "slow", function() {
-						$("#aPrivateMessages").animate( {color: '#ffffff' }, "slow");
+				$("#aPrivateMessages").animate( {color: \'#dd3333\' }, "slow", function() {
+						$("#aPrivateMessages").animate( {color: \'#ffffff\' }, "slow");
 						highlightPrivateMessages();
 					}
 				);
@@ -67,7 +68,9 @@
 					data:	"action=setresolution&width="+document.width,
 					success: function(result){
 						//alert(result);
-						//var screen_width = {/literal}{$screen_width}{literal};
+						//var screen_width = '; ?>
+<?php echo $this->_tpl_vars['screen_width']; ?>
+<?php echo ';
 						//if(result != screen_width)
 						//{
 							//alert(result + " " + screen_width);
@@ -76,7 +79,8 @@
 					});
 		    
 		});
-		{/literal}
+		'; ?>
+
 			
 		</script>
 	</head>
@@ -88,24 +92,18 @@
 		<div id="divGalleryBack" style="position:absolute; display:none; z-index:1;">
 	
 		</div>		
-		{*<div id="divUserPic" class='userpic'>
-	 
-		</div>*}
-				
+						
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class='navbar-inner'>
 				<div class="container-fluid">
-					<img src='/img/logo_small.png' class='pull-left hand' style='margin-right: 10px' onclick='window.location="/";' /> {* <a href='/' class='brand'>{$screen_width}</a>*}
-					<a href='/' class='brand' style='color:#ffffff'>{*Привет, {$currentUser->Name}*}Kostroma VAG Club</a>
+					<img src='/img/logo_small.png' class='pull-left hand' style='margin-right: 10px' onclick='window.location="/";' /> 					<a href='/' class='brand' style='color:#ffffff'>Kostroma VAG Club</a>
 					
-					{if $currentUser->IsLogged()}
+					<?php if ($this->_tpl_vars['currentUser']->IsLogged()): ?>
 						<div class="nav-collapse collapse">
 							<ul class="nav pull-right">
-								{*<li>
-									<li><a href="/"><i class="icon-home icon-white"></i> Домой</a></li>
-								</li>*}
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-user icon-white'></i> {$currentUser->Name} <b class="caret"></b></a>
+																<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class='icon-user icon-white'></i> <?php echo $this->_tpl_vars['currentUser']->Name; ?>
+ <b class="caret"></b></a>
 									<ul class="dropdown-menu">
 									  <li><a href="/profile/about">О себе</a></li>
 									  <li><a href="/profile/cars">Мои авто</a></li>
@@ -116,11 +114,11 @@
 									</ul>
 								</li>								
 								
-								{if $screen_width < 1200}
+								<?php if ($this->_tpl_vars['screen_width'] < 1200): ?>
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Ещё <b class="caret"></b></a>
 										<ul class="dropdown-menu">
-								{/if}
+								<?php endif; ?>
 								<li>
 									<a href='/service' >сервисная книжка</a>
 								</li>
@@ -131,19 +129,20 @@
 								<li>
 									<a href='/gallery' >галерея</a>
 								</li>
-								{if $screen_width < 1200}
+								<?php if ($this->_tpl_vars['screen_width'] < 1200): ?>
 										</ul>
 									</li>
-								{/if}
+								<?php endif; ?>
 								<li>
-								{if $privateMessagesCount>0}
-									<a id='aPrivateMessages' href='/privatemessages' class='active'>личные сообщения ({$privateMessagesCount})</a>
+								<?php if ($this->_tpl_vars['privateMessagesCount'] > 0): ?>
+									<a id='aPrivateMessages' href='/privatemessages' class='active'>личные сообщения (<?php echo $this->_tpl_vars['privateMessagesCount']; ?>
+)</a>
 									<script>
 										highlightPrivateMessages();
 									</script>
-								{else}
+								<?php else: ?>
 									<a id='aPrivateMessages' href='/privatemessages'>личные сообщения</a>
-								{/if}
+								<?php endif; ?>
 								</li>
 								<li>
 									<form class="navbar-form pull-right">  
@@ -156,7 +155,7 @@
 								</li>
 							</ul>
 						</div>
-					{else}
+					<?php else: ?>
 						<div class="nav-collapse collapse">
 						<nobr>
 							<ul class="nav">								
@@ -175,31 +174,30 @@
 						</div>
 						
 						
-					{/if}	
+					<?php endif; ?>	
 				
 				</div>	
 				
 			</div>
 		</div>
 		
-		{*<div class="pagetop logo" align="center">			
-				<div style="float:left">
-					<a href="/"><img style="border:0px" src="/img/bluelogo.png?version=winter"></a>
-				</div>			
-		</div>*}
-		
+				
 		<div class="container-fluid" id='wrap'>
 	      <div class="row-fluid" id='main'>
 	        <div class="span3">
 	          <div class="well sidebar-nav sidebar-nav-fixed span3">
-				{include file="controls/newsblock.html" news=$news}	            
+				<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => "controls/newsblock.html", 'smarty_include_vars' => array('news' => $this->_tpl_vars['news'])));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>	            
 	          </div><!--/.well -->
 	        </div><!--/span-->
 	        <div class="span9">
 	          
 			
 		
-		{literal}
+		<?php echo '
 		<script>	
 			$(".login").keypress(function(e) {
 				if(e.keyCode == 13)
@@ -208,6 +206,7 @@
 				}	
 			});						
 		</script>
-		{/literal}
+		'; ?>
+
 		
 		

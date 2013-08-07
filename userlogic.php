@@ -83,6 +83,11 @@
 		{
 			return $this->GroupInnerName == "Admins";
 		}
+        
+        public function IsAuthorized()
+		{
+			return $this->GroupInnerName != "Unauthorized";
+		}
 		
 		public function IsOnline()
 		{

@@ -1,0 +1,3213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Name>vag44</Name>
+    <ProjectGuid>62c5d7cb-4d1a-4966-8206-3b68ce002cfa</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>vag44</RootNamespace>
+    <!-- important to be opened by PHP Tools, when also Phalanger Tools are installed -->
+    <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
+    <AssemblyName>vag44</AssemblyName>
+    <IISProjectUrl>http://localhost:26913/</IISProjectUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <IncludeDebugInformation>true</IncludeDebugInformation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <IncludeDebugInformation>false</IncludeDebugInformation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="admin\feedback.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="admin\tags.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="admin\tips.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bloglogic.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="carlogic.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\ckeditor.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\ckeditor_php4.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\ckeditor_php5.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\_samples\assets\_posteddata.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\_samples\php\advanced.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\_samples\php\events.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\_samples\php\replace.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\_samples\php\replaceall.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\_samples\php\standalone.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ckeditor\_samples\sample_posteddata.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="constants.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="controls.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\AdminDB.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\BlogDB.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\CarDB.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\GalleryDB.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\MessagingDB.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\NotificationsDB.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="db\UserDB.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="functions.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="i18n\ru.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\class.db.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\class.fdb.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\class.mLoadable.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\class.mLogic.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\class.mNotification.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\class.templater.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\simpleimage.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\Config_File.class.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.assemble_plugin_filepath.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.assign_smarty_interface.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.create_dir_structure.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.display_debug_console.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.get_include_path.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.get_microtime.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.get_php_resource.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.is_secure.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.is_trusted.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.load_plugins.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.load_resource_plugin.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.process_cached_inserts.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.process_compiled_include.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.read_cache_file.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.rmdir.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.rm_auto.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.run_insert_handler.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.smarty_include_php.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.write_cache_file.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.write_compiled_include.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.write_compiled_resource.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\internals\core.write_file.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\block.textformat.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\compiler.assign.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.assign_debug_info.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.config_load.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.counter.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.cycle.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.debug.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.eval.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.fetch.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.html_checkboxes.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.html_image.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.html_options.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.html_radios.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.html_select_date.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.html_select_time.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.html_table.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.mailto.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.math.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.popup.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\function.popup_init.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.capitalize.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.caps.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.cat.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.count_characters.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.count_paragraphs.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.count_sentences.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.count_words.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.date_format.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.debug_print_var.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.default.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.escape.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.indent.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.lower.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.nl2br.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.regex_replace.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.replace.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.spacify.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.string_format.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.strip.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.strip_tags.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.truncate.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.upper.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\modifier.wordwrap.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\outputfilter.trimwhitespace.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\shared.escape_special_chars.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\plugins\shared.make_timestamp.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\Smarty.class.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="inc\smarty\Smarty_Compiler.class.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="index.php" />
+    <Compile Include="jobs\prerenderratings.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="jobs\prerendervisits.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="messaginglogic.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="miscfunctions.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\admin\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\blog\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\cars\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\category\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\feedback\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\gallery\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\knowlege\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\mainpage\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\personalscreen.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\post\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\privatemessages\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\profile\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\registration\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\restorepassword\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\rules\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\search\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\service\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\tips\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\userblogs\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\users\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\user\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="modules\writepost\index.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="phpinfo.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="response\blogresponse.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="response\carresponse.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="response\doajaxfileupload - Copy.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="response\doajaxfileupload.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="response\feedback.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="response\galleryresponse.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="response\messagingresponse.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="response\notificationsresponse.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="response\userresponse.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="res\userblogs.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="res\viewblog.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tools\doajaxfileupload.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tools\simpleimage.php">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="userlogic.php">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="admin\" />
+    <Folder Include="bootstrap\" />
+    <Folder Include="bootstrap\css\" />
+    <Folder Include="bootstrap\img\" />
+    <Folder Include="bootstrap\js\" />
+    <Folder Include="ckeditor\" />
+    <Folder Include="ckeditor\adapters\" />
+    <Folder Include="ckeditor\images\" />
+    <Folder Include="ckeditor\lang\" />
+    <Folder Include="ckeditor\plugins\" />
+    <Folder Include="ckeditor\plugins\a11yhelp\" />
+    <Folder Include="ckeditor\plugins\a11yhelp\dialogs\" />
+    <Folder Include="ckeditor\plugins\a11yhelp\lang\" />
+    <Folder Include="ckeditor\plugins\about\" />
+    <Folder Include="ckeditor\plugins\about\dialogs\" />
+    <Folder Include="ckeditor\plugins\adobeair\" />
+    <Folder Include="ckeditor\plugins\ajax\" />
+    <Folder Include="ckeditor\plugins\autogrow\" />
+    <Folder Include="ckeditor\plugins\bbcode\" />
+    <Folder Include="ckeditor\plugins\clipboard\" />
+    <Folder Include="ckeditor\plugins\clipboard\dialogs\" />
+    <Folder Include="ckeditor\plugins\colordialog\" />
+    <Folder Include="ckeditor\plugins\colordialog\dialogs\" />
+    <Folder Include="ckeditor\plugins\devtools\" />
+    <Folder Include="ckeditor\plugins\devtools\lang\" />
+    <Folder Include="ckeditor\plugins\dialog\" />
+    <Folder Include="ckeditor\plugins\div\" />
+    <Folder Include="ckeditor\plugins\div\dialogs\" />
+    <Folder Include="ckeditor\plugins\docprops\" />
+    <Folder Include="ckeditor\plugins\docprops\dialogs\" />
+    <Folder Include="ckeditor\plugins\find\" />
+    <Folder Include="ckeditor\plugins\find\dialogs\" />
+    <Folder Include="ckeditor\plugins\flash\" />
+    <Folder Include="ckeditor\plugins\flash\dialogs\" />
+    <Folder Include="ckeditor\plugins\flash\images\" />
+    <Folder Include="ckeditor\plugins\forms\" />
+    <Folder Include="ckeditor\plugins\forms\dialogs\" />
+    <Folder Include="ckeditor\plugins\forms\images\" />
+    <Folder Include="ckeditor\plugins\iframedialog\" />
+    <Folder Include="ckeditor\plugins\iframe\" />
+    <Folder Include="ckeditor\plugins\iframe\dialogs\" />
+    <Folder Include="ckeditor\plugins\iframe\images\" />
+    <Folder Include="ckeditor\plugins\image\" />
+    <Folder Include="ckeditor\plugins\image\dialogs\" />
+    <Folder Include="ckeditor\plugins\link\" />
+    <Folder Include="ckeditor\plugins\link\dialogs\" />
+    <Folder Include="ckeditor\plugins\link\images\" />
+    <Folder Include="ckeditor\plugins\liststyle\" />
+    <Folder Include="ckeditor\plugins\liststyle\dialogs\" />
+    <Folder Include="ckeditor\plugins\pagebreak\" />
+    <Folder Include="ckeditor\plugins\pagebreak\images\" />
+    <Folder Include="ckeditor\plugins\pastefromword\" />
+    <Folder Include="ckeditor\plugins\pastefromword\filter\" />
+    <Folder Include="ckeditor\plugins\pastetext\" />
+    <Folder Include="ckeditor\plugins\pastetext\dialogs\" />
+    <Folder Include="ckeditor\plugins\placeholder\" />
+    <Folder Include="ckeditor\plugins\placeholder\dialogs\" />
+    <Folder Include="ckeditor\plugins\placeholder\lang\" />
+    <Folder Include="ckeditor\plugins\scayt\" />
+    <Folder Include="ckeditor\plugins\scayt\dialogs\" />
+    <Folder Include="ckeditor\plugins\showblocks\" />
+    <Folder Include="ckeditor\plugins\showblocks\images\" />
+    <Folder Include="ckeditor\plugins\smiley\" />
+    <Folder Include="ckeditor\plugins\smiley\dialogs\" />
+    <Folder Include="ckeditor\plugins\smiley\images\" />
+    <Folder Include="ckeditor\plugins\specialchar\" />
+    <Folder Include="ckeditor\plugins\specialchar\dialogs\" />
+    <Folder Include="ckeditor\plugins\specialchar\lang\" />
+    <Folder Include="ckeditor\plugins\stylesheetparser\" />
+    <Folder Include="ckeditor\plugins\styles\" />
+    <Folder Include="ckeditor\plugins\styles\styles\" />
+    <Folder Include="ckeditor\plugins\tableresize\" />
+    <Folder Include="ckeditor\plugins\tabletools\" />
+    <Folder Include="ckeditor\plugins\tabletools\dialogs\" />
+    <Folder Include="ckeditor\plugins\table\" />
+    <Folder Include="ckeditor\plugins\table\dialogs\" />
+    <Folder Include="ckeditor\plugins\templates\" />
+    <Folder Include="ckeditor\plugins\templates\dialogs\" />
+    <Folder Include="ckeditor\plugins\templates\templates\" />
+    <Folder Include="ckeditor\plugins\templates\templates\images\" />
+    <Folder Include="ckeditor\plugins\uicolor\" />
+    <Folder Include="ckeditor\plugins\uicolor\dialogs\" />
+    <Folder Include="ckeditor\plugins\uicolor\lang\" />
+    <Folder Include="ckeditor\plugins\uicolor\yui\" />
+    <Folder Include="ckeditor\plugins\uicolor\yui\assets\" />
+    <Folder Include="ckeditor\plugins\wsc\" />
+    <Folder Include="ckeditor\plugins\wsc\dialogs\" />
+    <Folder Include="ckeditor\plugins\xml\" />
+    <Folder Include="ckeditor\skins\" />
+    <Folder Include="ckeditor\skins\kama\" />
+    <Folder Include="ckeditor\skins\kama\images\" />
+    <Folder Include="ckeditor\skins\office2003\" />
+    <Folder Include="ckeditor\skins\office2003\images\" />
+    <Folder Include="ckeditor\skins\v2\" />
+    <Folder Include="ckeditor\skins\v2\images\" />
+    <Folder Include="ckeditor\themes\" />
+    <Folder Include="ckeditor\themes\default\" />
+    <Folder Include="ckeditor\_samples\" />
+    <Folder Include="ckeditor\_samples\adobeair\" />
+    <Folder Include="ckeditor\_samples\api_dialog\" />
+    <Folder Include="ckeditor\_samples\asp\" />
+    <Folder Include="ckeditor\_samples\assets\" />
+    <Folder Include="ckeditor\_samples\php\" />
+    <Folder Include="ckeditor\_source\" />
+    <Folder Include="ckeditor\_source\adapters\" />
+    <Folder Include="ckeditor\_source\core\" />
+    <Folder Include="ckeditor\_source\core\dom\" />
+    <Folder Include="ckeditor\_source\core\htmlparser\" />
+    <Folder Include="ckeditor\_source\lang\" />
+    <Folder Include="ckeditor\_source\plugins\" />
+    <Folder Include="ckeditor\_source\plugins\a11yhelp\" />
+    <Folder Include="ckeditor\_source\plugins\a11yhelp\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\a11yhelp\lang\" />
+    <Folder Include="ckeditor\_source\plugins\about\" />
+    <Folder Include="ckeditor\_source\plugins\about\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\adobeair\" />
+    <Folder Include="ckeditor\_source\plugins\ajax\" />
+    <Folder Include="ckeditor\_source\plugins\autogrow\" />
+    <Folder Include="ckeditor\_source\plugins\basicstyles\" />
+    <Folder Include="ckeditor\_source\plugins\bbcode\" />
+    <Folder Include="ckeditor\_source\plugins\bidi\" />
+    <Folder Include="ckeditor\_source\plugins\blockquote\" />
+    <Folder Include="ckeditor\_source\plugins\button\" />
+    <Folder Include="ckeditor\_source\plugins\clipboard\" />
+    <Folder Include="ckeditor\_source\plugins\clipboard\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\colorbutton\" />
+    <Folder Include="ckeditor\_source\plugins\colordialog\" />
+    <Folder Include="ckeditor\_source\plugins\colordialog\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\contextmenu\" />
+    <Folder Include="ckeditor\_source\plugins\devtools\" />
+    <Folder Include="ckeditor\_source\plugins\devtools\lang\" />
+    <Folder Include="ckeditor\_source\plugins\dialogadvtab\" />
+    <Folder Include="ckeditor\_source\plugins\dialogui\" />
+    <Folder Include="ckeditor\_source\plugins\dialog\" />
+    <Folder Include="ckeditor\_source\plugins\div\" />
+    <Folder Include="ckeditor\_source\plugins\div\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\docprops\" />
+    <Folder Include="ckeditor\_source\plugins\docprops\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\domiterator\" />
+    <Folder Include="ckeditor\_source\plugins\editingblock\" />
+    <Folder Include="ckeditor\_source\plugins\elementspath\" />
+    <Folder Include="ckeditor\_source\plugins\enterkey\" />
+    <Folder Include="ckeditor\_source\plugins\entities\" />
+    <Folder Include="ckeditor\_source\plugins\fakeobjects\" />
+    <Folder Include="ckeditor\_source\plugins\filebrowser\" />
+    <Folder Include="ckeditor\_source\plugins\find\" />
+    <Folder Include="ckeditor\_source\plugins\find\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\flash\" />
+    <Folder Include="ckeditor\_source\plugins\flash\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\flash\images\" />
+    <Folder Include="ckeditor\_source\plugins\floatpanel\" />
+    <Folder Include="ckeditor\_source\plugins\font\" />
+    <Folder Include="ckeditor\_source\plugins\format\" />
+    <Folder Include="ckeditor\_source\plugins\forms\" />
+    <Folder Include="ckeditor\_source\plugins\forms\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\forms\images\" />
+    <Folder Include="ckeditor\_source\plugins\horizontalrule\" />
+    <Folder Include="ckeditor\_source\plugins\htmldataprocessor\" />
+    <Folder Include="ckeditor\_source\plugins\htmlwriter\" />
+    <Folder Include="ckeditor\_source\plugins\iframedialog\" />
+    <Folder Include="ckeditor\_source\plugins\iframe\" />
+    <Folder Include="ckeditor\_source\plugins\iframe\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\iframe\images\" />
+    <Folder Include="ckeditor\_source\plugins\image\" />
+    <Folder Include="ckeditor\_source\plugins\image\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\indent\" />
+    <Folder Include="ckeditor\_source\plugins\justify\" />
+    <Folder Include="ckeditor\_source\plugins\keystrokes\" />
+    <Folder Include="ckeditor\_source\plugins\link\" />
+    <Folder Include="ckeditor\_source\plugins\link\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\link\images\" />
+    <Folder Include="ckeditor\_source\plugins\listblock\" />
+    <Folder Include="ckeditor\_source\plugins\liststyle\" />
+    <Folder Include="ckeditor\_source\plugins\liststyle\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\list\" />
+    <Folder Include="ckeditor\_source\plugins\maximize\" />
+    <Folder Include="ckeditor\_source\plugins\menubutton\" />
+    <Folder Include="ckeditor\_source\plugins\menu\" />
+    <Folder Include="ckeditor\_source\plugins\newpage\" />
+    <Folder Include="ckeditor\_source\plugins\pagebreak\" />
+    <Folder Include="ckeditor\_source\plugins\pagebreak\images\" />
+    <Folder Include="ckeditor\_source\plugins\panelbutton\" />
+    <Folder Include="ckeditor\_source\plugins\panel\" />
+    <Folder Include="ckeditor\_source\plugins\pastefromword\" />
+    <Folder Include="ckeditor\_source\plugins\pastefromword\filter\" />
+    <Folder Include="ckeditor\_source\plugins\pastetext\" />
+    <Folder Include="ckeditor\_source\plugins\pastetext\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\placeholder\" />
+    <Folder Include="ckeditor\_source\plugins\placeholder\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\placeholder\lang\" />
+    <Folder Include="ckeditor\_source\plugins\popup\" />
+    <Folder Include="ckeditor\_source\plugins\preview\" />
+    <Folder Include="ckeditor\_source\plugins\print\" />
+    <Folder Include="ckeditor\_source\plugins\removeformat\" />
+    <Folder Include="ckeditor\_source\plugins\resize\" />
+    <Folder Include="ckeditor\_source\plugins\richcombo\" />
+    <Folder Include="ckeditor\_source\plugins\save\" />
+    <Folder Include="ckeditor\_source\plugins\scayt\" />
+    <Folder Include="ckeditor\_source\plugins\scayt\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\selection\" />
+    <Folder Include="ckeditor\_source\plugins\showblocks\" />
+    <Folder Include="ckeditor\_source\plugins\showblocks\images\" />
+    <Folder Include="ckeditor\_source\plugins\showborders\" />
+    <Folder Include="ckeditor\_source\plugins\smiley\" />
+    <Folder Include="ckeditor\_source\plugins\smiley\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\smiley\images\" />
+    <Folder Include="ckeditor\_source\plugins\sourcearea\" />
+    <Folder Include="ckeditor\_source\plugins\specialchar\" />
+    <Folder Include="ckeditor\_source\plugins\specialchar\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\specialchar\lang\" />
+    <Folder Include="ckeditor\_source\plugins\stylescombo\" />
+    <Folder Include="ckeditor\_source\plugins\stylesheetparser\" />
+    <Folder Include="ckeditor\_source\plugins\styles\" />
+    <Folder Include="ckeditor\_source\plugins\styles\styles\" />
+    <Folder Include="ckeditor\_source\plugins\tableresize\" />
+    <Folder Include="ckeditor\_source\plugins\tabletools\" />
+    <Folder Include="ckeditor\_source\plugins\tabletools\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\table\" />
+    <Folder Include="ckeditor\_source\plugins\table\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\tab\" />
+    <Folder Include="ckeditor\_source\plugins\templates\" />
+    <Folder Include="ckeditor\_source\plugins\templates\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\templates\templates\" />
+    <Folder Include="ckeditor\_source\plugins\templates\templates\images\" />
+    <Folder Include="ckeditor\_source\plugins\toolbar\" />
+    <Folder Include="ckeditor\_source\plugins\uicolor\" />
+    <Folder Include="ckeditor\_source\plugins\uicolor\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\uicolor\lang\" />
+    <Folder Include="ckeditor\_source\plugins\uicolor\yui\" />
+    <Folder Include="ckeditor\_source\plugins\uicolor\yui\assets\" />
+    <Folder Include="ckeditor\_source\plugins\undo\" />
+    <Folder Include="ckeditor\_source\plugins\wsc\" />
+    <Folder Include="ckeditor\_source\plugins\wsc\dialogs\" />
+    <Folder Include="ckeditor\_source\plugins\wysiwygarea\" />
+    <Folder Include="ckeditor\_source\plugins\xml\" />
+    <Folder Include="ckeditor\_source\skins\" />
+    <Folder Include="ckeditor\_source\skins\kama\" />
+    <Folder Include="ckeditor\_source\skins\kama\images\" />
+    <Folder Include="ckeditor\_source\skins\office2003\" />
+    <Folder Include="ckeditor\_source\skins\office2003\images\" />
+    <Folder Include="ckeditor\_source\skins\v2\" />
+    <Folder Include="ckeditor\_source\skins\v2\images\" />
+    <Folder Include="ckeditor\_source\themes\" />
+    <Folder Include="ckeditor\_source\themes\default\" />
+    <Folder Include="css\" />
+    <Folder Include="db\" />
+    <Folder Include="download\" />
+    <Folder Include="i18n\" />
+    <Folder Include="img\" />
+    <Folder Include="img\backgrounds\" />
+    <Folder Include="img\carousel\" />
+    <Folder Include="img\carpics\" />
+    <Folder Include="img\categoryimages\" />
+    <Folder Include="img\foreign\" />
+    <Folder Include="img\forms\" />
+    <Folder Include="img\misc\" />
+    <Folder Include="img\newpics\" />
+    <Folder Include="img\postpics\" />
+    <Folder Include="img\postpics\previews\" />
+    <Folder Include="img\social\" />
+    <Folder Include="img\userpics\" />
+    <Folder Include="inc\" />
+    <Folder Include="inc\smarty\" />
+    <Folder Include="inc\smarty\internals\" />
+    <Folder Include="inc\smarty\plugins\" />
+    <Folder Include="jobs\" />
+    <Folder Include="js\" />
+    <Folder Include="js\jquery\" />
+    <Folder Include="js\jquery\css\" />
+    <Folder Include="js\jquery\css\ui-lightness\" />
+    <Folder Include="js\jquery\css\ui-lightness\images\" />
+    <Folder Include="js\jquery\js\" />
+    <Folder Include="logs\" />
+    <Folder Include="modules\" />
+    <Folder Include="modules\admin\" />
+    <Folder Include="modules\blog\" />
+    <Folder Include="modules\cars\" />
+    <Folder Include="modules\category\" />
+    <Folder Include="modules\feedback\" />
+    <Folder Include="modules\gallery\" />
+    <Folder Include="modules\knowlege\" />
+    <Folder Include="modules\mainpage\" />
+    <Folder Include="modules\post\" />
+    <Folder Include="modules\privatemessages\" />
+    <Folder Include="modules\profile\" />
+    <Folder Include="modules\registration\" />
+    <Folder Include="modules\restorepassword\" />
+    <Folder Include="modules\rules\" />
+    <Folder Include="modules\search\" />
+    <Folder Include="modules\service\" />
+    <Folder Include="modules\tips\" />
+    <Folder Include="modules\userblogs\" />
+    <Folder Include="modules\users\" />
+    <Folder Include="modules\user\" />
+    <Folder Include="modules\writepost\" />
+    <Folder Include="response\" />
+    <Folder Include="res\" />
+    <Folder Include="themes\" />
+    <Folder Include="themes\admin\" />
+    <Folder Include="themes\blog\" />
+    <Folder Include="themes\cars\" />
+    <Folder Include="themes\category\" />
+    <Folder Include="themes\controls\" />
+    <Folder Include="themes\feedback\" />
+    <Folder Include="themes\gallery\" />
+    <Folder Include="themes\knowlege\" />
+    <Folder Include="themes\knowlege\js\" />
+    <Folder Include="themes\mainpage\" />
+    <Folder Include="themes\notifications\" />
+    <Folder Include="themes\post\" />
+    <Folder Include="themes\privatemessages\" />
+    <Folder Include="themes\profile\" />
+    <Folder Include="themes\registration\" />
+    <Folder Include="themes\restorepassword\" />
+    <Folder Include="themes\rules\" />
+    <Folder Include="themes\search\" />
+    <Folder Include="themes\service\" />
+    <Folder Include="themes\tips\" />
+    <Folder Include="themes\userblogs\" />
+    <Folder Include="themes\users\" />
+    <Folder Include="themes\user\" />
+    <Folder Include="themes\writepost\" />
+    <Folder Include="tools\" />
+    <Folder Include="uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".htaccess">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\css\bootstrap-image-gallery.min.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\css\bootstrap-list.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\css\bootstrap-responsive.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\css\bootstrap-responsive.min.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\css\bootstrap.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\css\bootstrap.min.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\img\glyphicons-halflings-white.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\img\glyphicons-halflings.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\js\bootstrap-dropdown.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\js\bootstrap-image-gallery.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\js\bootstrap-list.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\js\bootstrap-popover.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\js\bootstrap-tooltip.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\js\bootstrap.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\js\bootstrap.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\.htaccess">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\adapters\jquery.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\CHANGES.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\ckeditor.asp">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\ckeditor.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\ckeditor.pack">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\ckeditor_basic.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\ckeditor_basic_source.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\ckeditor_source.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\config.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\contents.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\images\spacer.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\INSTALL.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\af.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\ar.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\bg.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\bn.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\bs.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\ca.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\cs.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\cy.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\da.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\de.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\el.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\en-au.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\en-ca.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\en-gb.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\eo.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\es.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\et.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\eu.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\fa.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\fi.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\fo.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\fr-ca.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\fr.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\gl.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\gu.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\he.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\hi.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\hr.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\hu.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\is.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\it.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\ja.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\ka.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\km.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\ko.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\lt.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\lv.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\mn.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\ms.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\nb.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\nl.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\no.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\pl.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\pt-br.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\pt.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\ro.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\ru.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\sk.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\sl.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\sr-latn.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\sr.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\sv.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\th.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\tr.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\uk.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\vi.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\zh-cn.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\zh.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\_languages.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\lang\_translationstatus.txt">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\LICENSE.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\a11yhelp\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\a11yhelp\lang\he.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\about\dialogs\about.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\about\dialogs\logo_ckeditor.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\adobeair\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\ajax\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\autogrow\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\bbcode\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\clipboard\dialogs\paste.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\colordialog\dialogs\colordialog.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\devtools\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\devtools\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\dialog\dialogDefinition.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\div\dialogs\div.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\docprops\dialogs\docprops.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\docprops\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\find\dialogs\find.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\flash\dialogs\flash.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\flash\images\placeholder.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\forms\dialogs\button.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\forms\dialogs\checkbox.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\forms\dialogs\form.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\forms\dialogs\hiddenfield.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\forms\dialogs\radio.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\forms\dialogs\select.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\forms\dialogs\textarea.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\forms\dialogs\textfield.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\forms\images\hiddenfield.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\iframedialog\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\iframe\dialogs\iframe.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\iframe\images\placeholder.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\image\dialogs\image.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\link\dialogs\anchor.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\link\dialogs\link.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\link\images\anchor.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\liststyle\dialogs\liststyle.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\pagebreak\images\pagebreak.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\pastefromword\filter\default.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\pastetext\dialogs\pastetext.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\placeholder\dialogs\placeholder.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\placeholder\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\placeholder\lang\he.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\placeholder\placeholder.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\placeholder\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\scayt\dialogs\options.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\scayt\dialogs\toolbar.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_address.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_blockquote.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_div.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_h1.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_h2.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_h3.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_h4.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_h5.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_h6.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_p.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\showblocks\images\block_pre.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\dialogs\smiley.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\angel_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\angry_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\broken_heart.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\confused_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\cry_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\devil_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\embaressed_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\envelope.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\heart.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\kiss.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\lightbulb.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\omg_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\regular_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\sad_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\shades_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\teeth_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\thumbs_down.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\thumbs_up.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\tounge_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\smiley\images\wink_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\specialchar\dialogs\specialchar.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\specialchar\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\stylesheetparser\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\styles\styles\default.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\tableresize\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\tabletools\dialogs\tableCell.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\table\dialogs\table.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\templates\dialogs\templates.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\templates\templates\default.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\templates\templates\images\template1.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\templates\templates\images\template2.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\templates\templates\images\template3.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\dialogs\uicolor.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\lang\he.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\uicolor.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\hue_bg.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\hue_thumb.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\picker_mask.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\picker_thumb.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\yui\assets\yui.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\uicolor\yui\yui.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\wsc\dialogs\ciframe.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\wsc\dialogs\tmpFrameset.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\wsc\dialogs\wsc.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\wsc\dialogs\wsc.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\plugins\xml\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\dialog.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\editor.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\icons.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\icons_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\images\dialog_sides.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\images\dialog_sides.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\images\dialog_sides_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\images\mini.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\images\noimage.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\images\sprites.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\images\sprites_ie6.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\images\toolbar_start.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\skin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\kama\templates.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\dialog.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\editor.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\icons.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\icons_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\images\dialog_sides.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\images\dialog_sides.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\images\dialog_sides_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\images\mini.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\images\noimage.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\images\sprites.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\images\sprites_ie6.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\skin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\office2003\templates.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\dialog.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\editor.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\icons.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\icons_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\images\dialog_sides.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\images\dialog_sides.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\images\dialog_sides_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\images\mini.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\images\noimage.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\images\sprites.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\images\sprites_ie6.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\images\toolbar_start.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\skin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\skins\v2\templates.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\themes\default\theme.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\adobeair\application.xml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\adobeair\run.bat">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\adobeair\run.sh">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\adobeair\sample.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\ajax.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\api.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\api_dialog.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\api_dialog\my_dialog.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\asp\advanced.asp">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\asp\events.asp">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\asp\index.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\asp\replace.asp">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\asp\replaceall.asp">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\asp\sample_posteddata.asp">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\asp\standalone.asp">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\assets\output_for_flash.fla">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\assets\output_for_flash.swf">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\assets\output_xhtml.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\assets\parsesample.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\assets\swfobject.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\autogrow.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\bbcode.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\devtools.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\divreplace.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\enterkey.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\fullpage.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\index.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\jqueryadapter.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\output_for_flash.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\output_html.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\output_xhtml.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\php\index.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\placeholder.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\readonly.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\replacebyclass.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\replacebycode.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\sample.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\sample.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\sharedspaces.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\skins.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\stylesheetparser.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\tableresize.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\ui_color.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_samples\ui_languages.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\adapters\jquery.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\ckeditor.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\ckeditor_base.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\ckeditor_basic.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\command.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\commanddefinition.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\config.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dataprocessor.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\comment.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\document.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\documentfragment.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\domobject.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\element.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\elementpath.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\event.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\node.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\nodelist.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\range.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\rangelist.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\text.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\walker.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dom\window.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\dtd.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\editor.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\editor_basic.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\env.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\event.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\eventInfo.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\focusmanager.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\htmlparser.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\htmlparser\basicwriter.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\htmlparser\cdata.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\htmlparser\comment.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\htmlparser\element.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\htmlparser\filter.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\htmlparser\fragment.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\htmlparser\text.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\lang.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\loader.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\plugindefinition.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\plugins.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\resourcemanager.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\scriptloader.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\skins.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\themes.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\tools.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\ui.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\core\_bootstrap.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\af.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\ar.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\bg.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\bn.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\bs.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\ca.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\cs.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\cy.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\da.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\de.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\el.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\en-au.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\en-ca.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\en-gb.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\eo.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\es.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\et.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\eu.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\fa.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\fi.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\fo.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\fr-ca.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\fr.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\gl.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\gu.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\he.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\hi.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\hr.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\hu.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\is.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\it.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\ja.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\ka.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\km.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\ko.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\lt.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\lv.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\mn.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\ms.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\nb.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\nl.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\no.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\pl.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\pt-br.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\pt.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\ro.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\ru.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\sk.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\sl.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\sr-latn.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\sr.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\sv.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\th.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\tr.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\uk.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\vi.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\zh-cn.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\zh.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\_languages.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\lang\_translationstatus.txt">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\a11yhelp\dialogs\a11yhelp.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\a11yhelp\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\a11yhelp\lang\he.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\a11yhelp\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\about\dialogs\about.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\about\dialogs\logo_ckeditor.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\about\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\adobeair\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\ajax\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\autogrow\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\basicstyles\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\bbcode\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\bidi\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\blockquote\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\button\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\clipboard\dialogs\paste.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\clipboard\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\colorbutton\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\colordialog\dialogs\colordialog.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\colordialog\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\contextmenu\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\devtools\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\devtools\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\dialogadvtab\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\dialogui\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\dialog\dialogDefinition.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\dialog\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\div\dialogs\div.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\div\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\docprops\dialogs\docprops.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\docprops\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\domiterator\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\editingblock\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\elementspath\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\enterkey\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\entities\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\fakeobjects\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\filebrowser\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\find\dialogs\find.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\find\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\flash\dialogs\flash.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\flash\images\placeholder.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\flash\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\floatpanel\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\font\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\format\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\dialogs\button.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\dialogs\checkbox.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\dialogs\form.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\dialogs\hiddenfield.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\dialogs\radio.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\dialogs\select.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\dialogs\textarea.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\dialogs\textfield.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\images\hiddenfield.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\forms\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\horizontalrule\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\htmldataprocessor\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\htmlwriter\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\iframedialog\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\iframe\dialogs\iframe.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\iframe\images\placeholder.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\iframe\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\image\dialogs\image.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\image\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\indent\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\justify\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\keystrokes\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\link\dialogs\anchor.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\link\dialogs\link.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\link\images\anchor.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\link\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\listblock\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\liststyle\dialogs\liststyle.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\liststyle\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\list\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\maximize\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\menubutton\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\menu\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\newpage\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\pagebreak\images\pagebreak.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\pagebreak\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\panelbutton\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\panel\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\pastefromword\filter\default.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\pastefromword\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\pastetext\dialogs\pastetext.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\pastetext\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\placeholder\dialogs\placeholder.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\placeholder\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\placeholder\lang\he.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\placeholder\placeholder.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\placeholder\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\popup\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\preview\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\print\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\removeformat\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\resize\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\richcombo\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\save\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\scayt\dialogs\options.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\scayt\dialogs\toolbar.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\scayt\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\selection\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_address.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_blockquote.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_div.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_h1.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_h2.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_h3.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_h4.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_h5.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_h6.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_p.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\images\block_pre.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showblocks\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\showborders\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\dialogs\smiley.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\angel_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\angry_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\broken_heart.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\confused_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\cry_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\devil_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\embaressed_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\envelope.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\heart.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\kiss.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\lightbulb.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\omg_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\regular_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\sad_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\shades_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\teeth_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\thumbs_down.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\thumbs_up.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\tounge_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\whatchutalkingabout_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\images\wink_smile.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\smiley\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\sourcearea\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\specialchar\dialogs\specialchar.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\specialchar\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\specialchar\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\stylescombo\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\stylesheetparser\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\styles\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\styles\styles\default.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\tableresize\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\tabletools\dialogs\tableCell.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\tabletools\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\table\dialogs\table.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\table\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\tab\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\templates\dialogs\templates.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\templates\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\templates\templates\default.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\templates\templates\images\template1.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\templates\templates\images\template2.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\templates\templates\images\template3.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\toolbar\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\dialogs\uicolor.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\lang\en.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\lang\he.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\uicolor.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\yui\assets\hue_bg.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\yui\assets\hue_thumb.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\yui\assets\picker_mask.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\yui\assets\picker_thumb.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\yui\assets\yui.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\uicolor\yui\yui.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\undo\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\wsc\dialogs\ciframe.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\wsc\dialogs\tmpFrameset.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\wsc\dialogs\wsc.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\wsc\dialogs\wsc.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\wsc\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\wysiwygarea\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\plugins\xml\plugin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\dialog.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\editor.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\elementspath.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\icons.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\icons.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\icons_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\images\dialog_sides.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\images\dialog_sides.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\images\dialog_sides_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\images\mini.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\images\noimage.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\images\sprites.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\images\sprites_ie6.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\images\toolbar_start.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\mainui.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\menu.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\panel.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\presets.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\reset.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\richcombo.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\skin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\templates.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\kama\toolbar.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\dialog.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\editor.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\elementspath.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\icons.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\icons.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\icons_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\images\dialog_sides.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\images\dialog_sides.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\images\dialog_sides_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\images\mini.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\images\noimage.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\images\sprites.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\images\sprites_ie6.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\mainui.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\menu.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\panel.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\presets.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\reset.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\richcombo.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\skin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\templates.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\office2003\toolbar.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\dialog.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\editor.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\elementspath.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\icons.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\icons.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\icons_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\images\dialog_sides.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\images\dialog_sides.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\images\dialog_sides_rtl.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\images\mini.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\images\noimage.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\images\sprites.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\images\sprites_ie6.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\images\toolbar_start.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\mainui.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\menu.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\panel.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\presets.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\reset.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\richcombo.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\skin.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\templates.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\skins\v2\toolbar.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ckeditor\_source\themes\default\theme.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="css\23.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="css\gallery.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="css\main.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="css\main.min.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="css\PIE.htc">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="css\popupbox.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="css\winter.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="error404.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\9m.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\Audi_Logo.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\backgrounds\23.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\backgrounds\autumn.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\backgrounds\category.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\backgrounds\VolksWagen.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\backgrounds\winter.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\bgtop.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\bgtoplogo.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\bgtoplogo23.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\bluelogo.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\btnHide.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\btnShow.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\carousel\1.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\carousel\2.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\carousel\3.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\1.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\10.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\12.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\13.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\14.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\15.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\2.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\23.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\24.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\27.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\38.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\9.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\9.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\Audi.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\default.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\Seat.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\service.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\Skoda.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\categoryimages\VolksWagen.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\close.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\error.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\favicon.ico">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\file.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\forms\trhlleft.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\forms\trhlrght.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\key.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\loading.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\logo.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\logo.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\logo_small.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\message.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\misc\VolksWagen_Logo.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\next.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\noimage.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\nophoto.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\ok.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\post_hidecomments.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\post_last.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\post_list.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\post_showcomments.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\post_tree.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\prev.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\search.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\search_inv.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\Seat_Logo.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\Skoda_Logo.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\social\drive2.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\social\facebook.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\social\vkontakte.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\VolksWagen_Logo.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="img\VW_Logo.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="inc\smarty\debug.tpl">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\ajaxfileupload.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\blogging.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\functions.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\gallery.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery.cookie.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\animated-overlay.gif">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-icons_222222_256x240.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-icons_228ef1_256x240.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-icons_ef8c08_256x240.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-icons_ffd27a_256x240.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\images\ui-icons_ffffff_256x240.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\jquery-ui-1.10.3.custom.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\css\ui-lightness\jquery-ui-1.10.3.custom.min.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\js\jquery-1.9.1.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\js\jquery-ui-1.10.3.custom.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\jquery\js\jquery-ui-1.10.3.custom.min.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\screen.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\tracker.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="js\user.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="soon.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\404.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\admin\feedback.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\blog\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\blog\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\cars\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\category\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\category\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\blog.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\breadcrumbs.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\comment.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\mainbanner.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\maintabmenu.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\newsblock.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\notification.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\pagetitle.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\paging.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\post.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\postFace.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\privateMessage.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\tabmenu.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\tagcategory.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\controls\userplate.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\feedback\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\footer.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\gallery\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\gallery\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\header.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\knowlege\engines.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\knowlege\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\knowlege\js\engines.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\mainpage\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\mainpage\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\notifications\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\post\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\post\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\privatemessages\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\privatemessages\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\profile\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\profile\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\registration\congratulations.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\registration\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\registration\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\restorepassword\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\rules\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\search\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\search\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\service\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\service\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\tips\whynocar.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\userblogs\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\userblogs\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\users\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\users\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\user\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\user\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\writepost\index.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="themes\writepost\index.tpl.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="tools\log.txt">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+</Project>

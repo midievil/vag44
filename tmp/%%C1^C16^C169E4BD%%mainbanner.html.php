@@ -1,3 +1,5 @@
+<?php /* Smarty version 2.6.22, created on 2013-08-01 17:31:19
+         compiled from controls/mainbanner.html */ ?>
 	<div id="myCarousel" class="carousel slide" style='margin-top: -30px;'>
 	  <ol class="carousel-indicators">
 	    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -27,11 +29,11 @@
 	              <p class="lead">
 	              	Мы &mdash; сообщество владельцев и энтузиастов автомобилей концерна Volkswagen AG.<br />
 			Мы общаемся и помогаем друг другу.<br />
-			{if $currentUser->IsLogged()}
+			<?php if ($this->_tpl_vars['currentUser']->IsLogged()): ?>
 				Мы рады, что вы &mdash; один из нас.
-			{else}
+			<?php else: ?>
 				Присоединяйтесь.
-			{/if}
+			<?php endif; ?>
 					</p>
 					<p>&nbsp;</p>
 	              <p>

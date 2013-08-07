@@ -5,14 +5,14 @@
 	$dbPass = '';
 	$dbName = 'vag44';
 	$dbCharset = 'utf8_unicode_ci';
-	$domain = 'vag44.local';
+	$domain = 'vag44.ru';
 
 	$ourCarsCategoryID = 24;
 	$newsBlogID = 1;
 	
-	define('GENERAL_DOMAIN', 'vag44.local');
+	define('GENERAL_DOMAIN', 'vag44.ru');
 //	define('SITE_DIR', '/home/virtwww/w_vag44-net_e6e00719/http');
-	define('SITE_DIR', 'c:/sites/vag44/www/');
+	define('SITE_DIR', 'd:/vag44/');
 
 	
 	define('TIME_SHIFT', 0);
