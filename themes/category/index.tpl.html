@@ -10,7 +10,7 @@
 
 	{if $category->ID == $ourCarsCategoryID}
 		<div class="alert alert-block">
-			Написать в этот раздел напрямую невозможно. Чтобы создать описание автомобиля, нажмите <a class='button' href='/editprofile/cars'>сюда</a>
+			Написать в этот раздел напрямую невозможно. Чтобы создать описание автомобиля, нажмите <a class='button' href='/profile/cars'>сюда</a>
 		</div>
 	{else}
 		<a class='btn btn-primary' href='/writeforum/{$category->ID}'>Написать в этот раздел</a>

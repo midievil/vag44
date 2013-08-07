@@ -12,7 +12,7 @@
 			
 		if($currentUser->Email == "")
 		{	
-			$messages[] = "у вас не указан e-mail. Это может вызвать некоторые затруднения в случае потери пароля. Указать его можно <a href='/editprofile/contacts'>здесь</a>.";
+			$messages[] = "у вас не указан e-mail. Это может вызвать некоторые затруднения в случае потери пароля. Указать его можно <a href='/profile/contacts'>здесь</a>.";
 		}
 		
 		if($currentUser->CategoriesOrder == "")
