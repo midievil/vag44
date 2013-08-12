@@ -508,7 +508,7 @@
 							<a href='/user/".$commentUser->ID."' rel='popover' data-content='".$commentUser->GetDescriptionForPopup()."' data-original-title='".$commentUser->Name."' >
 							<strong>$commentUser->Name</strong></a>
 							$quotedcomment<br />
-							" . formatText($this->Text) . "<br /><br />
+							" . removeQuotes( formatText($this->Text) ) . "<br /><br />
 						</div>
 					</div>
 					<div class='span5'>

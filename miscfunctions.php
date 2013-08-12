@@ -279,6 +279,12 @@
 		
 		return $text;
 	}
+    
+    function removeQuotes($text)
+    {
+        $text = str_replace('"', '', $text);
+        return $text;
+    }
 	
 	function replaceSymbols($text)
 	{
