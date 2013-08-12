@@ -28,7 +28,7 @@
 		
 		public function PostDateText()
 		{			
-			return getDateTimeAtText($this->PostDate);
+			return DateFunctions::getDateTimeAtText($this->PostDate);
 		}
 		
 		public function Direction()

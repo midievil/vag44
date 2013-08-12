@@ -76,7 +76,7 @@
 				{
 					
 					
-					if(endsWith(strtolower($filename), ".jpg") || endsWith(strtolower($filename), ".jpeg"))
+					if(TextFunctions::endsWith(strtolower($filename), ".jpg") || TextFunctions::endsWith(strtolower($filename), ".jpeg"))
 					{
 						$msg .= " Gal: " . $_GET["galleryid"] . ", ";
 						

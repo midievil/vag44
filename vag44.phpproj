@@ -18,15 +18,6 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="admin\feedback.php">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="admin\tags.php">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="admin\tips.php">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="bloglogic.php">
       <SubType>Code</SubType>
     </Compile>
@@ -442,12 +433,6 @@
     <Compile Include="response\userresponse.php">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="res\userblogs.php">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="res\viewblog.php">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="tools\doajaxfileupload.php">
       <SubType>Code</SubType>
     </Compile>
@@ -459,7 +444,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="admin\" />
     <Folder Include="bootstrap\" />
     <Folder Include="bootstrap\css\" />
     <Folder Include="bootstrap\img\" />
@@ -755,7 +739,6 @@
     <Folder Include="modules\user\" />
     <Folder Include="modules\writepost\" />
     <Folder Include="response\" />
-    <Folder Include="res\" />
     <Folder Include="themes\" />
     <Folder Include="themes\admin\" />
     <Folder Include="themes\blog\" />
@@ -788,6 +771,9 @@
     <Content Include=".htaccess">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="bootstrap\css\bootstrap-datepicker.css">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="bootstrap\css\bootstrap-image-gallery.min.css">
       <SubType>Content</SubType>
     </Content>
@@ -800,9 +786,6 @@
     <Content Include="bootstrap\css\bootstrap-responsive.min.css">
       <SubType>Content</SubType>
     </Content>
-    <Content Include="bootstrap\css\bootstrap.css">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="bootstrap\css\bootstrap.min.css">
       <SubType>Content</SubType>
     </Content>
@@ -810,6 +793,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="bootstrap\img\glyphicons-halflings.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="bootstrap\js\bootstrap-datepicker.js">
       <SubType>Content</SubType>
     </Content>
     <Content Include="bootstrap\js\bootstrap-dropdown.js">

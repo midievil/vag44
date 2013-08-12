@@ -218,7 +218,7 @@
 			}
 			else
 			{				
-				$result .= "<br />Был&nbsp;".getDateTimeAtText($this->LastVisit);
+				$result .= "<br />Был&nbsp;".DateFunctions::getDateTimeAtText($this->LastVisit);
 			}
 			return $result;
 		}
@@ -295,10 +295,10 @@
 		if(!empty($PostID))
 		{
 			global $currentUser;
-			$Date = getCurrentDateText();
+			$date = DateFunctions::getCurrentDateText();
 			$UserID = $currentUser->ID;			
 			
-			$query = "insert into Visits (Date, UserID, PostID) values ('$Date', $UserID, $PostID)";
+			$query = "insert into Visits (Date, UserID, PostID) values ('$date', $UserID, $PostID)";
 			fDB::fquery($query);
 		}
 	}

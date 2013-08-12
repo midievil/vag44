@@ -7,9 +7,8 @@
 	$post = new Post($postID);
 	$post->Init();
 	
-	$post->Text = pasteUploadedImage($post->Text, $post->ID);
-	$post->Text = pastePics($post->Text);
-	$post->Text = formatText($post->Text);
+	$post->Text = TextFunctions::pasteUploadedImage($post->Text, $post->ID);
+	$post->Text = TextFunctions::formatText($post->Text);
 	
 	templater::assign('post', $post);
 	
@@ -34,7 +33,7 @@
 	{
 		$rawGalleryItems[] = "/img/postpics/$postID"."_$i.jpg";
 		$galleryPreviews[] = "/img/postpics/previews/$postID"."_$i.jpg";
-		createPicPreview(SITE_DIR."img/postpics", $postID . "_$i.jpg", 200);
+		FileFunctions::createPicPreview(SITE_DIR."img/postpics", $postID . "_$i.jpg", 200);
 		$i++;
 	}	
 	if($post->GalleryID && $post->GalleryID != -1)
@@ -43,7 +42,7 @@
 		while($galleryItemRow = mysql_fetch_assoc($galleryItemRows))
 		{
 			$fileName = $post->UserID ."_" . $post->GalleryID . "_" . $galleryItemRow["ID"] . ".jpg";			
-			createPicPreview(SITE_DIR."img/gallery", $fileName, 200);
+			FileFunctions::createPicPreview(SITE_DIR."img/gallery", $fileName, 200);
 			
 			$rawGalleryItems[] = "/img/gallery/$fileName";
 			$galleryPreviews[] = "/img/gallery/previews/$fileName";
@@ -69,7 +68,7 @@
 
 	
 	
-	templater::assign('rating', renderRatingForPost($post->Rating, $post->ID, $post->UserID));	
+	templater::assign('rating', RenderFunctions::renderRatingForPost($post->Rating, $post->ID, $post->UserID));	
 		
 	templater::display();
 ?>

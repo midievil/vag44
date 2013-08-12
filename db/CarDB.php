@@ -230,7 +230,7 @@
 						DATE_ADD(
 						S.Date,
 						INTERVAL  REPLACE(SI.Time, 'm', '') MONTH),
-						'".getCurrentDay()."')
+						'".DateFunctions::getCurrentDay()."')
 				ELSE	-10000
 			END	DaysLeft,
 			SI.Mileage	NextMileage

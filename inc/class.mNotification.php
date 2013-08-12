@@ -48,7 +48,7 @@
 		
 		public function DateText()
 		{
-			return getDateTimeAtText($this->Date);
+			return DateFunctions::getDateTimeAtText($this->Date);
 		}
 	}
 	

@@ -53,7 +53,7 @@
 	templater::assign('breadCrumbs', $breadCrumbs);
 	
 
-	$reg = getDateAtText($user->RegisterDate); 
+	$reg = DateFunctions::getDateAtText($user->RegisterDate); 
 	if($reg)
 	{
 		$comment .= "С нами с $reg.<br />";		
@@ -103,7 +103,7 @@
 			$ratingText .= "<br />";
 		}
 	}
-	templater::assign('ratingList', renderPopup($ratingText));
+	templater::assign('ratingList', $ratingText);
 
 	$rating = "<a class='btn popover-bottom' rel='popover' data-toggle='popover' title='' data-content='$ratingText' data-original-title='Рейтинг'>$user->Rating</a>";
 	templater::assign('rating', $rating);

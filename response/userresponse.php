@@ -335,7 +335,7 @@
 						$touserid,
 						$postid,
 						$commentid,
-						'".getCurrentDateText()."' )";
+						'".DateFunctions::getCurrentDateText()."' )";
 			
 			mysql_query($query);
 			
@@ -411,9 +411,9 @@
 			
 		case "markonline":
 			$userid = $_REQUEST["userid"];
-			$date = getCurrentDateText();
+			$date = DateFunctions::getCurrentDateText();
 			
-			$query = "update Users set LastVisit = '".getCurrentDateText()."' where ID = $userid";			
+			$query = "update Users set LastVisit = '".DateFunctions::getCurrentDateText()."' where ID = $userid";			
 			mysql_query($query);
 			return;
 			
@@ -483,13 +483,13 @@
 				
 				$status = $user->GroupID == 3 ? "<b>ждет подтверждения</b>" : "пользователь";
 				
-				if(startsWith($user->LastVisit, '0000'))
+				if(TextFunctions::startsWith($user->LastVisit, '0000'))
 				{
 					$lastVisit = '';
 				}
 				else
 				{
-					$lastVisit = getDateTimeAtText($user->LastVisit);
+					$lastVisit = DateFunctions::getDateTimeAtText($user->LastVisit);
 				}
 									
 				if($carRows = getCarsListByUserID($user->ID))
@@ -509,11 +509,12 @@
 							" . $user->RenderUserPic('UserList', $user->ID, 42) . "
 						</div>
 						<div style='width:250px; margin-left:60px'>
-							<a href='/user/$user->ID' class='username nowrap' id='aUser$user->ID' " . renderPopup($user->GetDescriptionForPopup()) . ">$user->Name</a>
+							<a  class='popover-top username nowrap' rel='popover' data-toggle='popover' title='' data-content='".$user->GetDescriptionForPopup()."' data-original-title='Пользователь <strong>$user->Name</strong>'
+                            href='/user/$user->ID'  id='aUser$user->ID'>$user->Name</a>
 							<a class='hand' title='скоро'><img src='/img/message.gif' width='16px' /></a>
 							<br />
 							Рейтинг: $user->Rating
-							" . ($user->RegisterDate ? "<br />С нами с " . getDateAtText($user->RegisterDate) : "") . "
+							" . ($user->RegisterDate ? "<br />С нами с " . DateFunctions::getDateAtText($user->RegisterDate) : "") . "
 						</div>
 					</td>
 					<td class='nowrap' width='100%'>$carRows</td>

@@ -67,7 +67,7 @@
 						{
 							if($days < 30)
 							{
-								$messages[] = "" . getDaysCountHint($days) . " " . ($days > 0 ? "истекает" : "истек") . " срок " . ($serviceRow["MessageText"] ? $serviceRow["MessageText"] : "операции " . $serviceRow["Operation"]) . " на ваш " . $car->getShortDescription() . "! <a class='hand' onclick='dontRemindService(".$serviceRow["ID"].");'>(больше не напоминать)</a>";
+								$messages[] = "" . DateFunctions::getDaysCountHint($days) . " " . ($days > 0 ? "истекает" : "истек") . " срок " . ($serviceRow["MessageText"] ? $serviceRow["MessageText"] : "операции " . $serviceRow["Operation"]) . " на ваш " . $car->getShortDescription() . "! <a class='hand' onclick='dontRemindService(".$serviceRow["ID"].");'>(больше не напоминать)</a>";
 							}
 						}
 					}

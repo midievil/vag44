@@ -27,7 +27,7 @@
 		templater::assign('userPic', $currentUserpicfile);
 	}
 	
-	$birthDateSelector = getDateSelector("BirthDate", $currentUser->BirthDate);
+	$birthDateSelector = RenderFunctions::getDateSelector("BirthDate", $currentUser->BirthDate);
 	templater::assign('birthDateSelector', $birthDateSelector);
 		
 	

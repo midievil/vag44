@@ -112,7 +112,7 @@
 	
 	function getUsersWithBirthday()
 	{
-		$date = getCurrentDay();
+		$date = DateFunctions::getCurrentDay();
 		$date = explode('-', $date);
 		
 		$day = $date[2];

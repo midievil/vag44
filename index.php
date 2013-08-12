@@ -71,14 +71,10 @@ try
 	$currentUser = User::CurrentUser();
 	templater::assign('currentUser', $currentUser);
 	
-	templater::assign('currentDate', getCurrentShortDateText());
+	templater::assign('currentDate', DateFunctions::getCurrentShortDateText());
 	
 	
-	$carsMenu = new CarsMenu("mnuMain", mLogic::$urlVariables["vendorid"]);
-	templater::assign('carsMenu', $carsMenu);
-	
-	
-	$catchPhrase = getRandomCatchPhrase();
+	$catchPhrase = TextFunctions::getRandomCatchPhrase();
 	templater::assign('catchPhrase', $catchPhrase);
 		
 	$birthdayUsers = getUsersWithBirthday();

@@ -4,7 +4,7 @@
 	var userID = {$currentUser->ID};
 	
 	var userCarsList = '{foreach from=$currentUser->Cars() item=car name=carscycle}{if $smarty.foreach.carscycle.iteration != 1};{/if}{$car->ID}{/foreach}';
-{literal}
+	{literal}
 
 	
 	function ajaxFileUpload()

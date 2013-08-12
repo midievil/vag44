@@ -53,7 +53,7 @@
 				return;
 			}
 			
-			$date = getCurrentDateText();
+			$date = DateFunctions::getCurrentDateText();
 			
 			$query = "
 				insert	into PrivateMessages (

@@ -75,7 +75,7 @@
 	{
 		foreach ($dir as $i=>$entry)
 		{
-			if(startsWith($entry, $post->ID.'_'))
+			if(TextFunctions::startsWith($entry, $post->ID.'_'))
 			{
 				$files[] = $entry;
 			}

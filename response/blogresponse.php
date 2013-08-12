@@ -81,10 +81,10 @@
 				$blogid = $_POST["blogid"];
 				$tagcategoryid = $_POST["tagcategoryid"];
 				$postid = $_POST["postid"];
-				$title = replaceSymbols(unescape($_POST["title"]));
-				$text = replaceSymbols(unescape($_POST["text"]));
+				$title = TextFunctions::replaceSymbols(TextFunctions::unescape($_POST["title"]));
+				$text = TextFunctions::replaceSymbols(TextFunctions::unescape($_POST["text"]));
 				$galleryid = $_POST["galleryid"];
-				$date = getCurrentDateText();
+				$date = DateFunctions::getCurrentDateText();
 				
 				$blog = getBlogByID($blogid);
 				if($blog && ($blog["UserID"] == $currentUser->ID || $currentUser->IsAdmin()))
@@ -165,7 +165,7 @@
 					{
 						foreach ($dir as $i=>$entry) 
 						{
-							if (startsWith($entry, $currentUser->ID.'_'))
+							if (TextFunctions::startsWith($entry, $currentUser->ID.'_'))
 							{
 								$newentry = str_replace($currentUser->ID.'_', $postid.'_', $entry);
 								rename("uploads/newfiles/$entry", "uploads/postfiles/$newentry");								
@@ -184,8 +184,8 @@
 			if($currentUser->IsLogged())
 			{
 				$postid = $_REQUEST["postid"];
-				$text = replaceSymbols(unescape($_REQUEST["text"]));			
-				$date = getCurrentDateText();			
+				$text = TextFunctions::replaceSymbols(TextFunctions::unescape($_REQUEST["text"]));			
+				$date = DateFunctions::getCurrentDateText();
 				
 				$query = "
 					insert	into Comments (
@@ -257,8 +257,8 @@
 			$commentid = $_REQUEST["commentid"];
 			$postid = $_REQUEST["postid"];
 			$parentlevel = $_REQUEST["parentlevel"];
-			$text = replaceSymbols(unescape($_REQUEST["text"]));
-			$date = getCurrentDateText();
+			$text = TextFunctions::replaceSymbols(TextFunctions::unescape($_REQUEST["text"]));
+			$date = DateFunctions::getCurrentDateText();
 						
 			$query = "
 				insert	into Comments (
@@ -429,7 +429,7 @@
 			$currentUser = User::CurrentUser();
 			
 			$commentid = $_POST["commentid"];
-			$text = replaceSymbols(unescape($_POST["text"]));
+			$text = TextFunctions::replaceSymbols(TextFunctions::unescape($_POST["text"]));
 			
 			$comment = BlogDB::getCommentByID($commentid);
 						

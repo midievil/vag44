@@ -11,6 +11,8 @@
 						$("#tblUserList tr.user").remove();
 						$("#tblUserList tr.loading").remove();
 						$("#tblUserList").append(result);						
+
+						$('[rel=\"popover\"]').popover({'placement':'top'});
 					}
 				});
 	}

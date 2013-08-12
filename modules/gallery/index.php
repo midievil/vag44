@@ -114,7 +114,7 @@
 				{
 					$fileName = $galleryUser->ID . '_' . $currentGalleryID . '_' . $galleryItem['ID'] . '.jpg';
 					
-					createPicPreview("img/gallery", $fileName, 200);
+					FileFunctions::createPicPreview("img/gallery", $fileName, 200);
 					
 					$galleryItem['ThumbFile'] = "/img/gallery/previews/$fileName";
 					$galleryItem['BigFile'] = "/img/gallery/$fileName";

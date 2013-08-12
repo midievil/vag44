@@ -43,9 +43,8 @@
 					
 					$post->Init();
 					
-					$post->Text = pasteUploadedImage($post->Text, $post->ID);
-					$post->Text = pastePics($post->Text);
-					$post->Text = formatText($post->Text);
+					$post->Text = TextFunctions::pasteUploadedImage($post->Text, $post->ID);
+					$post->Text = TextFunctions::formatText($post->Text);
 					
 					$this->posts[] = $post;
 				}
@@ -236,22 +235,22 @@
 		
 		public function CommentsCountHint()
 		{
-			return getCommentsCountHint($this->CommentsCount);
+			return RenderFunctions::getCommentsCountHint($this->CommentsCount);
 		}
 		
 		public function VisitsCountHint()
 		{
-			return getVisitsCountHint($this->VisitsCount);
+			return RenderFunctions::getVisitsCountHint($this->VisitsCount);
 		}
 		
 		public function CreateDate()
 		{
-			return getDateTimeAtText($this->Date);
+			return DateFunctions::getDateTimeAtText($this->Date);
 		}
 		
 		public function CreateShortDate()
 		{
-			return getDateAtText($this->Date);
+			return DateFunctions::getDateAtText($this->Date);
 		}
 		
 		public function Comment()
@@ -277,7 +276,7 @@
 			{
 				$comment .= "персональный блог";
 			}
-			$date = getDateTimeAtText($this->Date);
+			$date = DateFunctions::getDateTimeAtText($this->Date);
 			if($date)
 			{
 				$comment .= '<br />'.$date;
@@ -434,9 +433,9 @@
 						</div>
 					</div>";
 				}
-				$descriptionRow = "<div class='row'>".getDateTimeAtText($this->Date) . ( $currentUser->IsLogged() ? " $commentLink$quoteLink" : "" ).	$editLink . "</div>";
+				$descriptionRow = "<div class='row'>".DateFunctions::getDateTimeAtText($this->Date) . ( $currentUser->IsLogged() ? " $commentLink$quoteLink" : "" ).	$editLink . "</div>";
 				
-				$rating = renderRatingForComment($this->Rating, $this->PostID, $this->ID, $this->UserID);
+				$rating = RenderFunctions::renderRatingForComment($this->Rating, $this->PostID, $this->ID, $this->UserID);
 				
 				$result = "
 					<div class='span10 comment row' style='$tabulation'>
@@ -449,7 +448,7 @@
 								<a href='/user/".$commentUser->ID."' rel='popover' data-content='".$commentUser->GetDescriptionForPopup()."' data-original-title='".$commentUser->Name."' >
 								<strong>$commentUser->Name</strong></a>
 								$quotedcomment<br />
-								" . formatText($this->Text) . "								
+								" . TextFunctions::formatText($this->Text) . "								
 							</div>
 							<div class='span1 pull-right'>$rating</div>
 						</div>
@@ -498,7 +497,7 @@
 				$quotedcomment = " » <i class='icon-user icon-black'></i> <a href='/user/".$parentComment["UserID"]."'><strong>".$parentComment["UserName"]."</strong></a>";
 			}
 				
-			$descriptionRow = "<div class='row'>".getDateTimeAtText($this->Date)."</div>";
+             $descriptionRow = "<div class='row'>".DateFunctions::getDateTimeAtText($this->Date)."</div>";
 						
 			$result = "
 				<div>
@@ -508,7 +507,7 @@
 							<a href='/user/".$commentUser->ID."' rel='popover' data-content='".$commentUser->GetDescriptionForPopup()."' data-original-title='".$commentUser->Name."' >
 							<strong>$commentUser->Name</strong></a>
 							$quotedcomment<br />
-							" . removeQuotes( formatText($this->Text) ) . "<br /><br />
+							" . TextFunctions::removeQuotes( TextFunctions::formatText($this->Text) ) . "<br /><br />
 						</div>
 					</div>
 					<div class='span5'>
@@ -578,7 +577,7 @@
 				<td class='lastcomment nowrap' align='right'>
 					<div>
 					$link
-					" .getDateTimeAtText($date) . ", <a id='aTagCategory".rand(1, 1000)."User' $popupEvents>" . $user->Name . '</a><br />
+					" .DateFunctions::getDateTimeAtText($date) . ", <a id='aTagCategory".rand(1, 1000)."User' $popupEvents>" . $user->Name . '</a><br />
 					<a class="comment" href="/post/' . $lastPost->ID . '?page=last"> '.$comment_last.'</a><br />'.$lastPost->RenderQuickPaging()."</div>
 				</td>					
 				<td style='padding-left:5px'>" . $user->RenderUserPic($id, 'TagCategory'.rand(1, 1000), 30) . "</td></tr></table>";
@@ -719,7 +718,7 @@
 		$blogID = $carinstance["BlogID"];
 		
 		$car = getCarDescriptionByID($carid);
-		$date = getCurrentDateText();
+		$date = DateFunctions::getCurrentDateText();
 		
 		$query = "
 			insert	into Posts (

@@ -112,8 +112,8 @@
 				$this->serviceHistory =	CarDB::getCarServiceHistory($this->ID, $withIntervalsOnly);
 				for($i=0; $i<count($this->serviceHistory); $i++)
 				{
-					$this->serviceHistory[$i]['DateText'] = getDateAtText($this->serviceHistory[$i]['Date']);
-					$this->serviceHistory[$i]['NextDateText'] = getDateAtText($this->serviceHistory[$i]['NextTime']);
+					$this->serviceHistory[$i]['DateText'] = DateFunctions::getDateAtText($this->serviceHistory[$i]['Date']);
+					$this->serviceHistory[$i]['NextDateText'] = DateFunctions::getDateAtText($this->serviceHistory[$i]['NextTime']);
 				}
 			}			
 			return $this->serviceHistory;
