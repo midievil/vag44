@@ -11,7 +11,7 @@ function dbgTime($point)
 try
 {
 	error_reporting(E_ERROR | E_WARNING | E_PARSE);
-	error_reporting(0);
+//	error_reporting(0);
 		
 	session_start();	
 	header('Content-type: text/html; charset=utf-8');
