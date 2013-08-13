@@ -10,7 +10,7 @@
                            <div class='span6 nowrap' style="overflow:hidden">
 		                        <a class='tagcategory2 {if $post->Closed}closedpost{/if}' href="/post/{$post->ID}"><h4>{$post->Title}</h4></a>
 		                        <br />
-		                        Написал <a href="/user/{$post->User->ID}">{$post->User->Name}</a> <a class="textunderpost">{$post->CreateDate()}</a>		
+		                        Написал <i class="icon-user icon-black"></i><a href="/user/{$post->User->ID}">{$post->User->Name}</a> <a class="textunderpost">{$post->CreateDate()}</a>		
 	                        </div>
 	                        <div class='span2'>
 		                        <a class="comment font10">{$post->VisitsCountHint()}</a><br>

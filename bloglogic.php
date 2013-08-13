@@ -241,7 +241,7 @@
 		public function Comment()
 		{			
 			global $i18n;
-			$comment = $i18n['wrote'][$this->User->Gender == '' ? 'm' : $this->User->Gender]. " <a id='aPostUser".$this->ID."' href='/user/".$this->User->ID."' onmouseover='showPopup(this , \"".$this->User->GetDescriptionForPopup()."\")' onmouseout='hidePopup()'><b>" . $this->User->Name . "</b></a> в свой ";
+			$comment = $i18n['wrote'][$this->User->Gender == '' ? 'm' : $this->User->Gender]. " <a id='aPostUser".$this->ID."' href='/user/".$this->User->ID."' rel='popover' data-content='".$this->User->GetDescriptionForPopup()."'><b>" . $this->User->Name . "</b></a> в свой ";
 			if($this->BlogCarID)
 			{
 				$car = new Car($this->BlogCarID);

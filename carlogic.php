@@ -96,6 +96,15 @@
 			return $this->VendorName . ' ' . $this->ModelName . ' ' . $this->GenerationName();
 		}
 		
+		public function getMiddleDescription()
+		{
+			if(!$this->ModelVisible)
+			{
+				return $this->Name;
+			}
+			return $this->VendorName . ' ' . $this->ModelName . ' ' . $this->GenerationName() . ' ' . $this->EngineSize . ' ' . $this->EngineName . '(' . $this->EngineHP . 'hp) ' . ($this->Year > 0 ? $this->Year."г." : "");
+		}
+		
 		public function getEngineDescription()
 		{
 			if($this->EngineName != '')
@@ -323,7 +332,7 @@
 	function getCarsListByUserID($userid)
 	{
 		$result = "";
-		if($cars = CarDB::getCarsByUserID($userid))
+		if($cars = CarDB::getCarsByUserID($userid, true))
 		{
 			foreach($cars as $carrow)
 			{
@@ -360,24 +369,15 @@
 	function getShortCarsListByUserID($userid)
 	{
 		$result = "";
-		if($cars = CarDB::getCarsByUserID($userid))
+		
+		$user = new User($userid);
+		foreach($user->Cars() as $car)
 		{
-			foreach($cars as $carrow)
+			if($result != "")
 			{
-				if($result != "")
-				{
-					$result = $result."\n";
-				}
-				$genlist = explode(";", $carrow[GenerationsList]);
-				$generation = $genlist[$carrow["Generation"]] ? $genlist[$carrow["Generation"]]." " : "" ;
-								
-				$size = $carrow["EngineSize"] > 0 ? $carrow["EngineSize"].$carrow["EngineFuel"]."&nbsp;" : "";
-				$hp = $carrow["EngineHP"] ? "(".$carrow["EngineHP"]."&nbsp;л.с.)&nbsp;" : "";				
-				$year = $carrow["Year"] > 0 ? $carrow["Year"]."г.&nbsp;" : "";
-								
-				$description = "$generation&nbsp;$size&nbsp;".$carrow["EngineName"].$hp." ".$year;
-				$result = $result.$carrow["VendorName"]."&nbsp;".$carrow["ModelName"]."&nbsp;$description";
-			}
+				$result = $result."<br />";
+			}								
+			$result = $result.$car->getMiddleDescription();
 		}
 		return $result;
 	}

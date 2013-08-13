@@ -30,11 +30,8 @@
 			$messages[] = "У вас не указан день рождения. Указать его или отказаться от этого можно <a href='/profile/about'>здесь</a>.";
 		}
 		
-		$carRows = CarDB::getCarsByUserID($currentUser->ID);
-		foreach ($carRows as $carRow)
+		foreach ($currentUser->Cars() as $car)
 		{
-			$car = new Car();
-			$car->MakeFromRow($carRow);
 			if(!$car->InPast)
 			{
 				if($car->IsVag)

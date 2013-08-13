@@ -33,7 +33,7 @@
 			return fDB::fquery($query);
 		}
 		
-		public static function getCarsByUserID($userid)
+		public static function getCarsByUserID($userid, $onlyVag = false)
 		{
 			$query = "
 			select	C.*,
@@ -58,7 +58,7 @@
 					Blogs B on B.UserID = C.UserID and B.CarID = C.ID
 			left join
 					Posts P on P.IsCarDescription = 1 and P.BlogID = B.ID
-			where	C.UserID=$userid";
+			where	C.UserID=$userid". ($onlyVag ? " AND V.IsVag=1" : "");
 			fDB::fexec("SET SQL_BIG_SELECTS=1");
 			return fDB::fqueryAll($query);
 		}

@@ -14,19 +14,8 @@
 	$serviceOperationsSelect = getServiceOperationsSelect();
 	
 	templater::assign('serviceOperationsSelect', $serviceOperationsSelect);
-
 	
-	$carRows = CarDB::getCarsByUserID($currentUser->ID);
-	
-	$cars = array();
-	
-	foreach ($carRows as $carRow)
-	{
-		$car = new Car();
-		$car->MakeFromRow($carRow);
-		$cars[] = $car;			
-	}
-	templater::assign('cars', $cars);
+	templater::assign('cars', $currentUser->Cars());
 		
 	templater::display();
 	die;

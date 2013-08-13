@@ -12,12 +12,6 @@
 	
 	templater::assign('post', $post);
 	
-	
-	templater::assign('postComment', $comment);	
-	
-	
-	//$breadCrumbs[] = new BreadCrumb($category->Name, '');
-
 	templater::assign('includeMainMenu', true);
 
 	$parent = $post->getParent();
