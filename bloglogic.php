@@ -112,21 +112,6 @@
 			}
 			return "";
 		}
-		
-		public function RenderCategoryPath()
-		{
-			$result = "";
-			if($po = $this->getParent())
-			{
-				$result .= $po->RenderCategoryPath();
-			}
-			else
-			{
-				$result .= "<a href='/'>Главная</a>";
-			}
-			$result .= "<a> › </a><a href='/category/" . $this->ID . "'> " . $this->Name . " </a>";
-			return $result;
-		}
 	}
 
 	class TagCategory extends TagCategoryChild

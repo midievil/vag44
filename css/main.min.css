@@ -187,3 +187,8 @@ a.simple {
 	color: #eee;
 	background-image: url(/img/backgrounds/purple.jpg);
 }
+
+ul.breadcrumb
+{
+	border: 1px solid #ddd;
+}

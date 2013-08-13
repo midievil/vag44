@@ -20,10 +20,18 @@
 
 	templater::assign('includeMainMenu', true);
 
-	templater::assign('breadCrumbs', $breadCrumbs);
-	
-	
-	
+	$parent = $post->getParent();
+	if($parent != null)
+	{		
+		$parent2 = $parent->getParent();	
+		if($parent2 != null)
+		{
+			$breadCrumbs[] = new BreadCrumb($parent2->Name, '/category/'.$parent2->ID);			
+		}
+		
+		$breadCrumbs[] = new BreadCrumb($parent->Name, '/category/'.$parent->ID);
+	}	
+	templater::assign('breadCrumbs', $breadCrumbs);	
 	
 	
 	$rawGalleryItems = array();
