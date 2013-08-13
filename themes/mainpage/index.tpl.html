@@ -14,13 +14,13 @@
 	          </div><!--/row-->
 	          <div class="row-fluid">
 	            
-	          </div><!--/row-->				
+	          </div><!--/row-->
 				{if $smarty.server.REQUEST_URI == '/feed'}{assign var="active" value="feed"}{/if}
 				{include file='controls/maintabmenu.html' active=$active}
 				
-				<div id="myTabContent" class="tab-content">
+				<div id="myTabContent" class="tab-content span10" style="min-width: 700px; margin-left:0px">
 		            <div class="tab-pane fade {if $active != 'feed'}active in{/if}" id="home">
-						<div class="accordion" id="accordionMain">
+                        <div class="accordion" id="accordionMain">
 							{foreach from=$categories item=category}
 								{include file="controls/tagcategory.html" category=$category}
 							{/foreach}					
@@ -36,6 +36,9 @@
 						</div>
 		            </div>		            
 				</div>  
+
+
+               
 	
 <br />
 

@@ -161,6 +161,11 @@ a.textbold
 	font-weight: bold;
 }
 
+a.simple {
+    text-decoration: none;
+    color: #000000;
+}
+
 .nav-list>li>a
 {
 	white-space: normal;
@@ -188,4 +193,17 @@ a.textbold
 	height:90%;
 	text-align:center;
 	vertical-align:center;
+}
+
+
+.pagination.small {
+    margin:0px;
+}
+
+.pagination.small ul > li > a {
+    padding: 1px 6px;
+}
+
+.pagination.small ul > li:first-child.simple {
+    background-color:#ffffff;
 }

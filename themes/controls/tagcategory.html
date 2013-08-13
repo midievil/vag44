@@ -4,20 +4,27 @@
 				{/if}
 				
 				{assign var='childObjects' value=$category->getChildObjects()}			
-				<div class="accordion-group">
-		              <div class="accordion-heading" style='height:90px;'>
-						<div class="span8">
-		                <a class="accordion-toggle pull-left" data-toggle="collapse" href="#collapseTC{$category->ID}" data-parent="#accordionMain">
-							<h4>{$category->Name}</h4>
-		                </a>
-						<a class="btn" style='margin-top:10px;' href="/category/{$category->ID}">»</a>
-						<a style='margin-top:10px;' class="accordion-toggle nowrap" data-toggle="collapse" data-parent="#accordionMain" href="#collapseTC{$category->ID}"><small>{$category->Comment}</small></a>
-						</div>
-						<div class='pull-right span3' style='padding-right:20px; padding-top:5px;  text-align:right;'>						
-							{$category->LastCommentHint}
-						</div>
-		              </div>	
-					{if $childObjects|@count >0}
+
+                    <div class="accordion-group" style="margin-bottom: 10px;">
+                        <div class="accordion-heading tagcategory" style='min-height:100px;' id="divTC{$category->ID}">
+                            <div class="row-fluid">
+                              <div class="span12">                            
+                                <div class="row-fluid">
+                                  <div class="span8" style="overflow:hidden">
+                                    <a class="accordion-toggle pull-left" data-toggle="collapse" href="#collapseTC{$category->ID}" data-parent="#accordionMain">
+							            <h4>{$category->Name}</h4>
+		                            </a>
+                                    <a class="btn" style='margin-top:10px;' href="/category/{$category->ID}">»</a><br />
+                                      <a style='margin-top:10px;' class="accordion-toggle nowrap" data-toggle="collapse" data-parent="#accordionMain" href="#collapseTC{$category->ID}"><small>{$category->Comment}</small></a>
+                                  </div>
+                                  <div class="span4 nowrap" style="padding: 8px 15px; overflow:hidden">
+                                      {$category->LastCommentHint}                                      
+                                  </div>
+                                </div>                                  
+                              </div>                              
+                            </div>
+                        </div>
+                      {if $childObjects|@count >0}
 		              <div id="collapseTC{$category->ID}" class="accordion-body collapse" style="height: 0px;">
 		                <div class="accordion-inner">
 							<div class="list" style='height:250px'>
@@ -37,5 +44,5 @@
 							</div>
 		                </div>
 		              </div>
-					{/if}
-		            </div>    
+                    {/if}
+                    </div>				

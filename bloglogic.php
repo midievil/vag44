@@ -305,17 +305,17 @@
 		{
 			global $currentUser;
 			
-			$itemsCount = $this->CommentsCount;
-			$result = '<span class="paging nowrap">';			
-			
-			if($currentUser->PageSize > 0 && $itemsCount > $currentUser->PageSize)
-			{
-				if($hint)
-				{
-					$result .= '<a class="comment">'.$hint.'</a>';
-				}
-				
-				$pagesCount = ceil($itemsCount / $currentUser->PageSize);
+			$result = '';
+            
+            $result .= '<div class="pagination row small hidden"><ul>';
+            
+            if($currentUser->PageSize > 0 && $this->CommentsCount > $currentUser->PageSize)
+			{	
+                if($hint)
+                {
+                    $result .= '<li class="simple"><a class="simple">'.$hint.'</a></li>';
+                }
+                $pagesCount = ceil($this->CommentsCount / $currentUser->PageSize);
 				for($page = 1; $page <= $pagesCount; $page++)
 				{	
 					if($pagesCount > 5)
@@ -324,16 +324,16 @@
 						{
 							if($page == 3)
 							{
-								$result .= "...";
+								$result .= "<li page='$page'><a>...</a></li>";
 							}
 							continue;
 						}
 					}
-					$result .= "&nbsp;<a class='paging comment' href='/post/$this->ID&page=$page'>$page</a>&nbsp;";
+					$result .= "<li page='$page'><a class='hand' href='/post/$this->ID&page=$page'>$page</a>";
 				}
 			}
 			
-			$result .= "</span>";
+			$result .= "</ul></div>";
 			
 			return $result;
 		}		
@@ -565,22 +565,19 @@
 				if($lastPostID != -1)
 				{
 					$link = '
-					<div style="width: 200px; overflow: hidden;  white-space: nowrap;">
-						<a title="'.$lastPost->Title.'" class="lastposttitle" href="/post/' . $lastPost->ID . '?page=last">' . $lastPost->Title . '</a>
-					</div>&nbsp;';
+					<a title="'.$lastPost->Title.'" class="lastposttitle" href="/post/' . $lastPost->ID . '?page=last">' . $lastPost->Title . '</a>
+					<br />';
 				}
 			}
 			$userDescription = $user->GetDescriptionForPopup();
-			$popupEvents = "onmouseover='showPopup(this , \"$userDescription\")' onmouseout='hidePopup()'";		
 			
-			return "<table cellspacing='0' cellpadding='0'><tr>
-				<td class='lastcomment nowrap' align='right'>
-					<div>
-					$link
-					" .DateFunctions::getDateTimeAtText($date) . ", <a id='aTagCategory".rand(1, 1000)."User' $popupEvents>" . $user->Name . '</a><br />
-					<a class="comment" href="/post/' . $lastPost->ID . '?page=last"> '.$comment_last.'</a><br />'.$lastPost->RenderQuickPaging()."</div>
-				</td>					
-				<td style='padding-left:5px'>" . $user->RenderUserPic($id, 'TagCategory'.rand(1, 1000), 30) . "</td></tr></table>";
+			return "<div style='overflow: hidden; white-space:nowrap; width: 200px'>
+                        <div class='span2 pull-left' >". $user->RenderUserPic($id, 'TagCategory'.rand(1, 1000), 30) . "</div>
+					    <div class='span8 nowrap pull-left' style='height: 60px; padding-left:25px'>
+					        $link<a title='$comment_last' class='simple'><i class='icon-comment'></i>" .DateFunctions::getDateTimeAtText($date) . "</a><br />от <a href='/user/".$user->ID."'><i class='icon-user'></i>" . $user->Name . '</a><br />
+				        </div><br />
+                        
+                    </div>'.$lastPost->RenderQuickPaging('Страницы:');
 		}
 		else
 		{

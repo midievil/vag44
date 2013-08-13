@@ -54,10 +54,6 @@ class DateFunctions
 		$timestampPost = 	(mktime(0,0,0,	$dtPost[1], 	$dtPost[2],		intval($dtPost[0])		));
 		$difference = floor(($timestampPost - $timestampNow)/86400);		
 		
-		//echo "$dtPost[3], $dtPost[4], $dtPost[5], ".($dtPost[1]*1).", 	$dtPost[2],		$dtPost[0]<br />";
-		//echo $dtNow['hours'].", ".$dtNow['minutes'].", ".$dtNow['seconds'].", ".$dtNow['mon'].", ".$dtNow['mday'].", ".$dtNow['year']."<br />";
-		//echo $difference."<br />";
-		
 		if($difference == 0)
 		{
 			return date_format($date, "<b>Сегодня</b> в G:i");
@@ -536,19 +532,19 @@ class RenderFunctions
 	{
 		if($count == 0)		
 		{
-			return "нет ответов";
+			return "нет&nbsp;ответов";
 		}
 		else if($count % 10 == 1 && $count != 11)
 		{
-			return "$count ответ";
+			return "$count&nbsp;ответ";
 		}
 		else if(($count < 10 || $count > 20) && $count % 10 >= 2 && $count % 10 <= 4)
 		{
-			return "$count ответа";
+			return "$count&nbsp;ответа";
 		}
 		else
 		{
-			return "$count ответов";
+			return "$count&nbsp;ответов";
 		}
 	}
     
@@ -560,15 +556,15 @@ class RenderFunctions
 		}
 		else if($count % 10 == 1 && $count != 11)
 		{
-			return "$count просмотр";
+			return "$count&nbsp;просмотр";
 		}
 		else if(($count < 10 || $count > 20) && $count % 10 >= 2 && $count % 10 <= 4)
 		{
-			return "$count просмотра";
+			return "$count&nbsp;просмотра";
 		}
 		else
 		{
-			return "$count просмотров";
+			return "$count&nbsp;просмотров";
 		}
 	}
     

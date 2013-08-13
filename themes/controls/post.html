@@ -1,17 +1,27 @@
-<div class="alert alert-info" style='height:70px'>
-	<div class='pull-left'>
-		{$post->User->RenderUserPic('post', $post->ID, 42)}		
-	</div>
-	<div class='span6'>
-		<a class='tagcategory2 {if $post->Closed}closedpost{/if}' href="/post/{$post->ID}"><h4>{$post->Title}</h4></a>
-		<br />
-		Написал <a href="/user/{$post->User->ID}">{$post->User->Name}</a> <a class="textunderpost">{$post->CreateDate()}</a>		
-	</div>
-	<div class='span2'>
-		<a class="comment font10">{$post->VisitsCountHint()}</a><br>
-		<a class="comment font10">{$post->CommentsCountHint()}</a>
-	</div>
-	<div class='span3'>
-		{$post->LastCommentHint()}
-	</div>
+<div class="alert alert-info" style='height:90px; padding-right: 0px'>
+    <div class="row-fluid">
+        <div class="span12">                            
+            <div class="row-fluid">
+                <div class="span8" style="overflow:hidden">
+                    <div class="row-fluid">
+                        <div class='pull-left'>
+		                    {$post->User->RenderUserPic('post', $post->ID, 42)}		
+	                    </div>
+                           <div class='span6 nowrap' style="overflow:hidden">
+		                        <a class='tagcategory2 {if $post->Closed}closedpost{/if}' href="/post/{$post->ID}"><h4>{$post->Title}</h4></a>
+		                        <br />
+		                        Написал <a href="/user/{$post->User->ID}">{$post->User->Name}</a> <a class="textunderpost">{$post->CreateDate()}</a>		
+	                        </div>
+	                        <div class='span2'>
+		                        <a class="comment font10">{$post->VisitsCountHint()}</a><br>
+		                        <a class="comment font10">{$post->CommentsCountHint()}</a>
+	                        </div>
+                    </div>
+                </div>
+                <div class="span4 nowrap" style="padding: 8px 15px;">
+                    {$post->LastCommentHint()}
+                </div>
+            </div>                                  
+        </div>                              
+    </div>    
 </div>

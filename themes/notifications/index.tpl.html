@@ -1,6 +1,6 @@
 	{if $currentUser->IsAdmin()}
 		{if $unauthorizedUsers|@count > 0 || $feedbacks|@count > 0}
-	<div class="alert alert-block alert-error fade in">		
+	<div class="alert alert-block alert-error fade in span10" style="margin-left:0px">
 		<button class="close" data-dismiss="alert">×</button>
 			{foreach from=$feedbacks item=feedback}
 				Новый фидбэк: <a class='button' href='/admin/feedback/{$feedback.ID}'>{$feedback.Header}</a>{if $feedback.UserName != ''} от  {$feedback.UserName}{/if}<br />
@@ -20,7 +20,7 @@
 	
 	{if $currentUser->IsLogged()}
 		{if $userMessages|@count > 0}
-	<div class="alert fade in">
+	<div class="alert fade in span10" style="margin-left:0px">
 		<button class="close" data-dismiss="alert">×</button>
 				<ul>	
 				{foreach from=$userMessages item=message}

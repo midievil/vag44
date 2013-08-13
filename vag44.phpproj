@@ -84,9 +84,6 @@
     <Compile Include="db\UserDB.php">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="functions.php">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="i18n\ru.php">
       <SubType>Code</SubType>
     </Compile>
@@ -3076,9 +3073,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="themes\controls\privateMessage.html">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="themes\controls\tabmenu.html">
       <SubType>Content</SubType>
     </Content>
     <Content Include="themes\controls\tagcategory.html">
