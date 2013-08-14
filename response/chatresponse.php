@@ -1,7 +1,7 @@
 <?php
 
     error_reporting(E_ERROR | E_WARNING | E_PARSE);
-    //error_reporting(0);
+    error_reporting(0);
 	
 	session_start();
 	
@@ -19,6 +19,7 @@
 	require_once "constants.php";    
 	require_once "db/ChatDB.php";
 	require_once "userlogic.php";
+    require_once "carlogic.php";
     
     require_once "miscfunctions.php";
     
