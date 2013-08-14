@@ -273,13 +273,24 @@ div.whiteform {
         width: 350px;
         z-index: 1000;
     }
+    
+    #divChat div.header.highlight {
+		background-color: orange;
+    	color: #ffffff;
+	}
+    
 
     #divChat input.message {
         width:250px;
     }
 
-    #divChat div.messages {
+    #divChat div.content {
+		
+    }
+    
+    #divChat div.messages {    	
         height: 300px;
+    	max-height: 30%;
         overflow-y: scroll;
         margin-bottom: 20px;
     }

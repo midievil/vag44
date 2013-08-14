@@ -25,4 +25,18 @@ class ChatDB
         $query = "SELECT * FROM ChatMessages WHERE ChatID=$chatID AND ID>$fromMessageID ORDER BY ID";
         return fDB::fqueryAll($query);
     }
+    
+    public static function SetVisibility($userID, $visible)
+    {
+    	$query = "UPDATE Users SET ShowChat=".($visible ? "1" : "0")." WHERE ID=$userID";
+    	echo $query ;
+    	return fDB::fexec($query);
+    }
+    
+    public static function SetSound($userID, $sound)
+    {
+    	$query = "UPDATE Users SET SoundChat=".($sound ? "1" : "0")." WHERE ID=$userID";
+    	echo $query ;
+    	return fDB::fexec($query);
+    }
 }

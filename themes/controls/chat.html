@@ -1,21 +1,32 @@
-﻿{literal}
+
 <script type="text/javascript">
     var lastMessageId = -1;
     var chatTimeOut = -1;
-
+    var blinkTimeOut = -1;
+    var alertChat = {if $currentUser->SoundChat==0}false{else}true{/if};
+    
+{literal}
     function sendMessage() {
-        $.ajax({
-            type: "POST",
-            url: "/response/chatresponse.php",
-            data: "action=writemessage&message=" + $("#tbChatMessage").val(),
-            success: function (result) {
-                getMessages();
-                $("#tbChatMessage").val('');
-            }
-        });
+    	var message = trim($("#tbChatMessage").val());
+    	if(message != '')
+    	{
+    		$.ajax({
+                type: "POST",
+                url: "/response/chatresponse.php",
+                data: "action=writemessage&message=" + message,
+                success: function (result) {
+                    getMessages(true);
+                    $("#tbChatMessage").val('');
+                }
+            });	
+    	}        
     }
         
-    function getMessages() {
+    function getMessages(self) {
+    	if(self == undefined)
+    	{
+    		self = false;
+    	}
         $.ajax({
             type: "POST",
             url: "/response/chatresponse.php",
@@ -25,13 +36,18 @@
 
                 var res = JSON.parse(result);
 
-                if (res['lastid'] != 'nomessages') {
+                if (res['lastid'] != 'nomessages' && res['lastid'] != lastMessageId) {
 
                     if (lastMessageId == -1) {
                         $("#divChat div.messages").html(res['html']);
                     }
                     else {
                         $("#divChat div.messages").append(res['html']);
+                        if(!self)
+                        {
+                        	alertSound();
+                            blinkChat();	
+                        }                        
                     }
                                         
                     $("#divChat div.messages").scrollTop(100000);
@@ -43,6 +59,34 @@
             }
         });
     }
+    
+    function alertSound()
+    {
+    	if(alertChat)
+    	{
+    		$.playSound('http://vag44.net/sound/horn.mp3');
+    	}    	    	
+    }
+    
+    
+    function blinkChat() {
+    	clearTimeout(blinkTimeOut);
+    	var visible = $("#divChat div.content").is(':visible'); 
+        if(visible)
+        {
+        	$("#divChat div.header").toggleClass('highlight');
+        	if($("#divChat div.header").hasClass('highlight'))
+        	{
+        		blinkTimeOut = setTimeout(function () { blinkChat() }, 300);	
+        	}        	
+        }
+        else        	
+        {
+        	$("#divChat div.header").toggleClass('highlight');
+        	blinkTimeOut = setTimeout(function () { blinkChat() }, $("#divChat div.header").hasClass('highlight') ? 300:10000);
+        }
+    }
+    
 
     function tbMessageKeyUp(e) {
         if (e.keyCode == 13) {
@@ -51,23 +95,70 @@
     }
 
     function toggleChat() {
-        $("#divChat div.content").toggleClass('hidden');
+        //$("#divChat div.content").toggleClass('hidden');
 
-        $("#divChat div.header button.close i").attr("class", $("#divChat div.content").is(':visible') ? 'icon-chevron-down' : 'icon-chevron-up' );
+        var visible = $("#divChat div.content").is(':visible'); 
+        if(visible)
+        {
+        	$("#divChat div.content").hide();
+        }
+        else
+        {
+        	$("#divChat div.content").show();
+        	$("#divChat div.messages").scrollTop(100000);
+        }
+        visible = !visible;
+    
+        $("#divChat div.header button.close i").attr("class", visible ? 'icon-chevron-down' : 'icon-chevron-up' );
+        
+        $.ajax({
+            type: "POST",
+            url: "/response/chatresponse.php",
+            data: "action=setvisible&visible=" + (visible ? '1' : '0'),
+            success: function (result) {  
+            	
+            }
+        });
     }
+    
+    function toggleSound()
+    {
+    	var sound = $("#divChat button.mute i").hasClass('icon-volume-up');
+    	if(sound)
+    	{
+    		$("#divChat button.mute i").removeClass('icon-volume-up');
+    		$("#divChat button.mute i").addClass('icon-volume-off');
+    	}
+    	else
+    	{
+    		$("#divChat button.mute i").removeClass('icon-volume-off');
+    		$("#divChat button.mute i").addClass('icon-volume-up');    		
+    	}    
+    	sound = !sound;
+    	alertChat = sound;
+    	$.ajax({
+            type: "POST",
+            url: "/response/chatresponse.php",
+            data: "action=setsound&sound=" + (sound ? '1' : '0'),
+            success: function (result) {  
+            	
+            }
+        });
+    }    
 
-    getMessages();
+    getMessages();        
 </script>
 {/literal}
 
 
+<div id='chatAlert' class='hidden'></div>
 <div id="divChat" class="whiteform chat">
     <div class="header">Уютненький чатик 
         <button class="btn btn-small pull-right close" onclick="toggleChat();">
-            <i class='icon-chevron-down'></i>
+            <i class='icon-chevron-{if $currentUser->ShowChat==0}up{else}down{/if}'></i>
         </button>
     </div>
-    <div class="content">
+    <div class="content {if $currentUser->ShowChat==0}hidden{/if}">
         <div class="messages">
             <div class="progress progress-striped active">
                 <div class="bar" style="width: 100%;">Загружаем...</div>
@@ -81,7 +172,21 @@
                   Тыц                  
                 </button>                
               </div>
-            </div>
+            </div>            
+        </div>
+        <div>
+        	<button class='btn mute' onclick='toggleSound();'>
+        		<i class='icon-volume-{if $currentUser->SoundChat==1}up{else}off{/if}'></i>
+        	 </button>
         </div>
     </div>
 </div>
+
+<script>
+{literal}
+	if($(window).height()<550)
+	{
+		$("#divChat div.messages").css('height', $(window).height()-270) ;
+	}
+{/literal}	
+</script>

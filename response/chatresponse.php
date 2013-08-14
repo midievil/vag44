@@ -50,5 +50,13 @@
             echo json_encode($res);
             
             return;
+            
+        case "setvisible":        	
+        	ChatDB::SetVisibility(User::CurrentUserID(), $_REQUEST['visible']);
+        	return;
+        	
+       	case "setsound":
+        	ChatDB::SetSound(User::CurrentUserID(), $_REQUEST['sound']);
+        	return;
     }
 ?>

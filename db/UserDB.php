@@ -28,7 +28,9 @@
 						U.Gender,
 						G.DisplayName GroupName,
 						G.Name GroupInnerName,
-						U.Rating
+						U.Rating,
+						U.ShowChat,
+						U.SoundChat
 				from	Users U
 				join	UserGroups G on G.ID = U.GroupID				
 				where	U.ID=$id";
@@ -72,7 +74,9 @@
 					U.Gender,
 					G.DisplayName GroupName,
 					G.Name GroupInnerName,
-					U.Rating
+					U.Rating,
+					U.ShowChat,
+					U.SoundChat
 			from	Users U
 			join	UserGroups G on G.ID = U.GroupID
 			where	Visible = 1			

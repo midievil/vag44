@@ -33,6 +33,8 @@
 		public $GroupInnerName = '';
 		public $Rating = 0;
 		public $Gender = '';
+		public $ShowChat = 1;
+		public $SoundChat = 0;
 		
 		public function __construct($id = null) {
 			if($id)
