@@ -1,0 +1,87 @@
+﻿{literal}
+<script type="text/javascript">
+    var lastMessageId = -1;
+    var chatTimeOut = -1;
+
+    function sendMessage() {
+        $.ajax({
+            type: "POST",
+            url: "/response/chatresponse.php",
+            data: "action=writemessage&message=" + $("#tbChatMessage").val(),
+            success: function (result) {
+                getMessages();
+                $("#tbChatMessage").val('');
+            }
+        });
+    }
+        
+    function getMessages() {
+        $.ajax({
+            type: "POST",
+            url: "/response/chatresponse.php",
+            data: "action=getmessages&lastid=" + lastMessageId,
+            success: function (result) {
+                clearTimeout(chatTimeOut);
+
+                var res = JSON.parse(result);
+
+                if (res['lastid'] != 'nomessages') {
+
+                    if (lastMessageId == -1) {
+                        $("#divChat div.messages").html(res['html']);
+                    }
+                    else {
+                        $("#divChat div.messages").append(res['html']);
+                    }
+                                        
+                    $("#divChat div.messages").scrollTop(100000);
+
+                    lastMessageId = res['lastid'];
+                }
+
+                chatTimeOut = setTimeout(function () { getMessages(); }, 3000);
+            }
+        });
+    }
+
+    function tbMessageKeyUp(e) {
+        if (e.keyCode == 13) {
+            sendMessage();
+        }
+    }
+
+    function toggleChat() {
+        $("#divChat div.content").toggleClass('hidden');
+
+        $("#divChat div.header button.close i").attr("class", $("#divChat div.content").is(':visible') ? 'icon-chevron-down' : 'icon-chevron-up' );
+    }
+
+    getMessages();
+</script>
+{/literal}
+
+
+<div id="divChat" class="whiteform chat">
+    <div class="header">Уютненький чатик 
+        <button class="btn btn-small pull-right close" onclick="toggleChat();">
+            <i class='icon-chevron-down'></i>
+        </button>
+    </div>
+    <div class="content">
+        <div class="messages">
+            <div class="progress progress-striped active">
+                <div class="bar" style="width: 100%;">Загружаем...</div>
+            </div>
+        </div>
+        <div class="write">
+            <div class="input-append">
+              <input class="message" id="tbChatMessage" type="text" onkeyup="tbMessageKeyUp(event);">
+              <div class="btn-group">
+                <button class="btn btn-primary" onclick="sendMessage();">
+                  Тыц                  
+                </button>                
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

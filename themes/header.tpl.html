@@ -16,8 +16,7 @@
         <link rel="stylesheet" type="text/css" href="/css/popupbox.css?version=16.10.2012" />
 		<link rel="stylesheet" type="text/css" href="/css/gallery.css?version=3" />	
 		<link rel="shortcut icon" href="/img/favicon.ico">
-		<link rel="stylesheet" type="text/css" href="/css/main.min.css?version=16" />
-				
+		<link rel="stylesheet" type="text/css" href="/css/main.min.css?version=17" />				
 
 <!--[if lt IE 7]><link rel="stylesheet" href="css/bootstrap-ie6.css"><![endif]-->
 
@@ -33,8 +32,7 @@
 		<script type="text/javascript" src="/bootstrap/js/bootstrap-popover.js"></script>
 		<script type="text/javascript" src="/bootstrap/js/bootstrap-image-gallery.min.js"></script>
         
-		
-
+               
 		<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="/ckeditor/adapters/jquery.js"></script>
 		<script type="text/javascript" src="/js/functions.js?version=3"></script>	
@@ -174,7 +172,7 @@
 								<li><a id='aRegister' href='/registration'><b>Регистрация</b></a></li>
 							</ul>							
 							
-							</nobr>
+							<nobr>
 						</div>
 						
 						
@@ -185,17 +183,20 @@
 			</div>
 		</div>
 		
-		{*<div class="pagetop logo" align="center">			
-				<div style="float:left">
-					<a href="/"><img style="border:0px" src="/img/bluelogo.png?version=winter"></a>
-				</div>			
-		</div>*}
-		
+	
+        {if $currentUser->IsLogged()}
+            <script type="text/javascript">
+                var showChat=true;
+            </script>
+            {include file="controls/chat.html" news=$news}
+        
+        {/if}
+
 		<div class="container-fluid" id='wrap'>
 	      <div class="row-fluid" id='main'>
 	        <div class="span3">
 	          <div class="well sidebar-nav sidebar-nav-fixed span3">
-				{include file="controls/newsblock.html" news=$news}	            
+				{include file="controls/newsblock.html" news=$news}
 	          </div><!--/.well -->
 	        </div><!--/span-->
 	        <div class="span9" style="padding-top: 20px">
