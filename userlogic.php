@@ -227,16 +227,14 @@
 		{
 			if(file_exists("img/userpics/$this->ID.jpg"))
 			{
-				$imgname = "/img/userpics/$this->ID.jpg";
-				$enlarge = "enlargeUserPic(\"imgUserPic$type$id\")";
+				$imgname = "/img/userpics/$this->ID.jpg";				
 			}
 			else
 			{				
 				$vendor = getCarVendorByUserID($this->ID);
 				if($vendor)
 				{	
-					$imgname = "/img/".$vendor."_Logo.jpg";
-					$enlarge = "";
+					$imgname = "/img/".$vendor."_Logo.jpg";					
 				}
 				else
 				{
@@ -244,11 +242,7 @@
 				}
 			}
 			
-			if($size > 75)
-			{
-				$enlarge = "";
-			}
-			return "<img class='img-polaroid' id='imgUserPic$type$id' src='$imgname' style='max-width:$size"."px; width:$size"."px' class='avatar' onmouseover='$enlarge' />";
+			return "<img class='img-polaroid' id='imgUserPic$type$id' src='$imgname' style='max-width:$size"."px; width:$size"."px' class='avatar' />";
 		}
 	}
 

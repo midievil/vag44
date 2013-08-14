@@ -528,6 +528,31 @@ class RenderFunctions
 		}
 	}
     
+    public static function RenderChatMessage($messageRow){
+        $result = "<div>";
+        
+        $result.=$messageRow['Message'];
+        
+        $user = new User($messageRow['UserID']);
+        
+        $result = '
+            <div class="message">
+                <div class="image pull-left">'.$user->RenderUserPic(1,1,30).'
+                </div>
+                <div class="body" style="padding-right:-20px">                    
+                    <a class="username">'.$user->Name.'</a>
+                    <div class="text">'.$messageRow['Message'].'</div>
+                    <a class="timestamp">
+                        '.DateFunctions::getDateTimeAtText($messageRow['Date']).'
+                    </a>
+                </div>
+            </div>';
+        
+        //$result = "</div>";
+        
+        return $result;
+    }
+    
     public static function getCommentsCountHint($count)
 	{
 		if($count == 0)		
