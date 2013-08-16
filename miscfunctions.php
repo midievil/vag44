@@ -528,27 +528,44 @@ class RenderFunctions
 		}
 	}
     
-    public static function RenderChatMessage($messageRow){
-        $result = "<div>";
+    public static function RenderChatMessage($messageRow, $compact = false){
+    	
+    	$user = new User($messageRow['UserID']);
+    	
+    	$text = TextFunctions::formatText($messageRow['Message']);
+    	$username= '<a class="username" href="/user/'.$user->ID.'">'.$user->Name.'</a>';
+    	
+    	if($compact)
+    	{
+    		$result = 
+    		$username.'
+    		<span class="timestamp">
+	    		<a class="timestamp">
+	    			'.DateFunctions::getDateTimeAtText($messageRow['Date']).'
+	    		</a>
+    		</span><br />
+    		'.$text.'<br />    		
+    		<br />';
+    	}
+    	else
+    	{
+    		$result = '
+    		<div class="message">
+	    		<div class="image pull-left">'.$user->RenderUserPic(1,1,30).'</div>
+	    		<div class="body" style="padding-right:-20px">
+		    		'.$username.'
+		    		<span class="timestamp">
+			    		<a class="timestamp">$text</a>
+		    		</span>
+		    		<div class="text">'.$text.'</div>
+		    		<a class="timestamp">
+			    		
+		    		</a>
+	    		</div>
+    		</div>';
+    	}
         
-        $result.=$messageRow['Message'];
         
-        $user = new User($messageRow['UserID']);
-        
-        $result = '
-            <div class="message">
-                <div class="image pull-left">'.$user->RenderUserPic(1,1,30).'
-                </div>
-                <div class="body" style="padding-right:-20px">                    
-                    <a class="username">'.$user->Name.'</a>
-                    <div class="text">'.$messageRow['Message'].'</div>
-                    <a class="timestamp">
-                        '.DateFunctions::getDateTimeAtText($messageRow['Date']).'
-                    </a>
-                </div>
-            </div>';
-        
-        //$result = "</div>";
         
         return $result;
     }

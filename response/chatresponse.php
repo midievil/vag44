@@ -1,7 +1,8 @@
 <?php
 
     error_reporting(E_ERROR | E_WARNING | E_PARSE);
-    error_reporting(0);
+    error_reporting(E_ERROR);
+    //error_reporting(0);
 	
 	session_start();
 	
@@ -25,6 +26,8 @@
     
     global $currentUserID;
     
+    $currentUser = User::CurrentUser();
+    
     switch($_REQUEST["action"])
     {
         case "writemessage":            
@@ -32,13 +35,14 @@
             return;
             
         case "getmessages":
-            $result = '';
+        	
+        	$result = '';
             
             $messages = ChatDB::GetMessages(-1, $_REQUEST['lastid']);
             if(count($messages) > 0)
             {
                 foreach($messages as $message){
-                    $result .= RenderFunctions::RenderChatMessage($message);
+                    $result .= RenderFunctions::RenderChatMessage($message, $currentUser->CompactChat);
                 }
                 $res['html'] = $result;
                 $res['lastid'] = $messages[count($messages) -1]['ID'];
@@ -52,11 +56,15 @@
             return;
             
         case "setvisible":        	
-        	ChatDB::SetVisibility(User::CurrentUserID(), $_REQUEST['visible']);
+        	ChatDB::SetVisibility(User::CurrentUserID(), $_REQUEST['newvalue']);
         	return;
         	
        	case "setsound":
-        	ChatDB::SetSound(User::CurrentUserID(), $_REQUEST['sound']);
+        	ChatDB::SetSound(User::CurrentUserID(), $_REQUEST['newvalue']);
+        	return;
+        	
+        case "setcompact":
+        	ChatDB::SetCompact(User::CurrentUserID(), $_REQUEST['newvalue']);
         	return;
     }
 ?>

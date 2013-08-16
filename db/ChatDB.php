@@ -26,17 +26,24 @@ class ChatDB
         return fDB::fqueryAll($query);
     }
     
-    public static function SetVisibility($userID, $visible)
+    public static function SetVisibility($userID, $newValue)
     {
-    	$query = "UPDATE Users SET ShowChat=".($visible ? "1" : "0")." WHERE ID=$userID";
-    	echo $query ;
+    	$query = "UPDATE Users SET ShowChat=".($newValue ? "1" : "0")." WHERE ID=$userID";
+    	//echo $query ;
     	return fDB::fexec($query);
     }
     
-    public static function SetSound($userID, $sound)
+    public static function SetSound($userID, $newValue)
     {
-    	$query = "UPDATE Users SET SoundChat=".($sound ? "1" : "0")." WHERE ID=$userID";
-    	echo $query ;
+    	$query = "UPDATE Users SET SoundChat=".($newValue ? "1" : "0")." WHERE ID=$userID";
+    	//echo $query ;
+    	return fDB::fexec($query);
+    }
+    
+    public static function SetCompact($userID, $newValue)
+    {
+    	$query = "UPDATE Users SET CompactChat=".($newValue ? "1" : "0")." WHERE ID=$userID";
+    	//echo $query ;
     	return fDB::fexec($query);
     }
 }

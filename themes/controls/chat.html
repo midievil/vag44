@@ -10,13 +10,13 @@
     	var message = trim($("#tbChatMessage").val());
     	if(message != '')
     	{
+    		$("#tbChatMessage").val('');
     		$.ajax({
                 type: "POST",
                 url: "/response/chatresponse.php",
                 data: "action=writemessage&message=" + message,
                 success: function (result) {
-                    getMessages(true);
-                    $("#tbChatMessage").val('');
+                    getMessages(true);                    
                 }
             });	
     	}        
@@ -55,7 +55,7 @@
                     lastMessageId = res['lastid'];
                 }
 
-                chatTimeOut = setTimeout(function () { getMessages(); }, 3000);
+                chatTimeOut = setTimeout(function () { getMessages(); }, 10000);
             }
         });
     }
@@ -114,7 +114,7 @@
         $.ajax({
             type: "POST",
             url: "/response/chatresponse.php",
-            data: "action=setvisible&visible=" + (visible ? '1' : '0'),
+            data: "action=setvisible&newvalue=" + (visible ? '1' : '0'),
             success: function (result) {  
             	
             }
@@ -123,8 +123,8 @@
     
     function toggleSound()
     {
-    	var sound = $("#divChat button.mute i").hasClass('icon-volume-up');
-    	if(sound)
+    	var enabled = $("#divChat button.mute i").hasClass('icon-volume-up');
+    	if(enabled)
     	{
     		$("#divChat button.mute i").removeClass('icon-volume-up');
     		$("#divChat button.mute i").addClass('icon-volume-off');
@@ -134,17 +134,43 @@
     		$("#divChat button.mute i").removeClass('icon-volume-off');
     		$("#divChat button.mute i").addClass('icon-volume-up');    		
     	}    
-    	sound = !sound;
-    	alertChat = sound;
+    	enabled = !enabled;
+    	alertChat = enabled;
     	$.ajax({
             type: "POST",
             url: "/response/chatresponse.php",
-            data: "action=setsound&sound=" + (sound ? '1' : '0'),
+            data: "action=setsound&newvalue=" + (enabled ? '1' : '0'),
             success: function (result) {  
             	
             }
         });
     }    
+    
+    function toggleCompact()
+    {
+    	var enabled = $("#divChat button.compact i").hasClass('icon-align-justify');
+    	if(enabled)
+    	{
+    		$("#divChat button.compact i").removeClass('icon-align-justify');
+    		$("#divChat button.compact i").addClass('icon-user');
+    	}
+    	else
+    	{
+    		$("#divChat button.compact i").removeClass('icon-user');
+    		$("#divChat button.compact i").addClass('icon-align-justify');    		
+    	}    
+    	enabled = !enabled;
+    	alertChat = enabled;
+    	$.ajax({
+            type: "POST",
+            url: "/response/chatresponse.php",
+            data: "action=setcompact&newvalue=" + (enabled ? '1' : '0'),
+            success: function (result) {
+            	lastMessageId = -1;
+            	getMessages();
+            }
+        });    	
+    }
 
     getMessages();        
 </script>
@@ -176,7 +202,10 @@
         </div>
         <div>
         	<button class='btn mute' onclick='toggleSound();'>
-        		<i class='icon-volume-{if $currentUser->SoundChat==1}up{else}off{/if}'></i>
+        		<i class='icon-volume-{if $currentUser->SoundChat==1}up{else}off{/if}'></i>        		
+        	 </button>
+        	 <button class='btn compact' onclick='toggleCompact();'>
+        	 	<i class='{if $currentUser->CompactChat==1}icon-align-justify{else}icon-user{/if}'></i>
         	 </button>
         </div>
     </div>
