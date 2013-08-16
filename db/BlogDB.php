@@ -237,7 +237,6 @@
 			left join
 					Comments C on C.ID = P.LastCommentID
 			where	TCTP.TagCategoryID = $id
-					and	P.Text != ''			
 			order by 
 					case
 						when P.Date > IFNULL(C.Date, '1900-01-01') then P.Date
