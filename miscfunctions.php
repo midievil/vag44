@@ -534,18 +534,13 @@ class RenderFunctions
     	
     	$text = TextFunctions::formatText($messageRow['Message']);
     	$username= '<a class="username" href="/user/'.$user->ID.'">'.$user->Name.'</a>';
+    	$timestamp = '<span class="timestamp"><a class="timestamp">'.DateFunctions::getDateTimeAtText($messageRow['Date']).'</a></span>';
     	
     	if($compact)
     	{
     		$result = 
-    		$username.'
-    		<span class="timestamp">
-	    		<a class="timestamp">
-	    			'.DateFunctions::getDateTimeAtText($messageRow['Date']).'
-	    		</a>
-    		</span><br />
-    		'.$text.'<br />    		
-    		<br />';
+    		$username.$timestamp.'<br />
+    		'.$text.'<br />';
     	}
     	else
     	{
@@ -553,10 +548,7 @@ class RenderFunctions
     		<div class="message">
 	    		<div class="image pull-left">'.$user->RenderUserPic(1,1,30).'</div>
 	    		<div class="body" style="padding-right:-20px">
-		    		'.$username.'
-		    		<span class="timestamp">
-			    		<a class="timestamp">$text</a>
-		    		</span>
+		    		'.$username.$timestamp.'		    		
 		    		<div class="text">'.$text.'</div>
 		    		<a class="timestamp">
 			    		

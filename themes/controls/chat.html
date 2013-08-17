@@ -64,7 +64,7 @@
     {
     	if(alertChat)
     	{
-    		$.playSound('http://vag44.net/sound/horn.mp3');
+    		$.playSound('http://vag44.net/sound/msg.wav');
     	}    	    	
     }
     
@@ -153,11 +153,13 @@
     	{
     		$("#divChat button.compact i").removeClass('icon-align-justify');
     		$("#divChat button.compact i").addClass('icon-user');
+    		$("#divChat div.messages").removeClass('compact');
     	}
     	else
     	{
     		$("#divChat button.compact i").removeClass('icon-user');
-    		$("#divChat button.compact i").addClass('icon-align-justify');    		
+    		$("#divChat button.compact i").addClass('icon-align-justify');
+    		$("#divChat div.messages").addClass('compact');
     	}    
     	enabled = !enabled;
     	alertChat = enabled;
@@ -185,7 +187,7 @@
         </button>
     </div>
     <div class="content {if $currentUser->ShowChat==0}hidden{/if}">
-        <div class="messages">
+        <div class="messages {if $currentUser->CompactChat==1}compact{/if}">
             <div class="progress progress-striped active">
                 <div class="bar" style="width: 100%;">Загружаем...</div>
             </div>

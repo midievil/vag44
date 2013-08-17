@@ -293,7 +293,12 @@ div.whiteform {
     	max-height: 30%;
         overflow-y: scroll;
         margin-bottom: 20px;
+    	font-size:10pt;    	
     }
+    
+    #divChat div.messages.compact {
+		font-size:9pt;
+	}
 
     #divChat div.messages div.message div.image {
         padding:5px;
@@ -305,7 +310,7 @@ div.whiteform {
         border-right: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
         padding: 4px;
-    	min-height: 50px;
+    	min-height: 50px;    	    	
     }
 
     #divChat div.messages span.timestamp
@@ -313,14 +318,18 @@ div.whiteform {
 		float: right;
 	}    
     
-    #divChat div.messages a.timestamp, #divChat div.messages div.message a.timestamp{
+    #divChat div.messages a.timestamp {
         font-size:7pt;
         color:#808080;
     	text-decoration: none;
     	cursor: default;
     }
 
-    #divChat div.messages a.username, #divChat div.messages div.message a.username{
+    #divChat div.messages.compact a.username {
+    	margin-top: 5px;
+	}
+    
+    #divChat div.messages a.username {
         font-size:9pt;
         color:#005580;
         font-weight:bold;    	
