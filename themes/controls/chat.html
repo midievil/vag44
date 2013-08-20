@@ -1,13 +1,26 @@
 
 <script type="text/javascript">
     var lastMessageId = -1;
+    var firstMessageId = -1;
     var chatTimeOut = -1;
     var blinkTimeOut = -1;
     var alertChat = {if $currentUser->SoundChat==0}false{else}true{/if};
+    var sendByEnter = {if $currentUser->EnterChat==1}true{else}false{/if};
     
 {literal}
+
+	$(document).ready(function() 
+		{
+			$('#tbChatMessage').focus(function(){
+				var node = $(this).get(0);
+				node.setSelectionRange(node.value.length,node.value.length);								
+			});		
+		}
+	);
+	
+
     function sendMessage() {
-    	var message = trim($("#tbChatMessage").val());
+    	var message = encodeURIComponent(trim($("#tbChatMessage").val()));
     	if(message != '')
     	{
     		$("#tbChatMessage").val('');
@@ -16,29 +29,45 @@
                 url: "/response/chatresponse.php",
                 data: "action=writemessage&message=" + message,
                 success: function (result) {
-                    getMessages(true);                    
+                    getMessages(false, true);                    
                 }
             });	
     	}        
     }
         
-    function getMessages(self) {
+    function getMessages(topMessages,self) {
     	if(self == undefined)
     	{
     		self = false;
     	}
+    	if(topMessages == undefined)
+    	{
+    		topMessages = false;
+    	}
+    	
+    	clearTimeout(chatTimeOut);
+    	
+    	//alert("action=getmessages&fromid=" + (topMessages ? firstMessageId : lastMessageId) + "&top=" + topMessages);
         $.ajax({
             type: "POST",
             url: "/response/chatresponse.php",
-            data: "action=getmessages&lastid=" + lastMessageId,
-            success: function (result) {
-                clearTimeout(chatTimeOut);
+            data: "action=getmessages&fromid=" + (topMessages ? firstMessageId : lastMessageId) + "&top=" + topMessages,            
+            success: function (result) {                
 
+            	clearTimeout(chatTimeOut);
+            	
                 var res = JSON.parse(result);
+                
+                if (res['lastid'] != 'nomessages' && (res['lastid'] != lastMessageId || res['firstid'] != firstMessageId)) {
 
-                if (res['lastid'] != 'nomessages' && res['lastid'] != lastMessageId) {
-
-                    if (lastMessageId == -1) {
+                	if(topMessages)
+                	{
+                		var firstChild = $("#divChat div.messages :first-child");
+                		var oldOffset = firstChild[0].offsetTop;
+                		$("#divChat div.messages").prepend(res['html']);
+                		$("#divChat div.messages").scrollTop(firstChild[0].offsetTop-oldOffset);	
+                	}                	
+                	else if (lastMessageId == -1) {
                         $("#divChat div.messages").html(res['html']);
                     }
                     else {
@@ -49,13 +78,24 @@
                             blinkChat();	
                         }                        
                     }
-                                        
-                    $("#divChat div.messages").scrollTop(100000);
+                                    
+                	if(!topMessages)
+                	{
+                		$("#divChat div.messages").scrollTop(100000);	
+                	}                    
 
-                    lastMessageId = res['lastid'];
+                    if(topMessages || firstMessageId == -1)
+                    {
+                    	firstMessageId = res['firstid'];
+                    }
+                    if(!topMessages || lastMessageId == -1)
+                    {
+                    	lastMessageId = res['lastid'];
+                    }
+                    
                 }
 
-                chatTimeOut = setTimeout(function () { getMessages(); }, 10000);
+                chatTimeOut = setTimeout(function () { getMessages(); }, 15000);
             }
         });
     }
@@ -89,7 +129,7 @@
     
 
     function tbMessageKeyUp(e) {
-        if (e.keyCode == 13) {
+        if (sendByEnter && e.keyCode == 13) {
             sendMessage();
         }
     }
@@ -161,8 +201,7 @@
     		$("#divChat button.compact i").addClass('icon-align-justify');
     		$("#divChat div.messages").addClass('compact');
     	}    
-    	enabled = !enabled;
-    	alertChat = enabled;
+    	enabled = !enabled;    	
     	$.ajax({
             type: "POST",
             url: "/response/chatresponse.php",
@@ -173,6 +212,47 @@
             }
         });    	
     }
+    
+    function toggleEnter()
+    {
+    	var enabled = $("#divChat button.enter i").hasClass('icon-ok');
+    	if(enabled)
+    	{
+    		$("#divChat button.enter i").removeClass('icon-ok');
+    		$("#divChat button.enter i").addClass('icon-remove');    		
+    	}
+    	else
+    	{
+    		$("#divChat button.enter i").removeClass('icon-remove');
+    		$("#divChat button.enter i").addClass('icon-ok');    		
+    	}    
+    	enabled = !enabled;
+    	sendByEnter = enabled;
+    	$.ajax({
+            type: "POST",
+            url: "/response/chatresponse.php",
+            data: "action=setenter&newvalue=" + (enabled ? '1' : '0'),
+            success: function (result) {            	
+            }
+        });    	
+    }
+    
+    function chatScrolled()
+    {
+    	if($("div.messages").scrollTop() == 0)
+    	{
+    		getMessages(true, true);
+    	}
+    
+    }
+    
+    function AddressToUser(sender)
+    {
+    	var oldText = $("#tbChatMessage").val()
+    	$("#tbChatMessage").val(oldText + sender.innerText + ": ");
+    	$("#tbChatMessage").focus();
+    }
+    
 
     getMessages();        
 </script>
@@ -187,28 +267,27 @@
         </button>
     </div>
     <div class="content {if $currentUser->ShowChat==0}hidden{/if}">
-        <div class="messages {if $currentUser->CompactChat==1}compact{/if}">
+        <div class="messages {if $currentUser->CompactChat==1}compact{/if}" onscroll='chatScrolled()'>
             <div class="progress progress-striped active">
                 <div class="bar" style="width: 100%;">Загружаем...</div>
             </div>
         </div>
-        <div class="write">
-            <div class="input-append">
-              <input class="message" id="tbChatMessage" type="text" onkeyup="tbMessageKeyUp(event);">
-              <div class="btn-group">
-                <button class="btn btn-primary" onclick="sendMessage();">
-                  Тыц                  
-                </button>                
-              </div>
-            </div>            
+        <div class="write">                          
+              <textarea class="message" id="tbChatMessage" onkeyup="tbMessageKeyUp(event);"></textarea>
         </div>
         <div>
-        	<button class='btn mute' onclick='toggleSound();'>
+        	<button class='btn mute' onclick='toggleSound();' title='Звук'>
         		<i class='icon-volume-{if $currentUser->SoundChat==1}up{else}off{/if}'></i>        		
         	 </button>
-        	 <button class='btn compact' onclick='toggleCompact();'>
+        	 <button class='btn compact' onclick='toggleCompact();' title='Компактный/полный режим'>
         	 	<i class='{if $currentUser->CompactChat==1}icon-align-justify{else}icon-user{/if}'></i>
         	 </button>
+        	 <button class='btn enter' onclick='toggleEnter();' title='Отправка по Enter'>
+        	 	<i class='{if $currentUser->EnterChat==1}icon-ok{else}icon-remove{/if}'></i>
+        	 </button>
+        	 
+        	 
+        	 <button class="btn btn-primary pull-right" onclick="sendMessage();">Отправить</button>
         </div>
     </div>
 </div>

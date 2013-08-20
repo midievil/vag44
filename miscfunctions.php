@@ -532,8 +532,8 @@ class RenderFunctions
     	
     	$user = new User($messageRow['UserID']);
     	
-    	$text = TextFunctions::formatText($messageRow['Message']);
-    	$username= '<a class="username" href="/user/'.$user->ID.'">'.$user->Name.'</a>';
+    	$text = TextFunctions::pasteLinks(' ' . $messageRow['Message'] . ' ');
+    	$username= '<a class="username hand" onclick="AddressToUser(this);">'.$user->Name.'</a>';
     	$timestamp = '<span class="timestamp"><a class="timestamp">'.DateFunctions::getDateTimeAtText($messageRow['Date']).'</a></span>';
     	
     	if($compact)

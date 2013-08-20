@@ -28,6 +28,8 @@
     
     $currentUser = User::CurrentUser();
     
+    //static $lastChatUpdate = '1';
+    
     switch($_REQUEST["action"])
     {
         case "writemessage":            
@@ -37,8 +39,12 @@
         case "getmessages":
         	
         	$result = '';
-            
-            $messages = ChatDB::GetMessages(-1, $_REQUEST['lastid']);
+        	
+        	//$lastChatUpdate++;
+        	
+        	$res['lastupdate'] = $lastChatUpdate;
+        	
+        	$messages = ChatDB::GetMessages(-1, $_REQUEST['fromid'], $_REQUEST['top']);
             if(count($messages) > 0)
             {
                 foreach($messages as $message){
@@ -46,9 +52,11 @@
                 }
                 $res['html'] = $result;
                 $res['lastid'] = $messages[count($messages) -1]['ID'];
+                $res['firstid'] = $messages[0]['ID'];                
             }
             else {
                 $res['lastid'] = 'nomessages';
+                $res['html'] = '';
             }
             
             echo json_encode($res);
@@ -65,6 +73,10 @@
         	
         case "setcompact":
         	ChatDB::SetCompact(User::CurrentUserID(), $_REQUEST['newvalue']);
+        	return;
+        	
+      	case "setenter":
+        	ChatDB::SetEnter(User::CurrentUserID(), $_REQUEST['newvalue']);
         	return;
     }
 ?>

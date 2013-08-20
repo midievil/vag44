@@ -31,7 +31,8 @@
 						U.Rating,
 						U.ShowChat,
 						U.SoundChat,
-						U.CompactChat
+						U.CompactChat,
+						U.EnterChat
 				from	Users U
 				join	UserGroups G on G.ID = U.GroupID				
 				where	U.ID=$id";
@@ -78,7 +79,8 @@
 					U.Rating,
 					U.ShowChat,
 					U.SoundChat,
-					U.CompactChat
+					U.CompactChat,
+					U.EnterChat
 			from	Users U
 			join	UserGroups G on G.ID = U.GroupID
 			where	Visible = 1			

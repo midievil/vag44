@@ -20,11 +20,25 @@ class ChatDB
         return fDB::fexec($query);
     }
     
-    public static function GetMessages($chatID, $fromMessageID) 
+    public static function GetMessages($chatID, $fromMessageID, $top) 
     {
-        $query = "SELECT * FROM ChatMessages WHERE ChatID=$chatID AND ID>$fromMessageID ORDER BY ID";
+    	if($fromMessageID == -1)
+    	{
+    		$fromMessageID = fdb::fscalar("SELECT ID from ChatMessages ORDER BY ID DESC LIMIT 20, 1");
+    		$toMessageID = $fromMessageID + 200; 
+    	}
+    	    	
+    	if($top=="true")
+    	{   	
+    		$toMessageID = $fromMessageID;
+    		$fromMessageID = $fromMessageID - 20;
+    	}
+    	
+        $query = "SELECT * FROM ChatMessages WHERE ChatID=$chatID AND ID > $fromMessageID ". ($toMessageID ? " AND ID < $toMessageID" : '');
+        //echo $query ;    	 
         return fDB::fqueryAll($query);
     }
+    
     
     public static function SetVisibility($userID, $newValue)
     {
@@ -43,6 +57,13 @@ class ChatDB
     public static function SetCompact($userID, $newValue)
     {
     	$query = "UPDATE Users SET CompactChat=".($newValue ? "1" : "0")." WHERE ID=$userID";
+    	//echo $query ;
+    	return fDB::fexec($query);
+    }
+    
+    public static function SetEnter($userID, $newValue)
+    {
+    	$query = "UPDATE Users SET EnterChat=".($newValue ? "1" : "0")." WHERE ID=$userID";
     	//echo $query ;
     	return fDB::fexec($query);
     }

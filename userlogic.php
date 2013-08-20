@@ -36,6 +36,7 @@
 		public $ShowChat = 1;
 		public $SoundChat = 0;
 		public $CompactChat = 0;
+		public $EnterChat = 0;
 		
 		public function __construct($id = null) {
 			if($id)

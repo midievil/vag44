@@ -280,8 +280,8 @@ div.whiteform {
 	}
     
 
-    #divChat input.message {
-        width:250px;
+    #divChat textarea.message {
+        width:95%;
     }
 
     #divChat div.content {
