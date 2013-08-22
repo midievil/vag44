@@ -36,7 +36,7 @@
 					});
 	}
 	
-	function MarkReadNotification(id, userid)
+	function MarkReadNotification(id, userid, redirectUrl)
 	{
 		$.ajax(	{	type: "POST",
 						url:"/response/notificationsresponse.php",
@@ -52,6 +52,11 @@
 									$("#divNotification"+id).removeClass('alert-error');
 									
 									$("#divNotification"+id+" a.read").hide();
+									
+									if(redirectUrl != undefined)
+									{
+										window.location = redirectUrl; 
+									}
 								}
 						}
 					});

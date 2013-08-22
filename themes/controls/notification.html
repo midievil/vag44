@@ -2,7 +2,16 @@
 	<a class="close hand" data-dismiss="alert" onclick='DeleteNotification({$notification->ID}, {$currentUser->ID}, {$notification->Read})'>&times;</a>
 	{$notification->DateText()}<br /><br />
 	{$notification->Text}
-	{if $notification->Read == false}	
+	{if $notification->Read == false}
 		<a class='btn btn-small read' onclick='MarkReadNotification({$notification->ID}, {$currentUser->ID})'>{$i18n.read.$gender}</a>
 	{/if}
 </div>
+{if $notification->Read == false}
+<script>
+	$("#divNotification{$notification->ID} a.btn-success").click( function () {literal}{{/literal}
+			MarkReadNotification({$notification->ID}, {$currentUser->ID}, this.href);
+			return false;
+		{literal}}{/literal}
+	);
+</script>
+{/if}
