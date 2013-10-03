@@ -648,18 +648,19 @@
 		return false;
 	}
 		
-	function createPersonalBlog($userid)
+	function createPersonalBlog($userid, $blogName)
 	{
-		if(!personalBlogExists($userid))
+		//if(!personalBlogExists($userid))
 		{		
 			try
 			{
-				$query = "insert into Blogs (UserID, Name, `Comment`) values ($userid, 'Персональный блог', '')";
+				$query = "insert into Blogs (UserID, Name, `Comment`) values ($userid, '$blogName', '')";
 				fDB::fexec($query);
 				return true;
 			}
 			catch(Exception $e)
 			{
+				var_dump($e);
 				//	ToDo: Catch
 			}
 		}
@@ -667,20 +668,20 @@
 	}
 	
 	function createCarBlog($carid)
-	{
-		$carinstance = CarDB::getCarByID($carid);
-		$userid = $carinstance["UserID"];
+	{		
+		$carinstance = new Car($carid);		
+		$userid = $carinstance->UserID;
 		
-		$car = getCarDescriptionByID($carid);
+		$car = $carinstance->getShortDescription();		
 		
-		$query="select ID from Blogs where CarID=$carid";		
+		$query="select COUNT(ID) AS cnt from Blogs where CarID=$carid";		
 		if(fDB::fscalar($query) > 0)
 		{
 			return 0;
 		}
-		
-		
-		$query = "
+		if($car)
+		{
+			$query = "
 			insert	into Blogs (
 					UserID,
 					CarID,
@@ -690,16 +691,17 @@
 					$carid,
 					'$car',
 					'')";
+		}
 		
 		return fDB::fexec($query);		
 	}
 	
 	function createCarPost($carid)
 	{
-		$carinstance = CarDB::getCarByID($carid);
-		$blogID = $carinstance["BlogID"];
+		$carinstance = new Car($carid);
+		$blogID = $carinstance->BlogID;
 		
-		$car = getCarDescriptionByID($carid);
+		$car = $carinstance->getShortDescription();
 		$date = DateFunctions::getCurrentDateText();
 		
 		$query = "
@@ -719,18 +721,19 @@
 		$result = mysql_query($query);
 		$id = mysql_insert_id();
 		
-		require_once "constants.php";			
+		//require_once "constants.php";			
 				
 		$query = "insert into TagCategoriesToPosts (PostID, TagCategoryID) values ($id, $ourCarsCategoryID)";
+		echo $query; die;
 		mysql_query($query);
 		
 		return $id;
 	}
 	
 	function createCarBlogIfNotExists($carid)
-	{
+	{	
 		if(!carBlogExists($carid))
-		{	
+		{		
 			$id = createCarBlog($carid);
 			return $id;	//	means that exists
 		}

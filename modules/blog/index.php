@@ -49,7 +49,7 @@
 		{
 			$breadCrumbs[] = new BreadCrumb('Ваши блоги', '');
 			templater::assign('title', 'Ваши блоги');
-			templater::assign('comment', 'Здесь список ваших блогов. Их может быть несколько. Хоть весь блогами обложитесь.');
+			templater::assign('comment', 'Здесь список ваших блогов. Их может быть несколько. Хоть весь блогами обложитесь. <br /><br /><a class="btn btn-primary" onclick="createPersonalBlog('.$currentUser->ID.')">Я, пожалуй, создам блог</a>');
 		}
 		else 
 		{

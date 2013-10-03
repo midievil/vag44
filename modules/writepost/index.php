@@ -30,7 +30,7 @@
 	}
 	elseif(mLogic::$urlVariables['carid'])
 	{
-		$carid = mLogic::$urlVariables['carid'];		
+		$carid = mLogic::$urlVariables['carid'];				
 		createCarBlogIfNotExists($carid);		
 		createCarPostIfNotExists($carid);		
 				

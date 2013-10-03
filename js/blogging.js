@@ -22,11 +22,10 @@ function createPersonalBlog(userID){
 	$.ajax({	type:	"POST",	
 				url:	"/response/blogresponse.php",
 				data:	"action=createblog&userid="+userID,
-				success: function(result){
-					//alert(result);
+				success: function(result){					
 					if(trim(result) == "ok")
 					{						
-						showResource('/res/userblogs.php', false);
+						window.location = '/blog';
 					}
 				}
 			});

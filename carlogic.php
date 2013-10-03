@@ -202,18 +202,7 @@
 		$generations = explode(";", $list);		
 		return $generations[$index];
 	}
-	
-	function getCarDescriptionFromRow($row)
-	{
-		return '';
-	}
-	
-	function getCarDescriptionByID($carid)
-	{	
-		$row = CarDB::getCarByID($carid);
-		return getCarDescriptionFromRow($row);
-	}
-	
+		
 	function getEngineSelect($modelID, $selectedgeneration, $carEngineID, $carid)
 	{
 		$query = "

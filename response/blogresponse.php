@@ -43,9 +43,13 @@
 			$userid = $_POST["userid"];
 			try
 			{
-				if(createPersonalBlog($userid))
+				if(createPersonalBlog($userid, 'Персональный блог'))
 				{
-					echo "ok";
+					echo "ok";					
+				}
+				else
+				{
+					echo "no";
 				}
 			}
 			catch(Exception $e)
