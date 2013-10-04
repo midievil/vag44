@@ -696,7 +696,7 @@
 		return fDB::fexec($query);		
 	}
 	
-	function createCarPost($carid)
+	function createCarPost($carid, $categoryID)
 	{
 		$carinstance = new Car($carid);
 		$blogID = $carinstance->BlogID;
@@ -718,14 +718,11 @@
 					'$date',
 					1
 					)";
-		$result = mysql_query($query);
-		$id = mysql_insert_id();
-		
-		//require_once "constants.php";			
+		$result = fDB::fexec($query);
+		$id = fDB::lastID();
 				
-		$query = "insert into TagCategoriesToPosts (PostID, TagCategoryID) values ($id, $ourCarsCategoryID)";
-		echo $query; die;
-		mysql_query($query);
+		$query = "insert into TagCategoriesToPosts (PostID, TagCategoryID) values ($id, $categoryID)";		
+		fDB::fexec($query);
 		
 		return $id;
 	}
@@ -743,11 +740,11 @@
 		}
 	}
 	
-	function createCarPostIfNotExists($carid)
+	function createCarPostIfNotExists($carid, $categoryID)
 	{
 		if(!carPostExists($carid))
 		{			
-			$id = createCarPost($carid);
+			$id = createCarPost($carid, $categoryID);
 			return $id;	//	means that exists
 		}
 		else

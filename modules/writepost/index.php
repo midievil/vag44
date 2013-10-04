@@ -1,4 +1,5 @@
 <?php
+
 	global $breadCrumbs;
 	
 	$post = new Post();
@@ -30,9 +31,9 @@
 	}
 	elseif(mLogic::$urlVariables['carid'])
 	{
-		$carid = mLogic::$urlVariables['carid'];				
-		createCarBlogIfNotExists($carid);		
-		createCarPostIfNotExists($carid);		
+		$carid = mLogic::$urlVariables['carid'];						
+		createCarBlogIfNotExists($carid);				
+		createCarPostIfNotExists($carid, $ourCarsCategoryID);		
 				
 		$query = "
 			select	P.ID PostID, B.ID BlogID
