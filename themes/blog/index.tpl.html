@@ -34,10 +34,11 @@
 		{else}
 			{$i18n.blogs_count|sprintf:$cnt}
 		{/if}
-		{foreach from=$blogs item=blog name=blogs}
-			<a href='/blog/{$blog->ID}'>{$blog->Name|default:$i18n.blogs_noname}</a>{if !$smarty.foreach.blogs.last},{/if} 
-		{/foreach}
-	{/if}
+    {/if}
+	{foreach from=$blogs item=blog name=blogs}
+		<a href='/blog/{$blog->ID}'>{$blog->Name|default:$i18n.blogs_noname}</a>{if !$smarty.foreach.blogs.last},{/if} 
+	{/foreach}
+	
 {else}
 	Здесь пусто. Автор еще ничего не написал.
 {/if}
