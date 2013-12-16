@@ -385,7 +385,7 @@
 					if(mysql_affected_rows() > 0)
 					{
 						$headerFields = array(
-						    //"From: vag44 admin <midievil@vag44.com>",
+						    "From: vag44 admin <midievil@vag44.com>",
 						    "MIME-Version: 1.0",
 						    "Content-Type: text/html;charset=utf-8"
 						);
@@ -393,9 +393,14 @@
 						$messageText = "Здравствуйте! <br/><br/> Ваш e-mail был указан в процессе восстановления пароля на сайте vag44.net. <br/><br/> Для восстановления пароля перейдите по <a href='http://vag44.net/response/userresponse.php?action=confirmpasswordrestore&ticket=$ticket'>этой ссылке</a>. <br/><br/> Если вы не предпринимали подобных действий или не представляете, о чем идет речь, просто закройте это письмо. <br /><br />С уважением, администрация сайта vag44.net.";						
 						$messageText = wordwrap($messageText, 70);
 						
-						if(mail($email, 'VAG44 Password restore', $messageText, implode("\r\n", $headerFields)))
+						if($res = mail($email, 'VAG44 Password restore', $messageText, implode("\r\n", $headerFields)))
 						{							
-							echo "sent";
+							echo "sent $res";
+							return;
+						}
+						else
+						{
+							echo "error";
 							return;
 						}
 					}

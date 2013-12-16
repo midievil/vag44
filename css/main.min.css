@@ -335,3 +335,6 @@ div.whiteform {
         font-weight:bold;    	
     }
     
+    #divChat div.messages div.message div.text {
+	overflow: hidden;
+    }
