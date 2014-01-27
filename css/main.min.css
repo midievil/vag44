@@ -268,9 +268,9 @@ div.whiteform {
 
     #divChat {
         position: fixed;
-        right: 10px;
+        /*right: 10px;
         bottom: 20px;
-        width: 350px;
+        width: 100%;*/
         z-index: 1000;
     }
     
@@ -338,3 +338,9 @@ div.whiteform {
     #divChat div.messages div.message div.text {
 	overflow: hidden;
     }
+	
+	div.newsblock{
+		margin-top: 25px;
+		position: fixed;
+		/*width: 100%;*/
+	}

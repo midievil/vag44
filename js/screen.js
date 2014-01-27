@@ -1,3 +1,4 @@
+var isChat = false;
 function showRegister(){
 	$("#divMain").load("/res/register.php");
 	return false;
@@ -110,6 +111,10 @@ function toggleCategoryVisibility(elementIndex)
 		$("#btnShowCategory"+elementIndex).attr('src', '/img/btnHide.gif');
 		$(".trCategory"+elementIndex+"Child").show();
 	}
+}
+
+function redirectToMainPage() {
+    window.location = '/';
 }
 
 function redirectToCategory(elementIndex, event)
@@ -287,3 +292,47 @@ function scrollDiv(name, pix)
 	
 }
 
+function resizeScreen() {
+	if(isChat == true){
+		$("div.newsblock").hide();
+		$("div.chatblock").show();
+		$("div.chatblock").css("margin-top", "50px");
+		$("#divChat").css("height", ($(window).height() - 100) + "px");
+	}
+	else
+	{
+		var newHeight = ($(window).height() - 250) / 2;
+		
+		$contentDiv = $("#contentDiv");
+		
+		$("#leftDiv").removeClass("span1");
+		$("#leftDiv").addClass("span3");
+		$contentDiv.removeClass("span12");
+		$contentDiv.addClass("span9");
+		
+		var divLeft = $contentDiv.position().left;
+		if(divLeft<260)
+		{
+			$("div.newsblock").hide();
+			$("div.chatblock").hide();
+			$("#leftDiv").removeClass("span3");
+			$("#leftDiv").addClass("span1");
+			
+			$contentDiv.removeClass("span9");
+			$contentDiv.addClass("span12");
+		}
+		else
+		{	
+			$("div.newsblock").show();
+			$("div.chatblock").show();
+			
+			$("div.newsblock ul").height((newHeight)+"px");
+			$("div.newsblock ul").css('width', divLeft - 75);
+			
+			$("div.chatblock").height((newHeight)+"px");	
+			$("div.chatblock").css("margin-top", (newHeight+90)+"px");
+			$("#divChat").css('width', divLeft - 10);
+			$("#divChat div.messages").height( (newHeight) - 55);
+		}
+	}	
+}

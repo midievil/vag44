@@ -1,0 +1,18 @@
+{include file="header.tpl.html"}
+
+{include file="controls/breadcrumbs.html"}
+
+{include file="blog/index.js"}
+
+{$message}
+
+{include file="controls/pagetitle.html" pageTitle=$title pageComment=$comment}
+
+{assign var='gender' value=$blogs_user->Gender|default:'m'}
+
+<script>
+isChat = true;
+$("#contentDiv").hide();
+</script>
+
+{include file="footer.tpl.html"}

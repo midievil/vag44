@@ -16,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="/css/popupbox.css?version=16.10.2012" />
 		<link rel="stylesheet" type="text/css" href="/css/gallery.css?version=3" />	
 		<link rel="shortcut icon" href="/img/favicon.ico">
-		<link rel="stylesheet" type="text/css" href="/css/main.min.css?version=25" />				
+		<link rel="stylesheet" type="text/css" href="/css/main.min.css?version=26" />				
 
 <!--[if lt IE 7]><link rel="stylesheet" href="css/bootstrap-ie6.css"><![endif]-->
 
@@ -36,7 +36,7 @@
 		<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="/ckeditor/adapters/jquery.js"></script>
 		<script type="text/javascript" src="/js/functions.js?version=3"></script>	
-		<script type="text/javascript" src="/js/screen.js?version=19"></script>
+		<script type="text/javascript" src="/js/screen.js?version=20"></script>
 		<script type="text/javascript" src="/js/user.js?version=14"></script>
 		<script type="text/javascript" src="/js/blogging.js?version=34"></script>
 		<script type="text/javascript" src="/js/gallery.js?version=9"></script>
@@ -76,6 +76,14 @@
 					}
 					});
 		    
+		});
+		
+		
+		$(window).resize(function(){
+			resizeScreen();
+		});
+		$(document).ready(function(){
+			resizeScreen();
 		});
 		{/literal}
 			
@@ -131,11 +139,14 @@
 								</li>
 								<li>
 									<a href='/gallery' >галерея</a>
-								</li>
+								</li>								
 								{if $screen_width < 1200}
 										</ul>
 									</li>
 								{/if}
+								<li>
+									<a href='/chat' ><b>Чат</b></a>
+								</li>
 								<li>
 								{if $privateMessagesCount>0}
 									<a id='aPrivateMessages' href='/privatemessages' class='active'>личные сообщения ({$privateMessagesCount})</a>
@@ -184,22 +195,26 @@
 		</div>
 		
 	
-        {if $currentUser->IsLogged()}
-            <script type="text/javascript">
-                var showChat=true;
-            </script>
-            {include file="controls/chat.html"}
         
-        {/if}
 
 		<div class="container-fluid" id='wrap'>
 	      <div class="row-fluid" id='main'>
-	        <div class="span3">
-	          <div class="well sidebar-nav sidebar-nav-fixed span3">
+	        <div class="span3" id="leftDiv">
+				<div></div>
+	          <div class="well newsblock">
 				{include file="controls/newsblock.html" news=$news}
 	          </div><!--/.well -->
+			  <div class="chatblock">
+				{if $currentUser->IsLogged()}
+					<script type="text/javascript">
+						var showChat=true;
+					</script>            
+					{include file="controls/chat.html"}
+				{/if}
+				
+			  </div>
 	        </div><!--/span-->
-	        <div class="span9" style="padding-top: 20px">
+	        <div class="span9" id="contentDiv" style="padding-top: 20px">
 	          
 			
 		
