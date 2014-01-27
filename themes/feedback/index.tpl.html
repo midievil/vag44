@@ -8,38 +8,65 @@
 <script>
 	function sendFeedback()
 	{
-		$.ajax({	url:"/response/feedback.php?header="+$("#tbHeader").val()+"&text="+$("#tbMessage").val(),
-					success:	function(result){						
-									if(trim(result)=='ok')
-									{
-										$("#divFeedBack").html("Спасибо! Ваше послание обязательно будет учтено!");
-									}
-									else
-									{
-										var html = $("#divFeedBack").html();
-										$("#divFeedBack").html("Ой! Что-то пошло не так и ваше заявление не доставлено. Пожалуйста, <a href='/feedback'>попробуйте снова.</a.");
-									}
-								}
-				}
-			);
+	    var header = $("#tbHeader").val();
+	    var text = $("#tbMessage").val();
+
+	    if (header == '') {
+	        $("#divValidation").html('Вы не указали заголовок');
+	        $("#divValidation").show();
+	    }
+	    else if (text == '') {
+	        $("#divValidation").html('Вы не указали подробности');
+	        $("#divValidation").show();
+	    }
+	    else {
+	        $("#divValidation").hide();
+	        $("#frmFeedback").hide();
+	        $.ajax({
+	            url: "/response/feedback.php?header=" + $("#tbHeader").val() + "&text=" + $("#tbMessage").val(),
+	            success: function (result) {
+	                if (trim(result) == 'ok') {
+	                    $("#divSuccess").show();	                    
+	                }
+	                else {
+	                    $("#divValidation").html("Ой! Что-то пошло не так и ваше заявление не доставлено. Пожалуйста, <a href='/feedback'>попробуйте снова.</a.");
+	                    $("#divValidation").show();
+	                }
+	            }
+	        }
+                );
+	    }
 	}
 </script>
 {/literal}
 
-<table>
-	<tr>
-		<td class='innercontent'>
-			<br />
-			<br />
-			<div id="divFeedBack">
-				<table>
-					<tr><td>Заголовок:</td><td><input type='text' id='tbHeader' /></td></tr>
-					<tr><td valign='top'>Суть:</td><td><textarea id="tbMessage" rows="10" cols="100"></textarea></td></tr>
-					<tr><td></td><td><input type='button' value='Отправить' onclick='sendFeedback();' /><input type='button' value='Отмена' onclick='showContent();' /></td></tr>
-				</table>
+
+    <div class="alert alert-danger hidden" id="divValidation"></div>
+    <div class="alert alert-success hidden" id="divSuccess">Спасибо! Ваше послание обязательно будет учтено!</div>
+
+    
+
+        <form class="form-horizontal" id="frmFeedback">
+			<div class="control-group">
+			    <label class="control-label" for="tbEditProfileLastName">Заголовок</label>
+			    <div class="controls">
+			      <input type="text" id="tbHeader" placeholder="Коротко о проблеме">
+			    </div>
 			</div>
-		</td>
-	</tr>
-</table>
+			<div class="control-group">
+			    <label class="control-label" for="tbEditProfileLastName">Суть</label>
+			    <div class="controls">
+                    <textarea class="span6" id="tbMessage" placeholder="А теперь чуть поподробнее. Если вы не зашли на сайт, оставьте какую-нибудь контактную информацию, чтобы мы могли с вами связаться. Это может быть адрес электронной почты, ICQ, Skype или адрес страницы Вконтакте или Facebook."></textarea>			      
+			    </div>
+			</div>
+            <div class="control-group">
+			    <div class="controls">
+                    <a role='button' class="btn btn-primary" onclick='sendFeedback();'>Отправить</a>
+                    <a role='button' class="btn" onclick='redirectToMainPage();'>Отмена</a>
+			    </div>
+			</div>
+            
+		</form>
+    
 
 {include file="footer.tpl.html"}

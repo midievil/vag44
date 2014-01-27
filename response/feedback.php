@@ -1,25 +1,22 @@
 <?PHP
-	error_reporting(0);
 	if(!$sessionstarted) {	session_start(); $sessionstarted = 1; }	
 	if(!$headersent)
 	{
 		header('Content-type: text/html; charset=utf-8');
 		$headersent = 1;
 	}
-	
-	require_once "../constants.php";	
-	require_once "../miscfunctions.php";	
-	require_once "../inc/class.db.php";
-	require_once "../inc/class.fdb.php";
+	chdir("..");
+	require_once "constants.php";	
+	require_once "miscfunctions.php";	
+	require_once 'db/AdminDB.php';
 	
 	$userid = -1;
 	$header = $_GET["header"];
 	$text = $_GET["text"];
 	
-	if(	$userid && $header && $text	)
+    if(	$userid && $header && $text	)
 	{
-		$query = "insert into FeedBacks(UserID, Header, Text) values ($userid, '$header', '$text')";
-		if(fDB::fexec($query))
+		if(AdminDB::addFeedback($userid, $header, $text))
 		{		
 			echo "ok";
 			return;

@@ -31,7 +31,7 @@
 			return fDB::fqueryAll($query);
 		}
 		
-		public static function setFeedbakRead($id)
+		public static function setFeedbackRead($id)
 		{
 			$query = "
 				update	FeedBacks
@@ -40,5 +40,14 @@
 			fDB::fexec($query);
 				
 		}
+        
+        public static function addFeedback($userid, $header, $text){
+            $query = "insert into FeedBacks(UserID, Header, Text) values ($userid, '$header', '$text')";
+            if(fDB::fexec($query))
+		    {	
+			    return true;
+		    }
+            return false;
+        }
 	}
 ?>
